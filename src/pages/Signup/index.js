@@ -4,6 +4,7 @@ const Signup = () => {
     return(
         <>
             회원가입 화면
+            <p>연습 123</p>    
         </>
     )
 }
