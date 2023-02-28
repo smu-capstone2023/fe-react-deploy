@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoginButton, LoginContainer, LoginInputText, SignupButton
+import { LoginButton, LoginContainer, LoginInputText, SignupLink
 , LoginTitle, LoginLayout } from './LoginStyles';
 const Login = () => {
     return(
@@ -12,7 +12,7 @@ const Login = () => {
                 <LoginInputText placeholder="학교이메일 입력"/>
                 <LoginInputText placeholder="비밀번호 입력"/>
                 <LoginButton>로그인</LoginButton>
-                <SignupButton>회원가입하기</SignupButton>
+                <SignupLink to="../signup">회원가입하기</SignupLink>
             </LoginContainer>
         </LoginLayout>
         </>
