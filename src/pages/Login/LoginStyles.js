@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {COLORS} from '../../color';
+import {Link} from 'react-router-dom';
 
 export const LoginLayout = styled.div`
     display: flex;
@@ -42,7 +43,7 @@ export const LoginButton = styled.div`
     text-align: center;
 `;
 
-export const SignupButton = styled.div`
+export const SignupLink = styled(Link)`
     padding:15px;
     width: 80%; 
     background: ${COLORS.gray_button};
@@ -50,5 +51,6 @@ export const SignupButton = styled.div`
     border-radius: 5px;
     color: black;
     text-align: center;
+    text-decoration: none;
 `;
 
