@@ -10,6 +10,7 @@ import Major from './pages/Major';
 import Mypage from './pages/Mypage';
 import Signup from './pages/Signup';
 import Feedback from './pages/Feedback';
+import AddPost from './pages/AddPost';
 
 function App() {
     const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/mypage" element={<Mypage/>}></Route>
                 <Route path="/login" element={<Login/>}></Route>
                 <Route path="/signup" element={<Signup/>}></Route>
+                <Route path="/addpost" element={<AddPost/>}></Route>
             </Routes>
         </div>
   );
