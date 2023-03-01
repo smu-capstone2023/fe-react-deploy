@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import {COLORS} from '../../color';
+import styled from 'styled-components';
+import { COLORS } from '../../color';
 
 export const DefaultText = styled.p`
     padding: 5px;
@@ -22,7 +22,7 @@ export const SignLayout = styled.div`
 `;
 
 export const SignContainer = styled.div`
-    display:flex;
+    display: flex;
     flex-direction: column;
     border: solid 0.5px gray;
     border-radius: 8px;
@@ -32,9 +32,7 @@ export const SignContainer = styled.div`
     padding: 30px;
     margin: 100px 0 0 0;
     align-items: center;
-    
 `;
-
 
 export const SignTitle = styled.h1`
     color: ${COLORS.logo};
@@ -68,7 +66,7 @@ export const NumberBtn = styled.div`
 export const SignInnerBox = styled.div`
     // display: flex;
     // flex-directtion: column;
-    
+
     border: solid 0.5px gray;
     max-width: 280px;
     width: 100%;
@@ -109,14 +107,13 @@ export const SignInputText = styled.input`
     width: 90%;
     border: solid 0.5px gray;
     margin: 5px 0 10px 0;
-    
 `;
 
 export const SignButton = styled.div`
-    padding:15px;
-    width: 80%; 
+    padding: 15px;
+    width: 80%;
     background: ${COLORS.color_button};
-    margin-top:20px;
+    margin-top: 20px;
     border-radius: 5px;
     color: white;
     text-align: center;
@@ -130,7 +127,5 @@ export const Line = styled.div`
 export const ProfileImage = styled.div`
     width: 80%;
     height: 130px;
-    border: solid 1px black
-    
-    
+    border: solid 1px black;
 `;

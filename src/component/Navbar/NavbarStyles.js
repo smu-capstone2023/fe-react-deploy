@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Nav = styled.div`
@@ -10,9 +10,9 @@ export const Nav = styled.div`
     font-size: 1rem;
     position: sticky;
     top: 0;
-    z-index:10;
+    z-index: 10;
 
-    @media screen and(max-width:960px){
+    @media screen and(max-width:960px) {
         transition: 0.8s all ease;
     }
 `;
@@ -28,7 +28,7 @@ export const NavbarContainer = styled.div`
 `;
 
 export const NavLogo = styled.div`
-    color: #5377F7;
+    color: #5377f7;
     justify-content: flex-start;
     cursor: pointer;
     font-size: 1.5rem;
@@ -42,7 +42,7 @@ export const NavLogo = styled.div`
 export const MobileIcon = styled.div`
     display: none;
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 768px) {
         display: block;
         position: absolute;
         top: 0;
@@ -55,31 +55,31 @@ export const MobileIcon = styled.div`
 `;
 
 export const NavMenu = styled.ul`
-    display:flex;
+    display: flex;
     align-items: center;
     list-style: none;
     text-align: center;
     margin-right: -22px;
 
     @media screen and (max-width: 768px) {
-        display:none;
+        display: none;
     }
-`
+`;
 
 export const NavItem = styled.li`
     height: 80px;
 `;
 
 export const NavLinks = styled(Link)`
-    color:black;
-    display:flex;
+    color: black;
+    display: flex;
     align-items: center;
     text-decoration: none;
     padding: 0 1rem;
     height: 100%;
     cursor: pointer;
 
-    &.active{
+    &.active {
         border-bottom: 3px solide #01bf71;
     }
-`
+`;

@@ -1,11 +1,7 @@
 import React from 'react';
 
 const Notice = () => {
-    return(
-        <>
-            
-        </>
-    )
-}
+    return <></>;
+};
 
 export default Notice;

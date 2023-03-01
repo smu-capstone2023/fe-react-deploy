@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import {Link} from 'react-router-dom';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const NoticeElementLayout = styled.div`
     border-bottom: solid 0.3px gray;
@@ -9,7 +9,7 @@ export const NoticeElementLayout = styled.div`
     justify-content: space-between;
 `;
 
-export const NoticeElementLink = styled(Link)` 
+export const NoticeElementLink = styled(Link)`
     text-decoration: none;
     color: black;
 `;
@@ -19,18 +19,17 @@ export const NoticeBasicInfoField = styled.div`
 `;
 
 export const NoticeDepartmentName = styled.a`
-    margin:0 0.5em;
+    margin: 0 0.5em;
 `;
 
-export const NoticeTitle = styled.a`
-`;
+export const NoticeTitle = styled.a``;
 
 export const NoticeNumberOfCommnet = styled.a`
     color: red;
-    margin:0 0.5em;
+    margin: 0 0.5em;
 `;
 
 export const CreateDateField = styled.div`
-    color: gray;   
+    color: gray;
     font-size: 0.6em;
 `;
