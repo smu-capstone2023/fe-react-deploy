@@ -4,7 +4,7 @@ const Notice = ({departmentName, title, createDate, numberOfComment, postId}) =>
         <>
             <NoticeElementLayout>
                     <NoticeBasicInfoField>
-                        <NoticeElementLink to={"/notice#"+postId}>
+                        <NoticeElementLink to={"/viewpost/"+postId}>
                             <NoticeDepartmentName>
                                 [{departmentName}]
                             </NoticeDepartmentName>

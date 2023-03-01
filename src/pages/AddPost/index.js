@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Blank1em, CompletePostButtonContainer, HideWriterAndCompleteButtonLayout, WritePostContainer, AddPostLayout, WritePostNameInputText, WritePostContentInputText } from './AddPostStyles';
-
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const WritePostNameField = ({setPostTitle}) =>{
     return(
@@ -38,17 +39,33 @@ const CompletePostButton = ({savePostInServer}) => {
 const AddPost = () => {
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
-    const writerName = "안선정";
+    const {board_id} = useParams();
+    const majorId = board_id.slice(0,3);
+    const boardId = board_id.slice(3,6);
 
     const savePostInServer = () => {
 
-        const completePostContent = {
-            postTitle: postTitle,
-            postContent: postContent,
-            writerName: writerName ? "익명": writerName,
-        }
-
-        alert(JSON.stringify(completePostContent));
+        axios.post('http://api.gwabang.site:8001/board/create', 
+        { 
+            title: postTitle, 
+            content: postContent,
+            majorId: majorId,
+            boardId: boardId,
+            Anonymouse: true,
+        }, 
+        { 
+        headers:{ 
+            'Content-type': 'application/json', 
+            'Accept': 'application/json',
+            'email': 'super@super.com',
+            } 
+        } 
+        ) 
+        .then((response) => { 
+            console.log(response);
+            window.history.back();
+        }) 
+        .catch((response) => { console.log('Error!') });
         //TODO: 서버에 completePostContent올리기
     }
 

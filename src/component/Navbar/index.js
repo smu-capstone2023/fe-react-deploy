@@ -6,7 +6,7 @@ const Navbar = ({toggle}) => {
         <>
         <Nav>
             <NavbarContainer>
-                <NavLogo to="/">
+                <NavLogo onClick={() => window.location.href="/"}>
                     상명대학교
                 </NavLogo>
                 <MobileIcon onClick={toggle}>
