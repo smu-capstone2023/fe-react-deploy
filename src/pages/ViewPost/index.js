@@ -55,9 +55,9 @@ const ViewPost = () => {
     const [postInfo, setPostInfo] = useState({});
     const getPostInfo = () => {
         axios
-            .get(`http://api.gwabang.site:8001/board/detail/${post_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/detail/${post_id}`, {
                 headers: {
-                    email: 'super@super.com',
+                    email: localStorage.getItem('email'),
                 },
             })
             .then((response) => {

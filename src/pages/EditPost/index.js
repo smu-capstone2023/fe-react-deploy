@@ -54,9 +54,9 @@ const EditPost = () => {
 
     const getPostInfo = () => {
         axios
-            .get(`http://api.gwabang.site:8001/board/detail/${post_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/detail/${post_id}`, {
                 headers: {
-                    email: 'super@super.com',
+                    email: localStorage.getItem('email'),
                 },
             })
             .then((response) => {
@@ -70,7 +70,7 @@ const EditPost = () => {
     const editPostInServer = () => {
         axios
             .patch(
-                `http://api.gwabang.site:8001/board/update/${post_id}`,
+                `${process.env.REACT_APP_SERVER_URL}:8001/board/update/${post_id}`,
                 {
                     title: postTitle,
                     content: postContent,
@@ -79,7 +79,7 @@ const EditPost = () => {
                     headers: {
                         'Content-type': 'application/json',
                         Accept: 'application/json',
-                        email: 'super@super.com',
+                        email: localStorage.getItem('email'),
                     },
                 }
             )

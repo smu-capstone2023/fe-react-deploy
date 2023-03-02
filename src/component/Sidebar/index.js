@@ -3,6 +3,7 @@ const Sidebar = ({ isOpen, toggle, setIsOpen, isLogin }) => {
     const logout = () => {
         localStorage.clear();
     };
+
     return (
         <>
             <SidebarContainer isOpen={isOpen}>
@@ -11,7 +12,7 @@ const Sidebar = ({ isOpen, toggle, setIsOpen, isLogin }) => {
                 </Icon>
                 <SidebarWrapper>
                     <SidebarMenu>
-                        <SidebarLink to='/' onClick={() => setIsOpen(false)}>
+                        <SidebarLink to='board/004003' onClick={() => setIsOpen(false)}>
                             학교게시판
                         </SidebarLink>
                         <SidebarLink to='major' onClick={() => setIsOpen(false)}>

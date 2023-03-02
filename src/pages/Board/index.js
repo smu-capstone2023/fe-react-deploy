@@ -57,9 +57,9 @@ const Board = () => {
 
     const setBoardListFromServer = () => {
         axios
-            .get(`http://api.gwabang.site:8001/board/${majorId}/${boardId}/list`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/${majorId}/${boardId}/list`, {
                 headers: {
-                    email: 'super@super.com',
+                    email: localStorage.getItem('email'),
                 },
             })
             .then((response) => {
@@ -67,7 +67,11 @@ const Board = () => {
                 setBoardName(response.data.boardName);
                 setMajorName(response.data.majorName);
             })
-            .catch((response) => console.log(response));
+            .catch((response) => {
+                console.log(response);
+                alert('접근 불가능한 페이지입니다.');
+                window.history.back();
+            });
     };
 
     useEffect(() => {

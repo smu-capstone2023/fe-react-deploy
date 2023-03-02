@@ -63,7 +63,7 @@ const AddPost = () => {
                     headers: {
                         'Content-type': 'application/json',
                         Accept: 'application/json',
-                        email: 'super@super.com',
+                        email: localStorage.getItem('email'),
                     },
                 }
             )

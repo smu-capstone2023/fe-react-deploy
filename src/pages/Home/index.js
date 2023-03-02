@@ -13,14 +13,14 @@ import {
 import { TiArrowForward } from 'react-icons/ti';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import MajorBoardSmall from '../../component/MajorBoard/Small';
 
 const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
     useEffect(() => {
         axios
-            .get(`http://api.gwabang.site:8001/board/school/noti/list`)
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/school/noti/list`)
             .then((response) => {
-                console.log(response.data);
                 setBoardList(response.data);
             })
             .catch((response) => console.log(response));
@@ -78,11 +78,38 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
 };
 
 const Home = () => {
+    const [majorList, setMajorList] = useState([]);
+    const getUserMajorList = () => {
+        const email = localStorage.getItem('email');
+        if (email) {
+            axios
+                .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/usermajors`, {
+                    headers: {
+                        email: localStorage.getItem('email'),
+                    },
+                })
+                .then((response) => {
+                    setMajorList(response.data);
+                })
+                .catch((response) => console.log(response));
+        }
+    };
+
+    useEffect(() => {
+        getUserMajorList();
+    }, [majorList.length]);
+
     return (
         <>
             <HomeLayout>
                 <SchoolBoard />
-                {/* <SchoolBoard/> */}
+                {majorList.map((major) => {
+                    return (
+                        <>
+                            <MajorBoardSmall title={major.majorName} boardId={`${major.majorId}001`} />
+                        </>
+                    );
+                })}
             </HomeLayout>
         </>
     );
