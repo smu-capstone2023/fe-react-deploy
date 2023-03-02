@@ -22,7 +22,7 @@ function App() {
     };
     return (
         <div>
-            <Sidebar toggle={toggle} isOpen={isOpen} />
+            <Sidebar toggle={toggle} isOpen={isOpen} setIsOpen={setIsOpen} isLogin={localStorage.getItem('email')} />
             <Navbar toggle={toggle} isOpen={isOpen} />
             <Routes>
                 <Route path='/' element={<Home />}></Route>

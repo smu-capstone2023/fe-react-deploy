@@ -1,5 +1,8 @@
 import { SidebarContainer, Icon, CloseIcon, SidebarMenu, SidebarWrapper, SidebarLink } from './SidebarStyles';
-const Sidebar = ({ isOpen, toggle }) => {
+const Sidebar = ({ isOpen, toggle, setIsOpen, isLogin }) => {
+    const logout = () => {
+        localStorage.clear();
+    };
     return (
         <>
             <SidebarContainer isOpen={isOpen}>
@@ -8,11 +11,36 @@ const Sidebar = ({ isOpen, toggle }) => {
                 </Icon>
                 <SidebarWrapper>
                     <SidebarMenu>
-                        <SidebarLink to='/'>학교게시판</SidebarLink>
-                        <SidebarLink to='major'>학과게시판</SidebarLink>
-                        <SidebarLink to='feedback'>피드백게시판</SidebarLink>
-                        <SidebarLink to='mypage'>마이페이지</SidebarLink>
-                        <SidebarLink to='login'>로그인</SidebarLink>
+                        <SidebarLink to='/' onClick={() => setIsOpen(false)}>
+                            학교게시판
+                        </SidebarLink>
+                        <SidebarLink to='major' onClick={() => setIsOpen(false)}>
+                            학과게시판
+                        </SidebarLink>
+                        <SidebarLink to='feedback' onClick={() => setIsOpen(false)}>
+                            피드백게시판
+                        </SidebarLink>
+                        <SidebarLink to='mypage' onClick={() => setIsOpen(false)}>
+                            마이페이지
+                        </SidebarLink>
+                        {isLogin ? (
+                            <>
+                                <SidebarLink
+                                    onClick={() => {
+                                        logout();
+                                        setIsOpen(false);
+                                    }}
+                                >
+                                    로그아웃
+                                </SidebarLink>
+                            </>
+                        ) : (
+                            <>
+                                <SidebarLink to='login' onClick={() => setIsOpen(false)}>
+                                    로그인
+                                </SidebarLink>
+                            </>
+                        )}
                     </SidebarMenu>
                 </SidebarWrapper>
             </SidebarContainer>
