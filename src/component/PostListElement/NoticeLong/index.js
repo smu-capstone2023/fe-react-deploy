@@ -1,5 +1,5 @@
-import {WriterNameField, NoticeDepartmentName, NoticeElementLink, NoticeNumberOfComment, NoticeTitle, CreateDateField, NoticeElementLayout, NoticeBasicInfoField, NumberOfViewsField} from './NoticeLongStyles';
-const NoticeLong = ({departmentName, title, createDate, numberOfComment, postId, numberOfViews, writerName}) => {
+import {WriterNameField, NoticeElementLink, NoticeNumberOfComment, NoticeTitle, CreateDateField, NoticeElementLayout, NoticeBasicInfoField, NumberOfViewsField} from './NoticeLongStyles';
+const NoticeLong = ({title, createDate, numberOfComment, postId, numberOfViews, writerName}) => {
     return (
         <>
             <NoticeElementLayout>

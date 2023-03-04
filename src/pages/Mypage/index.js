@@ -14,7 +14,6 @@ const Mypage = () => {
     const logout = () => {
         localStorage.clear();
     };
-
     const majorList = JSON.parse(localStorage.getItem('majorList'));
     const nickName = localStorage.getItem('nickname');
     const email = localStorage.getItem('email');
