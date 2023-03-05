@@ -16,6 +16,7 @@ import ViewPost from './pages/ViewPost';
 import EditPost from './pages/EditPost';
 
 function App() {
+    //TODO: 지우기
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => {
         setIsOpen(!isOpen);
