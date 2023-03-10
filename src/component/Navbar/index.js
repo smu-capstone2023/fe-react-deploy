@@ -18,7 +18,7 @@ const Navbar = ({ toggle, isLogin }) => {
                             <NavLinks to='major'>학과게시판</NavLinks>
                         </NavItem>
                         <NavItem>
-                            <NavLinks to='feedback'>학과게시판</NavLinks>
+                            <NavLinks to='feedback'>피드백게시판</NavLinks>
                         </NavItem>
                         <NavItem>
                             <NavLinks to='mypage'>마이페이지</NavLinks>
