@@ -68,8 +68,11 @@ const AddPost = () => {
                 }
             )
             .then((response) => {
-                console.log(response);
-                window.history.back();
+                //console.log(response);
+                if (response.code === 201) {
+                    alert(response.message);
+                    window.history.back();
+                }
             })
             .catch((response) => {
                 console.log('Error!');

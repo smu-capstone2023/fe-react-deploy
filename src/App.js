@@ -6,10 +6,8 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Major from './pages/Major';
 import Mypage from './pages/Mypage';
 import Signup from './pages/Signup';
-import Feedback from './pages/Feedback';
 import AddPost from './pages/AddPost';
 import Board from './pages/Board';
 import ViewPost from './pages/ViewPost';
@@ -28,10 +26,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Home />}></Route>
                 <Route path='/login' element={<Login />}></Route>
-                <Route path='/major' element={<Major />}></Route>
-                <Route path='/feedback' element={<Feedback />}></Route>
                 <Route path='/mypage' element={<Mypage />}></Route>
-                <Route path='/login' element={<Login />}></Route>
                 <Route path='/signup' element={<Signup />}></Route>
                 <Route path='/addpost/:board_id' element={<AddPost />}></Route>
                 <Route path='/board/:board_id' element={<Board />}></Route>
