@@ -101,6 +101,7 @@ const Board = () => {
             })
             .then((response) => {
                 
+                //qwe
                 response.data.postList.sort(
                     (a, b) => new Date(b.createDate) - new Date(a.createDate));
                 
