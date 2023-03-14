@@ -52,3 +52,37 @@ export const WritePostButton = styled.div`
     width: 4em;
     text-align: center;
 `;
+
+export const SignInnerBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    border: solid 0.5px gray;
+    width: 30%;
+    height: 70%;
+    padding: 1em;
+`;
+
+export const DefaultText = styled.p`
+    padding: 5px;
+    font-size: 0.9em;
+`;
+
+export const BoardToggle = styled.p`
+
+
+
+`;
+
+export const NavLinks = styled.p`
+    color: black;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+    cursor: pointer;
+
+    &.active {
+        border-bottom: 3px solide #01bf71;
+    }
+`;
