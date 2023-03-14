@@ -73,20 +73,12 @@ const BoardToggle = () => {
         options={majorOptions}
         components={animatedComponents}
         onChange={(selectedOptions) =>{
-          console.log('selected options:', selectedOptions.link);
-          <Link to={`board/${selectedOptions.link}`} />}
+          
+          window.location.href=`${selectedOptions.link}`}
 
         }>
         
       </Select>
-      
-        {
-        /* 이거 사용하면 주소가 바뀌지만 이동은 안됨. 토글 형태X
-         {majorOptions.map((option) => (
-          <Link to={option.link} key={option.value}>
-            <button>{option.label}</button>
-          </Link>
-        ))} */}
     </SignInnerBox>
   );
 };
@@ -108,14 +100,20 @@ const Board = () => {
                 },
             })
             .then((response) => {
+                
+                response.data.postList.sort(
+                    (a, b) => new Date(b.createDate) - new Date(a.createDate));
+                
                 setBoardList(response.data.postList);
                 setBoardName(response.data.boardName);
                 setMajorName(response.data.majorName);
+                
             })
             .catch((response) => {
                 console.log(response);
                 alert('접근 불가능한 페이지입니다.');
                 window.history.back();
+                
             });
     };
 
@@ -125,7 +123,9 @@ const Board = () => {
         }
     }, []);
 
+    
     return (
+        
         <>
         
             <BoardLayout>

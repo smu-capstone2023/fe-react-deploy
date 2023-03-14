@@ -4,7 +4,7 @@ import React from 'react';
 
 const Navbar = ({ toggle, isLogin }) => {
 
-    const major = localStorage.majorList ? JSON.parse(localStorage.majorList)[0].id : "defaultMajor";
+    const firstMajor = localStorage.majorList ? JSON.parse(localStorage.majorList)[0].id : 'NOT_MAJOR';
     return (
         <>
         
@@ -20,7 +20,7 @@ const Navbar = ({ toggle, isLogin }) => {
                         </NavItem>
                         <NavItem>
                             
-                            <NavLinks to={`board/00${major}001`} >학과게시판</NavLinks>
+                            <NavLinks to={`board/00${firstMajor}001`} >학과게시판</NavLinks>
                             
                         </NavItem>
                         <NavItem>
