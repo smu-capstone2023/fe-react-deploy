@@ -1,9 +1,13 @@
 import { NavbarContainer, Nav, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks } from './NavbarStyles';
 import { FaBars } from 'react-icons/fa';
 import React from 'react';
+
 const Navbar = ({ toggle, isLogin }) => {
+
+    const firstMajor = localStorage.majorList ? JSON.parse(localStorage.majorList)[0].id : 'NOT_MAJOR';
     return (
         <>
+        
             <Nav>
                 <NavbarContainer>
                     <NavLogo onClick={() => (window.location.href = '/')}>상명대학교</NavLogo>
@@ -15,7 +19,9 @@ const Navbar = ({ toggle, isLogin }) => {
                             <NavLinks to='board/004003'>학교게시판</NavLinks>
                         </NavItem>
                         <NavItem>
-                            <NavLinks to='major'>학과게시판</NavLinks>
+                            
+                            <NavLinks to={`board/00${firstMajor}001`} >학과게시판</NavLinks>
+                            
                         </NavItem>
                         <NavItem>
                             <NavLinks to='feedback'>피드백게시판</NavLinks>
