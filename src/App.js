@@ -23,8 +23,7 @@ function App() {
         setIsOpen(!isOpen);
     };
     return (
-        <div>
-            //header을 따로 빼놓으심 
+        <div> 
             <Sidebar toggle={toggle} isOpen={isOpen} setIsOpen={setIsOpen} isLogin={localStorage.getItem('email')} />
             <Navbar toggle={toggle} isOpen={isOpen} />
 
