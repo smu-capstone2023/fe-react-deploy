@@ -115,6 +115,7 @@ const Board = () => {
                 alert('접근 불가능한 페이지입니다.');
                 window.history.back();
                 
+                
             });
     };
 
