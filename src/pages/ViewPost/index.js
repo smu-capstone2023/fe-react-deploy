@@ -21,7 +21,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const ViewPostMenu = (writerName) => {
+const ViewPostMenu = ({writerName}) => {
     const {selected, setSelected} = useState(true);
     const userName = localStorage.nickname;
 
