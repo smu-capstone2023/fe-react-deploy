@@ -98,6 +98,19 @@ export const SignButton = styled.div`
     text-align: center;
 `;
 
+//모달버튼 추가
+export const ModalButton = styled.div`
+    padding: 15px;
+    width: 80%;
+    background: #dcdcdc;
+    margin-top: 20px;
+    border-radius: 5px;
+    color: ${COLORS.color_button};
+    text-align: center;
+`;
+
+
+
 export const Line = styled.div`
     width: 90%;
     border-bottom: solid 0.5px gray;

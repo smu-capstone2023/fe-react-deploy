@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom'
-import { SignContainer, SignInputText, SignInnerBox, SignButton, DefaultText, SmallText } from './SignupStyles.js';
+
+import Modal from './Modal';
+import { ProfileImage, Line, SignContainer, SignInputText, SignInnerBox, SignButton, DefaultText, SmallText, ModalButton } from './SignupStyles.js';
+
+
 
 
 const SignupSection3 = ({ userSignupInfo }) => {
     const [nickName, setNickName] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
-    //닉네임 입력&&등록
+
+    
+
     const checkAllOfSingUpInfo = () => {
         if (nickName === '') {
             alert('닉네임을 입력해주세요');
@@ -34,6 +40,17 @@ const saveUserInfoAtServer = () => {
     };
 
 
+    //모달 띄우기
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      setShowModal(true);
+    };
+  
+    const closeModal = () => {
+      setShowModal(false);
+    };
+
+
     return (
         <SignContainer>
             <SignInnerBox>
@@ -50,8 +67,14 @@ const saveUserInfoAtServer = () => {
             >
                 회원가입 완료! 
             </SignButton>
+            <SmallText>학과인증을 통해 더 다양한 권한을 가질 수 있습니다.</SmallText>
+            <ModalButton onClick={handleSubmit}>학과인증</ModalButton>
+            <Modal showModal={showModal} onClose={closeModal} />
         </SignContainer>
+        
     );
 };
 
 export default SignupSection3;
+
+//3.18 madal page 만들어서 './modal'로 연결하기
