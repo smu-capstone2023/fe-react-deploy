@@ -10,16 +10,26 @@ import {
     WritePostUserLayout,
     SelectHashtagLayout,
     AddFileButtonContainer,
+    AddFileButtonLayout,
     AnonymousCheckButtonContainer,
     AnonymousContentContainer,
     WritePostUserImageLayout,
     WritePostUserNameLayout,
-    WritePostDateLayout
+    WritePostDateLayout,
+    AddPostFileLayout,
+    AddFileButtonContainerContent,
+    FileUploadNumberLayout,
+    ImageContainer,
+    ImageContainerLayout,
+    ImageContainerDelteLayout,
+    AddFileButtonImgLayout,
 } from './AddPostStyles';
 import axios from 'axios';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Navigate, useParams } from 'react-router-dom';
+import { upload } from '@testing-library/user-event/dist/upload';
+import { display } from '@mui/system';
 
 
 // 작성자 닉네임, 작성 날짜, 선택 해시태그, 첨부파일 데이터 저장
@@ -88,29 +98,91 @@ const WritePostContentField = ({ setPostContent }) => {
     );
 };
 
-const AnonymousCheckButton = ({setPostAnonymous}) => {
+const AnonymousCheckButton = ({setPostAnonymous, postAnonymous}) => {
+    // const [hideWriterName, setHideWriterName] = useState(false);
+    // function hideWriterName() {
+    //     const writerName = localStorage.nickname;
+    //     if (writerName) {
+    //         //작성자 이름 숨기기
+            
+    //     }
+    // }
+    
     return (
         <>
-            <AnonymousCheckButtonContainer type="Checkbox" onChange={(e) => setPostAnonymous(e.target.checked)}></AnonymousCheckButtonContainer>
+            <AnonymousCheckButtonContainer type="Checkbox" onChange={(e) => {
+                setPostAnonymous(e.target.checked)
+                //console.log(postAnonymous)
+                // e.state.checked ? setHideWriterName(true) : <></>
+                // hideWriterName ? hideWriterName : <></>
+            }}></AnonymousCheckButtonContainer>
             <AnonymousContentContainer>익명</AnonymousContentContainer>
         </>
         
     );
 };
 
+const HideWriterNameToggle = ({ setHideWriterName, hideWriterName }) => {
+    const userName = localStorage.nickname;
+    return <></>;
+};
+
 const AddFileButton = ({setPostAddFile}) => {
+    const [uploadNumber, setUploadNumber] = useState(0);
+    const [showImages, setShowImages] = useState([]);
+
+    const handleAddFiles = (e) => {
+        const imageList = e.target.files;
+        let imageUrlLists = [...showImages];
+        
+        for (let i=0; i<imageList.length; i++) {
+            const currentImageUrl = URL.createObjectURL(imageList[i]);
+            imageUrlLists.push(currentImageUrl);
+        }
+
+        if (imageUrlLists.length > 5) {
+            imageUrlLists = imageUrlLists.slice(0, 5);
+        }
+
+        setShowImages(imageUrlLists);
+        setPostAddFile(showImages);
+
+        //setUploadNumber(imageList.length);
+        //console.log(uploadNumber);
+        //console.log(showImages);
+    }
+
+    const handleDeleteImage = (id) => {
+        setShowImages(showImages.filter((_, index) => index !== id));
+    }
+
+
     return (
         <>
             <AddFileButtonContainer>
-                첨부파일
+                <AddFileButtonLayout>
+                    <AddFileButtonContainerContent htmlFor="input-file">
+                        <AddFileButtonImgLayout src="/img/camera.png"></AddFileButtonImgLayout>
+                    </AddFileButtonContainerContent>
+                    <AddPostFileLayout type='file' id="input-file" multiple style={{
+                        display: 'none'
+                    }} onChange={handleAddFiles}></AddPostFileLayout>
+                </AddFileButtonLayout>
+
+                
+                {showImages.map ((image, id) => (
+                    <ImageContainer key={id}>
+                        <ImageContainerLayout src={image} alt={`${image}-${id}`}/>
+                        <ImageContainerDelteLayout src='/img/x.png' onClick={() => handleDeleteImage(id)}></ImageContainerDelteLayout>
+                    </ImageContainer>
+                ))}
             </AddFileButtonContainer>
+
         </>
     );
 };
 
-const HideWriterNameToggle = ({ setHideWriterName, hideWriterName }) => {
-    return <></>;
-};
+
 
 
 
@@ -135,8 +207,8 @@ const CompletePostButton = ({ savePostInServer, majorId, boardId }) => {
 const AddPost = () => {
     const [postDate, setPostDate] = useState('');
     const [postHashtag, setPostHashtag] = useState('');
-    const [postAnonymous, setPostAnonymous] = useState('');
-    const [postAddFile, setPostAddFile] = useState();
+    const [postAnonymous, setPostAnonymous] = useState();
+    const [postAddFile, setPostAddFile] = useState([]);
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
     const { board_id } = useParams();
@@ -152,7 +224,8 @@ const AddPost = () => {
                     content: postContent,
                     majorId: majorId,
                     boardId: boardId,
-                    Anonymouse: true,
+                    anonymous: postAnonymous,
+                    file: postAddFile,
                 },
                 {
                     headers: {
@@ -188,11 +261,11 @@ const AddPost = () => {
                     <WritePostContentField setPostContent={setPostContent} />
                     <Blank1em />
                     <div>
-                        <AnonymousCheckButton setPostAnonymous={setPostAnonymous}></AnonymousCheckButton>
-                        <AddFileButton></AddFileButton>
+                        <AnonymousCheckButton setPostAnonymous={setPostAnonymous} postAnonymous={postAnonymous}></AnonymousCheckButton>
                         <HideWriterAndCompleteButtonLayout>
                             <CompletePostButton savePostInServer={savePostInServer} majorId={majorId} boardId={boardId}/>
                         </HideWriterAndCompleteButtonLayout>
+                        <AddFileButton setPostAddFile={setPostAddFile}></AddFileButton>
                     </div>
                 </WritePostContainer>
             </AddPostLayout>

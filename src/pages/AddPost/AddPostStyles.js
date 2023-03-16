@@ -1,6 +1,35 @@
 import styled from 'styled-components';
 import { COLORS } from '../../color';
 
+export const ImageContainerDelteLayout = styled.img`
+    width: 0.8rem;
+    height: 0.8rem;
+`;
+
+
+export const ImageContainer = styled.div`
+    //border: solid 1px gray;
+    width: 5rem;
+    height: 5rem;
+    float: left;
+`;
+
+export const ImageContainerLayout = styled.img`
+    border: solid 0.1em lightgray;
+    width: 3rem;
+    height: 3rem;
+    margin: 0.2rem;
+    float: left;
+`;
+
+export const FileUploadNumberLayout = styled.p`
+    
+`;
+
+export const AddPostFileLayout = styled.input`
+    
+`;
+
 export const AnonymousContentContainer = styled.p`
     color: gray;
     font-size: large;
@@ -17,14 +46,36 @@ export const AnonymousCheckButtonContainer = styled.input`
     float: left;
 `;
 
-export const AddFileButtonContainer = styled.button`
-    width: 10em;
-    height: 3em;
-    background: lightgray;
-    border: none;
-    border-radius: 5px;
-    margin-left: 20em;
+export const AddFileButtonContainer = styled.div`
+    border-top: solid 0.1em lightgray;
+    // border-radius: 5px;
+    //border: solid 0.5px lightgray;
+    width: 100%;
+    height: 10rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
     float: left;
+    // overflow: hidden;
+    resize: none;
+`;
+
+export const AddFileButtonImgLayout = styled.img`
+    //background: lightgray;
+    border-radius: 0.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0.1rem;
+    margin-right: 3rem;
+    padding: 0.5rem;
+    border: solid 1px lightgray;
+`;
+
+export const AddFileButtonLayout = styled.div`
+    margin-right: 0.5rem;
+    float: left;
+`;
+
+export const AddFileButtonContainerContent = styled.label`
 `;
 
 // export const SelectHashtegLayout = styled.select`
