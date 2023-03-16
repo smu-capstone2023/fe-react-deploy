@@ -11,27 +11,73 @@ import {
     ViewPostContentLayout,
     ViewCommentLayout,
     EditPostButtonField,
+    ReplyPostContainer,
+    ViewPostMenuImg,
+    ViewPostMenuContainer,
+    ViewPostMenuLayout,
+    ViewPostMenuContent,
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const WriterUserInfoBlock = ({ writerName, createDate, profileImageUrl }) => {
+const ViewPostMenu = ({writerName}) => {
+    const {selected, setSelected} = useState(true);
+    const userName = localStorage.nickname;
+
     return (
-        <WriterUserInfoLayout>
-            <ProfileImageLayout>
-                <ProfileImage />
-            </ProfileImageLayout>
-            <UserAndPostInfoLayout>
-                <UserNameFiled>{writerName}</UserNameFiled>
-                <CreateDateField>{createDate}</CreateDateField>
-            </UserAndPostInfoLayout>
-        </WriterUserInfoLayout>
+        <>
+            <ViewPostMenuLayout>
+                <ViewPostMenuContent>콘텐츠1</ViewPostMenuContent>
+                <ViewPostMenuContent>콘텐츠2</ViewPostMenuContent>
+                <ViewPostMenuContent>콘텐츠3</ViewPostMenuContent>
+            </ViewPostMenuLayout>  
+            <ViewPostMenuImg src='/img/dots.png' onClick={()=>{
+                if (writerName == userName) {
+                    //이 게시물의 작성자라면
+                    //이 메뉴를 보여주자
+                    //console.log('작성자임')
+                    
+                    
+                }
+                else {
+                    //이 게시물의 작성자가 아니라면
+                    //이 메뉴를 보여주자
+                    //console.log('작성자 아님')
+                }
+            }}></ViewPostMenuImg>
+            
+            
+        </>
+
     );
 };
 
-const EditPostButton = ({ isShow, postId }) => {
-    if (isShow) {
+const WriterUserInfoBlock = ({ writerName, createDate, profileImageUrl }) => {
+    return (
+        <>
+            <WriterUserInfoLayout>
+                <ProfileImageLayout>
+                    <ProfileImage src='https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk='/>
+                </ProfileImageLayout>
+                <UserAndPostInfoLayout>
+                    <UserNameFiled>{writerName}</UserNameFiled>
+                    <CreateDateField>{createDate}</CreateDateField>
+                </UserAndPostInfoLayout>
+                <ViewPostMenuContainer>
+                    <ViewPostMenu writerName={writerName}></ViewPostMenu>
+                </ViewPostMenuContainer>
+            </WriterUserInfoLayout>
+
+
+        </>
+
+    );
+};
+
+const EditPostButton = ({ isShow, postId, writerName}) => {
+    const userName = localStorage.nickname;
+    if (isShow && (writerName == userName)) {
         return <EditPostButtonField onClick={() => (window.location.href = `../editpost/${postId}`)}>수정하기</EditPostButtonField>;
     } else {
         return <></>;
@@ -70,7 +116,6 @@ const ViewPost = () => {
         getPostInfo();
     }, []);
 
-    //TODO: 유저가 글쓴이인지 아닌지에 따라서 EditPostButton 숨기기 기능 추가해야함
     return (
         <>
             <ViewPostLayout>
@@ -82,11 +127,14 @@ const ViewPost = () => {
                 ) : (
                     <></>
                 )}
-                <EditPostButton isShow={true} postId={post_id} />
+                <EditPostButton isShow={true} postId={post_id} writerName={postInfo.author}/>
                 <ViewCommentBlock />
+                <ReplyPostContainer></ReplyPostContainer>
             </ViewPostLayout>
         </>
     );
 };
 
 export default ViewPost;
+
+//merge
