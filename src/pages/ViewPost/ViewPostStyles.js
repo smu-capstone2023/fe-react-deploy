@@ -1,14 +1,34 @@
 import styled from 'styled-components';
 import { COLORS } from '../../color';
 
-export const ViewPostMenuContent = styled.div`
-    width: 0.5em;
-    hieght: 0.3em;
-    padding: 1em;
+export const ViewPostMenuUI = styled.ul`
+    position: absolute;
+    top: 3rem;
+    left: -9rem;
+    width: 10rem;
+    height: 8rem;
+    display: block;
+    // margin-left: 30em;
+    // margin-top: 12em;
+    //display: none;
+`;
+
+export const ViewPostMenuContent = styled.li`
+    width: 10rem;
+    height: 2.1rem;
+    text-align: center;
+    // margin-left: 2.5rem;
+    padding: 0.3rem;
+    list-style-type: none;
+    border: solid 0.05em white;
+    border-radius: 0.2rem;
+    background: ${COLORS.logo};
+    color: white;
+    // padding: 1em;
 
 `;
 
-export const ViewPostMenuLayout = styled.div`
+export const ViewPostMenuLayout = styled.ul`
     background: lightgray;
     position: absolute;
     top: 0;
@@ -27,6 +47,11 @@ export const ViewPostMenuContainer = styled.div`
     height: 5%;
     float: left;
     margin-top: 0.5em;
+`;
+
+export const ViewPostMenuImgContainer = styled.div`
+    //border: solid 1px lightgray;
+    position: relative;
 `;
 
 export const ViewPostMenuImg = styled.img`
@@ -107,8 +132,10 @@ export const ViewPostContentLayout = styled.div`
     display: flex;
     flex-direction: column;
     width: 80%;
-    max-width: 600px;
-    padding: 1em 0;
+    max-width: 1000rem;
+    min-height: 10rem;
+    padding: 1rem 0;
+    padding-left: 0.5rem;
 `;
 
 export const PostTitleField = styled.h3`
