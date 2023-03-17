@@ -59,8 +59,8 @@ const BoardUtilsButtons = ({ boardId }) => {
 const BoardToggle = () => {
 const majorOptions = [
   { label: '컴퓨터과학과', value: '컴퓨터과학과', link: '/board/001001' },
-  { label: '경제학과', value: '경제학과', link: '/board/002001' },
-  { label: '휴먼지능정보공학전공', value: '휴먼지능정보공학전공', link: '/board/003001' },
+  { label: '휴먼지능정보공학전공', value: '휴먼지능정보공학전공', link: '/board/002001' },
+  { label: '경제학과', value: '경제학과', link: '/board/003001' },
 ];
 
 const animatedComponents = makeAnimated();
