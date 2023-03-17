@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLORS } from '../../color';
 
@@ -98,16 +99,6 @@ export const SignButton = styled.div`
     text-align: center;
 `;
 
-//모달버튼 추가
-export const ModalButton = styled.div`
-    padding: 15px;
-    width: 80%;
-    background: #dcdcdc;
-    margin-top: 20px;
-    border-radius: 5px;
-    color: ${COLORS.color_button};
-    text-align: center;
-`;
 
 
 
@@ -133,4 +124,15 @@ export const SignupAgreeLayout = styled.div`
     padding: 1em 0 0 0;
     display: flex;
     flex-direction: row;
+`;
+
+export const CertificationLink = styled(Link)`
+padding: 15px;
+width: 80%;
+background: ${COLORS.gray_button};
+margin-top: 20px;
+border-radius: 5px;
+color: black;
+text-align: center;
+text-decoration: none;
 `;

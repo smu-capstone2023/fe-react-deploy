@@ -13,7 +13,7 @@ import Board from './pages/Board';
 import ViewPost from './pages/ViewPost';
 import EditPost from './pages/EditPost';
 import SignupSection3 from './pages/Signup/SignupSection3';
-
+import Certification from './pages/Certification';
 
 
 function App() {
@@ -38,6 +38,7 @@ function App() {
                 <Route path='/viewpost/:post_id' element={<ViewPost />}></Route>
                 <Route path='/editpost/:post_id' element={<EditPost />}></Route>
                 //board,post id 값 주기
+                <Route path='/certification' element={<Certification />}></Route>
             </Routes>
         </div>
     );

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import Modal from './Modal';
-import { ProfileImage, Line, SignContainer, SignInputText, SignInnerBox, SignButton, DefaultText, SmallText, ModalButton } from './SignupStyles.js';
+import {CertificationLink, SignContainer, SignInputText, SignInnerBox, SignButton, DefaultText, SmallText} from './SignupStyles.js';
 
 
 
 
 const SignupSection3 = ({ userSignupInfo }) => {
     const [nickName, setNickName] = useState('');
-    const [showModal, setShowModal] = useState(false);
+    // const [showModal, setShowModal] = useState(false);
 
 
     
@@ -40,15 +39,15 @@ const saveUserInfoAtServer = () => {
     };
 
 
-    //모달 띄우기
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      setShowModal(true);
-    };
+    // //모달 띄우기
+    // const handleSubmit = (event) => {
+    //   event.preventDefault();
+    //   setShowModal(true);
+    // };
   
-    const closeModal = () => {
-      setShowModal(false);
-    };
+    // const closeModal = () => {
+    //   setShowModal(false);
+    // };
 
 
     return (
@@ -58,18 +57,16 @@ const saveUserInfoAtServer = () => {
                 <SmallText>닉네임은 설정 후 30일 이후에 변경 가능합니다.</SmallText>
                 <SignInputText onChange={(e) => setNickName(e.target.value)} placeholder='닉네임 입력'></SignInputText>
             </SignInnerBox>
-            
-            <SignButton onClick={() => {if (checkAllOfSingUpInfo()) saveUserInfoAtServer()}}>회원가입 완료!</SignButton>
             <SignButton
                 onClick={() => {
                     if (checkAllOfSingUpInfo()) saveUserInfoAtServer();
                 }}
             >
-                회원가입 완료! 
+                회원가입 완료
             </SignButton>
+            <DefaultText></DefaultText>
             <SmallText>학과인증을 통해 더 다양한 권한을 가질 수 있습니다.</SmallText>
-            <ModalButton onClick={handleSubmit}>학과인증</ModalButton>
-            <Modal showModal={showModal} onClose={closeModal} />
+            <CertificationLink to='../certification'>학과인증하기</CertificationLink>
         </SignContainer>
         
     );
