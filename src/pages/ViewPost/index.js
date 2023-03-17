@@ -16,44 +16,65 @@ import {
     ViewPostMenuContainer,
     ViewPostMenuLayout,
     ViewPostMenuContent,
+    ViewPostMenuUI,
+    ViewPostMenuImgContainer,
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const ViewPostMenu = ({writerName}) => {
-    const {selected, setSelected} = useState(true);
+
+
+const ViewPostMenu = ({writerName, postId, deletePost}) => {
+    const [isOpen, setMenu] = useState(false);
     const userName = localStorage.nickname;
 
+    const linkCopy = () => {
+        var url = '';
+        var textArea = document.createElement("textarea");
+        document.body.appendChild(textArea);
+        url = window.document.location.href;
+        textArea.value = url;
+        textArea.select();
+        navigator.clipboard.writeText(url);
+        document.body.removeChild(textArea);
+        alert("링크가 복사되었습니다.")
+    }
+    const refreshPage = () => {
+        window.location.reload();
+    }
+
+    const toggleMenu = (e) => {
+        setMenu(isOpen => !isOpen);
+    }
+    
     return (
         <>
-            <ViewPostMenuLayout>
-                <ViewPostMenuContent>콘텐츠1</ViewPostMenuContent>
-                <ViewPostMenuContent>콘텐츠2</ViewPostMenuContent>
-                <ViewPostMenuContent>콘텐츠3</ViewPostMenuContent>
-            </ViewPostMenuLayout>  
-            <ViewPostMenuImg src='/img/dots.png' onClick={()=>{
-                if (writerName == userName) {
-                    //이 게시물의 작성자라면
-                    //이 메뉴를 보여주자
-                    //console.log('작성자임')
-                    
-                    
-                }
-                else {
-                    //이 게시물의 작성자가 아니라면
-                    //이 메뉴를 보여주자
-                    //console.log('작성자 아님')
-                }
-            }}></ViewPostMenuImg>
-            
-            
+            <ViewPostMenuImgContainer>
+                <ViewPostMenuImg src='/img/dots.png' onClick={toggleMenu}></ViewPostMenuImg>
+                {
+                    isOpen &&
+                        <ViewPostMenuUI>
+                            {
+                                writerName == userName ? 
+                                <>
+                                    <ViewPostMenuContent onClick={() => (window.location.href = `../editpost/${postId}`)}>수정</ViewPostMenuContent>
+                                    <ViewPostMenuContent onClick={deletePost}>삭제</ViewPostMenuContent>
+                                </> :
+                                <>
+                                    <ViewPostMenuContent onClick={()=>{}}>신고</ViewPostMenuContent>
+                                </>
+                            }
+                            <ViewPostMenuContent onClick={()=>{linkCopy()}}>링크 복사</ViewPostMenuContent>
+                            <ViewPostMenuContent onClick={()=>{refreshPage()}}>새로고침</ViewPostMenuContent>
+                        </ViewPostMenuUI>
+                }   
+            </ViewPostMenuImgContainer>
         </>
-
     );
 };
 
-const WriterUserInfoBlock = ({ writerName, createDate, profileImageUrl }) => {
+const WriterUserInfoBlock = ({ writerName, createDate, postId, deletePost, profileImageUrl }) => {
     return (
         <>
             <WriterUserInfoLayout>
@@ -65,7 +86,7 @@ const WriterUserInfoBlock = ({ writerName, createDate, profileImageUrl }) => {
                     <CreateDateField>{createDate}</CreateDateField>
                 </UserAndPostInfoLayout>
                 <ViewPostMenuContainer>
-                    <ViewPostMenu writerName={writerName}></ViewPostMenu>
+                    <ViewPostMenu writerName={writerName} postId={postId} deletePost={deletePost}></ViewPostMenu>
                 </ViewPostMenuContainer>
             </WriterUserInfoLayout>
 
@@ -75,14 +96,14 @@ const WriterUserInfoBlock = ({ writerName, createDate, profileImageUrl }) => {
     );
 };
 
-const EditPostButton = ({ isShow, postId, writerName}) => {
-    const userName = localStorage.nickname;
-    if (isShow && (writerName == userName)) {
-        return <EditPostButtonField onClick={() => (window.location.href = `../editpost/${postId}`)}>수정하기</EditPostButtonField>;
-    } else {
-        return <></>;
-    }
-};
+// const EditPostButton = ({ isShow, postId, writerName}) => {
+//     const userName = localStorage.nickname;
+//     if (isShow && (writerName == userName)) {
+//         return <EditPostButtonField onClick={() => (window.location.href = `../editpost/${postId}`)}>수정하기</EditPostButtonField>;
+//     } else {
+//         return <></>;
+//     }
+// };
 
 const ViewPostContentBlock = ({ postTitle, postContent }) => {
     return (
@@ -96,9 +117,11 @@ const ViewPostContentBlock = ({ postTitle, postContent }) => {
 const ViewCommentBlock = () => {
     return <ViewCommentLayout />;
 };
+
 const ViewPost = () => {
     const { post_id } = useParams();
     const [postInfo, setPostInfo] = useState({});
+
     const getPostInfo = () => {
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/detail/${post_id}`, {
@@ -112,6 +135,17 @@ const ViewPost = () => {
             .catch((response) => console.log(response));
     };
 
+    const deletePost = (post_id) => {
+        const url = `${process.env.REACT_APP_SERVER_URL}:8001/board/detail/${post_id}`;
+
+        axios.delete(url)
+            .then((response) => {
+                console.log(response.data);
+                alert("게시물이 삭제되었습니다.")
+            })
+            .catch((error) => {console.log(error);})
+    };
+
     useEffect(() => {
         getPostInfo();
     }, []);
@@ -121,13 +155,12 @@ const ViewPost = () => {
             <ViewPostLayout>
                 {postInfo ? (
                     <>
-                        <WriterUserInfoBlock writerName={postInfo.author} createDate={postInfo.createdAt} />
+                        <WriterUserInfoBlock writerName={postInfo.author} createDate={postInfo.createdAt} postId={post_id} deletePost={deletePost}></WriterUserInfoBlock>
                         <ViewPostContentBlock postTitle={postInfo.title} postContent={postInfo.content} />
                     </>
                 ) : (
                     <></>
                 )}
-                <EditPostButton isShow={true} postId={post_id} writerName={postInfo.author}/>
                 <ViewCommentBlock />
                 <ReplyPostContainer></ReplyPostContainer>
             </ViewPostLayout>
@@ -136,5 +169,3 @@ const ViewPost = () => {
 };
 
 export default ViewPost;
-
-//merge
