@@ -135,15 +135,39 @@ const ViewPost = () => {
             .catch((response) => console.log(response));
     };
 
-    const deletePost = (post_id) => {
-        const url = `${process.env.REACT_APP_SERVER_URL}:8001/board/detail/${post_id}`;
+    const deletePost = () => {
+        const url = `${process.env.REACT_APP_SERVER_URL}:8001/board/delete/${post_id}`;
+        console.log("deletepost 함수 호출");
 
-        axios.delete(url)
+        axios.delete(url, {
+            headers: {
+                'Content-type': 'application/json',
+                Accept: 'application/json',
+                email: localStorage.getItem('email'),
+            },
+        })
             .then((response) => {
-                console.log(response.data);
-                alert("게시물이 삭제되었습니다.")
+                if (response.code === 200) {
+                    alert(response.message);
+                    window.history.back();
+                }
+                alert("게시물이 삭제되었습니다.");
+                window.history.back();
             })
-            .catch((error) => {console.log(error);})
+            .catch((response) => {
+                if (response.code === 400) {
+                    console.log("요청 문법 오류");
+                } 
+                else if (response.code === 401) {
+                    console.log("존재하지 않는 사용자");
+                }
+                else if (response.code === 402) {
+                    console.log("존재하지 않는 게시물");
+                }
+                else if (response.code === 403) {
+                    console.log("게시글 수정 권한 없음");
+                }
+            });
     };
 
     useEffect(() => {
