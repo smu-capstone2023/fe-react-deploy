@@ -9,7 +9,10 @@ import {
   BoardLayout,
   SignInnerBox,
   DefaultText,
-  NavLinks
+  NavLinks,
+  ChangeBoardInBox,
+  ChangeBoardOutBox
+  
 
 } from './BoardStyles';
 import NoticeLong from '../../component/PostListElement/NoticeLong';
@@ -83,6 +86,27 @@ return (
 );
 };
 
+const ChangeBoardBox = ({boardId}) => {
+
+  const detailMajorId = boardId.slice(0, 3);
+  const boardLink = ['자유','비밀','공지','정보/홍보']
+
+return(
+    <>
+    
+      <ChangeBoardOutBox>
+        {
+        boardLink.map((a,i)=>(
+          <ChangeBoardInBox onClick={()=>(
+            window.location.href = `${detailMajorId}00${i+1}`
+          )}>{boardLink[i]}</ChangeBoardInBox>
+        ))
+
+        }
+        </ChangeBoardOutBox>
+    </>
+      );
+};
 
 const Board = () => {
   const [boardList, setBoardList] = useState([]);
@@ -133,6 +157,7 @@ const Board = () => {
               <BoardTitle>
                   {majorName}-{boardName}
               </BoardTitle>
+              <ChangeBoardBox boardId={board_id}/>
               <BoardToggle />
 
               <BoardUtilsButtons boardId={board_id} />

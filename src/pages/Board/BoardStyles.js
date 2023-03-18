@@ -57,6 +57,7 @@ export const SignInnerBox = styled.div`
     display: flex;
     flex-direction: column;
     border: solid 0.5px gray;
+    border-radius: 10px;
     width: 30%;
     height: 70%;
     padding: 1em;
@@ -67,8 +68,26 @@ export const DefaultText = styled.p`
     font-size: 0.9em;
 `;
 
-export const BoardToggle = styled.p`
+export const ChangeBoardOutBox = styled.p`
 
+    display:flex;
+    border-radius: 10px;
+
+    width: 20em;
+    
+
+    
+
+
+`;
+
+export const ChangeBoardInBox = styled.p`
+
+    border-radius: 5px;
+    border: solid 0.5px gray;
+    width: 10em;
+    text-align: center;
+    padding: 6px;
 
 
 `;
@@ -81,7 +100,7 @@ export const NavLinks = styled.p`
     padding: 0 1rem;
     height: 100%;
     cursor: pointer;
-
+    
     &.active {
         border-bottom: 3px solide #01bf71;
     }
