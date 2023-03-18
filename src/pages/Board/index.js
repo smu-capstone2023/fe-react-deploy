@@ -1,4 +1,5 @@
 import {
+  Boardline,
   BoardUtilsButtonsLayout,
   WritePostButton,
   BoardTitle,
@@ -22,6 +23,7 @@ import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Link } from 'react-router-dom';
+import { textAlign } from '@mui/system';
 
 
 const BoardList = ({ boardList }) => {
@@ -59,7 +61,8 @@ const BoardUtilsButtons = ({ boardId }) => {
   );
 };
 
-const BoardToggle = () => {
+const BoardToggle = ({majorName}) => {
+const major_Name = majorName;
 const majorOptions = [
   { label: '컴퓨터과학과', value: '컴퓨터과학과', link: '/board/001001' },
   { label: '휴먼지능정보공학전공', value: '휴먼지능정보공학전공', link: '/board/002001' },
@@ -68,45 +71,70 @@ const majorOptions = [
 
 const animatedComponents = makeAnimated();
 
+
 return (
   <SignInnerBox>
-      <DefaultText>학과를 선택하세요</DefaultText>
-    <Select
-      defaultValue={null}
+      {/* <DefaultText>학과를 선택하세요</DefaultText> */}
+      <Select
+      styles={{
+        // Select 기본 적용되는 테두리랑 온클릭 함수 없애는 기능
+        control: (base, state) => ({
+          ...base,
+          backgroundColor: 'transparent',
+          borderColor: 'transparent',
+          boxShadow: state.isFocused ? null : null, // optional: remove box shadow on focus
+          '&:hover': {
+            borderColor: 'transparent',
+          },
+        }),
+        placeholder: (base) => ({
+          ...base,
+          color: 'black',
+          fontWeight: '500',
+          textAlign: 'center'
+        }),
+      }}
+      key={major_Name}
+      placeholder={major_Name}
       options={majorOptions}
       components={animatedComponents}
-      onChange={(selectedOptions) =>{
-        
-        window.location.href=`${selectedOptions.link}`}
-
-      }>
-      
-    </Select>
+      onChange={(selectedOptions) => {
+        window.location.href = `${selectedOptions.link}`;
+      }}
+    />
   </SignInnerBox>
 );
 };
 
-const ChangeBoardBox = ({boardId}) => {
-
+const ChangeBoardBox = ({ boardId }) => {
   const detailMajorId = boardId.slice(0, 3);
-  const boardLink = ['자유','비밀','공지','정보/홍보']
+  const boardLink = ["자유", "비밀", "공지", "정보/홍보"];
+  const currentPageUrl = window.location.href;
 
-return(
+  return (
     <>
-    
       <ChangeBoardOutBox>
-        {
-        boardLink.map((a,i)=>(
-          <ChangeBoardInBox onClick={()=>(
-            window.location.href = `${detailMajorId}00${i+1}`
-          )}>{boardLink[i]}</ChangeBoardInBox>
-        ))
-
-        }
-        </ChangeBoardOutBox>
+        {boardLink.map((link, index) => {
+          const boardUrl = `${detailMajorId}00${index + 1}`;
+          const isActive = currentPageUrl.includes(boardUrl);
+          return (
+            <ChangeBoardInBox
+              key={index}
+              active={isActive}
+              onClick={() => {
+                window.location.href = boardUrl;
+              }}
+            >
+              {link}
+            </ChangeBoardInBox>
+          );
+        })}
+      </ChangeBoardOutBox>
     </>
-      );
+  );
 };
+
+
 
 const Board = () => {
   const [boardList, setBoardList] = useState([]);
@@ -150,22 +178,23 @@ const Board = () => {
   
   return (
       
-      <>
+      <BoardLayout>
       
-          <BoardLayout>
+          <Boardline>
 
               <BoardTitle>
-                  {majorName}-{boardName}
+                  {boardName}
               </BoardTitle>
+              <BoardToggle majorName={majorName} />
               <ChangeBoardBox boardId={board_id}/>
-              <BoardToggle />
+              
 
               <BoardUtilsButtons boardId={board_id} />
               
               <BoardList boardList={boardList} />
-          </BoardLayout>
+          </Boardline>
           
-      </>
+      </BoardLayout>
   );
 };
 
