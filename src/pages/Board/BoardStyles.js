@@ -51,13 +51,22 @@ export const BoardListLayout = styled.div`
     width: 85%;
 `;
 
+export const TitleAndToggle = styled.p`
+    display: flex;
+    align-items: center;
+    width: 90%;
+`;
+
 export const BoardTitle = styled.div`
     color: ${COLORS.logo};
     font-size: 1.8rem;
     font-weight: bold;
-    width: 28%;
+    width: 21.6%;
     padding: 1.3em;
     padding-right: 0em;
+    padding-left: 0em;
+    text-align: left;
+
 
 `;
 
@@ -74,7 +83,7 @@ export const BoardUtilsButtonsLayout = styled.div`
 export const BoardUtilsButton = styled.div`
     margin 0px;
     border-radius: 12px;
-    border: solid 0.5px gray;
+    border: solid 4px ${COLORS.gray_button};
     width: 4.9em;
     text-align: center;
     padding: 0.7em;
@@ -87,9 +96,9 @@ export const BoardUtilsButton = styled.div`
 export const ToggleBox = styled.div`
 
     
-    border: solid 0.5px gray;
+    border: solid 3px ${COLORS.gray_button};
     border-radius: 50px;
-    width: 20%;
+    width: 32%;
     
 `;
 
@@ -100,8 +109,8 @@ export const DefaultText = styled.p`
 
 export const ChangeBoardOutBox = styled.p`
     display:flex;
-    border-radius: 10px;
-    border: solid 2.5px #a8a8a8;
+    border-radius: 30px;
+    border: solid 3px #a8a8a8;
     width: 90%;
     justify-content: center;
     align-items: center;
@@ -131,16 +140,29 @@ export const NavLinks = styled.p`
     }
 `;
 
-export const TitleAndToggle = styled.p`
-    display: flex;
-    align-items: center;
-    width: 100%;
-
-`;
-
 export const Line = styled.div`
     margin: 2em;
     margin-bottom: 0;
     width: 90%;
-    border-bottom: solid 0.5px gray;
+    border-bottom: solid 3px ${COLORS.gray_button};
+`;
+
+export const SearchBarWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 1.5em;
+  margin-bottom: 0;
+  width: 90%
+  
+`;
+
+export const SearchInput = styled.input`
+  color: gray;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 0.5em;
+  width: 39%;
+  border: solid 3px gray;
+  border-radius: 30px;
+  text-align: center;
 `;

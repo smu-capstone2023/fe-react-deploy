@@ -14,7 +14,10 @@ import {
   ChangeBoardInBox,
   ChangeBoardOutBox,
   TitleAndToggle,
-  Line
+  Line,
+  SearchBar,
+  SearchBarWrapper,
+  SearchInput
   
 
 } from './BoardStyles';
@@ -139,6 +142,27 @@ const ChangeBoardBox = ({ boardId }) => {
   );
 };
 
+const Search = () => {
+  const handleSearch = (event) => {
+    console.log(event.target.value);
+  };
+ 
+  return(
+  <SearchBarWrapper>
+    <SearchInput
+      type="search"
+      placeholder="검색하기"
+      onChange={
+        handleSearch
+      }
+      
+    />
+  </SearchBarWrapper>
+  )
+}
+
+
+
 
 
 const Board = () => {
@@ -148,6 +172,7 @@ const Board = () => {
   const { board_id } = useParams();
   const majorId = board_id.slice(0, 3);
   const boardId = board_id.slice(3, 6);
+  
 
   const setBoardListFromServer = () => {
       axios
@@ -193,10 +218,12 @@ const Board = () => {
               <BoardToggle majorName={majorName} />
             </TitleAndToggle>
               <ChangeBoardBox boardId={board_id}/>
-              <Line/>
-              <BoardUtilsButtons boardId={board_id} />
-              
 
+              <Line/>
+
+              <Search/>
+
+              <BoardUtilsButtons boardId={board_id} />
               <BoardList boardList={boardList} />
           </Boardline>
           
