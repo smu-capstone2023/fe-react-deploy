@@ -1,18 +1,20 @@
 import {
   Boardline,
   BoardUtilsButtonsLayout,
-  WritePostButton,
+  BoardUtilsButton,
   BoardTitle,
   BoardListLayout,
   TableSchemaElement,
   TableTitleSchema,
   BoardTableSchema,
   BoardLayout,
-  SignInnerBox,
+  ToggleBox,
   DefaultText,
   NavLinks,
   ChangeBoardInBox,
-  ChangeBoardOutBox
+  ChangeBoardOutBox,
+  TitleAndToggle,
+  Line
   
 
 } from './BoardStyles';
@@ -56,7 +58,10 @@ const BoardList = ({ boardList }) => {
 const BoardUtilsButtons = ({ boardId }) => {
   return (
       <BoardUtilsButtonsLayout>
-          <WritePostButton onClick={() => (window.location.href = `/addpost/${boardId}`)}>글쓰기</WritePostButton>
+          <BoardUtilsButton onClick={() => (window.location.href = `/addpost/${boardId}`)}>글쓰기</BoardUtilsButton>
+          <BoardUtilsButton style={{marginLeft: 'auto'}}>최신순</BoardUtilsButton>
+          <BoardUtilsButton style={{marginLeft: '8px'}}>인기순</BoardUtilsButton>
+
       </BoardUtilsButtonsLayout>
   );
 };
@@ -73,7 +78,7 @@ const animatedComponents = makeAnimated();
 
 
 return (
-  <SignInnerBox>
+  <ToggleBox>
       {/* <DefaultText>학과를 선택하세요</DefaultText> */}
       <Select
       styles={{
@@ -102,7 +107,7 @@ return (
         window.location.href = `${selectedOptions.link}`;
       }}
     />
-  </SignInnerBox>
+  </ToggleBox>
 );
 };
 
@@ -181,16 +186,17 @@ const Board = () => {
       <BoardLayout>
       
           <Boardline>
-
-              <BoardTitle>
+            <TitleAndToggle>
+            <BoardTitle>
                   {boardName}
               </BoardTitle>
               <BoardToggle majorName={majorName} />
+            </TitleAndToggle>
               <ChangeBoardBox boardId={board_id}/>
-              
-
+              <Line/>
               <BoardUtilsButtons boardId={board_id} />
               
+
               <BoardList boardList={boardList} />
           </Boardline>
           

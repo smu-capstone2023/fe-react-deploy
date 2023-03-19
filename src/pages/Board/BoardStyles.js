@@ -6,9 +6,9 @@ export const BoardLayout = styled.div`
     flex-direction: column;
     align-items: center;
     border: solid 0.5px gray;
-    
     padding: 10px;
     background-color: ${COLORS.background_color};
+    // font-weight: ;
 `;
 
 
@@ -48,36 +48,48 @@ export const TableTitleSchema = styled.div`
 `;
 
 export const BoardListLayout = styled.div`
-    width: 80%;
+    width: 85%;
 `;
 
 export const BoardTitle = styled.div`
     color: ${COLORS.logo};
     font-size: 1.8rem;
     font-weight: bold;
-    width: 80%;
-    padding-top: 3em;
+    width: 28%;
+    padding: 1.3em;
+    padding-right: 0em;
+
 `;
 
 export const BoardUtilsButtonsLayout = styled.div`
-    width: 80%;
-    padding: 1em 0;
+    display: flex;
+    width: 83%;
+    padding: 1.5em 0;
+    font-weight: 600;
+    color: #6e6e6e;
+    justify-content: end;
+    
 `;
 
-export const WritePostButton = styled.div`
-    border-radius: 5px;
+export const BoardUtilsButton = styled.div`
+    margin 0px;
+    border-radius: 12px;
     border: solid 0.5px gray;
-    width: 4em;
+    width: 4.9em;
     text-align: center;
+    padding: 0.7em;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    font-size: 0.8rem;
+
 `;
 
-export const SignInnerBox = styled.div`
+export const ToggleBox = styled.div`
 
     
     border: solid 0.5px gray;
     border-radius: 50px;
-    width: 22%;
-    padding: 0.1rem;
+    width: 20%;
     
 `;
 
@@ -88,8 +100,8 @@ export const DefaultText = styled.p`
 
 export const ChangeBoardOutBox = styled.p`
     display:flex;
-    border-radius: 8px;
-    border: solid 2.5px gray;
+    border-radius: 10px;
+    border: solid 2.5px #a8a8a8;
     width: 90%;
     justify-content: center;
     align-items: center;
@@ -97,7 +109,7 @@ export const ChangeBoardOutBox = styled.p`
 
 export const ChangeBoardInBox = styled.p`
 
-    border-left: solid 0.5px lightgray;
+    border-right: solid 0.5px whitesmoke;
     width: 15rem;
     text-align: center;
     
@@ -117,4 +129,18 @@ export const NavLinks = styled.p`
     &.active {
         border-bottom: 3px solide #01bf71;
     }
+`;
+
+export const TitleAndToggle = styled.p`
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+`;
+
+export const Line = styled.div`
+    margin: 2em;
+    margin-bottom: 0;
+    width: 90%;
+    border-bottom: solid 0.5px gray;
 `;
