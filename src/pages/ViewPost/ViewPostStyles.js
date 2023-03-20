@@ -52,12 +52,17 @@ export const ViewPostMenuContainer = styled.div`
 export const ViewPostMenuImgContainer = styled.div`
     //border: solid 1px lightgray;
     position: relative;
+
 `;
 
 export const ViewPostMenuImg = styled.img`
     // border: solid 1px lightgray;
     width: 100%;
     height: 100%;
+    margin: 0.4rem;
+    @media (max-width: 700px) {
+        height: 2rem;
+    }
 `;
 
 export const ViewPostLayout = styled.div`
@@ -110,6 +115,9 @@ export const CreateDateField = styled.p`
     padding-bottom: 0.2em;
     padding-left: 0.1em;
     font-size: 0.8em;
+    @media (max-width: 430px) {
+        font-size: 0.65em;
+    }
 `;
 
 export const ProfileImage = styled.img`
@@ -155,7 +163,7 @@ export const WriteCommentContainer = styled.div`
 
 export const WriteCommentLayout = styled.input`
     min-height: 3vh;
-    width: 87%;
+    width: 85%;
     padding: 0.7rem;
     //background: lightgray;
     border: none;
@@ -177,6 +185,9 @@ export const UploadCommentLayout = styled.div`
     border-radius: 0.5em;
     float: right;
     margin-right: 0.5rem;
+    @media (max-width: 430px) {
+        font-size: 0.65em;
+    }
 `;
 
 export const ViewCommentMenuLayout = styled.div`
@@ -208,6 +219,7 @@ export const ViewCommentUserImgLayout = styled.img`
 `;
 
 export const ViewCommentUserNameLayout = styled.p`
+    color: gray;
     height: 2rem;
     margin: 0.2rem;
     margin-left: 3rem;
@@ -219,7 +231,7 @@ export const ViewCommentLayout= styled.div`
     border: solid 0.05em lightgray;
     border-radius: 0.3rem;
     padding: 0.3rem;
-    width: 91%;
+    width: 84%;
     min-height: 4vh;
     max-height: 1000rem;
     margin-top: 1.5rem;

@@ -165,32 +165,14 @@ const WriteCommentBlock = ({createDate, writerName}) => {
         window.location.reload();
     }
 
-    const toggleMenu = (e) => {
+    const toggleMenu = () => {
         setMenu(isOpen => !isOpen);
     }
-
-    console.log(feedComments);
-
-    const ShowMenuComponents = () => {
-        {
-            (isOpen && (showMenu === comment.id)) &&
-                <ViewPostMenuUI style={{top: '2rem', left: '-8.5rem'}}>
-                    {
-                        writerName == userName ? 
-                        <>
-                            <ViewPostMenuContent onClick={()=>{}}>수정</ViewPostMenuContent>
-                            <ViewPostMenuContent onClick={()=>{}}>삭제</ViewPostMenuContent>
-                        </> :
-                        <>
-                            <ViewPostMenuContent onClick={()=>{}}>신고</ViewPostMenuContent>
-                        </>
-                    }
-                </ViewPostMenuUI>
-        } 
-    }
+    
 
     return (
-        <>  {
+        <>  
+        {
                 feedComments.map((commentArr, i) => {
                     return (
                         <ViewCommentContainer visible={visible}>
@@ -198,10 +180,10 @@ const WriteCommentBlock = ({createDate, writerName}) => {
                             {/* <ViewPostMenuImg src='/img/dots.png' style={{
                                 width: '2rem', height: '2rem', paddingTop: '0.3rem', float: 'right'
                                 }} onClick={()=>{}}></ViewPostMenuImg> */}
-                            <ViewCommentMenuLayout style={{position: 'relative'}} onClick={() => {toggleMenu(); setShowMenu(comment.id);}}>
+                            <ViewCommentMenuLayout style={{position: 'relative'}} onClick={() => {toggleMenu(); setShowMenu(i);}}>
                                 <p>➕</p>
                                 {
-                                    (isOpen && (showMenu === comment.id)) &&
+                                    (isOpen && (showMenu === i)) &&
                                         <ViewPostMenuUI style={{top: '2rem', left: '-8.5rem'}}>
                                             {
                                                 writerName == userName ? 
@@ -214,7 +196,7 @@ const WriteCommentBlock = ({createDate, writerName}) => {
                                                 </>
                                             }
                                         </ViewPostMenuUI>
-                                } 
+                                }
                             </ViewCommentMenuLayout>
                             <ViewCommentMenuLayout onClick={()=>{
                                 alert("대댓글 작성")
