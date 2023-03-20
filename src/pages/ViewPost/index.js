@@ -130,12 +130,13 @@ const ViewCommentBlock = () => {
     );
 };
 
-const WriteCommentBlock = ({createDate, writerName, postId}) => {
+const WriteCommentBlock = ({createDate, writerName}) => {
     const [visible, setVisible] = useState(false);
     const [comment, setComment] = useState('');
     const [isVaild, setIsVaild] = useState(false);   //유효성 검사
     const [feedComments, setFeedComments] = useState([]);
     const [isOpen, setMenu] = useState(false);
+    const [showMenu, setShowMenu] = useState()
     const userName = localStorage.nickname;
 
     const post = (e) => {
@@ -168,6 +169,26 @@ const WriteCommentBlock = ({createDate, writerName, postId}) => {
         setMenu(isOpen => !isOpen);
     }
 
+    console.log(feedComments);
+
+    const ShowMenuComponents = () => {
+        {
+            (isOpen && (showMenu === comment.id)) &&
+                <ViewPostMenuUI style={{top: '2rem', left: '-8.5rem'}}>
+                    {
+                        writerName == userName ? 
+                        <>
+                            <ViewPostMenuContent onClick={()=>{}}>수정</ViewPostMenuContent>
+                            <ViewPostMenuContent onClick={()=>{}}>삭제</ViewPostMenuContent>
+                        </> :
+                        <>
+                            <ViewPostMenuContent onClick={()=>{}}>신고</ViewPostMenuContent>
+                        </>
+                    }
+                </ViewPostMenuUI>
+        } 
+    }
+
     return (
         <>  {
                 feedComments.map((commentArr, i) => {
@@ -177,23 +198,21 @@ const WriteCommentBlock = ({createDate, writerName, postId}) => {
                             {/* <ViewPostMenuImg src='/img/dots.png' style={{
                                 width: '2rem', height: '2rem', paddingTop: '0.3rem', float: 'right'
                                 }} onClick={()=>{}}></ViewPostMenuImg> */}
-                            <ViewCommentMenuLayout style={{position: 'relative'}} onClick={toggleMenu}>
+                            <ViewCommentMenuLayout style={{position: 'relative'}} onClick={() => {toggleMenu(); setShowMenu(comment.id);}}>
                                 <p>➕</p>
                                 {
-                                    isOpen &&
+                                    (isOpen && (showMenu === comment.id)) &&
                                         <ViewPostMenuUI style={{top: '2rem', left: '-8.5rem'}}>
                                             {
                                                 writerName == userName ? 
                                                 <>
-                                                    <ViewPostMenuContent onClick={() =>{}}>수정</ViewPostMenuContent>
+                                                    <ViewPostMenuContent onClick={()=>{}}>수정</ViewPostMenuContent>
                                                     <ViewPostMenuContent onClick={()=>{}}>삭제</ViewPostMenuContent>
                                                 </> :
                                                 <>
                                                     <ViewPostMenuContent onClick={()=>{}}>신고</ViewPostMenuContent>
                                                 </>
                                             }
-                                            <ViewPostMenuContent onClick={()=>{linkCopy()}}>링크 복사</ViewPostMenuContent>
-                                            <ViewPostMenuContent onClick={()=>{refreshPage()}}>새로고침</ViewPostMenuContent>
                                         </ViewPostMenuUI>
                                 } 
                             </ViewCommentMenuLayout>
@@ -311,7 +330,7 @@ const ViewPost = () => {
                     <></>
                 )}
                 {/* <ViewCommentBlock /> */}
-                <WriteCommentBlock createDate={postInfo.createdAt} />
+                <WriteCommentBlock createDate={postInfo.createdAt} writerName={postInfo.author}/>
             </ViewPostLayout>
         </>
     );

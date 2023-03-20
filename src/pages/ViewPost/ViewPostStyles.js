@@ -174,7 +174,7 @@ export const UploadCommentLayout = styled.div`
     height: 4.5vh;
     background: ${COLORS.logo};
     color: white;
-    border-radius: 0.8em;
+    border-radius: 0.5em;
     float: right;
     margin-right: 0.5rem;
 `;
