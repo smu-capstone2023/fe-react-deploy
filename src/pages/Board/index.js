@@ -17,7 +17,8 @@ import {
   Line,
   SearchBar,
   SearchBarWrapper,
-  SearchInput
+  SearchInput,
+  SortUtilButtonLayout,
   
 
 } from './BoardStyles';
@@ -29,6 +30,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Link } from 'react-router-dom';
 import { textAlign } from '@mui/system';
+import { COLORS } from '../../color';
 
 
 const BoardList = ({ boardList }) => {
@@ -61,9 +63,11 @@ const BoardList = ({ boardList }) => {
 const BoardUtilsButtons = ({ boardId }) => {
   return (
       <BoardUtilsButtonsLayout>
-          <BoardUtilsButton onClick={() => (window.location.href = `/addpost/${boardId}`)}>글쓰기</BoardUtilsButton>
-          <BoardUtilsButton style={{marginLeft: 'auto'}}>최신순</BoardUtilsButton>
-          <BoardUtilsButton style={{marginLeft: '8px'}}>인기순</BoardUtilsButton>
+          <BoardUtilsButton style={{borderColor: `${COLORS.gray_button}`}} onClick={() => (window.location.href = `/addpost/${boardId}`)}>글쓰기</BoardUtilsButton>
+          <SortUtilButtonLayout>
+          <BoardUtilsButton>최신순</BoardUtilsButton>
+          <BoardUtilsButton>인기순</BoardUtilsButton>
+          </SortUtilButtonLayout>
 
       </BoardUtilsButtonsLayout>
   );
@@ -82,7 +86,6 @@ const animatedComponents = makeAnimated();
 
 return (
   <ToggleBox>
-      {/* <DefaultText>학과를 선택하세요</DefaultText> */}
       <Select
       styles={{
         // Select 기본 적용되는 테두리랑 온클릭 함수 없애는 기능

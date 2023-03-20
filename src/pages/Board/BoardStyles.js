@@ -8,9 +8,7 @@ export const BoardLayout = styled.div`
     border: solid 0.5px gray;
     padding: 10px;
     background-color: ${COLORS.background_color};
-    // font-weight: ;
 `;
-
 
 export const Boardline = styled.div`
     margin 3rem;
@@ -23,6 +21,14 @@ export const Boardline = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    @media screen and (max-width: 768px) {
+        max-width: 100%;
+    }
+
+    @media screen and (max-width: 360px) {
+        width: 100%;
+      }
 `;
 
 export const BoardTableSchema = styled.div`
@@ -30,7 +36,6 @@ export const BoardTableSchema = styled.div`
     border-radius: 5px;
     padding: 0.8em 0;
     background: #f1f1f1;
-    
 `;
 
 export const TableSchemaElement = styled.div`
@@ -43,7 +48,8 @@ export const TableSchemaElement = styled.div`
 export const TableTitleSchema = styled.div`
     font-size: 0.8rem;
     width: 100%;
-    text-align: center;
+    text-align: left;
+    text-indent: 35px;
     justify-content: center;
 `;
 
@@ -55,6 +61,10 @@ export const TitleAndToggle = styled.p`
     display: flex;
     align-items: center;
     width: 90%;
+    flex-flow: wrap;
+
+    
+
 `;
 
 export const BoardTitle = styled.div`
@@ -67,29 +77,16 @@ export const BoardTitle = styled.div`
     padding-left: 0em;
     text-align: left;
 
+    @media screen and (max-width: 768px) {
+        width: 50%;
+        
+    }
 
-`;
-
-export const BoardUtilsButtonsLayout = styled.div`
-    display: flex;
-    width: 83%;
-    padding: 1.5em 0;
-    font-weight: 600;
-    color: #6e6e6e;
-    justify-content: end;
-    
-`;
-
-export const BoardUtilsButton = styled.div`
-    margin 0px;
-    border-radius: 12px;
-    border: solid 4px ${COLORS.gray_button};
-    width: 4.9em;
-    text-align: center;
-    padding: 0.7em;
-    padding-right: 0.5em;
-    padding-left: 0.5em;
-    font-size: 0.8rem;
+    @media screen and (max-width: 360px) {
+        width: 100%;
+        text-align: center;
+        font-size: 2rem;
+    }
 
 `;
 
@@ -100,12 +97,46 @@ export const ToggleBox = styled.div`
     border-radius: 50px;
     width: 32%;
     
+
+    @media screen and (max-width: 768px) {
+        width: 50%;
+        
+    }
+
+    @media screen and (max-width: 410px) {
+        width: 100%;
+        margin-bottom: 1rem;
+        
+    }
+    
+
 `;
 
-export const DefaultText = styled.p`
-    padding: 5px;
-    font-size: 0.9em;
+export const BoardUtilsButtonsLayout = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 83%;
+    padding: 1.5em 0;
+    font-weight: 600;
+    color: #6e6e6e;
+    justify-content: space-between;
 `;
+
+export const BoardUtilsButton = styled.div`
+    margin 5px;
+    border-radius: 12px;
+    border: solid 3px ${COLORS.color_button};
+    width: 4.9em;
+    text-align: center;
+    padding: 0.7em 0.5em;
+    font-size: 0.8rem;
+`;
+
+export const SortUtilButtonLayout = styled.div`
+display:flex;
+flex-direction: row;
+`;
+
 
 export const ChangeBoardOutBox = styled.p`
     display:flex;
@@ -117,28 +148,13 @@ export const ChangeBoardOutBox = styled.p`
 `;
 
 export const ChangeBoardInBox = styled.p`
-
-    border-right: solid 0.5px whitesmoke;
     width: 15rem;
-    text-align: center;
-    
+    text-align: center; 
     padding: 0.5rem;
     font-weight: ${({ active }) => (active ? "bold" : "normal")};
 
 `;
 
-export const NavLinks = styled.p`
-    color: black;
-    align-items: center;
-    text-decoration: none;
-    padding: 0 1rem;
-    height: 100%;
-    cursor: pointer;
-    
-    &.active {
-        border-bottom: 3px solide #01bf71;
-    }
-`;
 
 export const Line = styled.div`
     margin: 2em;
@@ -150,10 +166,8 @@ export const Line = styled.div`
 export const SearchBarWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 1.5em;
-  margin-bottom: 0;
-  width: 90%
-  
+  margin: 1.5em 1.5em 0 1.5em;
+  width: 90%;   
 `;
 
 export const SearchInput = styled.input`
@@ -164,5 +178,4 @@ export const SearchInput = styled.input`
   width: 39%;
   border: solid 3px gray;
   border-radius: 30px;
-  text-align: center;
 `;
