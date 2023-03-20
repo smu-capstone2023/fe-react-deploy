@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { COLORS } from '../../color';
 
 export const SchoolBoardButtonLayout = styled.div`
     background-color: ${(props) => props.backgroundColor};
@@ -35,6 +36,7 @@ export const HomeLayout = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: ${COLORS.background_color};
 `;
 
 export const DetailBoardTitleWithMoreLayout = styled.div`

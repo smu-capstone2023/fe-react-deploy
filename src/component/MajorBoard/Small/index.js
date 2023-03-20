@@ -42,7 +42,7 @@ const MajorBoardSmall = ({ title, boardId }) => {
     return (
         <>
             <SmallBoardLayout>
-                <BoardBannerButton title={title} backgroundColor={'#A9D3F2'} boardId={boardId} />
+                <BoardBannerButton title={title} backgroundColor={'#90A8FF'} boardId={boardId} />
 
                 {boardList.map((postElement) => {
                     return (

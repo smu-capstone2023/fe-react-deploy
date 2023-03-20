@@ -29,7 +29,7 @@ const SchoolBoard = () => {
     return (
         <>
             <SmallBoardLayout>
-                <BoardBannerButton title='학교게시판' backgroundColor={'#D9D9D9'} boardId={'004003'} />
+                <BoardBannerButton title='학교게시판' backgroundColor={'#FF8686'} boardId={'004003'} />
                 <DetailBoardTitleWithMore boardIcon={<TiArrowForward />} boardTitle='학사 공지' boardId={'004003'} />
                 {boardList.map((postElement) => {
                     return (
