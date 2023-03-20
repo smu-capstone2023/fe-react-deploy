@@ -100,8 +100,6 @@ export const SignButton = styled.div`
 `;
 
 
-
-
 export const Line = styled.div`
     width: 90%;
     border-bottom: solid 0.5px gray;
@@ -111,7 +109,10 @@ export const ProfileImage = styled.div`
     width: 80%;
     height: 130px;
     border: solid 1px black;
+    margin: 0.2rem;
 `;
+
+
 
 export const SignupTitleLayout = styled.div`
     padding: 3em 0 0 0;
