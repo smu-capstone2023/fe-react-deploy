@@ -32,13 +32,9 @@ export const SmallBoardLayout = styled.div`
 export const HomeLayout = styled.div`
     padding: 5rem 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    @media screen and (max-width: 1000px) {
-        flex-direction: column;
-    }
 `;
 
 export const DetailBoardTitleWithMoreLayout = styled.div`
