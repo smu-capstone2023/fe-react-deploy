@@ -1,16 +1,47 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import {CertificationLink, SignContainer, SignInputText, SignInnerBox, SignButton, DefaultText, SmallText} from './SignupStyles.js';
+import { ProfileImage, Line, CertificationLink, SignContainer, SignInputText, SignInnerBox, SignButton, DefaultText, SmallText} from './SignupStyles.js';
 
 
 
 
 const SignupSection3 = ({ userSignupInfo }) => {
     const [nickName, setNickName] = useState('');
+    const [profileImgUrl, setProfileImgUrl] = useState('');
     // const [showModal, setShowModal] = useState(false);
 
+    
 
+    const handleProfileImgChange = (e) => {
+        const file = e.target.files[0];
+        const imgUrl = URL.createObjectURL(file);
+        setProfileImgUrl(imgUrl);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!profileImgUrl) {
+            alert('프로필 사진을 선택해주세요');
+            return;
+        }};
+    
+    //     const formData = new FormData();
+    //     formData.append('profileImage', profileImage);
+    
+    //     axios
+    //         .post(`${process.env.REACT_APP_SERVER_URL}:8001/auth/join`, {
+    //             email: userSignupInfo.email,
+    //             nick: userSignupInfo.nickName,
+    //             password: userSignupInfo.password,
+    //             majornames: userSignupInfo.majorList.toString(),
+    //         })
+    //         .then((response) => {
+    //             console.log(response);
+    //             window.location.href = '/login';
+    //         })
+    //         .catch((response) => console.log(response));
+    // };
     
 
     const checkAllOfSingUpInfo = () => {
@@ -23,7 +54,25 @@ const SignupSection3 = ({ userSignupInfo }) => {
         }
     };
 
-const saveUserInfoAtServer = () => {
+    
+    const handleFileChange = (e) => {
+        setProfileImgUrl(e.target.files[0]);
+      };
+    
+      
+
+
+    // //모달 띄우기
+    // const handleSubmit = (event) => {
+    //   event.preventDefault();
+    //   setShowModal(true);
+    // };
+  
+    // const closeModal = () => {
+    //   setShowModal(false);
+    // };
+
+    const saveUserInfoAtServer = () => {
         axios
             .post(`${process.env.REACT_APP_SERVER_URL}:8001/auth/join`, {
                 email: userSignupInfo.email,
@@ -38,24 +87,28 @@ const saveUserInfoAtServer = () => {
             .catch((response) => console.log(response));
     };
 
-
-    // //모달 띄우기
-    // const handleSubmit = (event) => {
-    //   event.preventDefault();
-    //   setShowModal(true);
-    // };
-  
-    // const closeModal = () => {
-    //   setShowModal(false);
-    // };
-
-
     return (
         <SignContainer>
             <SignInnerBox>
                 <DefaultText>사용하실 닉네임을 입력하세요</DefaultText>
                 <SmallText>닉네임은 설정 후 30일 이후에 변경 가능합니다.</SmallText>
                 <SignInputText onChange={(e) => setNickName(e.target.value)} placeholder='닉네임 입력'></SignInputText>
+                <Line></Line>
+                <DefaultText>프로필 사진을 첨부해주세요.</DefaultText>
+                {profileImgUrl ? (
+                    
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '80%', height: '80%' }}>
+                    <img src={URL.createObjectURL(profileImgUrl)} alt='프로필 이미지' style={{ maxWidth: '80%', maxHeight: '80%' }} />
+                    </div>
+                    ) : (
+                <ProfileImage style={{ margin: '30px'}} />
+                )}
+                <form onSubmit={handleSubmit}>
+                    <label className='signup-profileImg-label' htmlFor='profileImg'>
+                        사진 첨부하기
+                    </label>
+                    <input className='signup-profileImg-input' type='file' accept='image/*' id='profileImg' style={{ display: 'none' }} onChange={handleFileChange} />
+                </form>
             </SignInnerBox>
             <SignButton
                 onClick={() => {
@@ -64,7 +117,6 @@ const saveUserInfoAtServer = () => {
             >
                 회원가입 완료
             </SignButton>
-            <DefaultText></DefaultText>
             <SmallText>학과인증을 통해 더 다양한 권한을 가질 수 있습니다.</SmallText>
             <CertificationLink to='../certification'>학과인증하기</CertificationLink>
         </SignContainer>
@@ -73,5 +125,3 @@ const saveUserInfoAtServer = () => {
 };
 
 export default SignupSection3;
-
-//3.18 madal page 만들어서 './modal'로 연결하기

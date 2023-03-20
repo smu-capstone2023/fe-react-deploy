@@ -12,3 +12,13 @@
     cursor: pointer;
     background-color: #d9d9d9;
 }
+
+.tosbox {
+    overflow-y: auto; /* 스크롤이 생기도록 설정 */
+    max-height: 300px; /* 스크롤이 생기는 높이를 설정 */
+    /* 스크롤바 스타일링을 위한 CSS 변수 */
+    --scrollbar-width: 10px;
+    --scrollbar-track-color: #f1f1f1;
+    --scrollbar-thumb-color: #ccc;
+  }
+  

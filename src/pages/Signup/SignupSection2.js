@@ -49,7 +49,7 @@ const SignupSection2 = ({ setCurrentSection, setUserSignupInfo }) => {
         <SignContainer>
             <SignInnerBox>
                 <DefaultText>사용하실 이메일을 입력하세요</DefaultText>
-                <SignInputText placeholder='example@email.com' onChange={(e) => setEmail(e.target.value)}></SignInputText>
+                <SignInputText placeholder='example@sangmyung.kr' onChange={(e) => setEmail(e.target.value)}></SignInputText>
                 <DefaultText>사용하실 비밀번호를 입력하세요</DefaultText>
                 <SmallText>최소 8자, 최소 하나의 문자 및 하나의 숫자</SmallText>
                 <SignInputText placeholder='비밀번호' onChange={(e) => setPassword(e.target.value)}></SignInputText>
