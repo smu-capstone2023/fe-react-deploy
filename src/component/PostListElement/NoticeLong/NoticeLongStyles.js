@@ -13,8 +13,9 @@ export const NoticeElementLink = styled(Link)`
 `;
 
 export const NoticeBasicInfoField = styled.div`
-font-size: 0.8rem;
-width:100%;
+    font-size: 0.8rem;
+    width:100%;
+    text-indent: 35px;
 `;
 
 

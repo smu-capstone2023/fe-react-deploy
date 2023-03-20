@@ -1,15 +1,25 @@
 import {
+  Boardline,
   BoardUtilsButtonsLayout,
-  WritePostButton,
+  BoardUtilsButton,
   BoardTitle,
   BoardListLayout,
   TableSchemaElement,
   TableTitleSchema,
   BoardTableSchema,
   BoardLayout,
-  SignInnerBox,
+  ToggleBox,
   DefaultText,
-  NavLinks
+  NavLinks,
+  ChangeBoardInBox,
+  ChangeBoardOutBox,
+  TitleAndToggle,
+  Line,
+  SearchBar,
+  SearchBarWrapper,
+  SearchInput,
+  SortUtilButtonLayout,
+  
 
 } from './BoardStyles';
 import NoticeLong from '../../component/PostListElement/NoticeLong';
@@ -19,6 +29,8 @@ import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Link } from 'react-router-dom';
+import { textAlign } from '@mui/system';
+import { COLORS } from '../../color';
 
 
 const BoardList = ({ boardList }) => {
@@ -51,12 +63,18 @@ const BoardList = ({ boardList }) => {
 const BoardUtilsButtons = ({ boardId }) => {
   return (
       <BoardUtilsButtonsLayout>
-          <WritePostButton onClick={() => (window.location.href = `/addpost/${boardId}`)}>글쓰기</WritePostButton>
+          <BoardUtilsButton style={{borderColor: `${COLORS.gray_button}`}} onClick={() => (window.location.href = `/addpost/${boardId}`)}>글쓰기</BoardUtilsButton>
+          <SortUtilButtonLayout>
+          <BoardUtilsButton>최신순</BoardUtilsButton>
+          <BoardUtilsButton>인기순</BoardUtilsButton>
+          </SortUtilButtonLayout>
+
       </BoardUtilsButtonsLayout>
   );
 };
 
-const BoardToggle = () => {
+const BoardToggle = ({majorName}) => {
+const major_Name = majorName;
 const majorOptions = [
   { label: '컴퓨터과학과', value: '컴퓨터과학과', link: '/board/001001' },
   { label: '휴먼지능정보공학전공', value: '휴먼지능정보공학전공', link: '/board/002001' },
@@ -65,23 +83,89 @@ const majorOptions = [
 
 const animatedComponents = makeAnimated();
 
+
 return (
-  <SignInnerBox>
-      <DefaultText>학과를 선택하세요</DefaultText>
-    <Select
-      defaultValue={null}
+  <ToggleBox>
+      <Select
+      styles={{
+        // Select 기본 적용되는 테두리랑 온클릭 함수 없애는 기능
+        control: (base, state) => ({
+          ...base,
+          backgroundColor: 'transparent',
+          borderColor: 'transparent',
+          boxShadow: state.isFocused ? null : null, // optional: remove box shadow on focus
+          '&:hover': {
+            borderColor: 'transparent',
+          },
+        }),
+        placeholder: (base) => ({
+          ...base,
+          color: 'black',
+          fontWeight: '500',
+          textAlign: 'center'
+        }),
+      }}
+      key={major_Name}
+      placeholder={major_Name}
       options={majorOptions}
       components={animatedComponents}
-      onChange={(selectedOptions) =>{
-        
-        window.location.href=`${selectedOptions.link}`}
-
-      }>
-      
-    </Select>
-  </SignInnerBox>
+      onChange={(selectedOptions) => {
+        window.location.href = `${selectedOptions.link}`;
+      }}
+    />
+  </ToggleBox>
 );
 };
+
+const ChangeBoardBox = ({ boardId }) => {
+  const detailMajorId = boardId.slice(0, 3);
+  const boardLink = ["자유", "비밀", "공지", "정보/홍보"];
+  const currentPageUrl = window.location.href;
+
+  return (
+    <>
+      <ChangeBoardOutBox>
+        {boardLink.map((link, index) => {
+          const boardUrl = `${detailMajorId}00${index + 1}`;
+          const isActive = currentPageUrl.includes(boardUrl);
+          return (
+            <ChangeBoardInBox
+              key={index}
+              active={isActive}
+              onClick={() => {
+                window.location.href = boardUrl;
+              }}
+            >
+              {link}
+            </ChangeBoardInBox>
+          );
+        })}
+      </ChangeBoardOutBox>
+    </>
+  );
+};
+
+const Search = () => {
+  const handleSearch = (event) => {
+    console.log(event.target.value);
+  };
+ 
+  return(
+  <SearchBarWrapper>
+    <SearchInput
+      type="search"
+      placeholder="검색하기"
+      onChange={
+        handleSearch
+      }
+      
+    />
+  </SearchBarWrapper>
+  )
+}
+
+
+
 
 
 const Board = () => {
@@ -91,6 +175,7 @@ const Board = () => {
   const { board_id } = useParams();
   const majorId = board_id.slice(0, 3);
   const boardId = board_id.slice(3, 6);
+  
 
   const setBoardListFromServer = () => {
       axios
@@ -126,21 +211,26 @@ const Board = () => {
   
   return (
       
-      <>
+      <BoardLayout>
       
-          <BoardLayout>
-
-              <BoardTitle>
-                  {majorName}-{boardName}
+          <Boardline>
+            <TitleAndToggle>
+            <BoardTitle>
+                  {boardName}
               </BoardTitle>
-              <BoardToggle />
+              <BoardToggle majorName={majorName} />
+            </TitleAndToggle>
+              <ChangeBoardBox boardId={board_id}/>
+
+              <Line/>
+
+              <Search/>
 
               <BoardUtilsButtons boardId={board_id} />
-              
               <BoardList boardList={boardList} />
-          </BoardLayout>
+          </Boardline>
           
-      </>
+      </BoardLayout>
   );
 };
 
