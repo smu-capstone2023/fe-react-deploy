@@ -54,20 +54,12 @@ const SignupSection3 = ({ userSignupInfo }) => {
         }
     };
 
-    // const saveUserInfoAtServer = () => {
-    //     if (checkAllOfSingUpInfo()) {
-    //         handleSubmit();
-    //     }
-    // };
     
     const handleFileChange = (e) => {
         setProfileImgUrl(e.target.files[0]);
       };
     
       
-
-    //     const formData = new FormData();
-    //     formData.append('profileImage', profileImage);
 
 
     // //모달 띄우기
@@ -104,20 +96,13 @@ const SignupSection3 = ({ userSignupInfo }) => {
                 <Line></Line>
                 <DefaultText>프로필 사진을 첨부해주세요.</DefaultText>
                 {profileImgUrl ? (
-                    <ProfileImage src={profileImgUrl} alt='프로필 이미지' />
-                ) : (
-                    <ProfileImage src='default-profile-image.jpg' alt='프로필 이미지' />
-                )}
-                 <input type='file' accept='image/*' onChange={handleProfileImgChange} />
-                 
-                {/* {profileImageUrl ? (
                     
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '80%', height: '80%' }}>
-                    <img src={URL.createObjectURL(profileImageUrl)} alt='프로필 이미지' style={{ maxWidth: '80%', maxHeight: '80%' }} />
+                    <img src={URL.createObjectURL(profileImgUrl)} alt='프로필 이미지' style={{ maxWidth: '80%', maxHeight: '80%' }} />
                     </div>
                     ) : (
                 <ProfileImage style={{ margin: '30px'}} />
-                )} */}
+                )}
                 <form onSubmit={handleSubmit}>
                     <label className='signup-profileImg-label' htmlFor='profileImg'>
                         사진 첨부하기
