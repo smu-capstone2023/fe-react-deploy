@@ -28,7 +28,7 @@ import {
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
-import {ref} from 'react';
+import {useRef} from 'react';
 import axios from 'axios';
 
 
@@ -119,6 +119,7 @@ const WriteCommentBlock = ({createDate, writerName}) => {
     const [feedComments, setFeedComments] = useState([]);
     const [isOpen, setMenu] = useState(false);
     const [showMenu, setShowMenu] = useState()
+    const textRef = useRef();
     const userName = localStorage.nickname;
 
     const post = (e) => {
@@ -126,6 +127,7 @@ const WriteCommentBlock = ({createDate, writerName}) => {
         copyFeedComments.push(comment);
         setFeedComments(copyFeedComments);
         setComment('')
+        textRef.current.style.height = 'auto';
     }
 
     const handleViewComments = () => {
@@ -136,17 +138,26 @@ const WriteCommentBlock = ({createDate, writerName}) => {
         setMenu(isOpen => !isOpen);
     }
 
-    const onClick = () => {
-        if (comment.length > 0) {
-            post()
-            console.log("댓글이 작성되었습니다.");
-            handleViewComments();
+    const handleResizeHeight = () => {
+        textRef.current.style.height = 'auto';
+        textRef.current.style.height = `${textRef.current.scrollHeight}px`;
+    };
+
+    const enterPress = (e) => {
+        if (e.key === "Enter" && e.shiftKey) {
+            return;
         }
-        else {
-            alert("댓글을 작성해주세요.")
+        else if (e.key === "Enter") {
+            if (comment.length > 0) {
+                post();
+                console.log("댓글이 작성되었습니다.");
+                handleViewComments();
+            }
+            else {
+                alert("댓글을 작성해주세요.");
+            }
         }
     }
-
 
     return (
         <>  
@@ -193,9 +204,12 @@ const WriteCommentBlock = ({createDate, writerName}) => {
             }
 
             <WriteCommentContainer>
-                <WriteCommentLayout type={'text'} placeholder={"댓글을 입력해주세요"}
+                <WriteCommentLayout type={'text'} rows={1} placeholder={"댓글을 입력해주세요"}
+                onKeyDown={enterPress}
+                ref={textRef}
                 onChange={(e)=>{
                     setComment(e.target.value);
+                    handleResizeHeight();
                 }}
                 onkeyup={(e)=>{
                     e.target.value.length > 0

@@ -162,9 +162,10 @@ export const WriteCommentContainer = styled.div`
     display: flex;
     justify-content: space-between;
     height: auto;
+    inline-height: auto;
     min-height: 6vh;
     max-width: 56rem;
-    padding: 0.5rem;
+    padding: 0.1rem;
     //background: lightgray;
     border: solid 0.1em lightgray;
     border-radius: 0.5em;
@@ -175,16 +176,16 @@ export const WriteCommentContainer = styled.div`
 `;
 
 export const WriteCommentLayout = styled.textarea`
-    inline-height: 4vh;
     display: flex;
     flex: 9;
     white-space: pre-line;
     min-height: 3vh;
     width: 85%;
-    padding: 0.7rem;
+    padding: 1.5rem;
+    // padding-top: 1.5rem;
     //background: lightgray;
     border: none;
-    border-radius: 1em;
+    // border-radius: 1em;
     font-size: 1.1em;
     word-break: keep-all;
     overflow: hidden;
@@ -213,7 +214,7 @@ export const UploadCommentLayout = styled.div`
     text-align: center;
     align-items: center;
     justify-content: center;
-    margin: 0.5rem;
+    margin: 0.7rem;
     width: 15%;
     min-width: 2rem;
     height: 6vh;
