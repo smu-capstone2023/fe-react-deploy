@@ -28,7 +28,7 @@ import {
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
-import {ref} from 'react';
+import {useRef} from 'react';
 import axios from 'axios';
 
 
@@ -97,21 +97,11 @@ const WriterUserInfoBlock = ({ writerName, createDate, postId, deletePost, profi
                     <ViewPostMenu writerName={writerName} postId={postId} deletePost={deletePost}></ViewPostMenu>
                 </ViewPostMenuContainer>
             </WriterUserInfoLayout>
-
-
         </>
 
     );
 };
 
-// const EditPostButton = ({ isShow, postId, writerName}) => {
-//     const userName = localStorage.nickname;
-//     if (isShow && (writerName == userName)) {
-//         return <EditPostButtonField onClick={() => (window.location.href = `../editpost/${postId}`)}>수정하기</EditPostButtonField>;
-//     } else {
-//         return <></>;
-//     }
-// };
 
 const ViewPostContentBlock = ({ postTitle, postContent }) => {
     return (
@@ -122,21 +112,14 @@ const ViewPostContentBlock = ({ postTitle, postContent }) => {
     );
 };
 
-const ViewCommentBlock = () => {
-    return (
-        <ViewCommentContainer>
-            <ViewCommentLayout></ViewCommentLayout>
-        </ViewCommentContainer>
-    );
-};
-
 const WriteCommentBlock = ({createDate, writerName}) => {
     const [visible, setVisible] = useState(false);
     const [comment, setComment] = useState('');
-    const [isVaild, setIsVaild] = useState(false);   //유효성 검사
+    const [isVaild, setIsVaild] = useState(false);
     const [feedComments, setFeedComments] = useState([]);
     const [isOpen, setMenu] = useState(false);
     const [showMenu, setShowMenu] = useState()
+    const textRef = useRef();
     const userName = localStorage.nickname;
 
     const post = (e) => {
@@ -144,31 +127,37 @@ const WriteCommentBlock = ({createDate, writerName}) => {
         copyFeedComments.push(comment);
         setFeedComments(copyFeedComments);
         setComment('')
+        textRef.current.style.height = 'auto';
     }
 
     const handleViewComments = () => {
         setVisible(true);
     }
 
-    const linkCopy = () => {
-        var url = '';
-        var textArea = document.createElement("textarea");
-        document.body.appendChild(textArea);
-        url = window.document.location.href;
-        textArea.value = url;
-        textArea.select();
-        navigator.clipboard.writeText(url);
-        document.body.removeChild(textArea);
-        alert("링크가 복사되었습니다.")
-    }
-    const refreshPage = () => {
-        window.location.reload();
-    }
-
     const toggleMenu = () => {
         setMenu(isOpen => !isOpen);
     }
-    
+
+    const handleResizeHeight = () => {
+        textRef.current.style.height = 'auto';
+        textRef.current.style.height = `${textRef.current.scrollHeight}px`;
+    };
+
+    const enterPress = (e) => {
+        if (e.key === "Enter" && e.shiftKey) {
+            return;
+        }
+        else if (e.key === "Enter") {
+            if (comment.length > 0) {
+                post();
+                console.log("댓글이 작성되었습니다.");
+                handleViewComments();
+            }
+            else {
+                alert("댓글을 작성해주세요.");
+            }
+        }
+    }
 
     return (
         <>  
@@ -177,9 +166,6 @@ const WriteCommentBlock = ({createDate, writerName}) => {
                     return (
                         <ViewCommentContainer visible={visible}>
                             <ViewCommentUserImgLayout src="https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk="></ViewCommentUserImgLayout>
-                            {/* <ViewPostMenuImg src='/img/dots.png' style={{
-                                width: '2rem', height: '2rem', paddingTop: '0.3rem', float: 'right'
-                                }} onClick={()=>{}}></ViewPostMenuImg> */}
                             <ViewCommentMenuLayout style={{position: 'relative'}} onClick={() => {toggleMenu(); setShowMenu(i);}}>
                                 <p>➕</p>
                                 {
@@ -218,11 +204,12 @@ const WriteCommentBlock = ({createDate, writerName}) => {
             }
 
             <WriteCommentContainer>
-                {/* <ProfileImage src='https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk='
-                style={{margin: '1rem'}}/> */}
-                <WriteCommentLayout type={'text'} placeholder={"댓글을 입력해주세요"}
+                <WriteCommentLayout type={'text'} rows={1} placeholder={"댓글을 입력해주세요"}
+                onKeyDown={enterPress}
+                ref={textRef}
                 onChange={(e)=>{
                     setComment(e.target.value);
+                    handleResizeHeight();
                 }}
                 onkeyup={(e)=>{
                     e.target.value.length > 0
@@ -230,14 +217,14 @@ const WriteCommentBlock = ({createDate, writerName}) => {
                 }} value={comment}></WriteCommentLayout>
                 <UploadCommentLayout onClick={()=>{
                     if (comment.length > 0) {
-                        post()
+                        post();
                         console.log("댓글이 작성되었습니다.");
                         handleViewComments();
                     }
                     else {
-                        alert("댓글을 작성해주세요.")
+                        alert("댓글을 작성해주세요.");
                     }
-                }} disabled={isVaild ? false : true} >작성</UploadCommentLayout>
+                }} disabled={isVaild ? false : true}>작성</UploadCommentLayout>
             </WriteCommentContainer>
         </>
 
