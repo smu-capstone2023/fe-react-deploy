@@ -25,6 +25,8 @@ export const SmallBoardLayout = styled.div`
     padding: 1.2rem;
     border: solid 0.5px gray;
     border-radius: 5px;
+
+
     @media screen and (max-width: 1000px) {
         margin: 1rem 0;
     }
@@ -33,11 +35,18 @@ export const SmallBoardLayout = styled.div`
 export const HomeLayout = styled.div`
     padding: 5rem 0;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background-color: ${COLORS.background_color};
-`;
+    flex-flow: wrap;
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    `;
 
 export const DetailBoardTitleWithMoreLayout = styled.div`
     padding: 0.5em;
