@@ -9,6 +9,7 @@ import {
     UserEmailField,
     UserSettingLayout,
     SettingButtonLayout,
+    SettingsLink
 } from './MyPageStyles';
 const Mypage = () => {
     const logout = () => {
@@ -17,6 +18,7 @@ const Mypage = () => {
     const majorList = JSON.parse(localStorage.getItem('majorList'));
     const nickName = localStorage.getItem('nickname');
     const email = localStorage.getItem('email');
+    
     return (
         <>
             <MyPageLayout>
@@ -35,7 +37,8 @@ const Mypage = () => {
                         >
                             로그아웃
                         </LogoutButtonLayout>
-                        <SettingButtonLayout>설정</SettingButtonLayout>
+                        <SettingsLink to='../MyPage/MyPageSettings'>설정</SettingsLink>
+                        {/* <SettingButtonLayout>설정</SettingButtonLayout> */}
                     </UserSettingLayout>
                 </MyPageContainer>
             </MyPageLayout>
