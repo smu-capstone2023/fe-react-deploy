@@ -43,23 +43,27 @@ export const ViewPostMenuLayout = styled.ul`
 
 export const ViewPostMenuContainer = styled.div`
     //border: solid 1px lightgray;
-    width: 5%;
-    height: 5%;
-    float: left;
+    flex: 1;
+    // width: 5%;
+    // height: 5%;
+    // float: left;
     margin-top: 0.5em;
+    @media (max-width: 500px) {
+        flex: 2;
+    }
 `;
 
 export const ViewPostMenuImgContainer = styled.div`
     //border: solid 1px lightgray;
     position: relative;
-
 `;
 
 export const ViewPostMenuImg = styled.img`
     // border: solid 1px lightgray;
-    width: 100%;
+    min-width: 2rem;
+    width: 90%;
     height: 100%;
-    margin: 0.4rem;
+    // margin: 0.4rem;
     @media (max-width: 700px) {
         height: 2rem;
     }
@@ -88,17 +92,19 @@ export const WriterUserInfoLayout = styled.div`
 
 export const ProfileImageLayout = styled.div`
     display: flex;
+    flex: 1;
     height: 4em;
     width: 4em;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
 `;
 
 export const UserAndPostInfoLayout = styled.div`
+    flex: 15;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    // justify-content: end;
     padding: 0.5em;
     
 `;
@@ -127,15 +133,16 @@ export const ProfileImage = styled.img`
     border-radius: 70%;
     overflow: hidden;
     object-fit: cover;
-    float: left;
+    // float: left;
 `;
 export const ViewPostContentLayout = styled.div`
+    flex: 1;
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 95%;
     max-width: 1000rem;
     min-height: 10rem;
-    padding: 1rem 0;
+    padding: 2rem 0;
     padding-left: 0.5rem;
 `;
 
@@ -146,47 +153,79 @@ export const PostTitleField = styled.h3`
 `;
 
 export const PostContentField = styled.p`
-    padding: 0.5em 0;
+    white-space: pre-wrap;
+    padding: 1em 0;
 `;
-
 
 
 export const WriteCommentContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    inline-height: auto;
     min-height: 6vh;
     max-width: 56rem;
-    padding: 0.7rem;
+    padding: 0.1rem;
     //background: lightgray;
     border: solid 0.1em lightgray;
     border-radius: 0.5em;
-    margin: 1rem;
+    margin: 0.7rem;
+    @media (max-width: 445px) {
+        margin-right: 0;
+    }
 `;
 
-export const WriteCommentLayout = styled.input`
+export const WriteCommentLayout = styled.textarea`
+    display: flex;
+    flex: 9;
+    white-space: pre-line;
     min-height: 3vh;
     width: 85%;
-    padding: 0.7rem;
+    padding: 1.5rem;
+    // padding-top: 1.5rem;
     //background: lightgray;
     border: none;
-    border-radius: 1em;
+    // border-radius: 1em;
+    font-size: 1.1em;
     word-break: keep-all;
+    overflow: hidden;
+    resize: none;
     :focus {
         outline: none;
+    }
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.4);
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 6px;
+    }
+    &::-focus {
+        outline: 1px solid gray;
     }
 `;
 
 export const UploadCommentLayout = styled.div`
     display: flex;
+    flex: 1;
+    text-align: center;
     align-items: center;
     justify-content: center;
-    width: 10%;
-    height: 4.5vh;
+    margin: 0.7rem;
+    width: 15%;
+    min-width: 2rem;
+    height: 6vh;
     background: ${COLORS.logo};
     color: white;
     border-radius: 0.5em;
-    float: right;
-    margin-right: 0.5rem;
-    @media (max-width: 430px) {
-        font-size: 0.65em;
+    @media (max-width: 660px) {
+        font-size: 0.78em;
+    }
+    @media (max-width: 400px) {
+        font-size: 0.5em;
     }
 `;
 
@@ -228,6 +267,7 @@ export const ViewCommentUserNameLayout = styled.p`
 
 
 export const ViewCommentLayout= styled.div`
+    white-space: pre-line;
     border: solid 0.05em lightgray;
     border-radius: 0.3rem;
     padding: 0.3rem;
