@@ -25,6 +25,7 @@ const MajorBoardSmall = ({ title, boardId }) => {
     const [boardList, setBoardList] = useState([]);
     const detailMajorId = boardId.slice(0, 3);
     const detailBoardId = boardId.slice(3, 6);
+    
     useEffect(() => {
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/${detailMajorId}/${detailBoardId}/list`, {

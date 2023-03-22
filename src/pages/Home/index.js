@@ -80,7 +80,9 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
 const Home = () => {
     const [majorList, setMajorList] = useState([]);
     const getUserMajorList = () => {
-        const email = localStorage.getItem('email');
+    const email = localStorage.getItem('email');
+    console.log(majorList[0]);
+    
         if (email) {
             axios
                 .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/usermajors`, {
@@ -103,13 +105,14 @@ const Home = () => {
         <>
             <HomeLayout>
                 <SchoolBoard />
-                {majorList.map((major) => {
+                {/* {majorList.map((major) => {
                     return (
                         <>
                             <MajorBoardSmall title={major.majorName} boardId={`${major.majorId}001`} />
                         </>
                     );
-                })}
+                })} */}
+                <MajorBoardSmall title={majorList[0].majorName} boardId={`${majorList[0].majorId}001`} />
             </HomeLayout>
         </>
     );
