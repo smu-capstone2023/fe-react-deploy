@@ -47,7 +47,7 @@ export const ToggleBox = styled.div`
 background-color: #90A8FF;
 border-radius: 3px;
 display: flex;
-justify-content: space-between;
+justify-content: end;
 align-items: center;
 padding: 0.5rem;
 

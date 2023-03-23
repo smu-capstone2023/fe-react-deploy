@@ -56,41 +56,40 @@ const DetailBoardTitleWithMore = ({ boardIcon, boardTitle}) => {
     );
 };
 
-const BoardToggle = () => {
+const BoardToggle = ({ title }) => {
     const animatedComponents = makeAnimated();
-    return(
-        <ToggleBox>
-            <Select
-            styles={{
-
+  
+    return (
+      <ToggleBox>
+        <Select
+          styles={{
+            
             control: (base, state) => ({
-                ...base,
-                backgroundColor: 'transparent',
+              ...base,
+              backgroundColor: 'transparent',
+              borderColor: 'transparent',
+              boxShadow: state.isFocused ? null : null,
+              '&:hover': {
                 borderColor: 'transparent',
-                boxShadow: state.isFocused ? null : null, // optional: remove box shadow on focus
-                '&:hover': {
-                borderColor: 'transparent',
-                },
+              },
+              
             }),
             placeholder: (base) => ({
-                ...base,
-                color: 'white',
-                fontWeight: '500',
-                textAlign: 'center'
+              ...base,
+              color: 'white',
+              fontWeight: '500',
+              textAlign: 'center',
             }),
-            }}
-            //   key={major_Name}
-            //   placeholder={major_Name}
-            //   options={majorOptions}
-            components={animatedComponents}
-            onChange={(selectedOptions) => {
+          }}
+          placeholder={title}
+          components={animatedComponents}
+          onChange={(selectedOptions) => {
             window.location.href = `${selectedOptions.link}`;
-            }}
-            />
-        </ToggleBox>
-    )
-}
-
+          }}
+        />
+      </ToggleBox>
+    );
+  };
 
 
 
@@ -100,7 +99,6 @@ const MajorBoardSmall = ({ title, boardId }) => {
     const [boardList, setBoardList] = useState([]);
     const detailMajorId = boardId.slice(0, 3);
     const detailBoardId = boardId.slice(3, 6);
-
 
     useEffect(() => {
         axios
@@ -121,7 +119,7 @@ const MajorBoardSmall = ({ title, boardId }) => {
             <SmallBoardLayout>
                 {/* <BoardBannerButton title={title} backgroundColor={'#90A8FF'} boardId={boardId} /> */}
 
-            <BoardToggle mainBoard={boardList[0]}></BoardToggle>
+           <BoardToggle title={title}></BoardToggle>
 
                 <>
                 <DetailBoardTitleWithMore boardIcon={<BsFillChatFill size={25}/>} boardTitle='최근 게시글 ' />
