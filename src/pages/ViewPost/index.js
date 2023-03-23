@@ -26,6 +26,7 @@ import {
     ViewCommentUserNameLayout,
     ViewCommentMenuLayout,
     EditPostCommentLayout,
+    ReplyPostLayout,
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
@@ -119,7 +120,11 @@ const WriteCommentBlock = ({saveCommentInSever, feedComments, setFeedComments, c
     const [userId, setUserId] = useState('');
     const [isVaild, setIsVaild] = useState(false);
     const [isOpen, setMenu] = useState(false);
+    const [replyIsOpen, setReplyIsOpen] = useState(false);
+    const [replyMenuIsOpen, setReplyMenuIsOpen] = useState(false);
     const [showMenu, setShowMenu] = useState();
+    const [showReplyMenu, setShowReplyMenu] = useState();
+    const [showReply, setShowReply] = useState();
     const textRef = useRef();
     const inputRef = useRef([]);
     const userName = localStorage.nickname;
@@ -142,6 +147,14 @@ const WriteCommentBlock = ({saveCommentInSever, feedComments, setFeedComments, c
 
     const toggleMenu = () => {
         setMenu(isOpen => !isOpen);
+    }
+
+    const toggleReplyMenu = () => {
+        setReplyMenuIsOpen(replyMenuIsOpen => !replyMenuIsOpen);
+    }
+
+    const WriteReplyToggle = () => {
+        setReplyIsOpen(replyIsOpen => !replyIsOpen);
     }
 
     const handleResizeHeight = () => {
@@ -208,7 +221,8 @@ const WriteCommentBlock = ({saveCommentInSever, feedComments, setFeedComments, c
                                 }
                             </ViewCommentMenuLayout>
                             <ViewCommentMenuLayout onClick={()=>{
-                                alert("대댓글 작성")
+                                WriteReplyToggle();
+                                setShowReply(i);
                             }}>
                                 <p>✏️</p>
                             </ViewCommentMenuLayout>
@@ -221,6 +235,38 @@ const WriteCommentBlock = ({saveCommentInSever, feedComments, setFeedComments, c
                                 <CreateDateField>{createDate}</CreateDateField>
                             </ViewCommentUserNameLayout>
                             <ViewCommentLayout rows={1}>{commentArr.content}</ViewCommentLayout>
+                            {
+                                (replyIsOpen && showReply === i) && 
+                                    userName === feedComments[i].userId ?
+                                    <>
+                                        <ReplyPostContainer>
+                                            <ViewCommentUserImgLayout src="https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk="></ViewCommentUserImgLayout>
+                                            <ViewCommentMenuLayout style={{position: 'relative'}} onClick={() => {toggleReplyMenu(); setShowReplyMenu(i);}}>
+                                            <p>➕</p>
+                                            {
+                                                (replyMenuIsOpen && (showReplyMenu === i)) &&
+                                                    <ViewPostMenuUI style={{top: '2rem', left: '-8.5rem'}}>
+                                                        {
+                                                            writerName == userName ? 
+                                                            <>
+                                                                {/* <ViewPostMenuContent onClick={handleEdit(i)}>수정</ViewPostMenuContent> */}
+                                                                <ViewPostMenuContent onClick={()=>{}}>삭제</ViewPostMenuContent>
+                                                            </> :
+                                                            <>
+                                                                <ViewPostMenuContent onClick={alert("대댓글 신고")}>신고</ViewPostMenuContent>
+                                                            </>
+                                                        }
+                                                    </ViewPostMenuUI>
+                                            }
+                                            </ViewCommentMenuLayout>
+                                            <ViewCommentUserNameLayout>{userName}
+                                                <CreateDateField>{createDate}</CreateDateField>
+                                            </ViewCommentUserNameLayout>
+                                            <ReplyPostLayout>대댓글</ReplyPostLayout>
+                                        </ReplyPostContainer>
+                                    </> 
+                                    : <></>
+                            }
                         </ViewCommentContainer>
                     )
                 })
