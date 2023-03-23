@@ -25,6 +25,7 @@ import {
     ViewCommentUserImgLayout,
     ViewCommentUserNameLayout,
     ViewCommentMenuLayout,
+    EditPostCommentLayout,
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
@@ -112,21 +113,26 @@ const ViewPostContentBlock = ({ postTitle, postContent }) => {
     );
 };
 
-const WriteCommentBlock = ({createDate, writerName}) => {
+const WriteCommentBlock = ({saveCommentInSever, feedComments, setFeedComments, createDate, writerName}) => {
     const [visible, setVisible] = useState(false);
     const [comment, setComment] = useState('');
+    const [userId, setUserId] = useState('');
     const [isVaild, setIsVaild] = useState(false);
-    const [feedComments, setFeedComments] = useState([]);
     const [isOpen, setMenu] = useState(false);
-    const [showMenu, setShowMenu] = useState()
+    const [showMenu, setShowMenu] = useState();
     const textRef = useRef();
+    const inputRef = useRef([]);
     const userName = localStorage.nickname;
 
     const post = (e) => {
         const copyFeedComments = [...feedComments];
-        copyFeedComments.push(comment);
+        copyFeedComments.push({
+            id: feedComments.length,
+            content: comment,
+            userId: userId,
+        });
         setFeedComments(copyFeedComments);
-        setComment('')
+        setComment('');
         textRef.current.style.height = 'auto';
     }
 
@@ -147,7 +153,8 @@ const WriteCommentBlock = ({createDate, writerName}) => {
         if (e.key === "Enter" && e.shiftKey) {
             return;
         }
-        else if (e.key === "Enter") {
+        else if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
             if (comment.length > 0) {
                 post();
                 console.log("댓글이 작성되었습니다.");
@@ -158,6 +165,22 @@ const WriteCommentBlock = ({createDate, writerName}) => {
             }
         }
     }
+
+    const onRemove = (id) => {
+        const updateComments = feedComments.filter((comment) => comment.id !== id)
+            .map((comment) => {
+                if (comment.id > id) {
+                    return {
+                        ...comment,
+                        id : comment.id - 1
+                    };
+                } else {
+                    return comment;
+                }
+            });
+        setFeedComments(updateComments);
+        console.log(updateComments);
+    };
 
     return (
         <>  
@@ -174,8 +197,8 @@ const WriteCommentBlock = ({createDate, writerName}) => {
                                             {
                                                 writerName == userName ? 
                                                 <>
-                                                    <ViewPostMenuContent onClick={()=>{}}>수정</ViewPostMenuContent>
-                                                    <ViewPostMenuContent onClick={()=>{}}>삭제</ViewPostMenuContent>
+                                                    {/* <ViewPostMenuContent onClick={handleEdit(i)}>수정</ViewPostMenuContent> */}
+                                                    <ViewPostMenuContent onClick={()=>{onRemove(i)}}>삭제</ViewPostMenuContent>
                                                 </> :
                                                 <>
                                                     <ViewPostMenuContent onClick={()=>{}}>신고</ViewPostMenuContent>
@@ -197,7 +220,7 @@ const WriteCommentBlock = ({createDate, writerName}) => {
                             <ViewCommentUserNameLayout>{userName}
                                 <CreateDateField>{createDate}</CreateDateField>
                             </ViewCommentUserNameLayout>
-                            <ViewCommentLayout>{commentArr}</ViewCommentLayout>
+                            <ViewCommentLayout rows={1}>{commentArr.content}</ViewCommentLayout>
                         </ViewCommentContainer>
                     )
                 })
@@ -209,6 +232,7 @@ const WriteCommentBlock = ({createDate, writerName}) => {
                 ref={textRef}
                 onChange={(e)=>{
                     setComment(e.target.value);
+                    setUserId(userName);
                     handleResizeHeight();
                 }}
                 onkeyup={(e)=>{
@@ -217,6 +241,7 @@ const WriteCommentBlock = ({createDate, writerName}) => {
                 }} value={comment}></WriteCommentLayout>
                 <UploadCommentLayout onClick={()=>{
                     if (comment.length > 0) {
+                        saveCommentInSever();
                         post();
                         console.log("댓글이 작성되었습니다.");
                         handleViewComments();
@@ -234,6 +259,7 @@ const WriteCommentBlock = ({createDate, writerName}) => {
 const ViewPost = () => {
     const { post_id } = useParams();
     const [postInfo, setPostInfo] = useState({});
+    const [feedComments, setFeedComments] = useState([]);
 
     const getPostInfo = () => {
         axios
@@ -247,6 +273,25 @@ const ViewPost = () => {
             })
             .catch((response) => console.log(response));
     };
+
+    const saveCommentInSever = () => {
+        axios
+            .post (
+                `http://api.gwabang.site:8001/viewpost/${post_id}`,
+                {
+                    content: feedComments.content,
+                    id: feedComments.id,
+                    UserId:  feedComments.userId,
+                },
+                {
+                    headers: {
+                        'Content-type': 'application/json',
+                        Accept: 'application/json',
+                        email: localStorage.getItem('email'),
+                    },
+                }
+            )
+    }
 
     const deletePost = () => {
         const url = `${process.env.REACT_APP_SERVER_URL}:8001/board/delete/${post_id}`;
@@ -283,6 +328,8 @@ const ViewPost = () => {
             });
     };
 
+    
+
     useEffect(() => {
         getPostInfo();
     }, []);
@@ -299,7 +346,7 @@ const ViewPost = () => {
                     <></>
                 )}
                 {/* <ViewCommentBlock /> */}
-                <WriteCommentBlock createDate={postInfo.createdAt} writerName={postInfo.author}/>
+                <WriteCommentBlock saveCommentInSever={saveCommentInSever} feedComments={feedComments} setFeedComments={setFeedComments} createDate={postInfo.createdAt} writerName={postInfo.author}/>
             </ViewPostLayout>
         </>
     );
