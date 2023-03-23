@@ -81,7 +81,7 @@ const Home = () => {
     const [majorList, setMajorList] = useState([]);
     const getUserMajorList = () => {
     const email = localStorage.getItem('email');
-    console.log(majorList[0]);
+
     
         if (email) {
             axios
@@ -105,14 +105,20 @@ const Home = () => {
         <>
             <HomeLayout>
                 <SchoolBoard />
-                {/* {majorList.map((major) => {
+                {/* 학과게시판 주전공 하나만 보여주고 나머지 드롭 다운 토글 안으로.. 버전 */}
+                {majorList.length > 0 && <MajorBoardSmall 
+                title={majorList[0].majorName} boardId={`${majorList[0].majorId}001`} />}
+
+
+                   {/* 유저의 모든 전공 게시판 나열하는 버전
+                    {majorList.map((major) => {
                     return (
                         <>
                             <MajorBoardSmall title={major.majorName} boardId={`${major.majorId}001`} />
                         </>
                     );
-                })} */}
-                <MajorBoardSmall title={majorList[0].majorName} boardId={`${majorList[0].majorId}001`} />
+                })}   */}
+                
             </HomeLayout>
         </>
     );

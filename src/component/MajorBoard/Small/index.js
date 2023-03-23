@@ -2,7 +2,30 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { SchoolBoardButtonIcon, SchoolBoardTitle, SmallBoardLayout, SchoolBoardButtonLayout } from './MajorSmallBoard';
 import { TiArrowForward } from 'react-icons/ti';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 import Common from '../../../component/PostListElement/Common';
+
+const ArrowDown = (e) => {
+    const qwe = (e) => {
+        //화살표 누르면 모달창 켜지게 해야함
+        if (e.target.classList.contains('asd')) {
+            e.stopPropagation();
+            
+        }
+      };
+
+    return(
+        <MdKeyboardArrowDown class='asd' color='white' size={'1.3em'} style={{margin: ".2em"}}
+        onClick={
+         qwe
+         }   
+        
+        
+        />
+    )
+}
+
+
 const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
     return (
         <>
@@ -16,6 +39,7 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
                     <TiArrowForward size={'1.5em'} />
                 </SchoolBoardButtonIcon>
                 <SchoolBoardTitle>{title}</SchoolBoardTitle>
+                <ArrowDown/>
             </SchoolBoardButtonLayout>
         </>
     );
@@ -44,7 +68,7 @@ const MajorBoardSmall = ({ title, boardId }) => {
         <>
             <SmallBoardLayout>
                 <BoardBannerButton title={title} backgroundColor={'#90A8FF'} boardId={boardId} />
-
+                
                 {boardList.map((postElement) => {
                     return (
                         <Common
