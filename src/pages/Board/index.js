@@ -28,8 +28,6 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { Link } from 'react-router-dom';
-import { textAlign } from '@mui/system';
 import { COLORS } from '../../color';
 
 

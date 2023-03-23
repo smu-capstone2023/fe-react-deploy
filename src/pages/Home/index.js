@@ -15,6 +15,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import MajorBoardSmall from '../../component/MajorBoard/Small';
 
+
 const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
     useEffect(() => {
@@ -31,6 +32,7 @@ const SchoolBoard = () => {
             <SmallBoardLayout>
                 <BoardBannerButton title='학교게시판' backgroundColor={'#FF8686'} boardId={'004003'} />
                 <DetailBoardTitleWithMore boardIcon={<TiArrowForward />} boardTitle='학사 공지' boardId={'004003'} />
+                
                 {boardList.map((postElement) => {
                     return (
                         <Notice
@@ -118,6 +120,9 @@ const Home = () => {
                         </>
                     );
                 })}   */}
+                
+                
+
                 
             </HomeLayout>
         </>

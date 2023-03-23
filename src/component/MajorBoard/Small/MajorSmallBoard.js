@@ -16,12 +16,6 @@ export const SmallBoardLayout = styled.div`
     }
 `;
 
-export const DetailBoardTitleWithMoreLayout = styled.div`
-    padding: 0.5em;
-    display: flex;
-    justify-content: space-between;
-`;
-
 export const SchoolBoardButtonLayout = styled.div`
     background-color: ${(props) => props.backgroundColor};
     border-radius: 3px;
@@ -37,4 +31,24 @@ export const SchoolBoardButtonIcon = styled.div`
 
 export const SchoolBoardTitle = styled.div`
     color: white;
+`;
+
+export const DetailBoardTitleWithMoreLayout = styled.div`
+    margin-top: .5em;
+    padding: 0.5em;
+    display: flex;
+    justify-content: space-between;
+`;
+
+export const DetailBoardTitle = styled.p``;
+
+export const ToggleBox = styled.div`
+
+background-color: #90A8FF;
+border-radius: 3px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0.5rem;
+
 `;
