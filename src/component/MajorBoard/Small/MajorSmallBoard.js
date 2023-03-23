@@ -3,14 +3,15 @@ import {COLORS} from '../../../color';
 
 //학과
 export const SmallBoardLayout = styled.div`
-    max-width: 650px;
+    max-width: 20rem;
     width: 80%;
     margin: 0 1rem;
     padding: 1.2rem;
     border: solid 0.5px ${COLORS.gray_button};
     border-radius: 5px;
     background-color: white;
-    @media screen and (max-width: 1000px) {
+    
+    @media screen and (max-width: 1200px) {
         margin: 1rem 0;
     }
 `;
