@@ -5,14 +5,14 @@ export const BoardLayout = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid 0.5px gray;
+    border: solid 0.5px white;
     padding: 10px;
     background-color: ${COLORS.background_color};
 `;
 
 export const Boardline = styled.div`
     margin 3rem;
-    border: solid 0.5px #D9D9D9;
+    border: solid 0.5px ${COLORS.gray_button};
     border-radius: 0.6rem;
     padding-bottom: 10rem;
     max-width: 50rem;

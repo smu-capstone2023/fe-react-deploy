@@ -18,14 +18,16 @@ export const SchoolBoardTitle = styled.div`
     color: white;
 `;
 
+
+//학교
 export const SmallBoardLayout = styled.div`
-    max-width: 500px;
+    max-width: 650px;
     width: 80%;
     margin: 0 1rem;
     padding: 1.2rem;
-    border: solid 0.5px gray;
+    border: solid 0.5px ${COLORS.gray_button};
     border-radius: 5px;
-
+    background-color: white;
 
     @media screen and (max-width: 1000px) {
         margin: 1rem 0;
