@@ -14,6 +14,8 @@ export const ViewPostMenuUI = styled.ul`
 `;
 
 export const ViewPostMenuContent = styled.li`
+    position: relative;
+    z-index: 1;
     width: 10rem;
     height: 2.1rem;
     text-align: center;
@@ -267,24 +269,42 @@ export const ViewCommentUserNameLayout = styled.p`
 
 
 export const ViewCommentLayout= styled.div`
+    position: relative;
     white-space: pre-line;
     border: solid 0.05em lightgray;
     border-radius: 0.3rem;
     padding: 0.3rem;
+    height: auto;
     width: 84%;
     min-height: 4vh;
     max-height: 1000rem;
     margin-top: 1.5rem;
-    margin-left: 3rem;
     margin-bottom: 0.5rem;
+    margin-left: 3rem;
     font-size: 0.9em;
+    word-break: keep-all;
+    overflow: hidden;
+    resize: none;
+    :focus {
+        outline: none;
+    }
 `;
 
-//대댓글 컨테이너
-export const ReplyPostContainer = styled.div`
-    border: solid 1px lightgray;
-    min-height: 20vh;
 
+export const ReplyPostContainer = styled.div`
+    //border: solid 1px lightgray;
+    min-height: 5vh;
+    margin-left: 3rem;
+`;
+
+export const ReplyPostLayout = styled.div`
+    border: solid 1px lightgray;
+    border-radius: 0.3em;
+    min-height: 1vh;
+    margin: 1.5rem;
+    margin-left: 0;
+    padding: 0.3rem;
+    font-size: 0.9em;
 `;
 
 export const EditPostButtonField = styled.div`
