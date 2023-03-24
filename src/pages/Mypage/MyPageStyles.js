@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLORS } from '../../color';
 export const MyPageLayout = styled.div`
@@ -58,6 +59,18 @@ export const UserSettingLayout = styled.div`
 `;
 
 export const SettingButtonLayout = styled.div`
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    border-radius: 5px;
+    background: ${COLORS.gray_button};
+    color: white;
+    padding: 1em 0;
+    margin: 0 0 0 0.2em;
+`;
+
+//설정 페이지
+export const SettingsLink = styled(Link)`
     display: flex;
     flex: 1;
     justify-content: center;
