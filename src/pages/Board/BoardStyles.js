@@ -22,7 +22,7 @@ export const Boardline = styled.div`
     justify-content: center;
     flex-direction: column;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 812px) {
         max-width: 100%;
     }
 
@@ -77,7 +77,7 @@ export const BoardTitle = styled.div`
     padding-left: 0em;
     text-align: left;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 812px) {
         width: 50%;
         
     }
@@ -98,7 +98,7 @@ export const ToggleBox = styled.div`
     width: 32%;
     
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 812px) {
         width: 50%;
         
     }

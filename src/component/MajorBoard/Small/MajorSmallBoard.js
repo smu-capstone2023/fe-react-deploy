@@ -3,8 +3,9 @@ import {COLORS} from '../../../color';
 
 //학과
 export const SmallBoardLayout = styled.div`
-    max-width: 20rem;
+    max-width: 22rem;
     width: 80%;
+    height: 250px;
     margin: 0 1rem;
     padding: 1.2rem;
     border: solid 0.5px ${COLORS.gray_button};
@@ -23,6 +24,7 @@ export const SchoolBoardButtonLayout = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
+    
 `;
 
 export const SchoolBoardButtonIcon = styled.div`
@@ -50,5 +52,6 @@ display: flex;
 justify-content: end;
 align-items: center;
 padding: 0.5rem;
+height: 45px;
 
 `;

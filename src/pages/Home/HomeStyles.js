@@ -9,6 +9,7 @@ export const SchoolBoardButtonLayout = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
+    height: 45px;
 `;
 export const SchoolBoardButtonIcon = styled.div`
     color: white;
@@ -21,8 +22,9 @@ export const SchoolBoardTitle = styled.div`
 
 //학교
 export const SmallBoardLayout = styled.div`
-    max-width: 20rem;
+    max-width: 22rem;
     width: 80%;
+    height: 250px;
     margin: 0 1rem;
     padding: 1.2rem;
     border: solid 0.5px ${COLORS.gray_button};
@@ -40,7 +42,7 @@ export const HomeLayout = styled.div`
     justify-content: center;
     align-items: flex-start;
     background-color: ${COLORS.background_color};
-
+    height: 35em;
     @media screen and (max-width: 1200px) {
         flex-direction: column;
         align-items: center;

@@ -58,6 +58,13 @@ const DetailBoardTitleWithMore = ({ boardIcon, boardTitle}) => {
 
 const BoardToggle = ({ title }) => {
     const animatedComponents = makeAnimated();
+   
+//     const major_Name = majorName;
+// const majorOptions = [
+//   { label: '컴퓨터과학과', value: '컴퓨터과학과', link: '/board/001001' },
+//   { label: '휴먼지능정보공학전공', value: '휴먼지능정보공학전공', link: '/board/002001' },
+//   { label: '경제학과', value: '경제학과', link: '/board/003001' },
+// ];
   
     return (
       <ToggleBox>
@@ -72,7 +79,6 @@ const BoardToggle = ({ title }) => {
               '&:hover': {
                 borderColor: 'transparent',
               },
-              
             }),
             placeholder: (base) => ({
               ...base,
@@ -81,6 +87,9 @@ const BoardToggle = ({ title }) => {
               textAlign: 'center',
             }),
           }}
+          
+        //   key={major_Name}
+        //   options={majorOptions}
           placeholder={title}
           components={animatedComponents}
           onChange={(selectedOptions) => {
@@ -122,7 +131,7 @@ const MajorBoardSmall = ({ title, boardId }) => {
            <BoardToggle title={title}></BoardToggle>
 
                 <>
-                <DetailBoardTitleWithMore boardIcon={<BsFillChatFill size={25}/>} boardTitle='최근 게시글 ' />
+                <DetailBoardTitleWithMore boardIcon={<BsFillChatFill size={'1em'}/>} boardTitle='최근 게시글 ' />
                 {boardList.map((postElement) => {
                     return (
                         <Common

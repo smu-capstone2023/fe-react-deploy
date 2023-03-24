@@ -102,7 +102,7 @@ const Home = () => {
     useEffect(() => {
         getUserMajorList();
     }, [majorList.length]);
-
+console.log(majorList);
     return (
         <>
             <HomeLayout>
