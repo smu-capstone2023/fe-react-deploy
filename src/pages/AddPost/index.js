@@ -218,7 +218,7 @@ const AddPost = () => {
     const savePostInServer = () => {
         axios
             .post(
-                'http://api.gwabang.site:8001/board/create',
+                'http://serv.smus.co.kr:8001/board/create',
                 {
                     title: postTitle,
                     content: postContent,

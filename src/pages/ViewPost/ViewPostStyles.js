@@ -291,7 +291,6 @@ export const ViewCommentLayout= styled.div`
 `;
 
 
-//대댓글 컨테이너
 export const ReplyPostContainer = styled.div`
     //border: solid 1px lightgray;
     min-height: 5vh;
