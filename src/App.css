@@ -3,3 +3,19 @@
     margin: 0;
     padding: 0;
 }
+
+
+@font-face{
+    font-family: "NOTOSANSKR-REGULAR";
+    src: url("./font/NOTOSANSKR-REGULAR.woff") format("woff");
+}
+
+@font-face{
+    font-family: "NANUMGOTHIC-REGULAR";
+    src: url("./font/NANUMGOTHIC-REGULAR.woff") format("woff");
+}
+
+@font-face{
+    font-family: "GOTHICA1-REGULARR";
+    src: url("./font/GOTHICA1-REGULAR.woff") format("woff");
+}
