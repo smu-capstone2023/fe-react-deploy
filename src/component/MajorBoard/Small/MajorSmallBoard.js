@@ -5,7 +5,7 @@ import {COLORS} from '../../../color';
 export const SmallBoardLayout = styled.div`
     max-width: 22rem;
     width: 80%;
-    height: 250px;
+
     margin: 0 1rem;
     padding: 1.2rem;
     border: solid 0.5px ${COLORS.gray_button};
