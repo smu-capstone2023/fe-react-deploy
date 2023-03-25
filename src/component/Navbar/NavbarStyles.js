@@ -12,6 +12,7 @@ export const Nav = styled.div`
     top: 0;
     z-index: 10;
 
+    font-family: "NANUMGOTHIC-REGULAR";
     @media screen and(max-width:960px) {
         transition: 0.8s all ease;
     }
@@ -68,6 +69,7 @@ export const NavMenu = styled.ul`
 
 export const NavItem = styled.li`
     height: 80px;
+    font-family: "NANUMGOTHIC-REGULAR";
 `;
 
 export const NavLinks = styled(Link)`

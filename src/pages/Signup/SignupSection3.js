@@ -7,7 +7,7 @@ import { ProfileImage, Line, CertificationLink, SignContainer, SignInputText, Si
 
 
 const SignupSection3 = ({ userSignupInfo }) => {
-    const [nickName, setNickName] = useState('');
+    const [nickname, setNickName] = useState('');
     const [profileImgUrl, setProfileImgUrl] = useState('');
     // const [showModal, setShowModal] = useState(false);
 
@@ -45,11 +45,11 @@ const SignupSection3 = ({ userSignupInfo }) => {
     
 
     const checkAllOfSingUpInfo = () => {
-        if (nickName === '') {
+        if (nickname === '') {
             alert('닉네임을 입력해주세요');
             return false;
         } else {
-            userSignupInfo.nickName = nickName;
+            userSignupInfo.nickname = nickname;
             return true;
         }
     };
@@ -75,8 +75,8 @@ const SignupSection3 = ({ userSignupInfo }) => {
     const saveUserInfoAtServer = () => {
         axios
             .post(`${process.env.REACT_APP_SERVER_URL}:8001/auth/join`, {
-                email: userSignupInfo.email,
-                nick: userSignupInfo.nickName,
+                school_id: userSignupInfo.school_id,
+                nickname: userSignupInfo.nickname,
                 password: userSignupInfo.password,
                 majornames: userSignupInfo.majorList.toString(),
             })

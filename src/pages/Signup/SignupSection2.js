@@ -5,7 +5,7 @@ import makeAnimated from 'react-select/animated';
 import './SignupStyles.css';
 
 const SignupSection2 = ({ setCurrentSection, setUserSignupInfo }) => {
-    const [email, setEmail] = useState('');
+    const [school_id, setSchoolId] = useState('');
     const [password, setPassword] = useState('');
     const [checkPassword, setCheckPassword] = useState('');
     const selectedMajorList = [];
@@ -16,9 +16,9 @@ const SignupSection2 = ({ setCurrentSection, setUserSignupInfo }) => {
     ];
     const animatedComponents = makeAnimated();
 
-    const checkEmailRegExp = (email) => {
+    const checkEmailRegExp = (school_id) => {
         const emailRegex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
-        return emailRegex.test(email);
+        return emailRegex.test(school_id);
     };
 
     const checkPasswordRegExp = (password) => {
@@ -28,7 +28,7 @@ const SignupSection2 = ({ setCurrentSection, setUserSignupInfo }) => {
 
     const checkAllOfSingUpInfo = () => {
         console.log(selectedMajorList);
-        if (!checkEmailRegExp(email)) {
+        if (!checkEmailRegExp(school_id)) {
             alert('이메일 형식을 확인해주세요.');
             return false;
         } else if (!checkPasswordRegExp(password)) {
@@ -49,7 +49,7 @@ const SignupSection2 = ({ setCurrentSection, setUserSignupInfo }) => {
         <SignContainer>
             <SignInnerBox>
                 <DefaultText>사용하실 이메일을 입력하세요</DefaultText>
-                <SignInputText placeholder='example@sangmyung.kr' onChange={(e) => setEmail(e.target.value)}></SignInputText>
+                <SignInputText placeholder='example@sangmyung.kr' onChange={(e) => setSchoolId(e.target.value)}></SignInputText>
                 <DefaultText>사용하실 비밀번호를 입력하세요</DefaultText>
                 <SmallText>최소 8자, 최소 하나의 문자 및 하나의 숫자</SmallText>
                 <SignInputText placeholder='비밀번호' onChange={(e) => setPassword(e.target.value)}></SignInputText>
@@ -68,10 +68,10 @@ const SignupSection2 = ({ setCurrentSection, setUserSignupInfo }) => {
                 onClick={() => {
                     if (checkAllOfSingUpInfo()) {
                         setUserSignupInfo({
-                            email: email,
+                            school_id: school_id,
                             password: password,
                             majorList: selectedMajorList,
-                            nickName: '',
+                            nickname: '',
                             profileImage: '',
                         });
                         setCurrentSection(3);
