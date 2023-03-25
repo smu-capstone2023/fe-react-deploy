@@ -177,9 +177,9 @@ const Board = () => {
 
   const setBoardListFromServer = () => {
       axios
-          .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/${majorId}/${boardId}/list`, {
+          .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/${board_id}`, {
               headers: {
-                  email: localStorage.getItem('email'),
+                  Authorization : localStorage.getItem('access token')
               },
           })
           .then((response) => {
