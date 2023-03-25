@@ -184,14 +184,12 @@ export const WriteCommentLayout = styled.textarea`
     min-height: 3vh;
     width: 85%;
     padding: 1.5rem;
-    // padding-top: 1.5rem;
-    //background: lightgray;
     border: none;
-    // border-radius: 1em;
-    font-size: 1.1em;
+    font-size: 1em;
     word-break: keep-all;
     overflow: hidden;
     resize: none;
+    font-family: "NOTOSANSKR-REGULAR";
     :focus {
         outline: none;
     }

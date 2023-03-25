@@ -36,6 +36,7 @@ export const AnonymousContentContainer = styled.p`
     float: left;
     margin-top: 0.4em;
     margin-left: 0.5em;
+    font-family: "NOTOSANSKR-REGULAR";
 `;
 
 export const AnonymousCheckButtonContainer = styled.input`
@@ -109,12 +110,14 @@ export const WritePostUserNameLayout = styled.p`
     color: gray;
     padding-bottom: 0.3em;
     padding-left: 4em;
+    font-family: "NOTOSANSKR-REGULAR";
 `;
 
 export const WritePostDateLayout = styled.p`
     color: gray;
     padding-left: 4.6em;
     font-size: 14px;
+    font-family: "NOTOSANSKR-REGULAR";
 `;
 
 export const WritePostNameInputText = styled.input`
@@ -124,6 +127,7 @@ export const WritePostNameInputText = styled.input`
     height: 4em;
     padding: 1em;
     font-weight: bold;
+    font-family: "NOTOSANSKR-REGULAR";
 `;
 
 export const WritePostContentInputText = styled.textarea`
@@ -133,6 +137,7 @@ export const WritePostContentInputText = styled.textarea`
     padding: 1em;
     overflow: auto;
     resize: none;
+    font-family: "NOTOSANSKR-REGULAR";
     &::-webkit-scrollbar {
         width: 8px;
         height: 8px;
@@ -174,6 +179,7 @@ export const CompletePostButtonContainer = styled.button`
     border: none;
     border-radius: 5px;
     color: white;
+    font-family: "NOTOSANSKR-REGULAR";
 `;
 
 export const Blank1em = styled.div`
