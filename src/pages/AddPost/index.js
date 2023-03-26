@@ -26,14 +26,11 @@ import {
 } from './AddPostStyles';
 import axios from 'axios';
 import Select from 'react-select';
+import { AiFillCamera } from "react-icons/ai";
 import makeAnimated from 'react-select/animated';
 import { Navigate, useParams } from 'react-router-dom';
 import { upload } from '@testing-library/user-event/dist/upload';
 import { display } from '@mui/system';
-
-
-// 작성자 닉네임, 작성 날짜, 선택 해시태그, 첨부파일 데이터 저장
-
 
 const WriteUserField = ({setPostDate}) => {
     const userName = localStorage.nickname;
@@ -81,7 +78,7 @@ const SelectHashtagField = ({setPostHashtag}) => {
     );
 };
 
-// + 입력칸 클릭시 테두리 색 변화 방지
+
 const WritePostNameField = ({ setPostTitle }) => {
     return (
         <>
@@ -98,23 +95,11 @@ const WritePostContentField = ({ setPostContent }) => {
     );
 };
 
-const AnonymousCheckButton = ({setPostAnonymous, postAnonymous}) => {
-    // const [hideWriterName, setHideWriterName] = useState(false);
-    // function hideWriterName() {
-    //     const writerName = localStorage.nickname;
-    //     if (writerName) {
-    //         //작성자 이름 숨기기
-            
-    //     }
-    // }
-    
+const AnonymousCheckButton = ({setPostAnonymous}) => {
     return (
         <>
             <AnonymousCheckButtonContainer type="Checkbox" onChange={(e) => {
-                setPostAnonymous(e.target.checked)
-                //console.log(postAnonymous)
-                // e.state.checked ? setHideWriterName(true) : <></>
-                // hideWriterName ? hideWriterName : <></>
+                setPostAnonymous(false)
             }}></AnonymousCheckButtonContainer>
             <AnonymousContentContainer>익명</AnonymousContentContainer>
         </>
@@ -146,10 +131,6 @@ const AddFileButton = ({setPostAddFile}) => {
 
         setShowImages(imageUrlLists);
         setPostAddFile(showImages);
-
-        //setUploadNumber(imageList.length);
-        //console.log(uploadNumber);
-        //console.log(showImages);
     }
 
     const handleDeleteImage = (id) => {
@@ -162,7 +143,8 @@ const AddFileButton = ({setPostAddFile}) => {
             <AddFileButtonContainer>
                 <AddFileButtonLayout>
                     <AddFileButtonContainerContent htmlFor="input-file">
-                        <AddFileButtonImgLayout src="/img/camera.png"></AddFileButtonImgLayout>
+                        {/* <AddFileButtonImgLayout src="/img/camera.png"></AddFileButtonImgLayout> */}
+                        <AddFileButtonImgLayout size="40" color="#486EF7"></AddFileButtonImgLayout>
                     </AddFileButtonContainerContent>
                     <AddPostFileLayout type='file' id="input-file" multiple style={{
                         display: 'none'
@@ -218,32 +200,31 @@ const AddPost = () => {
     const savePostInServer = () => {
         axios
             .post(
-                'http://serv.smus.co.kr:8001/board/create',
+                `${process.env.REACT_APP_SERVER_URL}:8001/board/create`,
                 {
                     title: postTitle,
                     content: postContent,
-                    majorId: majorId,
                     boardId: boardId,
-                    anonymous: postAnonymous,
-                    file: postAddFile,
+                    is_anonymous: postAnonymous,
+                    majorId: majorId,
+                    // file: postAddFile,
                 },
                 {
                     headers: {
-                        'Content-type': 'application/json',
-                        Accept: 'application/json',
-                        email: localStorage.getItem('email'),
+                        // Authorization : localStorage.getItem(response.access_token)
                     },
                 }
             )
             .then((response) => {
-                //console.log(response);
+
                 if (response.code === 201) {
                     alert(response.message);
                     window.history.back();
                 }
             })
+
             .catch((response) => {
-                console.log('Error!');
+                console.log(response);
             });
     };
 
