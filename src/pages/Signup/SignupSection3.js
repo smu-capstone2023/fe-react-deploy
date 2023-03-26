@@ -7,7 +7,7 @@ import { ProfileImage, Line, CertificationLink, SignContainer, SignInputText, Si
 
 
 const SignupSection3 = ({ userSignupInfo }) => {
-    const [nickName, setNickName] = useState('');
+    const [nickname, setNickname] = useState('');
     const [profileImgUrl, setProfileImgUrl] = useState('');
     // const [showModal, setShowModal] = useState(false);
 
@@ -25,31 +25,14 @@ const SignupSection3 = ({ userSignupInfo }) => {
             alert('프로필 사진을 선택해주세요');
             return;
         }};
-    
-    //     const formData = new FormData();
-    //     formData.append('profileImage', profileImage);
-    
-    //     axios
-    //         .post(`${process.env.REACT_APP_SERVER_URL}:8001/auth/join`, {
-    //             email: userSignupInfo.email,
-    //             nick: userSignupInfo.nickName,
-    //             password: userSignupInfo.password,
-    //             majornames: userSignupInfo.majorList.toString(),
-    //         })
-    //         .then((response) => {
-    //             console.log(response);
-    //             window.location.href = '/login';
-    //         })
-    //         .catch((response) => console.log(response));
-    // };
-    
+
 
     const checkAllOfSingUpInfo = () => {
-        if (nickName === '') {
+        if (nickname === '') {
             alert('닉네임을 입력해주세요');
             return false;
         } else {
-            userSignupInfo.nickName = nickName;
+            userSignupInfo.nickname = nickname;
             return true;
         }
     };
@@ -75,8 +58,8 @@ const SignupSection3 = ({ userSignupInfo }) => {
     const saveUserInfoAtServer = () => {
         axios
             .post(`${process.env.REACT_APP_SERVER_URL}:8001/auth/join`, {
-                email: userSignupInfo.email,
-                nick: userSignupInfo.nickName,
+                school_id: userSignupInfo.school_id,
+                nickname: userSignupInfo.nickname,
                 password: userSignupInfo.password,
                 majornames: userSignupInfo.majorList.toString(),
             })
@@ -92,7 +75,7 @@ const SignupSection3 = ({ userSignupInfo }) => {
             <SignInnerBox>
                 <DefaultText>사용하실 닉네임을 입력하세요</DefaultText>
                 <SmallText>닉네임은 설정 후 30일 이후에 변경 가능합니다.</SmallText>
-                <SignInputText onChange={(e) => setNickName(e.target.value)} placeholder='닉네임 입력'></SignInputText>
+                <SignInputText onChange={(e) => setNickname(e.target.value)} placeholder='닉네임 입력'></SignInputText>
                 <Line></Line>
                 <DefaultText>프로필 사진을 첨부해주세요.</DefaultText>
                 {profileImgUrl ? (
