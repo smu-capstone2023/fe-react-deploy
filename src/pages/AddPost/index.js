@@ -211,7 +211,7 @@ const AddPost = () => {
                 },
                 {
                     headers: {
-                        // Authorization : localStorage.getItem(response.access_token)
+                        Authorization : localStorage.getItem('access_token')
                     },
                 }
             )
@@ -219,6 +219,7 @@ const AddPost = () => {
 
                 if (response.code === 201) {
                     alert(response.message);
+                    console.log(response.message);
                     window.history.back();
                 }
             })
