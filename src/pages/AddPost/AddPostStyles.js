@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLORS } from '../../color';
+import { AiFillCamera } from "react-icons/ai";
 
 export const ImageContainerDelteLayout = styled.img`
     width: 0.8rem;
@@ -16,8 +17,9 @@ export const ImageContainer = styled.div`
 
 export const ImageContainerLayout = styled.img`
     border: solid 0.1em lightgray;
-    width: 3rem;
-    height: 3rem;
+    border-radius: 0.5em;
+    width: 3.5rem;
+    height: 3.5rem;
     margin: 0.2rem;
     float: left;
 `;
@@ -32,18 +34,19 @@ export const AddPostFileLayout = styled.input`
 
 export const AnonymousContentContainer = styled.p`
     color: gray;
-    font-size: large;
+    font-size: 0.8em;
     float: left;
-    margin-top: 0.4em;
+    margin-top: 0.6em;
     margin-left: 0.5em;
+    padding: 0;
     font-family: "NOTOSANSKR-REGULAR";
 `;
 
 export const AnonymousCheckButtonContainer = styled.input`
-    zoom: 1.5;
+    zoom: 1.2;
     border-radius: 5px;
-    border: solid 0.5px gray;
-    margin-top: 0.5em;
+    border: solid 0.5px lightgray;
+    margin-top: 0.7em;
     float: left;
 `;
 
@@ -60,18 +63,17 @@ export const AddFileButtonContainer = styled.div`
     resize: none;
 `;
 
-export const AddFileButtonImgLayout = styled.img`
-    //background: lightgray;
-    border-radius: 0.5rem;
-    width: 3.5rem;
-    height: 3.5rem;
-    margin: 0.1rem;
+
+export const AddFileButtonImgLayout = styled(AiFillCamera)`
+    size: 40;
+    color: #486EF7;
+    margin-top: 0.5rem;
     margin-right: 3rem;
-    padding: 0.5rem;
-    border: solid 1px lightgray;
+    
 `;
 
 export const AddFileButtonLayout = styled.div`
+    height: 30rem;
     margin-right: 0.5rem;
     float: left;
 `;
@@ -122,24 +124,33 @@ export const WritePostDateLayout = styled.p`
 
 export const WritePostNameInputText = styled.input`
     width: 100%;
-    border-radius: 5px;
     border: solid 0.5px lightgray;
+    border-radius: 5px;
     height: 4em;
     padding: 1em;
     font-weight: bold;
     font-family: "NOTOSANSKR-REGULAR";
+    :focus {
+        outline: none;
+    }
+    @media (max-width: 430px) {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: solid 0.5px lightgray;
+    }
 `;
 
 export const WritePostContentInputText = styled.textarea`
-    border-radius: 5px;
     border: solid 0.5px lightgray;
+    border-radius: 5px;
     height: 25em;
     padding: 1em;
     overflow: auto;
     resize: none;
     font-family: "NOTOSANSKR-REGULAR";
     &::-webkit-scrollbar {
-        width: 8px;
+        width: 5px;
         height: 8px;
         border-radius: 6px;
         background: rgba(255, 255, 255, 0.4);
@@ -148,8 +159,11 @@ export const WritePostContentInputText = styled.textarea`
         background: rgba(0, 0, 0, 0.3);
         border-radius: 6px;
     }
-    &::-focus {
-        outline: 1px solid gray;
+    :focus {
+        outline: none;
+    }
+    @media (max-width: 430px) {
+        border: none;
     }
 `;
 
@@ -177,9 +191,14 @@ export const CompletePostButtonContainer = styled.button`
     height: 3em;
     background: ${COLORS.logo};
     border: none;
-    border-radius: 5px;
+    border-radius: 2em;
     color: white;
     font-family: "NOTOSANSKR-REGULAR";
+    @media (max-width: 430px) {
+        width: 6em;
+        height: 3em;
+        font-size: 0.7em;
+    }
 `;
 
 export const Blank1em = styled.div`
