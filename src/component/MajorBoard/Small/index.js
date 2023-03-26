@@ -23,18 +23,21 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
 
 const MajorBoardSmall = ({ title, boardId }) => {
     const [boardList, setBoardList] = useState([]);
-    const detailMajorId = boardId.slice(0, 3);
-    const detailBoardId = boardId.slice(3, 6);
+
+
     useEffect(() => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/${detailMajorId}/${detailBoardId}/list`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${boardId}`, {
+                
+                
                 headers: {
-                    email: localStorage.getItem('email'),
+                    Authorization: localStorage.getItem('access_token')
                     // listsize: 4,
                 },
             })
             .then((response) => {
                 setBoardList(response.data.postList);
+                console.log(response.data);
             })
             .catch((response) => console.log(response));
     }, [boardList.length]);
