@@ -347,7 +347,7 @@ const ViewPost = () => {
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/detail/${post_id}`, {
                 headers: {
-                    email: localStorage.getItem('email'),
+                    Authorization: localStorage.getItem('access_token'),
                 },
             })
             .then((response) => {

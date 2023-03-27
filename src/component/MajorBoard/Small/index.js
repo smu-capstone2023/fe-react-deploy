@@ -22,39 +22,36 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
 };
 
 const MajorBoardSmall = ({ title, boardId }) => {
-    const [boardList, setBoardList] = useState([]);
-
+    const [preview, setPreview] = useState([]);
 
     useEffect(() => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${boardId}`, {
-                
-                
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/preview?board_id=${boardId}&limit_post_num=5`,
+            {
                 headers: {
-                    Authorization: localStorage.getItem('access_token')
-                    // listsize: 4,
-                },
+                    Authorization: localStorage.getItem('access_token'),
+                }
             })
             .then((response) => {
-                setBoardList(response.data.postList);
+                setPreview(response.data);
                 console.log(response.data);
             })
             .catch((response) => console.log(response));
-    }, [boardList.length]);
+    }, [preview.length]);
 
     return (
         <>
             <SmallBoardLayout>
                 <BoardBannerButton title={title} backgroundColor={'#A9D3F2'} boardId={boardId} />
 
-                {boardList.map((postElement) => {
+                {preview.map((postElement) => {
                     return (
                         <Common
-                            key={postElement.id}
+                            key={postElement.post_id}
                             title={postElement.title}
-                            numberOfComment={postElement.commentNum}
-                            createDate={postElement.createDate}
-                            postId={postElement.id + ''}
+                            numberOfComment={postElement.comments}
+                            createDate={postElement.created_time}
+                            postId={postElement.post_id}
                         />
                     );
                 })}
