@@ -15,6 +15,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import MajorBoardSmall from '../../component/MajorBoard/Small';
 
+
 const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
     useEffect(() => {
@@ -29,8 +30,9 @@ const SchoolBoard = () => {
     return (
         <>
             <SmallBoardLayout>
-                <BoardBannerButton title='학교게시판' backgroundColor={'#D9D9D9'} boardId={'004003'} />
+                <BoardBannerButton title='학교게시판' backgroundColor={'#FF8686'} boardId={'004003'} />
                 <DetailBoardTitleWithMore boardIcon={<TiArrowForward />} boardTitle='학사 공지' boardId={'004003'} />
+                
                 {boardList.map((postElement) => {
                     return (
                         <Notice
@@ -80,7 +82,9 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
 const Home = () => {
     const [majorList, setMajorList] = useState([]);
     const getUserMajorList = () => {
-        const email = localStorage.getItem('email');
+    const email = localStorage.getItem('email');
+
+    
         if (email) {
             axios
                 .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/usermajors`, {
@@ -98,18 +102,28 @@ const Home = () => {
     useEffect(() => {
         getUserMajorList();
     }, [majorList.length]);
-
+console.log(majorList);
     return (
         <>
             <HomeLayout>
                 <SchoolBoard />
-                {majorList.map((major) => {
+                {/* 학과게시판 주전공 하나만 보여주고 나머지 드롭 다운 토글 안으로.. 버전 */}
+                {majorList.length > 0 && <MajorBoardSmall 
+                title={majorList[0].majorName} boardId={`${majorList[0].majorId}001`} />}
+
+
+                   {/* 유저의 모든 전공 게시판 나열하는 버전
+                    {majorList.map((major) => {
                     return (
                         <>
                             <MajorBoardSmall title={major.majorName} boardId={`${major.majorId}001`} />
                         </>
                     );
-                })}
+                })}   */}
+                
+                
+
+                
             </HomeLayout>
         </>
     );

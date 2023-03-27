@@ -5,14 +5,14 @@ export const BoardLayout = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid 0.5px gray;
+    border: solid 0.5px white;
     padding: 10px;
     background-color: ${COLORS.background_color};
 `;
 
 export const Boardline = styled.div`
     margin 3rem;
-    border: solid 0.5px #D9D9D9;
+    border: solid 0.5px ${COLORS.gray_button};
     border-radius: 0.6rem;
     padding-bottom: 10rem;
     max-width: 50rem;
@@ -22,7 +22,8 @@ export const Boardline = styled.div`
     justify-content: center;
     flex-direction: column;
 
-    @media screen and (max-width: 768px) {
+
+    @media screen and (max-width: 812px) {
         max-width: 100%;
     }
 
@@ -77,7 +78,9 @@ export const BoardTitle = styled.div`
     padding-left: 0em;
     text-align: left;
 
-    @media screen and (max-width: 768px) {
+
+    @media screen and (max-width: 812px) {
+
         width: 50%;
         
     }
@@ -98,7 +101,8 @@ export const ToggleBox = styled.div`
     width: 32%;
     
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 812px) {
+
         width: 50%;
         
     }
