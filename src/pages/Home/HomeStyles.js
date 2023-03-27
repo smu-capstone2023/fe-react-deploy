@@ -42,7 +42,7 @@ export const HomeLayout = styled.div`
     justify-content: center;
     align-items: flex-start;
     background-color: ${COLORS.background_color};
-    height: 35em;
+    // height: 35em;
     @media screen and (max-width: 1200px) {
         flex-direction: column;
         align-items: center;

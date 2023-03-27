@@ -107,19 +107,19 @@ console.log(majorList);
         <>
             <HomeLayout>
                 <SchoolBoard />
-                {/* 학과게시판 주전공 하나만 보여주고 나머지 드롭 다운 토글 안으로.. 버전 */}
+                {/* 학과게시판 주전공 하나만 보여주고 나머지 드롭 다운 토글 안으로.. 버전
                 {majorList.length > 0 && <MajorBoardSmall 
-                title={majorList[0].majorName} boardId={`${majorList[0].majorId}001`} />}
+                title={majorList[0].majorName} boardId={`${majorList[0].majorId}001`} />} */}
 
 
-                   {/* 유저의 모든 전공 게시판 나열하는 버전
+                   {/* 유저의 모든 전공 게시판 나열하는 버전 */}
                     {majorList.map((major) => {
                     return (
                         <>
                             <MajorBoardSmall title={major.majorName} boardId={`${major.majorId}001`} />
                         </>
                     );
-                })}   */}
+                })}   
                 
                 
 
