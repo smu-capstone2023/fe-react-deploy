@@ -34,10 +34,19 @@ const Login = () => {
         })
         .catch((response) => {
           //예외처리
-          //response
+          if (response && response.status === 401) {
+            alert("API 요청 양식이 틀렸습니다.");
+          }
+          else if (response && response.status === 403) {
+            alert("로그인이 실패했습니다.");
+          }else if (response && response.status === 405) {
+            alert("학교 이메일 인증을 완료하지 않았습니다.");
+          }
+          else{
           console.log(school_id, "@", password);
           console.log(response);
           alert("로그인 정보가 없습니다.");
+          }
         });
     }
   };
