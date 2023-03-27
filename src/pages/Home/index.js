@@ -34,8 +34,10 @@ const SchoolBoard = () => {
     return (
         <>
             <SmallBoardLayout>
+
                 <BoardBannerButton title='학교게시판' backgroundColor={'#FF8686'} boardId={process.env.REACT_APP_SCHOOL_BOARD_ID} />
                 <DetailBoardTitleWithMore boardIcon={<TiArrowForward />} boardTitle='학사 공지' boardId={process.env.REACT_APP_SCHOOL_BOARD_ID} />
+
                 
                 {boardList.map((postElement) => {
                     return (
@@ -86,6 +88,7 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
 const Home = () => {
     const [majorList, setMajorList] = useState([]);
     const getUserMajorList = () => {
+
     axios
         .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/usermajors`, {
             headers: {
@@ -98,11 +101,14 @@ const Home = () => {
             
         })
         .catch((response) => console.log(response));
+
     };
 
     useEffect(() => {
         getUserMajorList();
+
     }, []);
+
     return (
         <>
             <HomeLayout>
@@ -114,7 +120,9 @@ const Home = () => {
 
                    {/* 유저의 모든 전공 게시판 나열하는 버전 */}
                     {majorList.map((major) => {
+
                         //TODO: major.major_id => board_id
+
                     return (
                         <>
                             <MajorBoardSmall title={major.major_name} boardId={major.major_id} />

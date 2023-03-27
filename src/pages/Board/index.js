@@ -180,6 +180,7 @@ const Board = () => {
           .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
               headers: {
                   Authorization: localStorage.getItem('access_token'),
+
               },
           })
           .then((response) => {
