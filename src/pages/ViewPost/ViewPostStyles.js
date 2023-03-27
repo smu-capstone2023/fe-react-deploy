@@ -243,7 +243,7 @@ export const ViewCommentContainer = styled.div`
     //border-bottom: solid 0.1em lightgray;
     padding: 0.3rem;
     min-height: 10vh;
-    display: ${props => (props.visible ? 'block' : 'none')}
+    // display: ${props => (props.visible ? 'block' : 'none')}
 `;
 
 
@@ -269,8 +269,8 @@ export const ViewCommentUserNameLayout = styled.p`
 export const ViewCommentLayout= styled.div`
     position: relative;
     white-space: pre-line;
-    border: solid 0.05em lightgray;
-    border-radius: 0.3rem;
+    //border: solid 0.05em lightgray;
+    //border-radius: 0.3rem;
     padding: 0.3rem;
     height: auto;
     width: 84%;
