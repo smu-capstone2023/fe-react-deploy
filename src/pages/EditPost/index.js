@@ -20,22 +20,22 @@ import Select from 'react-select';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-const WriteUserField = ({setPostDate, setPostNickname}) => {
-    const userName = localStorage.nickname;
-    let date = new Date();
-    const year = date.toLocaleString('ko-KR', {year: "numeric"});
-    const month = date.toLocaleString('ko-KR', {month: 'long'});
-    const day = date.toLocaleString('ko-KR', {day: '2-digit'});
-    const hours = date.getHours();
-    const minute = date.getMinutes();
-    return (
-        <WritePostUserLayout>
-            <WritePostUserImageLayout src='https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk='></WritePostUserImageLayout>
-            <WritePostUserNameLayout>{userName}</WritePostUserNameLayout>
-            <WritePostDateLayout>{year} {month} {day}  {hours}:{minute}</WritePostDateLayout>
-        </WritePostUserLayout>
-    );
-};
+// const WriteUserField = ({setPostDate, setPostNickname}) => {
+//     const userName = localStorage.nickname;
+//     let date = new Date();
+//     const year = date.toLocaleString('ko-KR', {year: "numeric"});
+//     const month = date.toLocaleString('ko-KR', {month: 'long'});
+//     const day = date.toLocaleString('ko-KR', {day: '2-digit'});
+//     const hours = date.getHours();
+//     const minute = date.getMinutes();
+//     return (
+//         <WritePostUserLayout>
+//             <WritePostUserImageLayout src='https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk='></WritePostUserImageLayout>
+//             <WritePostUserNameLayout>{userName}</WritePostUserNameLayout>
+//             <WritePostDateLayout>{year} {month} {day}  {hours}:{minute}</WritePostDateLayout>
+//         </WritePostUserLayout>
+//     );
+// };
 
 const SelectHashtagField = ({setPosthashtag}) => {
     function handleSelect(data) {
@@ -180,7 +180,7 @@ const EditPost = () => {
         <>
             <AddPostLayout>
                 <WritePostContainer>
-                    <WriteUserField></WriteUserField>
+                    {/* <WriteUserField></WriteUserField> */}
                     <div>
                         {/* <SelectHashtagField></SelectHashtagField> */}
                         <WritePostNameField setPostTitle={setPostTitle} value={postTitle} />
