@@ -49,7 +49,7 @@ const ViewPostMenu = ({writerName, postId, deletePost}) => {
         textArea.select();
         navigator.clipboard.writeText(url);
         document.body.removeChild(textArea);
-        alert("링크가 복사되었습니다.")
+        alert("링크가 복사되었습니다.");
     }
     const refreshPage = () => {
         window.location.reload();
@@ -338,21 +338,21 @@ const ViewPost = () => {
     }
 
     const deleteComment = (comment_id) => {
-        const url = `${process.env.REACT_APP_SERVER_URL}:8001/comment/delete/${comment_id}`;
-
-        axios.delete(url, {
+        axios.delete(`${process.env.REACT_APP_SERVER_URL}:8001/comment/delete/${comment_id}`, {
             headers: {
                 Authorization: localStorage.getItem('access_token'),
             },
         })
         .then((response) => {
             if (response.code == 201) {
+                setUserInfoAtLocalStorage(response.data);
                 console.log(response.message);
                 alert(response.message);
                 refreshPage();
             }
         })
         .catch((response) => {
+            console.log(response);
             console.log(response.message);
             alert(response.message);
         })

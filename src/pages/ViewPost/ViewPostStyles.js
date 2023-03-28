@@ -271,6 +271,7 @@ export const ViewCommentLayout= styled.div`
     white-space: pre-line;
     //border: solid 0.05em lightgray;
     //border-radius: 0.3rem;
+    color: gray;
     padding: 0.3rem;
     height: auto;
     width: 84%;
