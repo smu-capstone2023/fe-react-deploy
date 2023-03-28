@@ -188,8 +188,6 @@ const CompletePostButton = ({ savePostInServer }) => {
 };
 
 const AddPost = () => {
-    const [postDate, setPostDate] = useState('');
-    const [postHashtag, setPostHashtag] = useState('');
     const [postAnonymous, setPostAnonymous] = useState();
     const [postAddFile, setPostAddFile] = useState([]);
     const [postTitle, setPostTitle] = useState('');
