@@ -105,23 +105,24 @@ const BoardToggle = ({ title }) => {
 
 
 const MajorBoardSmall = ({ title, boardId }) => {
-    const [boardList, setBoardList] = useState([]);
-    const detailMajorId = boardId.slice(0, 3);
-    const detailBoardId = boardId.slice(3, 6);
+
+    const [preview, setPreview] = useState([]);
+
 
     useEffect(() => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/${detailMajorId}/${detailBoardId}/list`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/preview?board_id=${boardId}&limit_post_num=5`,
+            {
                 headers: {
-                    email: localStorage.getItem('email'),
-                    // listsize: 4,
-                },
+                    Authorization: localStorage.getItem('access_token'),
+                }
             })
             .then((response) => {
-                setBoardList(response.data.postList);
+                setPreview(response.data);
+                console.log(response.data);
             })
             .catch((response) => console.log(response));
-    }, [boardList.length]);
+    }, [preview.length]);
 
     return (
         <>
@@ -130,16 +131,18 @@ const MajorBoardSmall = ({ title, boardId }) => {
 
            <BoardToggle title={title}></BoardToggle>
 
+
                 <>
                 <DetailBoardTitleWithMore boardIcon={<BsFillChatFill size={'1em'}/>} boardTitle='최근 게시글 ' />
-                {boardList.map((postElement) => {
+                {preview.map((postElement) => {
+
                     return (
                         <Common
-                            key={postElement.id}
+                            key={postElement.post_id}
                             title={postElement.title}
-                            numberOfComment={postElement.commentNum}
-                            createDate={postElement.createDate}
-                            postId={postElement.id + ''}
+                            numberOfComment={postElement.comments}
+                            createDate={postElement.created_time}
+                            postId={postElement.post_id}
                         />
                     );
                 })}

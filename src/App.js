@@ -24,7 +24,7 @@ function App() {
     };
     return (
         <div> 
-            <Sidebar toggle={toggle} isOpen={isOpen} setIsOpen={setIsOpen} isLogin={localStorage.getItem('email')} />
+            <Sidebar toggle={toggle} isOpen={isOpen} setIsOpen={setIsOpen} />
             <Navbar toggle={toggle} isOpen={isOpen} />
 
             <Routes>

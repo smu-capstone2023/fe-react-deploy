@@ -46,12 +46,12 @@ const BoardList = ({ boardList }) => {
 
               {boardList.map((boardElement) => (
                   <NoticeLong
-                      key={boardElement.id}
-                      writerName={boardElement.author}
+                      key={boardElement.post_id}
+                      writerName={boardElement.username}
                       title={boardElement.title}
-                      numberOfComment={3}
-                      createDate={boardElement.createDate}
-                      postId={boardElement.id}
+                      numberOfComment={boardElement.comments}
+                      createDate={boardElement.created_time.split('T')[0]}
+                      postId={boardElement.post_id}
                       numberOfViews={boardElement.views}
                   />
               ))}
@@ -173,31 +173,35 @@ const Board = () => {
   const [boardName, setBoardName] = useState('');
   const [majorName, setMajorName] = useState('');
   const { board_id } = useParams();
-  const majorId = board_id.slice(0, 3);
-  const boardId = board_id.slice(3, 6);
-  
 
   const setBoardListFromServer = () => {
+
       axios
-          .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/${board_id}`, {
+          .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
               headers: {
-                  Authorization : localStorage.getItem('access token')
+                  Authorization: localStorage.getItem('access_token'),
+
               },
           })
           .then((response) => {
+            //TODO: response.data 어떻게 생겼는지 보기
+            //setBoardList(response.data.list)
+            //setBoardName(response.data.name)
+            //setBoardMajorName(response.data.major)
+            console.log(response.data);
+              setBoardList(response.data);
+              // response.data.postList.sort(
+              //     (a, b) => new Date(b.createDate) - new Date(a.createDate));
               
-              response.data.postList.sort(
-                  (a, b) => new Date(b.createDate) - new Date(a.createDate));
-              
-              setBoardList(response.data.postList);
-              setBoardName(response.data.boardName);
-              setMajorName(response.data.majorName);
+              // setBoardList(response.data.post_id);
+              // setBoardName(response.data.boardName);
+              // setMajorName(response.data.majorName);
               
           })
           .catch((response) => {
               console.log(response);
               alert('접근 불가능한 페이지입니다.');
-              window.history.back();
+              // window.history.back();
               
           });
   };
@@ -206,7 +210,7 @@ const Board = () => {
       if (board_id) {
           setBoardListFromServer();
       }
-  }, []);
+  },[board_id]);
 
   
   return (
