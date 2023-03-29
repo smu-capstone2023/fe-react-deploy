@@ -162,17 +162,17 @@ const EditPost = () => {
                 },
                 {
                     headers: {
-                        'Content-type': 'application/json',
-                        Accept: 'application/json',
-                        email: localStorage.getItem('email'),
+                        Authorization: localStorage.getItem('access_token'),
                     },
                 }
             )
             .then((response) => {
+                console.log(response);
+                alert(response.message);
                 window.history.back();
             })
             .catch((response) => {
-                console.log('Error!');
+                console.log(response);
             });
     };
 
