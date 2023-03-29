@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { COLORS } from '../../color';
 import { AiFillCamera } from "react-icons/ai";
 
+export const AddPostBackgroundContainer = styled.div`
+    background-color: ${COLORS.background_color};
+`;
+
 export const ImageContainerDelteLayout = styled.img`
     width: 0.8rem;
     height: 0.8rem;
@@ -91,11 +95,25 @@ export const AddFileButtonContainerContent = styled.label`
 //     float: left;
 // `;
 
-export const WritePostUserLayout = styled.div`
+export const WritePostBoardContentLayout = styled.div`
     border-radius: 5px;
     // border: solid 0.5px gray;
-    height: 4em;
     color: gray;
+`;
+
+export const WritePostMajorContent = styled.p`
+    color: #433b45;
+    font-weight: 600;
+    font-size: 1.8em;
+    padding: 0.2em;
+`;
+
+export const WritePostBoardContent = styled.p`
+    color: #433b45;
+    font-weight: 100;
+    font-size: 1.15em;
+    margin-left: 0.5em;
+    margin-bottom: 1.8em;
 `;
 
 export const WritePostUserImageLayout = styled.img`

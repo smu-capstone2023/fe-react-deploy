@@ -1,7 +1,6 @@
 import { NavbarContainer, Nav, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks } from './NavbarStyles';
 import { FaBars } from 'react-icons/fa';
 import React from 'react';
-import axios from 'axios';
 
 const Navbar = ({ toggle }) => {
     return (
