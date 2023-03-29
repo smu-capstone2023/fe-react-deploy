@@ -26,34 +26,33 @@ import {
 } from './AddPostStyles';
 import axios from 'axios';
 import Select from 'react-select';
+import { AiFillCamera } from 'react-icons/ai';
 import makeAnimated from 'react-select/animated';
 import { Navigate, useParams } from 'react-router-dom';
 import { upload } from '@testing-library/user-event/dist/upload';
 import { display } from '@mui/system';
 
-
-// 작성자 닉네임, 작성 날짜, 선택 해시태그, 첨부파일 데이터 저장
-
-
-const WriteUserField = ({setPostDate}) => {
+const WriteUserField = ({ setPostDate }) => {
     const userName = localStorage.nickname;
     let date = new Date();
-    const year = date.toLocaleString('ko-KR', {year: "numeric"});
-    const month = date.toLocaleString('ko-KR', {month: 'long'});
-    const day = date.toLocaleString('ko-KR', {day: '2-digit'});
+    const year = date.toLocaleString('ko-KR', { year: 'numeric' });
+    const month = date.toLocaleString('ko-KR', { month: 'long' });
+    const day = date.toLocaleString('ko-KR', { day: '2-digit' });
     const hours = date.getHours();
     const minute = date.getMinutes();
-    
+
     return (
         <WritePostUserLayout>
             <WritePostUserImageLayout src='https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk='></WritePostUserImageLayout>
             <WritePostUserNameLayout>{userName}</WritePostUserNameLayout>
-            <WritePostDateLayout>{year} {month} {day}  {hours}:{minute}</WritePostDateLayout>
+            <WritePostDateLayout>
+                {year} {month} {day} {hours}:{minute}
+            </WritePostDateLayout>
         </WritePostUserLayout>
     );
 };
 
-const SelectHashtagField = ({setPostHashtag}) => {
+const SelectHashtagField = ({ setPostHashtag }) => {
     function handleSelect(data) {
         setSelectedOptions(data);
     }
@@ -66,13 +65,14 @@ const SelectHashtagField = ({setPostHashtag}) => {
     ];
 
     const SelectHashtagLayout = {
-        container: styles => ({...styles, width: 300, height: 50})
-    }
+        container: (styles) => ({ ...styles, width: 300, height: 50 }),
+    };
 
     return (
-        <Select style={{width:'20%'}}
+        <Select
+            style={{ width: '20%' }}
             options={HashtagOption}
-            placeholder="#해시태그를 선택해주세요"
+            placeholder='#해시태그를 선택해주세요'
             value={selectedOptions}
             onChange={(e) => setPostHashtag(e.target.value)}
             isSearchable={true}
@@ -81,7 +81,6 @@ const SelectHashtagField = ({setPostHashtag}) => {
     );
 };
 
-// + 입력칸 클릭시 테두리 색 변화 방지
 const WritePostNameField = ({ setPostTitle }) => {
     return (
         <>
@@ -98,27 +97,17 @@ const WritePostContentField = ({ setPostContent }) => {
     );
 };
 
-const AnonymousCheckButton = ({setPostAnonymous, postAnonymous}) => {
-    // const [hideWriterName, setHideWriterName] = useState(false);
-    // function hideWriterName() {
-    //     const writerName = localStorage.nickname;
-    //     if (writerName) {
-    //         //작성자 이름 숨기기
-            
-    //     }
-    // }
-    
+const AnonymousCheckButton = ({ setPostAnonymous }) => {
     return (
         <>
-            <AnonymousCheckButtonContainer type="Checkbox" onChange={(e) => {
-                setPostAnonymous(e.target.checked)
-                //console.log(postAnonymous)
-                // e.state.checked ? setHideWriterName(true) : <></>
-                // hideWriterName ? hideWriterName : <></>
-            }}></AnonymousCheckButtonContainer>
+            <AnonymousCheckButtonContainer
+                type='Checkbox'
+                onChange={(e) => {
+                    setPostAnonymous(false);
+                }}
+            ></AnonymousCheckButtonContainer>
             <AnonymousContentContainer>익명</AnonymousContentContainer>
         </>
-        
     );
 };
 
@@ -127,15 +116,15 @@ const HideWriterNameToggle = ({ setHideWriterName, hideWriterName }) => {
     return <></>;
 };
 
-const AddFileButton = ({setPostAddFile}) => {
+const AddFileButton = ({ setPostAddFile }) => {
     const [uploadNumber, setUploadNumber] = useState(0);
     const [showImages, setShowImages] = useState([]);
 
     const handleAddFiles = (e) => {
         const imageList = e.target.files;
         let imageUrlLists = [...showImages];
-        
-        for (let i=0; i<imageList.length; i++) {
+
+        for (let i = 0; i < imageList.length; i++) {
             const currentImageUrl = URL.createObjectURL(imageList[i]);
             imageUrlLists.push(currentImageUrl);
         }
@@ -146,58 +135,52 @@ const AddFileButton = ({setPostAddFile}) => {
 
         setShowImages(imageUrlLists);
         setPostAddFile(showImages);
-
-        //setUploadNumber(imageList.length);
-        //console.log(uploadNumber);
-        //console.log(showImages);
-    }
+    };
 
     const handleDeleteImage = (id) => {
         setShowImages(showImages.filter((_, index) => index !== id));
-    }
-
+    };
 
     return (
         <>
             <AddFileButtonContainer>
                 <AddFileButtonLayout>
-                    <AddFileButtonContainerContent htmlFor="input-file">
-                        <AddFileButtonImgLayout src="/img/camera.png"></AddFileButtonImgLayout>
+                    <AddFileButtonContainerContent htmlFor='input-file'>
+                        {/* <AddFileButtonImgLayout src="/img/camera.png"></AddFileButtonImgLayout> */}
+                        <AddFileButtonImgLayout size='40' color='#486EF7'></AddFileButtonImgLayout>
                     </AddFileButtonContainerContent>
-                    <AddPostFileLayout type='file' id="input-file" multiple style={{
-                        display: 'none'
-                    }} onChange={handleAddFiles}></AddPostFileLayout>
+                    <AddPostFileLayout
+                        type='file'
+                        id='input-file'
+                        multiple
+                        style={{
+                            display: 'none',
+                        }}
+                        onChange={handleAddFiles}
+                    ></AddPostFileLayout>
                 </AddFileButtonLayout>
 
-                
-                {showImages.map ((image, id) => (
+                {showImages.map((image, id) => (
                     <ImageContainer key={id}>
-                        <ImageContainerLayout src={image} alt={`${image}-${id}`}/>
+                        <ImageContainerLayout src={image} alt={`${image}-${id}`} />
                         <ImageContainerDelteLayout src='/img/x.png' onClick={() => handleDeleteImage(id)}></ImageContainerDelteLayout>
                     </ImageContainer>
                 ))}
             </AddFileButtonContainer>
-
         </>
     );
 };
 
-
-
-
-
-const CompletePostButton = ({ savePostInServer, majorId, boardId }) => {
-    function handleClick(e) {
-        window.location.href = "/board/" + majorId + boardId;
-    }
-    
+const CompletePostButton = ({ savePostInServer }) => {
     return (
         <>
-            <CompletePostButtonContainer type='submit' onClick={()=> {
-                savePostInServer();
-                alert('게시물이 업로드되었습니다.');
-                handleClick();
-            }}>
+            <CompletePostButtonContainer
+                type='submit'
+                onClick={() => {
+                    savePostInServer();
+                    //alert('게시물이 업로드되었습니다.');
+                }}
+            >
                 게시하기
             </CompletePostButtonContainer>
         </>
@@ -205,49 +188,41 @@ const CompletePostButton = ({ savePostInServer, majorId, boardId }) => {
 };
 
 const AddPost = () => {
-    const [postDate, setPostDate] = useState('');
-    const [postHashtag, setPostHashtag] = useState('');
     const [postAnonymous, setPostAnonymous] = useState();
     const [postAddFile, setPostAddFile] = useState([]);
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
     const { board_id } = useParams();
-    const majorId = board_id.slice(0, 3);
-    const boardId = board_id.slice(3, 6);
 
-    const savePostInServer = () => {
+    const savePostInServer = async () => {
+        console.log(board_id);
         axios
             .post(
-                'http://serv.smus.co.kr:8001/board/create',
+                `${process.env.REACT_APP_SERVER_URL}:8001/board/create`,
                 {
                     title: postTitle,
                     content: postContent,
-                    majorId: majorId,
-                    boardId: boardId,
-                    anonymous: postAnonymous,
-                    file: postAddFile,
+                    board_id: board_id,
+                    is_anonymous: postAnonymous,
+                    // file: postAddFile,
                 },
                 {
                     headers: {
-                        'Content-type': 'application/json',
-                        Accept: 'application/json',
-                        email: localStorage.getItem('email'),
+                        Authorization: localStorage.getItem('access_token'),
                     },
                 }
             )
             .then((response) => {
-                //console.log(response);
-                if (response.code === 201) {
-                    alert(response.message);
-                    window.history.back();
-                }
+                alert('게시물이 업로드되었습니다.');
+                window.history.back();
+                console.log(response);
             })
+
             .catch((response) => {
-                console.log('Error!');
+                console.log(response);
             });
     };
 
-    
     return (
         <>
             <AddPostLayout>
@@ -263,7 +238,7 @@ const AddPost = () => {
                     <div>
                         <AnonymousCheckButton setPostAnonymous={setPostAnonymous} postAnonymous={postAnonymous}></AnonymousCheckButton>
                         <HideWriterAndCompleteButtonLayout>
-                            <CompletePostButton savePostInServer={savePostInServer} majorId={majorId} boardId={boardId}/>
+                            <CompletePostButton savePostInServer={savePostInServer} boardId={board_id} />
                         </HideWriterAndCompleteButtonLayout>
                         <AddFileButton setPostAddFile={setPostAddFile}></AddFileButton>
                     </div>

@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const CommonElementLayout = styled.div`
-    border-bottom: solid 0.3px gray;
+
     display: flex;
     border-radius: 5px;
-    padding: 0.8em;
+    padding: 0.5em;
     justify-content: space-between;
 `;
 

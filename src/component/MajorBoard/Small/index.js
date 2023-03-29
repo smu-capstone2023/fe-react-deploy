@@ -1,8 +1,36 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { SchoolBoardButtonIcon, SchoolBoardTitle, SmallBoardLayout, SchoolBoardButtonLayout } from './MajorSmallBoard';
+import {
+    SchoolBoardButtonIcon,
+    SchoolBoardTitle,
+    SmallBoardLayout,
+    SchoolBoardButtonLayout,
+    DetailBoardTitleWithMoreLayout,
+    DetailBoardTitle,
+    ToggleBox,
+} from './MajorSmallBoard';
 import { TiArrowForward } from 'react-icons/ti';
+import { MdKeyboardArrowDown } from 'react-icons/md';
+import { BsFillChatFill } from 'react-icons/bs';
 import Common from '../../../component/PostListElement/Common';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+
+const ArrowDown = (e) => {
+    return (
+        <MdKeyboardArrowDown
+            class='asd'
+            color='white'
+            size={'1.3em'}
+            style={{ margin: '.2em' }}
+            onClick={(e) => {
+                e.stopPropagation();
+                alert('ㅇ');
+            }}
+        />
+    );
+};
+
 const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
     return (
         <>
@@ -16,42 +44,86 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
                     <TiArrowForward size={'1.5em'} />
                 </SchoolBoardButtonIcon>
                 <SchoolBoardTitle>{title}</SchoolBoardTitle>
+                <ArrowDown />
             </SchoolBoardButtonLayout>
         </>
     );
 };
 
-const MajorBoardSmall = ({ title, boardId }) => {
-    const [boardList, setBoardList] = useState([]);
-    const detailMajorId = boardId.slice(0, 3);
-    const detailBoardId = boardId.slice(3, 6);
+const DetailBoardTitleWithMore = ({ boardIcon, boardTitle }) => {
+    return (
+        <DetailBoardTitleWithMoreLayout>
+            <DetailBoardTitle>
+                {boardTitle}
+                {boardIcon}
+            </DetailBoardTitle>
+        </DetailBoardTitleWithMoreLayout>
+    );
+};
+
+const BoardToggle = ({ title, majorOptions }) => {
+    const animatedComponents = makeAnimated();
+    console.log('BoardToggle', majorOptions);
+    return (
+        <ToggleBox>
+            <Select
+                styles={{
+                    control: (base, state) => ({
+                        ...base,
+                        backgroundColor: 'transparent',
+                        borderColor: 'transparent',
+                        boxShadow: state.isFocused ? null : null,
+                        '&:hover': {
+                            borderColor: 'transparent',
+                        },
+                    }),
+                    placeholder: (base) => ({
+                        ...base,
+                        color: 'white',
+                        fontWeight: '500',
+                        textAlign: 'center',
+                    }),
+                }}
+                //key={majorOptions.value}
+                options={majorOptions}
+                placeholder={title}
+                components={animatedComponents}
+                onChange={(major) => {
+                    window.location.href = `/board/${major.value}`;
+                }}
+            />
+        </ToggleBox>
+    );
+};
+
+const MajorBoardSmall = ({ title, boardId, majorOptions }) => {
+    const [preview, setPreview] = useState([]);
     useEffect(() => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/${detailMajorId}/${detailBoardId}/list`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/preview?board_id=${boardId}&limit_post_num=5`, {
                 headers: {
-                    email: localStorage.getItem('email'),
-                    // listsize: 4,
+                    Authorization: localStorage.getItem('access_token'),
                 },
             })
             .then((response) => {
-                setBoardList(response.data.postList);
+                setPreview(response.data);
             })
             .catch((response) => console.log(response));
-    }, [boardList.length]);
+    }, [preview.length]);
 
     return (
         <>
             <SmallBoardLayout>
-                <BoardBannerButton title={title} backgroundColor={'#A9D3F2'} boardId={boardId} />
-
-                {boardList.map((postElement) => {
+                <BoardToggle title={title} majorOptions={majorOptions}></BoardToggle>
+                <DetailBoardTitleWithMore boardIcon={<BsFillChatFill size={'1em'} />} boardTitle='최근 게시글 ' />
+                {preview.map((postElement) => {
                     return (
                         <Common
-                            key={postElement.id}
+                            key={postElement.post_id}
                             title={postElement.title}
-                            numberOfComment={postElement.commentNum}
-                            createDate={postElement.createDate}
-                            postId={postElement.id + ''}
+                            numberOfComment={postElement.comments}
+                            createDate={postElement.created_time}
+                            postId={postElement.post_id}
                         />
                     );
                 })}

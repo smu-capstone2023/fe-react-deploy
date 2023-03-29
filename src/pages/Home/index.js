@@ -19,7 +19,14 @@ const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
     useEffect(() => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/school/noti/list`)
+            .get(
+                `${process.env.REACT_APP_SERVER_URL}:8001/board/preview?board_id=${process.env.REACT_APP_SCHOOL_BOARD_ID}&limit_post_num=5`,
+                {
+                    headers: {
+                        Authorization: localStorage.getItem('access_token'),
+                    },
+                }
+            )
             .then((response) => {
                 setBoardList(response.data);
             })
@@ -29,17 +36,23 @@ const SchoolBoard = () => {
     return (
         <>
             <SmallBoardLayout>
-                <BoardBannerButton title='학교게시판' backgroundColor={'#D9D9D9'} boardId={'004003'} />
-                <DetailBoardTitleWithMore boardIcon={<TiArrowForward />} boardTitle='학사 공지' boardId={'004003'} />
+                <BoardBannerButton title='학교게시판' backgroundColor={'#FF8686'} boardId={process.env.REACT_APP_SCHOOL_BOARD_ID} />
+                <DetailBoardTitleWithMore
+                    boardIcon={<TiArrowForward />}
+                    boardTitle='학사 공지'
+                    boardId={process.env.REACT_APP_SCHOOL_BOARD_ID}
+                />
+
                 {boardList.map((postElement) => {
+                    console.log(postElement);
                     return (
                         <Notice
-                            key={postElement.postId}
+                            key={postElement.post_id}
                             departmentName={postElement.nickName}
                             title={postElement.title}
-                            numberOfComment={postElement.commentNum}
-                            createDate={postElement.createDate}
-                            postId={postElement.id + ''}
+                            numberOfComment={postElement.comments}
+                            createDate={postElement.created_time}
+                            postId={postElement.post_id}
                         />
                     );
                 })}
@@ -78,38 +91,36 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
 };
 
 const Home = () => {
-    const [majorList, setMajorList] = useState([]);
+    const [majorOptions, setMajorOptions] = useState([]);
     const getUserMajorList = () => {
-        const email = localStorage.getItem('email');
-        if (email) {
-            axios
-                .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/usermajors`, {
-                    headers: {
-                        email: localStorage.getItem('email'),
-                    },
-                })
-                .then((response) => {
-                    setMajorList(response.data);
-                })
-                .catch((response) => console.log(response));
-        }
+        axios
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/usermajors`, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token'),
+                },
+            })
+            .then((response) => {
+                const tempMajorList = [];
+                response.data.forEach((element) => {
+                    tempMajorList.push({ value: element.free_board_id, label: element.major_name });
+                });
+                localStorage.setItem('major_options', JSON.stringify(tempMajorList));
+                setMajorOptions(tempMajorList);
+            })
+            .catch((response) => console.log(response));
     };
 
     useEffect(() => {
         getUserMajorList();
-    }, [majorList.length]);
+    }, [majorOptions.length]);
 
     return (
         <>
             <HomeLayout>
                 <SchoolBoard />
-                {majorList.map((major) => {
-                    return (
-                        <>
-                            <MajorBoardSmall title={major.majorName} boardId={`${major.majorId}001`} />
-                        </>
-                    );
-                })}
+                {majorOptions.length !== 0 && (
+                    <MajorBoardSmall title={majorOptions[0].label} boardId={majorOptions[0].value} majorOptions={majorOptions} />
+                )}
             </HomeLayout>
         </>
     );
