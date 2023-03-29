@@ -13,7 +13,9 @@ const Navbar = ({ toggle}) => {
             },
         })
         .then((response) => {
+            //작업중
             setMainMajor_free_boardId(response.data[1].free_board_id);
+            console.log(response.data.major_id[1]);
         })
         .catch((response) => {
             console.log(response);
