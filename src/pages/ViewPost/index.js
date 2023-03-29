@@ -27,6 +27,15 @@ import {
     ViewCommentMenuLayout,
     EditPostCommentLayout,
     ReplyPostLayout,
+    ViewPostBackground,
+    PostViewAndLikeContainer,
+    PostViewNumberLayout,
+    PostLikeNumberLayout,
+    PostLikeButtonLayout,
+    PostTitleBorderLayout,
+    PostViewResponseContent,
+    AnonymousCommentCheckButton,
+    AnonymousCommentCheckContent,
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
@@ -110,10 +119,41 @@ const ViewPostContentBlock = ({ postTitle, postContent }) => {
     return (
         <ViewPostContentLayout>
             <PostTitleField>{postTitle}</PostTitleField>
+            <PostTitleBorderLayout></PostTitleBorderLayout>
             <PostContentField>{postContent}</PostContentField>
         </ViewPostContentLayout>
     );
 };
+
+const ViewPostInfoBlock = ({views, likes, isLiked, likeNumber, setLikeNumber}) => {
+
+    const PlusLikeNumber = () => {
+        setLikeNumber(likeNumber+1);
+    }
+
+    return (
+        <>
+            <PostViewAndLikeContainer>
+                <PostViewNumberLayout>
+                    <PostViewResponseContent>조회수</PostViewResponseContent>
+                    {views}
+                </PostViewNumberLayout>
+                <PostLikeNumberLayout onClick={()=>{
+                    if (isLiked) {
+                        alert("이미 추천되었습니다.")
+                    } else {
+                        alert("추천되었습니다.")
+                        PlusLikeNumber();
+                    }
+                    }}>
+                    <PostLikeButtonLayout></PostLikeButtonLayout>
+                    {likes}
+                </PostLikeNumberLayout>
+            </PostViewAndLikeContainer>
+        </>
+
+    )
+}
 
 const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setComment, setIs_anonymous, deleteComment}) => {
     const [visible, setVisible] = useState(false);
@@ -131,12 +171,13 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
 
     const post = (e) => {
         const copyComment = [...comment];
-        const copyIs_anonymous = [...is_anonymous];
         copyComment.push(comment);
-        copyIs_anonymous.push(is_anonymous);
         setComment(copyComment);
-        setIs_anonymous(copyIs_anonymous);
         textRef.current.style.height = 'auto';
+    }
+
+    const handleAnonymousChange = () => {
+        setIs_anonymous(!is_anonymous);
     }
 
     const handleViewComments = () => {
@@ -164,7 +205,6 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                 handleViewComments();
                 saveCommentInSever();
                 setComment('');
-                refreshPage();
             }
             else {
                 alert("댓글을 작성해주세요.");
@@ -189,7 +229,7 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                                                         {
                                                             userName == userName ? 
                                                             <>
-                                                                <ViewPostMenuContent onClick={()=>{deleteComment(commentArr.comment_id)}}>삭제</ViewPostMenuContent>
+                                                                <ViewPostMenuContent onClick={()=>{deleteComment(commentArr.comment_id);}}>삭제</ViewPostMenuContent>
                                                             </> :
                                                             <>
                                                                 <ViewPostMenuContent onClick={()=>{}}>신고</ViewPostMenuContent>
@@ -197,7 +237,7 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                                                         }
                                                     </ViewPostMenuUI>
                                             }
-                                    </ViewCommentMenuLayout>
+                                        </ViewCommentMenuLayout>
 
                                     <ViewCommentMenuLayout onClick={()=>{
                                             // WriteReplyToggle();
@@ -261,6 +301,8 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                         e.target.value.length > 0
                             ? setIsVaild(true) : setIsVaild(false);
                     }} value={comment}></WriteCommentLayout>
+                    <AnonymousCommentCheckContent>익명</AnonymousCommentCheckContent>
+                    <AnonymousCommentCheckButton type={'checkbox'} onChange={(e)=>{handleAnonymousChange()}}></AnonymousCommentCheckButton>
                     <UploadCommentLayout onClick={()=>{
                         if (comment.length > 0) {
                             post();
@@ -268,7 +310,6 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                             handleViewComments();
                             saveCommentInSever();
                             setComment('');
-                            refreshPage();
                         }
                         else {
                             alert("댓글을 작성해주세요.");
@@ -284,15 +325,13 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
 
 const ViewPost = () => {
     const [comment, setComment] = useState('');
-    const [is_anonymous, setIs_anonymous] = useState('false');
+    const [is_anonymous, setIs_anonymous] = useState(false);
+    const [likeNumber, setLikeNumber] = useState(0);
     const { post_id } = useParams();
     const [postInfo, setPostInfo] = useState({});
     // const [feedComments, setFeedComments] = useState([]);
     // const [feedReplyComments, setFeedReplyComments] = useState([]);
 
-    const refreshPage = () => {
-        window.location.reload();
-    }
 
     const getPostInfo = () => {
         axios
@@ -324,11 +363,11 @@ const ViewPost = () => {
                 },
             })
             .then((response)=>{
-                if (response.status_code === 201) {
+                if (response.status === 201) {
                     setUserInfoAtLocalStorage(response.data);
                     console.log(response.message);
-                    alert(response.message);
-                    refreshPage();
+                    alert("댓글이 작성되었습니다.");
+                    window.location.reload();
                 }
             })
             .catch((response)=>{
@@ -344,11 +383,11 @@ const ViewPost = () => {
             },
         })
         .then((response) => {
-            if (response.code == 201) {
+            if (response.status == 201) {
                 setUserInfoAtLocalStorage(response.data);
                 console.log(response.message);
-                alert(response.message);
-                refreshPage();
+                alert("댓글이 삭제되었습니다.");
+                window.location.reload();
             }
         })
         .catch((response) => {
@@ -368,7 +407,7 @@ const ViewPost = () => {
             },
         })
             .then((response) => {
-                if (response.code === 200) {
+                if (response.status_code === 200) {
                     setUserInfoAtLocalStorage(response.data);
                     alert(response.message);
                     window.history.back();
@@ -405,6 +444,7 @@ const ViewPost = () => {
 
     return (
         <>
+        <ViewPostBackground>
             <ViewPostLayout>
                 {postInfo ? (
                     <>
@@ -416,8 +456,11 @@ const ViewPost = () => {
                 )}
                 {/* <ViewCommentBlock /> */}
                 {/* <WriteCommentBlock saveCommentInSever={saveCommentInSever} feedComments={feedComments} setFeedComments={setFeedComments} feedReplyComments={feedReplyComments} setFeedReplyComments={setFeedReplyComments} createDate={postInfo.createdAt} writerName={postInfo.author}/> */}
+                <ViewPostInfoBlock views={postInfo.views} likes={postInfo.likes} isLiked={postInfo.isLiked}></ViewPostInfoBlock>
                 <CommentBlock comments={postInfo.comments} saveCommentInSever={saveCommentInSever} comment={comment} is_anonymous={is_anonymous} setComment={setComment} setIs_anonymous={setIs_anonymous} deleteComment={deleteComment}></CommentBlock>
             </ViewPostLayout>
+        </ViewPostBackground>
+ 
         </>
     );
 };

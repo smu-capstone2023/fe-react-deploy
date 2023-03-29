@@ -174,7 +174,7 @@ const Board = () => {
         if (board_id) {
             setBoardListFromServer();
         }
-    }, [board_id]);
+    }, [board_id, boardList]);
 
     return (
         <BoardLayout>
