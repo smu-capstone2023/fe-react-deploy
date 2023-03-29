@@ -80,3 +80,10 @@ export const SettingsLink = styled(Link)`
     padding: 1em 0;
     margin: 0 0 0 0.2em;
 `;
+
+export const CertificateButton = styled.div`
+    background: ${COLORS.logo};
+    padding: 0.5em 0;
+    border-radius: 5px;
+    color: white;
+`;

@@ -12,7 +12,7 @@ import {
 import { TiArrowForward } from 'react-icons/ti';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { BsFillChatFill } from 'react-icons/bs';
-import Common from '../../../component/PostListElement/Common';
+import Common from '../../PostListElement/Common';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
@@ -22,7 +22,7 @@ const ArrowDown = (e) => {
             class='asd'
             color='white'
             size={'1.3em'}
-            style={{ margin: '.2em' }}
+            style={{  margin: '.2em' }}
             onClick={(e) => {
                 e.stopPropagation();
                 alert('ㅇ');

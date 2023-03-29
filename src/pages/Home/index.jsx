@@ -107,11 +107,13 @@ const Home = () => {
                 localStorage.setItem('major_options', JSON.stringify(tempMajorList));
                 setMajorOptions(tempMajorList);
             })
-            .catch((response) => console.log(response));
+            .catch((response) => {
+                localStorage.clear();
+            });
     };
 
     useEffect(() => {
-        getUserMajorList();
+        if (localStorage.getItem('access_token')) getUserMajorList();
     }, [majorOptions.length]);
 
     return (
