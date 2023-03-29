@@ -7,7 +7,6 @@ import {
     AddPostLayout,
     WritePostNameInputText,
     WritePostContentInputText,
-    WritePostUserLayout,
     SelectHashtagLayout,
     AddFileButtonContainer,
     AddFileButtonLayout,
@@ -23,6 +22,10 @@ import {
     ImageContainerLayout,
     ImageContainerDelteLayout,
     AddFileButtonImgLayout,
+    AddPostBackgroundContainer,
+    WritePostMajorContent,
+    WritePostBoardContent,
+    WritePostBoardContentLayout,
 } from './AddPostStyles';
 import axios from 'axios';
 import Select from 'react-select';
@@ -32,23 +35,20 @@ import { Navigate, useParams } from 'react-router-dom';
 import { upload } from '@testing-library/user-event/dist/upload';
 import { display } from '@mui/system';
 
-const WriteUserField = ({ setPostDate }) => {
-    const userName = localStorage.nickname;
-    let date = new Date();
-    const year = date.toLocaleString('ko-KR', { year: 'numeric' });
-    const month = date.toLocaleString('ko-KR', { month: 'long' });
-    const day = date.toLocaleString('ko-KR', { day: '2-digit' });
-    const hours = date.getHours();
-    const minute = date.getMinutes();
+const WriteBoardInfoField = ({ setPostDate }) => {
+    // const userName = localStorage.nickname;
+    // let date = new Date();
+    // const year = date.toLocaleString('ko-KR', { year: 'numeric' });
+    // const month = date.toLocaleString('ko-KR', { month: 'long' });
+    // const day = date.toLocaleString('ko-KR', { day: '2-digit' });
+    // const hours = date.getHours();
+    // const minute = date.getMinutes();
 
     return (
-        <WritePostUserLayout>
-            <WritePostUserImageLayout src='https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk='></WritePostUserImageLayout>
-            <WritePostUserNameLayout>{userName}</WritePostUserNameLayout>
-            <WritePostDateLayout>
-                {year} {month} {day} {hours}:{minute}
-            </WritePostDateLayout>
-        </WritePostUserLayout>
+        <WritePostBoardContentLayout>
+            <WritePostMajorContent>컴퓨터공학과</WritePostMajorContent>
+            <WritePostBoardContent>자유게시판 글 쓰기</WritePostBoardContent>
+        </WritePostBoardContentLayout>
     );
 };
 
@@ -97,13 +97,17 @@ const WritePostContentField = ({ setPostContent }) => {
     );
 };
 
-const AnonymousCheckButton = ({ setPostAnonymous }) => {
+const AnonymousCheckButton = ({ setPostAnonymous, postAnonymous}) => {
+    const handleAnonymousChange = () => {
+        setPostAnonymous(!postAnonymous);
+        console.log(postAnonymous);
+    }
     return (
         <>
             <AnonymousCheckButtonContainer
                 type='Checkbox'
                 onChange={(e) => {
-                    setPostAnonymous(false);
+                    handleAnonymousChange();
                 }}
             ></AnonymousCheckButtonContainer>
             <AnonymousContentContainer>익명</AnonymousContentContainer>
@@ -188,10 +192,10 @@ const CompletePostButton = ({ savePostInServer }) => {
 };
 
 const AddPost = () => {
-    const [postAnonymous, setPostAnonymous] = useState();
-    const [postAddFile, setPostAddFile] = useState([]);
+    const [postAnonymous, setPostAnonymous] = useState(false);
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
+    const [postAddFile, setPostAddFile] = useState([]);
     const { board_id } = useParams();
 
     const savePostInServer = async () => {
@@ -225,25 +229,27 @@ const AddPost = () => {
 
     return (
         <>
-            <AddPostLayout>
-                <WritePostContainer>
-                    <WriteUserField></WriteUserField>
-                    <div>
-                        {/* <SelectHashtagField setPostHashtag={setPostHashtag}></SelectHashtagField> */}
-                        <WritePostNameField setPostTitle={setPostTitle} />
-                    </div>
-                    <Blank1em />
-                    <WritePostContentField setPostContent={setPostContent} />
-                    <Blank1em />
-                    <div>
-                        <AnonymousCheckButton setPostAnonymous={setPostAnonymous} postAnonymous={postAnonymous}></AnonymousCheckButton>
-                        <HideWriterAndCompleteButtonLayout>
-                            <CompletePostButton savePostInServer={savePostInServer} boardId={board_id} />
-                        </HideWriterAndCompleteButtonLayout>
-                        <AddFileButton setPostAddFile={setPostAddFile}></AddFileButton>
-                    </div>
-                </WritePostContainer>
-            </AddPostLayout>
+            <AddPostBackgroundContainer>
+                <AddPostLayout>
+                    <WritePostContainer>
+                        <WriteBoardInfoField></WriteBoardInfoField>
+                        <div>
+                            {/* <SelectHashtagField setPostHashtag={setPostHashtag}></SelectHashtagField> */}
+                            <WritePostNameField setPostTitle={setPostTitle} />
+                        </div>
+                        <Blank1em />
+                        <WritePostContentField setPostContent={setPostContent} />
+                        <Blank1em />
+                        <div>
+                            <AnonymousCheckButton setPostAnonymous={setPostAnonymous} postAnonymous={postAnonymous}></AnonymousCheckButton>
+                            <HideWriterAndCompleteButtonLayout>
+                                <CompletePostButton savePostInServer={savePostInServer} boardId={board_id} />
+                            </HideWriterAndCompleteButtonLayout>
+                            <AddFileButton setPostAddFile={setPostAddFile}></AddFileButton>
+                        </div>
+                    </WritePostContainer>
+                </AddPostLayout>
+            </AddPostBackgroundContainer>
         </>
     );
 };

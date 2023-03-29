@@ -33,6 +33,7 @@ import Select from 'react-select';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
+
 const WriteUserField = ({setPostDate, setPostNickname}) => {
     const userName = localStorage.nickname;
     let date = new Date();
