@@ -36,13 +36,13 @@ import { upload } from '@testing-library/user-event/dist/upload';
 import { display } from '@mui/system';
 
 const WriteBoardInfoField = ({ setPostDate }) => {
-    const userName = localStorage.nickname;
-    let date = new Date();
-    const year = date.toLocaleString('ko-KR', { year: 'numeric' });
-    const month = date.toLocaleString('ko-KR', { month: 'long' });
-    const day = date.toLocaleString('ko-KR', { day: '2-digit' });
-    const hours = date.getHours();
-    const minute = date.getMinutes();
+    // const userName = localStorage.nickname;
+    // let date = new Date();
+    // const year = date.toLocaleString('ko-KR', { year: 'numeric' });
+    // const month = date.toLocaleString('ko-KR', { month: 'long' });
+    // const day = date.toLocaleString('ko-KR', { day: '2-digit' });
+    // const hours = date.getHours();
+    // const minute = date.getMinutes();
 
     return (
         <WritePostBoardContentLayout>
@@ -97,13 +97,17 @@ const WritePostContentField = ({ setPostContent }) => {
     );
 };
 
-const AnonymousCheckButton = ({ setPostAnonymous }) => {
+const AnonymousCheckButton = ({ setPostAnonymous, postAnonymous}) => {
+    const handleAnonymousChange = () => {
+        setPostAnonymous(!postAnonymous);
+        console.log(postAnonymous);
+    }
     return (
         <>
             <AnonymousCheckButtonContainer
                 type='Checkbox'
                 onChange={(e) => {
-                    setPostAnonymous(false);
+                    handleAnonymousChange();
                 }}
             ></AnonymousCheckButtonContainer>
             <AnonymousContentContainer>익명</AnonymousContentContainer>
@@ -188,10 +192,10 @@ const CompletePostButton = ({ savePostInServer }) => {
 };
 
 const AddPost = () => {
-    const [postAnonymous, setPostAnonymous] = useState();
-    const [postAddFile, setPostAddFile] = useState([]);
+    const [postAnonymous, setPostAnonymous] = useState(false);
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
+    const [postAddFile, setPostAddFile] = useState([]);
     const { board_id } = useParams();
 
     const savePostInServer = async () => {
