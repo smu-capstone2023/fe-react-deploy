@@ -73,7 +73,8 @@ export const SignInnerBox = styled.div`
 export const TosBox = styled.div`
     border: solid 0.5px gray;
     overflow: scroll;
-    width: 100%;
+    width: auto;
+    max-height: 350px;
     padding: 10px;
     font-size: 0.9rem;
 `;
