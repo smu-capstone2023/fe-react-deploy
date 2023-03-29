@@ -13,8 +13,21 @@ import {
     AnonymousContentContainer,
     WritePostUserImageLayout,
     WritePostUserNameLayout,
-    WritePostDateLayout
+    WritePostDateLayout,
+    AddFileButtonLayout,
+    AddFileButtonContainerContent,
+    AddFileButtonImgLayout,
+    AddPostFileLayout,
+    ImageContainer,
+    ImageContainerLayout,
+    ImageContainerDelteLayout,
 } from '../AddPost/AddPostStyles';
+import {
+    EditPostBackgroundContainer,
+    EditPostBoardContentLayout,
+    EditPostMajorContent,
+    EditPostBoardContent,
+} from '../EditPost/EditPostStyles';
 import axios from 'axios';
 import Select from 'react-select';
 import { useParams } from 'react-router-dom';
@@ -29,11 +42,15 @@ const WriteUserField = ({setPostDate, setPostNickname}) => {
     const hours = date.getHours();
     const minute = date.getMinutes();
     return (
-        <WritePostUserLayout>
-            <WritePostUserImageLayout src='https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk='></WritePostUserImageLayout>
-            <WritePostUserNameLayout>{userName}</WritePostUserNameLayout>
-            <WritePostDateLayout>{year} {month} {day}  {hours}:{minute}</WritePostDateLayout>
-        </WritePostUserLayout>
+        <EditPostBoardContentLayout>
+            <EditPostMajorContent>컴퓨터과학과</EditPostMajorContent>
+            <EditPostBoardContent>자유게시판 글 수정</EditPostBoardContent>
+        </EditPostBoardContentLayout>
+        // <WritePostUserLayout>
+        //     <WritePostUserImageLayout src='https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk='></WritePostUserImageLayout>
+        //     <WritePostUserNameLayout>{userName}</WritePostUserNameLayout>
+        //     <WritePostDateLayout>{year} {month} {day}  {hours}:{minute}</WritePostDateLayout>
+        // </WritePostUserLayout>
     );
 };
 
@@ -91,11 +108,58 @@ const AnonymousCheckButton = ({setPostAnonymous}) => {
     );
 };
 
+
+//addpost와 달리 get 해와야 함.
 const AddFileButton = ({setPostAddFile}) => {
+    const [uploadNumber, setUploadNumber] = useState(0);
+    const [showImages, setShowImages] = useState([]);
+
+    const handleAddFiles = (e) => {
+        const imageList = e.target.files;
+        let imageUrlLists = [...showImages];
+
+        for (let i = 0; i < imageList.length; i++) {
+            const currentImageUrl = URL.createObjectURL(imageList[i]);
+            imageUrlLists.push(currentImageUrl);
+        }
+
+        if (imageUrlLists.length > 5) {
+            imageUrlLists = imageUrlLists.slice(0, 5);
+        }
+
+        setShowImages(imageUrlLists);
+        setPostAddFile(showImages);
+    };
+
+    const handleDeleteImage = (id) => {
+        setShowImages(showImages.filter((_, index) => index !== id));
+    };
+
     return (
         <>
             <AddFileButtonContainer>
-                첨부파일
+                 <AddFileButtonLayout>
+                    <AddFileButtonContainerContent htmlFor='input-file'>
+                        {/* <AddFileButtonImgLayout src="/img/camera.png"></AddFileButtonImgLayout> */}
+                        <AddFileButtonImgLayout size='40' color='#486EF7'></AddFileButtonImgLayout>
+                    </AddFileButtonContainerContent>
+                    <AddPostFileLayout
+                        type='file'
+                        id='input-file'
+                        multiple
+                        style={{
+                            display: 'none',
+                        }}
+                        onChange={handleAddFiles}
+                    ></AddPostFileLayout>
+                </AddFileButtonLayout>
+
+                {showImages.map((image, id) => (
+                    <ImageContainer key={id}>
+                        <ImageContainerLayout src={image} alt={`${image}-${id}`} />
+                        <ImageContainerDelteLayout src='/img/x.png' onClick={() => handleDeleteImage(id)}></ImageContainerDelteLayout>
+                    </ImageContainer>
+                ))}
             </AddFileButtonContainer>
         </>
     );
@@ -114,7 +178,6 @@ const CompletePostButton = ({ editPostInServer, post_id}) => {
         <>
             <CompletePostButtonContainer type='submit' onClick={()=>{
                 editPostInServer();
-                alert('게시물이 수정되었습니다.');
                 handleClick();
             }}>
                 수정하기
@@ -141,7 +204,7 @@ const EditPost = () => {
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/detail/${post_id}`, {
                 headers: {
-                    email: localStorage.getItem('email'),
+                    Authorization: localStorage.getItem('access_token'),
                 },
             })
             .then((response) => {
@@ -168,8 +231,8 @@ const EditPost = () => {
             )
             .then((response) => {
                 console.log(response);
-                alert(response.message);
-                window.history.back();
+                alert("게시물이 수정되었습니다");
+                window.location.href = `/viewpost/${post_id}`;
             })
             .catch((response) => {
                 console.log(response);
@@ -178,25 +241,27 @@ const EditPost = () => {
 
     return (
         <>
-            <AddPostLayout>
-                <WritePostContainer>
-                    <WriteUserField></WriteUserField>
-                    <div>
-                        {/* <SelectHashtagField></SelectHashtagField> */}
-                        <WritePostNameField setPostTitle={setPostTitle} value={postTitle} />
-                    </div>
-                    <Blank1em />
-                    <WritePostContentField setPostContent={setPostContent} value={postContent} />
-                    <Blank1em />
-                    <div>
-                        <AnonymousCheckButton></AnonymousCheckButton>
-                        <AddFileButton></AddFileButton>
-                        <HideWriterAndCompleteButtonLayout>
-                            <CompletePostButton editPostInServer={editPostInServer} post_id={post_id}/>
-                        </HideWriterAndCompleteButtonLayout>
-                    </div>
-                </WritePostContainer>
-            </AddPostLayout>
+            <EditPostBackgroundContainer>
+                <AddPostLayout>
+                    <WritePostContainer>
+                        <WriteUserField></WriteUserField>
+                        <div>
+                            {/* <SelectHashtagField></SelectHashtagField> */}
+                            <WritePostNameField setPostTitle={setPostTitle} value={postTitle} />
+                        </div>
+                        <Blank1em />
+                        <WritePostContentField setPostContent={setPostContent} value={postContent} />
+                        <Blank1em />
+                        <div>
+                            <AnonymousCheckButton></AnonymousCheckButton>
+                            <HideWriterAndCompleteButtonLayout>
+                                <CompletePostButton editPostInServer={editPostInServer} post_id={post_id}/>
+                            </HideWriterAndCompleteButtonLayout>
+                            <AddFileButton></AddFileButton>
+                        </div>
+                    </WritePostContainer>
+                </AddPostLayout>
+            </EditPostBackgroundContainer>
         </>
     );
 };
