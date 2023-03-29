@@ -1,32 +1,27 @@
 import { NavbarContainer, Nav, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks } from './NavbarStyles';
 import { FaBars } from 'react-icons/fa';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Navbar = ({ toggle}) => {
-    axios
-    .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/usermajors`, {
-        headers: {
-            Authorization: localStorage.getItem('access_token'),
-        },
-    })
-    .then((response) => {
-      console.log(response);
-        
-        // response.data.postList.sort(
-        //     (a, b) => new Date(b.createDate) - new Date(a.createDate));
-        
-        // setBoardList(response.data.post_id);
-        // setBoardName(response.data.boardName);
-        // setMajorName(response.data.majorName);
-        
-    })
-    .catch((response) => {
-        console.log(response);
-        alert('접근 불가능한 페이지입니다.');
-        // window.history.back();
-        
-    });
+    const [MainMajor_free_boardId, setMainMajor_free_boardId] = useState('');
+    
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/usermajors`, {
+            headers: {
+                Authorization: localStorage.getItem('access_token'),
+            },
+        })
+        .then((response) => {
+            console.log('res',response.data);
+            console.log('res2',response.data[1].free_board_id);
+            setMainMajor_free_boardId(response.data[1].free_board_id);
+        })
+        .catch((response) => {
+            console.log(response);
+            alert('접근 불가능한 페이지입니다.');
+        });
+    }, []);
 
     return (
         <>
@@ -42,7 +37,7 @@ const Navbar = ({ toggle}) => {
                             <NavLinks to='board/3'>학교게시판</NavLinks>
                         </NavItem>
                         <NavItem>
-                            <NavLinks to={`board/2`} >학과게시판</NavLinks>
+                            <NavLinks to={`board/${MainMajor_free_boardId}`} >학과게시판</NavLinks>
                             
                         </NavItem>
                         <NavItem>
