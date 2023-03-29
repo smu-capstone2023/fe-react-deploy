@@ -13,8 +13,6 @@ const Navbar = ({ toggle}) => {
             },
         })
         .then((response) => {
-            console.log('res',response.data);
-            console.log('res2',response.data[1].free_board_id);
             setMainMajor_free_boardId(response.data[1].free_board_id);
         })
         .catch((response) => {
