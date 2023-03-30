@@ -119,7 +119,7 @@ const Home = () => {
             <HomeLayout>
                 <SchoolBoard />
                 {majorOptions.length !== 0 && (
-                    <MajorBoardSmall title={majorOptions[0].label} boardId={majorOptions[0].value} majorOptions={majorOptions} />
+                    <MajorBoardSmall title={majorOptions[1].label} boardId={majorOptions[1].value} majorOptions={majorOptions} />
                 )}
             </HomeLayout>
         </>
