@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
     LogoutButtonLayout,
     TogoBoardListWidget,
@@ -8,27 +9,47 @@ import {
     UserNameField,
     UserEmailField,
     UserSettingLayout,
-    SettingButtonLayout,
-    SettingsLink
+    CertificateButton,
+    SettingsLink,
 } from './MyPageStyles';
 const Mypage = () => {
     const logout = () => {
         localStorage.clear();
+        window.location.href = '/';
     };
-    const majorList = JSON.parse(localStorage.getItem('majorList'));
-    const nickName = localStorage.getItem('nickname');
-    const email = localStorage.getItem('email');
-    
+    const [nickname, setNickname] = useState('');
+    const [schoolId, setSchoolId] = useState('');
+
+    useEffect(() => {
+        axios
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/user_info`, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token'),
+                },
+            })
+            .then((response) => {
+                setNickname(response.data.username);
+                setSchoolId(response.data.school_id);
+            });
+    }, []);
+
+    const majorList = JSON.parse(localStorage.getItem('major_options'));
+
     return (
         <>
             <MyPageLayout>
                 <MyPageContainer>
                     <ProfileImageLayout></ProfileImageLayout>
-                    <UserNameField>{nickName}</UserNameField>
-                    <UserEmailField>{email}</UserEmailField>
+                    <UserNameField>{nickname}</UserNameField>
+                    <UserEmailField>{schoolId}@sangmyung.kr</UserEmailField>
                     {majorList.map((major) => {
-                        return <TogoBoardListWidget>{major.majorName}</TogoBoardListWidget>;
+                        return (
+                            <TogoBoardListWidget onClick={() => (window.location.href = `../board/${major.value}`)}>
+                                {major.label}
+                            </TogoBoardListWidget>
+                        );
                     })}
+                    <CertificateButton onClick={() => (window.location.href = '../certification')}>학과 인증</CertificateButton>
                     <UserSettingLayout>
                         <LogoutButtonLayout
                             onClick={(e) => {
@@ -38,7 +59,6 @@ const Mypage = () => {
                             로그아웃
                         </LogoutButtonLayout>
                         <SettingsLink to='../MyPage/MyPageSettings'>설정</SettingsLink>
-                        {/* <SettingButtonLayout>설정</SettingButtonLayout> */}
                     </UserSettingLayout>
                 </MyPageContainer>
             </MyPageLayout>
