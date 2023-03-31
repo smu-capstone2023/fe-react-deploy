@@ -254,7 +254,7 @@ const AddPost = () => {
             )
             .then((response) => {
                 alert('게시물이 업로드되었습니다.');
-                //window.history.back();
+                window.history.back();
                 console.log(response);
             })
 
