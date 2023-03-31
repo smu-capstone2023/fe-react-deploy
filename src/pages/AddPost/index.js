@@ -137,10 +137,8 @@ const uploadImageToServer = (formData) => {
 
 
 const AddFileButton = ({ setPostAddFile }) => {
-    const [uploadNumber, setUploadNumber] = useState(0);
     const [showImages, setShowImages] = useState([]);
     const [formDataArray, setFormDataArray] = useState([]);
-    // const formDataArray = [];
 
 
     const handleAddFiles = (e) => {
@@ -179,12 +177,6 @@ const AddFileButton = ({ setPostAddFile }) => {
         setPostAddFile(showImages);
     };
 
-    const uploadFile = () => {
-        console.log('a');
-        console.log(formDataArray.length);
-        console.log('b');
-    }
-
     const handleDeleteImage = (id) => {
         handleAddFiles({target : {files:[]}});
         setFormDataArray(formDataArray.filter((_, index) => index !== id));
@@ -196,7 +188,6 @@ const AddFileButton = ({ setPostAddFile }) => {
             <AddFileButtonContainer>
                 <AddFileButtonLayout>
                     <AddFileButtonContainerContent htmlFor='input-file'>
-                        {/* <AddFileButtonImgLayout src="/img/camera.png"></AddFileButtonImgLayout> */}
                         <AddFileButtonImgLayout size='40' color='#486EF7'></AddFileButtonImgLayout>
                     </AddFileButtonContainerContent>
                     <AddPostFileLayout
@@ -228,7 +219,6 @@ const CompletePostButton = ({ savePostInServer }) => {
                 type='submit'
                 onClick={() => {
                     savePostInServer();
-                    //alert('게시물이 업로드되었습니다.');
                 }}
             >
                 게시하기
