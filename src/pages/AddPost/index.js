@@ -120,9 +120,28 @@ const HideWriterNameToggle = ({ setHideWriterName, hideWriterName }) => {
     return <></>;
 };
 
+const uploadImageToServer = (formData) => {
+    return axios
+    .post(`${process.env.REACT_APP_SERVER_URL}:8001/upload`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
+    .then((response) => {
+        console.log(response);
+        return response.data;
+    })
+    .catch((response) => console.log(response));
+}
+
+
+
 const AddFileButton = ({ setPostAddFile }) => {
     const [uploadNumber, setUploadNumber] = useState(0);
     const [showImages, setShowImages] = useState([]);
+    const [formDataArray, setFormDataArray] = useState([]);
+    // const formDataArray = [];
+
 
     const handleAddFiles = (e) => {
         const imageList = e.target.files;
@@ -131,6 +150,25 @@ const AddFileButton = ({ setPostAddFile }) => {
         for (let i = 0; i < imageList.length; i++) {
             const currentImageUrl = URL.createObjectURL(imageList[i]);
             imageUrlLists.push(currentImageUrl);
+
+            const formData = new FormData();
+            formData.append('image', imageList[i]);
+            formDataArray.push(formData);
+        }
+
+        console.log(formDataArray);
+
+        for (let i = 0; i < formDataArray.length; i++) {
+            const formData = formDataArray[i];
+            uploadImageToServer(formData)
+            .then((response)=> {
+                console.log(response);
+                console.log('good');
+            })
+            .catch((response) => {
+                console.log(response);
+                console.log('bad');
+            });
         }
 
         if (imageUrlLists.length > 5) {
@@ -141,7 +179,15 @@ const AddFileButton = ({ setPostAddFile }) => {
         setPostAddFile(showImages);
     };
 
+    const uploadFile = () => {
+        console.log('a');
+        console.log(formDataArray.length);
+        console.log('b');
+    }
+
     const handleDeleteImage = (id) => {
+        handleAddFiles({target : {files:[]}});
+        setFormDataArray(formDataArray.filter((_, index) => index !== id));
         setShowImages(showImages.filter((_, index) => index !== id));
     };
 
@@ -166,8 +212,8 @@ const AddFileButton = ({ setPostAddFile }) => {
 
                 {showImages.map((image, id) => (
                     <ImageContainer key={id}>
-                        <ImageContainerLayout src={image} alt={`${image}-${id}`} />
-                        <ImageContainerDelteLayout src='/img/x.png' onClick={() => handleDeleteImage(id)}></ImageContainerDelteLayout>
+                        <ImageContainerLayout src={image} alt={`${image}-${id}`}/>
+                        <ImageContainerDelteLayout src='/img/x.png' onClick={() => {handleDeleteImage(id)}}></ImageContainerDelteLayout>
                     </ImageContainer>
                 ))}
             </AddFileButtonContainer>
@@ -218,7 +264,7 @@ const AddPost = () => {
             )
             .then((response) => {
                 alert('게시물이 업로드되었습니다.');
-                window.history.back();
+                //window.history.back();
                 console.log(response);
             })
 
