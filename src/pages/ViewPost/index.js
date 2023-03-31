@@ -36,12 +36,16 @@ import {
     PostViewResponseContent,
     AnonymousCommentCheckButton,
     AnonymousCommentCheckContent,
+    CommentLikeIcon,
+    CommentReplyIcon,
+    CommentMenuIcon,
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import {useRef} from 'react';
 import axios from 'axios';
 import { colors } from '@mui/material';
+
 
 
 
@@ -99,7 +103,7 @@ const WriterUserInfoBlock = ({ writerName, createDate, postId, deletePost, profi
         <>
             <WriterUserInfoLayout>
                 <ProfileImageLayout>
-                    <ProfileImage src='https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk='/>
+                    <ProfileImage/>
                 </ProfileImageLayout>
                 <UserAndPostInfoLayout>
                     <UserNameFiled>{writerName}</UserNameFiled>
@@ -149,6 +153,7 @@ const ViewPostInfoBlock = ({views, likes, isLiked, likeNumber, setLikeNumber}) =
                     <PostLikeButtonLayout></PostLikeButtonLayout>
                     {likes}
                 </PostLikeNumberLayout>
+                <div style={{display: "flex", flex: "90"}}/>
             </PostViewAndLikeContainer>
         </>
 
@@ -220,9 +225,9 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                         comments.map((commentArr, i) => {
                             return (
                                 <ViewCommentContainer visible={visible}>
-                                    <ViewCommentUserImgLayout src="https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk="></ViewCommentUserImgLayout>
+                                    <ViewCommentUserImgLayout></ViewCommentUserImgLayout>
                                         <ViewCommentMenuLayout style={{position: 'relative'}} onClick={() => {toggleMenu(); setShowMenu(i);}}>
-                                            <p>➕</p>
+                                            <CommentMenuIcon/>
                                             {
                                                 (isOpen && (showMenu === i)) &&
                                                     <ViewPostMenuUI style={{top: '2rem', left: '-8.5rem'}}>
@@ -243,13 +248,13 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                                             // WriteReplyToggle();
                                             // setShowReply(i);
                                     }}>
-                                            <p>✏️</p>
+                                            <CommentReplyIcon/>
                                     </ViewCommentMenuLayout>
 
                                     <ViewCommentMenuLayout onClick={()=>{
                                                 alert("추천되었습니다.")
                                     }}>
-                                            <p>👍</p>
+                                            <CommentLikeIcon/>
                                     </ViewCommentMenuLayout>
 
                                     <ViewCommentUserNameLayout>{commentArr.username}
