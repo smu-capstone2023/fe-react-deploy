@@ -30,7 +30,9 @@ const SchoolBoard = () => {
             .then((response) => {
                 setBoardList(response.data);
             })
-            .catch((response) => console.log(response));
+            .catch((response) => {
+                localStorage.clear();
+            });
     }, []);
 
     return (
