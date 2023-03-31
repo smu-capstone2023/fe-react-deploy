@@ -106,63 +106,67 @@ const BoardToggle = ({ majorName, majorOptions }) => {
 };
 
 const ChangeBoardBox = ({ boardId }) => {
-    const BoardTitle = ['자유', '비밀', '공지', '정보/홍보'];
-    const currentPageUrl = window.location.href;
-    // const {major_id} = useParams();
-    const [{major_id}, setMajor_id] = useState('');
-    console.log('113',major_id)
+
+    const [major_id, setMajor_id] = useState('');
+    const [boardList, setBoardList] = useState([]);
+    console.log('(위)메이저 아이디',major_id)
     
-//작업중
 
 useEffect(() => {
+    console.log('rendering')
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/usermajors`, {
         headers: { Authorization: localStorage.getItem('access_token') },
       })
       .then((response) => {
         setMajor_id(response.data[1].major_id);
-        console.log('123',response.data[1].major_id)
+        console.log('(aixos)메이저아이디',response.data[1].major_id)
+        setBoardList(getBoardList(response.data[1].major_id));
       })
       .catch((response) => {
         alert('접근 불가능한 페이지입니다.');
         window.history.back();
     });
-  }, []);
+  }, [major_id]);
 
 
 
 
-    useEffect(() => {
-        axios
+const getBoardList = (major_id)=>{
+    console.log(major_id)
+    axios
           .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/board_list/${major_id}`)
           
           .then((response) => {
-            console.log('res', response.data);
-            console.log('res', major_id);
+            console.log('2데이터반환', response.data);
+            return response.data
+            // console.log('2메이저아이디반환', major_id);
             // setBoardList(response.data.boardList);
           })
           .catch((response) => {
-            alert('접근 불가능한 페이지입니다.');
-            window.history.back();
+            console.log(response)
+            
+            return[]
           });
-      }, []);
-    
+}
+        
+ 
       return (
         <>
           <ChangeBoardOutBox>
-            {BoardTitle.map((link, index) => {
-                // boardUrl 교체 예정
-              const boardUrl = Number(boardId) - 1 + index + 1;
-              const isActive = currentPageUrl.includes(String(boardUrl));
+            {boardList.map((board) => {
+
+
+            //   const isActive = currentPageUrl.includes(String(boardUrl));
               return (
                 <ChangeBoardInBox
-                  key={index}
-                  active={isActive}
+                  key={board.board_id}
+                //   active={isActive}
                   onClick={() => {
-                    window.location.href = boardUrl;
+                    window.location.href = `./${board.board_id}`;
                   }}
                 >
-                  {link}
+                  {board.board_name}
                 </ChangeBoardInBox>
               );
             })}
