@@ -107,6 +107,7 @@ const BoardToggle = ({ majorName, majorOptions }) => {
 
 const ChangeBoardBox = ({ boardId }) => {
 
+
     const [major_id, setMajor_id] = useState('');
     const [boardList, setBoardList] = useState([]);
     console.log('(위)메이저 아이디',major_id)
@@ -167,6 +168,7 @@ const getBoardList = (major_id)=>{
                   }}
                 >
                   {board.board_name}
+
                 </ChangeBoardInBox>
               );
             })}
@@ -202,7 +204,7 @@ const Board = () => {
                 },
             })
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 setBoardList(response.data.posts);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
@@ -217,7 +219,9 @@ const Board = () => {
         if (board_id) {
             setBoardListFromServer();
         }
+
     }, [board_id, boardList.length]);
+
 
     return (
         <BoardLayout>

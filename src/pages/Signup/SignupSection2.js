@@ -17,11 +17,12 @@ const SignupSection2 = ({ setCurrentSection, setUserSignupInfo }) => {
     const animatedComponents = makeAnimated();
 
     const checkEmailRegExp = (school_id) => {
-        const emailRegex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+        const emailRegex = new RegExp('^\\d{9}@sangmyung\\.kr$');
         return emailRegex.test(school_id);
     };
 
     const checkPasswordRegExp = (password) => {
+        //@sangmyung.kr로 아이디 제한
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
         return passwordRegex.test(password);
     };

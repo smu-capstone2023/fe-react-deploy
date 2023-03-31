@@ -44,16 +44,14 @@ const SignupSection3 = ({ userSignupInfo }) => {
     
       
 
+    // headers: {
+    //     school_id: school_id,
+    //     password: password,
+    //     'Content-type': 'application/json',
+    //     Accept: 'application/json',
+    // },
 
-    // //모달 띄우기
-    // const handleSubmit = (event) => {
-    //   event.preventDefault();
-    //   setShowModal(true);
-    // };
-  
-    // const closeModal = () => {
-    //   setShowModal(false);
-    // };
+
 
     const saveUserInfoAtServer = () => {
         axios
