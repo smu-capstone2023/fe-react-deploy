@@ -29,7 +29,8 @@ export const SignContainer = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border: solid 0.5px gray;
+    box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.2);
+    border: solid 0.1px rgba(128, 128, 128, 0.3);
     border-radius: 8px;
     width: 25em;
     padding: 2em 0;
@@ -64,7 +65,7 @@ export const NumberBtn = styled.div`
 export const SignInnerBox = styled.div`
     display: flex;
     flex-direction: column;
-    border: solid 0.5px gray;
+    border: solid 0.1px rgba(128, 128, 128, 0.4);
     width: 80%;
     height: 70%;
     padding: 1em;

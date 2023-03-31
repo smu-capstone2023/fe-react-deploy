@@ -12,8 +12,9 @@ export const LoginLayout = styled.div`
 export const LoginContainer = styled.div`
     display: flex;
     flex-direction: column;
-    border: solid 0.5px gray;
-    border-radius: 8px;
+    box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.2);
+    border: solid 0.1px rgba(128, 128, 128, 0.3);
+    border-radius: 30px;
     max-width: 400px;
     width: 80%;
     padding: 30px;
@@ -23,6 +24,12 @@ export const LoginContainer = styled.div`
 
 export const LoginTitle = styled.h1`
     color: ${COLORS.logo};
+
+    @font-face{
+        font-family: "NOTOSANSKR-REGULAR";
+        src: url("./font/NOTOSANSKR-REGULAR.woff") format("woff");
+    }
+    
 `;
 
 export const LoginInputText = styled.input`
@@ -30,6 +37,12 @@ export const LoginInputText = styled.input`
     width: 80%;
     border: solid 0.5px gray;
     margin-top: 20px;
+
+    @font-face{
+        font-family: "NOTOSANSKR-REGULAR";
+        src: url("./font/NOTOSANSKR-REGULAR.woff") format("woff");
+    }
+    
 `;
 
 export const LoginButton = styled.div`
@@ -40,6 +53,7 @@ export const LoginButton = styled.div`
     border-radius: 5px;
     color: white;
     text-align: center;
+    
 `;
 
 export const SignupLink = styled(Link)`
