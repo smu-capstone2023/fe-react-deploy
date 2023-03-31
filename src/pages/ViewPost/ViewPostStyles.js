@@ -158,6 +158,10 @@ export const ProfileImage = styled(CiUser)`
     overflow: hidden;
     object-fit: cover;
     color: gray;
+    @media (max-width: 700px) {
+        height: 2em;
+        width: 2em;
+    }
 `;
 export const ViewPostContentLayout = styled.div`
     flex: 1;
@@ -326,8 +330,9 @@ export const UploadCommentLayout = styled.div`
     background: ${COLORS.logo};
     color: white;
     border-radius: 2em;
-    @media (max-width: 660px) {
-        font-size: 0.78em;
+    font-size: 0.9em;
+    @media (max-width: 970px) {
+        font-size: 0.7em;
     }
     @media (max-width: 400px) {
         font-size: 0.5em;
@@ -411,6 +416,10 @@ export const ViewCommentUserImgLayout = styled(CiUser)`
     height: 2.5rem;
     margin: 0.2rem;
     float: left;
+    @media (max-width: 700px) {
+        height: 2em;
+        width: 2em;
+    }
 `;
 
 export const ViewCommentUserNameLayout = styled.p`
@@ -421,7 +430,8 @@ export const ViewCommentUserNameLayout = styled.p`
     padding: 0.2rem;
     @media (max-width: 700px){
         font-size: 0.75em;
-    } 
+        margin-left: 2.5rem;
+    }
 `;
 
 
