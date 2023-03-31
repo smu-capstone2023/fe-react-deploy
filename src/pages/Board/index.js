@@ -106,32 +106,71 @@ const BoardToggle = ({ majorName, majorOptions }) => {
 };
 
 const ChangeBoardBox = ({ boardId }) => {
-    const detailMajorId = boardId.slice(0, 3);
-    const boardLink = ['자유', '비밀', '공지', '정보/홍보'];
+    const BoardTitle = ['자유', '비밀', '공지', '정보/홍보'];
     const currentPageUrl = window.location.href;
+    // const {major_id} = useParams();
+    const [{major_id}, setMajor_id] = useState('');
+    console.log('113',major_id)
+    
+//작업중
 
-    return (
+useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/usermajors`, {
+        headers: { Authorization: localStorage.getItem('access_token') },
+      })
+      .then((response) => {
+        setMajor_id(response.data[1].major_id);
+        console.log('123',response.data[1].major_id)
+      })
+      .catch((response) => {
+        alert('접근 불가능한 페이지입니다.');
+        window.history.back();
+    });
+  }, []);
+
+
+
+
+    useEffect(() => {
+        axios
+          .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/board_list/${major_id}`)
+          
+          .then((response) => {
+            console.log('res', response.data);
+            console.log('res', major_id);
+            // setBoardList(response.data.boardList);
+          })
+          .catch((response) => {
+            alert('접근 불가능한 페이지입니다.');
+            window.history.back();
+          });
+      }, []);
+    
+      return (
         <>
-            <ChangeBoardOutBox>
-                {boardLink.map((link, index) => {
-                    const boardUrl = `${detailMajorId}00${index + 1}`;
-                    const isActive = currentPageUrl.includes(boardUrl);
-                    return (
-                        <ChangeBoardInBox
-                            key={index}
-                            active={isActive}
-                            onClick={() => {
-                                window.location.href = boardUrl;
-                            }}
-                        >
-                            {link}
-                        </ChangeBoardInBox>
-                    );
-                })}
-            </ChangeBoardOutBox>
+          <ChangeBoardOutBox>
+            {BoardTitle.map((link, index) => {
+                // boardUrl 교체 예정
+              const boardUrl = Number(boardId) - 1 + index + 1;
+              const isActive = currentPageUrl.includes(String(boardUrl));
+              return (
+                <ChangeBoardInBox
+                  key={index}
+                  active={isActive}
+                  onClick={() => {
+                    window.location.href = boardUrl;
+                  }}
+                >
+                  {link}
+                </ChangeBoardInBox>
+              );
+            })}
+          </ChangeBoardOutBox>
         </>
-    );
-};
+      );
+    };
+
 
 const Search = () => {
     const handleSearch = (event) => {
@@ -174,7 +213,7 @@ const Board = () => {
         if (board_id) {
             setBoardListFromServer();
         }
-    }, [board_id, boardList]);
+    }, [board_id, boardList.length]);
 
     return (
         <BoardLayout>
