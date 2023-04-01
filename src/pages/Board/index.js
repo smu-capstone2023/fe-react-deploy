@@ -23,7 +23,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { COLORS } from '../../color';
 import ChangeBoardBox from './ChangeBoardBox';
-import './Board.css'
+import './BoardStyles.css'
 
 const BoardList = ({ boardList }) => {
     return (
@@ -122,7 +122,8 @@ const Board = () => {
     const [boardName, setBoardName] = useState('');
     const [majorName, setMajorName] = useState('');
     const { major_id, board_id } = useParams();
-    console.log('board', major_id);
+    const [fade, setFade] = useState('')
+
     const setBoardListFromServer = () => {
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
@@ -153,11 +154,8 @@ const Board = () => {
         }
     }, [board_id, boardList.length]);
 
-    const [fade, setFade] = useState('')
 
-    useEffect(()=>{
-        
-    },[])
+
 
     return (
         <BoardLayout className= {`start ${fade}`}>

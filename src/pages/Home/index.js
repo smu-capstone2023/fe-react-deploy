@@ -15,6 +15,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import MajorBoardSmall from '../../component/MajorBoard/Small';
 import { getBoardListFromMajorId } from '../../api/board/boardList';
+import './HomeStyles.css'
 
 const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
@@ -94,9 +95,18 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
 
 const Home = () => {
     const majorIdTitleList = JSON.parse(localStorage.getItem('major_options'));
+
+    const [fade, setFade] = useState('');
+    useEffect(()=>{
+        setTimeout(() => {
+            setFade('end')
+        }, 100);
+        return (()=>{setFade('')}) 
+    },[])
+
     return (
         <>
-            <HomeLayout>
+            <HomeLayout className={`start ${fade}`}>
                 <SchoolBoard />
                 {majorIdTitleList && (
                     <MajorBoardSmall
