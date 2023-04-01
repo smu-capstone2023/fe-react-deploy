@@ -23,6 +23,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { COLORS } from '../../color';
 import ChangeBoardBox from './ChangeBoardBox';
+import './Board.css'
 
 const BoardList = ({ boardList }) => {
     return (
@@ -143,11 +144,23 @@ const Board = () => {
     useEffect(() => {
         if (board_id) {
             setBoardListFromServer();
+            setTimeout(() => {
+                setFade('end')
+            }, 100);
+            return(()=>{
+                setFade('')
+            })
         }
     }, [board_id, boardList.length]);
 
+    const [fade, setFade] = useState('')
+
+    useEffect(()=>{
+        
+    },[])
+
     return (
-        <BoardLayout>
+        <BoardLayout className= {`start ${fade}`}>
             <Boardline>
                 <TitleAndToggle>
                     <BoardTitle>{boardName}</BoardTitle>
