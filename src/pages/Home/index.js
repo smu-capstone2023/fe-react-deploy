@@ -14,6 +14,7 @@ import { TiArrowForward } from 'react-icons/ti';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import MajorBoardSmall from '../../component/MajorBoard/Small';
+import { getBoardListFromMajorId } from '../../api/board/boardList';
 
 const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
@@ -46,7 +47,6 @@ const SchoolBoard = () => {
                 />
 
                 {boardList.map((postElement) => {
-                    console.log(postElement);
                     return (
                         <Notice
                             key={postElement.post_id}
@@ -93,35 +93,17 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
 };
 
 const Home = () => {
-    const [majorOptions, setMajorOptions] = useState([]);
-    const getUserMajorList = () => {
-        axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/usermajors`, {
-                headers: {
-                    Authorization: localStorage.getItem('access_token'),
-                },
-            })
-            .then((response) => {
-                const tempMajorList = [];
-                response.data.forEach((element) => {
-                    tempMajorList.push({ value: element.free_board_id, label: element.major_name });
-                });
-                localStorage.setItem('major_options', JSON.stringify(tempMajorList));
-                setMajorOptions(tempMajorList);
-            })
-            .catch((response) => console.log(response));
-    };
-
-    useEffect(() => {
-        getUserMajorList();
-    }, [majorOptions.length]);
-
+    const majorIdTitleList = JSON.parse(localStorage.getItem('major_options'));
     return (
         <>
             <HomeLayout>
                 <SchoolBoard />
-                {majorOptions.length !== 0 && (
-                    <MajorBoardSmall title={majorOptions[1].label} boardId={majorOptions[1].value} majorOptions={majorOptions} />
+                {majorIdTitleList && (
+                    <MajorBoardSmall
+                        title={majorIdTitleList[1].label}
+                        boardId={majorIdTitleList[1].freeBoard}
+                        majorOptions={majorIdTitleList}
+                    />
                 )}
             </HomeLayout>
         </>

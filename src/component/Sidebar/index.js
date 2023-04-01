@@ -4,6 +4,7 @@ const Sidebar = ({ isOpen, toggle, setIsOpen }) => {
         localStorage.clear();
         window.location.href = '/';
     };
+    const majorList = JSON.parse(localStorage.getItem('major_options'));
     return (
         <>
             <SidebarContainer isOpen={isOpen}>
@@ -14,10 +15,10 @@ const Sidebar = ({ isOpen, toggle, setIsOpen }) => {
                     <SidebarMenu>
                         {localStorage.getItem('access_token') && (
                             <>
-                                <SidebarLink to='board/3' onClick={() => setIsOpen(false)}>
+                                <SidebarLink to='board/1/3' onClick={() => setIsOpen(false)}>
                                     학교게시판
                                 </SidebarLink>
-                                <SidebarLink to='board/2' onClick={() => setIsOpen(false)}>
+                                <SidebarLink to={`board/${majorList[1].value}/${majorList[1].freeBoard}`} onClick={() => setIsOpen(false)}>
                                     학과게시판
                                 </SidebarLink>
                                 <SidebarLink to='feedback' onClick={() => setIsOpen(false)}>
