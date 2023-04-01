@@ -23,7 +23,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { COLORS } from '../../color';
 import ChangeBoardBox from './ChangeBoardBox';
-import './BoardStyles.css'
+import '../../App.css'
 
 const BoardList = ({ boardList }) => {
     return (

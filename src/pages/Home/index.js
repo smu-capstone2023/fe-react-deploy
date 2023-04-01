@@ -15,7 +15,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import MajorBoardSmall from '../../component/MajorBoard/Small';
 import { getBoardListFromMajorId } from '../../api/board/boardList';
-import './HomeStyles.css'
+import '../../App.css'
 
 const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
@@ -99,14 +99,14 @@ const Home = () => {
     const [fade, setFade] = useState('');
     useEffect(()=>{
         setTimeout(() => {
-            setFade('end')
+            setFade('HomeEnd')
         }, 100);
         return (()=>{setFade('')}) 
     },[])
 
     return (
         <>
-            <HomeLayout className={`start ${fade}`}>
+            <HomeLayout className={`HomeStart ${fade}`}>
                 <SchoolBoard />
                 {majorIdTitleList && (
                     <MajorBoardSmall
