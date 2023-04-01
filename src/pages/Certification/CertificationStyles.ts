@@ -41,9 +41,10 @@ export const CertificationTitle = styled.p`
     font-weight: bold;
 `;
 
-export const UploadButton = styled.form`
+export const UploadButton = styled.div`
     background: ${COLORS.logo};
     border-radius: 5px;
+    padding: 0.5em;
 `;
 
 export const UploadButtonLabel = styled.label`
@@ -52,9 +53,7 @@ export const UploadButtonLabel = styled.label`
     color: white;
 `;
 
-export const UploadInput = styled.input`
-    display: none;
-`;
+export const UploadInput = styled.input``;
 
 export const CertificationTextInput = styled.input`
     margin: 1em 0;
@@ -62,7 +61,6 @@ export const CertificationTextInput = styled.input`
     flex-direction: column;
     border-radius: 5px;
     border: solid 0.5px gray;
-    max-width: 25em;
     padding: 1em;
     height: 5em;
 `;

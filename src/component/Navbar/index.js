@@ -3,6 +3,7 @@ import { FaBars } from 'react-icons/fa';
 import React from 'react';
 
 const Navbar = ({ toggle }) => {
+    const majorList = JSON.parse(localStorage.getItem('major_options'));
     return (
         <>
             <Nav>
@@ -15,10 +16,10 @@ const Navbar = ({ toggle }) => {
                         {localStorage.getItem('access_token') && (
                             <>
                                 <NavItem>
-                                    <NavLinks to='board/3'>학교게시판</NavLinks>
+                                    <NavLinks to='board/1/3'>학교게시판</NavLinks>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLinks to={`board/2`}>학과게시판</NavLinks>
+                                    <NavLinks to={`board/${majorList[1].value}/${majorList[1].freeBoard}`}>학과게시판</NavLinks>
                                 </NavItem>
                                 <NavItem>
                                     <NavLinks to='feedback'>피드백게시판</NavLinks>
