@@ -53,9 +53,9 @@ const BoardList = ({ boardList, boardListByRecommendation }) => {
     );
 };
 
-const BoardUtilsButtons = ({ boardId, BoardList_sortByRecommendation }) => {
+const BoardUtilsButtons = ({ boardId, isActive,setIsActive, BoardList_sortByRecommendation }) => {
 
-    const [isActive, setIsActive] = useState(false);
+
 
 
     return (
@@ -73,7 +73,7 @@ const BoardUtilsButtons = ({ boardId, BoardList_sortByRecommendation }) => {
                 onClick={()=>{
                 BoardList_sortByRecommendation();   
                 setIsActive(!isActive);   
-                
+
                  }}
                  style={{ 
                     // fontWeight: isActive ? 'bold' : 'normal' ,
@@ -214,23 +214,28 @@ const Board = () => {
     const { board_id } = useParams();
 
     const[ boardListByRecommendation, setBoardListbyReco] = useState([]);
+    const [isActive, setIsActive] = useState(false);
+// -----------------------------------------------------------
+// 인기순 보드리스트
 
     const BoardList_sortByRecommendation = () => {
 
         axios
-        .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, 
-            {headers : {
-            Authorization : localStorage.getItem('access_token'),
-            sorting : localStorage.getItem('likes')
-        }})
-        .then((response)=>{
-            setBoardListbyReco(response.data.posts)
-            console.log('q',boardListByRecommendation)
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, 
+                {headers : {
+                Authorization : localStorage.getItem('access_token'),
+                sorting : localStorage.getItem('likes')
+            }})
+            .then((response)=>{
+                setBoardListbyReco(response.data.posts)
+                console.log('q',boardListByRecommendation)
+            
         })
         }
 
 
-
+// -----------------------------------------------------------
+// 기본 보드리스트
     const setBoardListFromServer = () => {
 
         axios
@@ -256,7 +261,7 @@ const Board = () => {
             setBoardListFromServer();
         }
 
-    }, [board_id, boardList.length]);
+    }, [board_id, boardList.length, isActive]);
 
 
     return (
@@ -269,8 +274,12 @@ const Board = () => {
                 {/* <ChangeBoardBox boardId={board_id} /> */}
                 <Line />
                 <Search />
-                <BoardUtilsButtons boardId={board_id} BoardList_sortByRecommendation={BoardList_sortByRecommendation} />
-                <BoardList boardList={boardList}   />
+                <BoardUtilsButtons 
+                boardId={board_id}
+                isActive={isActive}
+                setIsActive={setIsActive} 
+                BoardList_sortByRecommendation={BoardList_sortByRecommendation} />
+                <BoardList boardList={isActive ? boardListByRecommendation : boardList}   />
             </Boardline>
         </BoardLayout>
     );
