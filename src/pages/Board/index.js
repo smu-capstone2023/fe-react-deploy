@@ -55,36 +55,30 @@ const BoardList = ({ boardList, boardListByRecommendation }) => {
 
 const BoardUtilsButtons = ({ boardId, isActive,setIsActive, BoardList_sortByRecommendation }) => {
 
-
-
-
     return (
         <BoardUtilsButtonsLayout>
             <BoardUtilsButton
                 style={{ borderColor: `${COLORS.gray_button}` }}
                 onClick={() => (window.location.href = `/addpost/${boardId}`)}
-            >
-                글쓰기
+            >글쓰기
             </BoardUtilsButton>
             <SortUtilButtonLayout>
                 <BoardUtilsButton>최신순</BoardUtilsButton>
                 <BoardUtilsButton
-                
                 onClick={()=>{
                 BoardList_sortByRecommendation();   
                 setIsActive(!isActive);   
-
                  }}
                  style={{ 
                     // fontWeight: isActive ? 'bold' : 'normal' ,
                     background: isActive ? `${COLORS.color_button}`: '' }}
                     //TODO_hyun: 활성화된 배경색 구림, 변경 필요함
-                    
-                 >인기순</BoardUtilsButton>
+           >인기순</BoardUtilsButton>
             </SortUtilButtonLayout>
         </BoardUtilsButtonsLayout>
     );
 };
+
 
 const BoardToggle = ({ majorName, majorOptions }) => {
     const major_Name = majorName;
@@ -228,7 +222,7 @@ const Board = () => {
             }})
             .then((response)=>{
                 setBoardListbyReco(response.data.posts)
-                console.log('q',boardListByRecommendation)
+
             
         })
         }
@@ -245,7 +239,7 @@ const Board = () => {
                 },
             })
             .then((response) => {
-                // console.log(response.data);
+
                 setBoardList(response.data.posts);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
