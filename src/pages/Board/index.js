@@ -24,6 +24,7 @@ import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { COLORS } from '../../color';
+import styled from 'styled-components';
 
 const BoardList = ({ boardList, boardListByRecommendation }) => {
     return (
@@ -54,7 +55,7 @@ const BoardList = ({ boardList, boardListByRecommendation }) => {
 
 const BoardUtilsButtons = ({ boardId, BoardList_sortByRecommendation }) => {
 
-
+    const [isActive, setIsActive] = useState(false);
 
 
     return (
@@ -69,8 +70,17 @@ const BoardUtilsButtons = ({ boardId, BoardList_sortByRecommendation }) => {
                 <BoardUtilsButton>최신순</BoardUtilsButton>
                 <BoardUtilsButton
                 
-                onClick={()=>{BoardList_sortByRecommendation()
-                console.log('인기순zz') }}>인기순</BoardUtilsButton>
+                onClick={()=>{
+                BoardList_sortByRecommendation();   
+                setIsActive(!isActive);   
+                
+                 }}
+                 style={{ 
+                    // fontWeight: isActive ? 'bold' : 'normal' ,
+                    background: isActive ? `${COLORS.color_button}`: '' }}
+                    //TODO_hyun: 활성화된 배경색 구림, 변경 필요함
+                    
+                 >인기순</BoardUtilsButton>
             </SortUtilButtonLayout>
         </BoardUtilsButtonsLayout>
     );
