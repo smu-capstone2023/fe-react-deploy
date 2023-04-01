@@ -14,6 +14,7 @@ import {
     SubmitButtonLabel,
 } from './CertificationStyles.ts';
 import axios from 'axios';
+import { postCertificationPost } from '../../api/manage/certificate.js';
 
 const uploadImageToServer = (formData) => {
     return axios
@@ -30,7 +31,10 @@ const uploadImageToServer = (formData) => {
 
 const Certification = () => {
     const [profileImgUrl, setProfileImgUrl] = useState(null);
+    const [inputtext, setInputText] = useState('');
+
     const handleFileChange = (e) => {
+        e.preventDefault();
         const formData = new FormData();
         formData.append('image', e.target.files[0]);
         uploadImageToServer(formData).then((response) => {
@@ -46,14 +50,27 @@ const Certification = () => {
                     {profileImgUrl && <CertificationImageFrame src={profileImgUrl} />}
                 </CertificationImageContainer>
                 <UploadButton>
-                    <UploadButtonLabel className='signup-profileImg-label' htmlFor='profileImg'>
-                        사진 첨부하기
-                    </UploadButtonLabel>
-                    <UploadInput type='file' accept='image/*' id='profileImg' onChange={handleFileChange} />
+                    <UploadInput hidden type='file' accept='image/*' id='profileImg' onChange={(e) => handleFileChange(e)} />
+                    <UploadButtonLabel htmlFor='profileImg'>사진 첨부하기</UploadButtonLabel>
                 </UploadButton>
-                <CertificationTextInput type='text' placeholder='기타사항을 입력해주세요.' />
+                <CertificationTextInput
+                    type='text'
+                    placeholder='기타사항을 입력해주세요.'
+                    onChange={(e) => {
+                        setInputText(e.target.value);
+                    }}
+                />
                 <SubmitButton>
-                    <SubmitButtonLabel>확과 인증 업로드</SubmitButtonLabel>
+                    <SubmitButtonLabel
+                        onClick={() => {
+                            postCertificationPost(profileImgUrl, inputtext).then((response) => {
+                                alert('인증 요청을 완료했습니다.');
+                                if (response) window.location.href = '../mypage';
+                            });
+                        }}
+                    >
+                        확과 인증 업로드
+                    </SubmitButtonLabel>
                 </SubmitButton>
             </CertificationContainer>
         </CertificationLayout>

@@ -9,8 +9,6 @@ import {
     BoardTableSchema,
     BoardLayout,
     ToggleBox,
-    ChangeBoardInBox,
-    ChangeBoardOutBox,
     TitleAndToggle,
     Line,
     SearchBarWrapper,
@@ -24,6 +22,7 @@ import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { COLORS } from '../../color';
+import ChangeBoardBox from './ChangeBoardBox';
 
 const BoardList = ({ boardList }) => {
     return (
@@ -98,55 +97,12 @@ const BoardToggle = ({ majorName, majorOptions }) => {
                 options={majorOptions}
                 components={animatedComponents}
                 onChange={(selectedOptions) => {
-                    window.location.href = `${selectedOptions.value}`;
+                    window.location.href = `../${selectedOptions.value}/${selectedOptions.freeBoard}`;
                 }}
             />
         </ToggleBox>
     );
 };
-
-const ChangeBoardBox = ({ boardId }) => {
-    const BoardTitle = ['자유', '비밀', '공지', '정보/홍보'];
-    const currentPageUrl = window.location.href;
-    const {major_id} = useParams();
-//작업중
-    useEffect(() => {
-        axios
-          .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/board_list/${major_id}`)
-          
-          .then((response) => {
-            console.log('res', response.data);
-            console.log('res', major_id);
-            // setBoardList(response.data.boardList);
-          })
-          .catch((response) => {
-            alert('접근 불가능한 페이지입니다.');
-            window.history.back();
-          });
-      }, []);
-    
-      return (
-        <>
-          <ChangeBoardOutBox>
-            {BoardTitle.map((link, index) => {
-              const boardUrl = Number(boardId) - 1 + index + 1;
-              const isActive = currentPageUrl.includes(String(boardUrl));
-              return (
-                <ChangeBoardInBox
-                  key={index}
-                  active={isActive}
-                  onClick={() => {
-                    window.location.href = boardUrl;
-                  }}
-                >
-                  {link}
-                </ChangeBoardInBox>
-              );
-            })}
-          </ChangeBoardOutBox>
-        </>
-      );
-    };
 
 const Search = () => {
     const handleSearch = (event) => {
@@ -164,8 +120,8 @@ const Board = () => {
     const [boardList, setBoardList] = useState([]);
     const [boardName, setBoardName] = useState('');
     const [majorName, setMajorName] = useState('');
-    const { board_id } = useParams();
-
+    const { major_id, board_id } = useParams();
+    console.log('board', major_id);
     const setBoardListFromServer = () => {
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
@@ -174,7 +130,6 @@ const Board = () => {
                 },
             })
             .then((response) => {
-                // console.log(response.data);
                 setBoardList(response.data.posts);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
@@ -189,7 +144,7 @@ const Board = () => {
         if (board_id) {
             setBoardListFromServer();
         }
-    }, [board_id]);
+    }, [board_id, boardList.length]);
 
     return (
         <BoardLayout>
@@ -198,7 +153,7 @@ const Board = () => {
                     <BoardTitle>{boardName}</BoardTitle>
                     <BoardToggle majorName={majorName} majorOptions={JSON.parse(localStorage.getItem('major_options'))} />
                 </TitleAndToggle>
-                <ChangeBoardBox boardId={board_id} />
+                <ChangeBoardBox majorId={major_id} />
                 <Line />
                 <Search />
                 <BoardUtilsButtons boardId={board_id} />
