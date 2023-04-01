@@ -63,7 +63,11 @@ const BoardUtilsButtons = ({ boardId, isActive,setIsActive, BoardList_sortByReco
             >글쓰기
             </BoardUtilsButton>
             <SortUtilButtonLayout>
-                <BoardUtilsButton>최신순</BoardUtilsButton>
+
+                
+                {/*보류- 필요성 문제 의문
+                 <BoardUtilsButton>최신순</BoardUtilsButton> */}
+
                 <BoardUtilsButton
                 onClick={()=>{
                 BoardList_sortByRecommendation();   
