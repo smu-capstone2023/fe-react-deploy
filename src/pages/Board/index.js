@@ -25,7 +25,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { COLORS } from '../../color';
 
-const BoardList = ({ boardList }) => {
+const BoardList = ({ boardList, boardListByRecommendation }) => {
     return (
         <>
             <BoardListLayout>
@@ -52,7 +52,11 @@ const BoardList = ({ boardList }) => {
     );
 };
 
-const BoardUtilsButtons = ({ boardId }) => {
+const BoardUtilsButtons = ({ boardId, BoardList_sortByRecommendation }) => {
+
+
+
+
     return (
         <BoardUtilsButtonsLayout>
             <BoardUtilsButton
@@ -63,7 +67,10 @@ const BoardUtilsButtons = ({ boardId }) => {
             </BoardUtilsButton>
             <SortUtilButtonLayout>
                 <BoardUtilsButton>최신순</BoardUtilsButton>
-                <BoardUtilsButton>인기순</BoardUtilsButton>
+                <BoardUtilsButton
+                
+                onClick={()=>{BoardList_sortByRecommendation()
+                console.log('인기순zz') }}>인기순</BoardUtilsButton>
             </SortUtilButtonLayout>
         </BoardUtilsButtonsLayout>
     );
@@ -121,7 +128,7 @@ useEffect(() => {
       })
       .then((response) => {
         setMajor_id(response.data[1].major_id);
-        console.log('(aixos)메이저아이디',response.data[1].major_id)
+        // console.log('(aixos)메이저아이디',response.data[1].major_id)
         setBoardList(getBoardList(response.data[1].major_id));
       })
       .catch((response) => {
@@ -139,7 +146,7 @@ const getBoardList = (major_id)=>{
           .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/board_list/${major_id}`)
           
           .then((response) => {
-            console.log('2데이터반환', response.data);
+            // console.log('2데이터반환', response.data);
             return response.data
             // console.log('2메이저아이디반환', major_id);
             // setBoardList(response.data.boardList);
@@ -196,7 +203,26 @@ const Board = () => {
     const [majorName, setMajorName] = useState('');
     const { board_id } = useParams();
 
+    const[ boardListByRecommendation, setBoardListbyReco] = useState([]);
+
+    const BoardList_sortByRecommendation = () => {
+
+        axios
+        .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, 
+            {headers : {
+            Authorization : localStorage.getItem('access_token'),
+            sorting : localStorage.getItem('likes')
+        }})
+        .then((response)=>{
+            setBoardListbyReco(response.data.posts)
+            console.log('q',boardListByRecommendation)
+        })
+        }
+
+
+
     const setBoardListFromServer = () => {
+
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
                 headers: {
@@ -230,11 +256,11 @@ const Board = () => {
                     <BoardTitle>{boardName}</BoardTitle>
                     <BoardToggle majorName={majorName} majorOptions={JSON.parse(localStorage.getItem('major_options'))} />
                 </TitleAndToggle>
-                <ChangeBoardBox boardId={board_id} />
+                {/* <ChangeBoardBox boardId={board_id} /> */}
                 <Line />
                 <Search />
-                <BoardUtilsButtons boardId={board_id} />
-                <BoardList boardList={boardList} />
+                <BoardUtilsButtons boardId={board_id} BoardList_sortByRecommendation={BoardList_sortByRecommendation} />
+                <BoardList boardList={boardList}   />
             </Boardline>
         </BoardLayout>
     );
