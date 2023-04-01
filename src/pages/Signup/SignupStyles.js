@@ -65,7 +65,7 @@ export const NumberBtn = styled.div`
 export const SignInnerBox = styled.div`
     display: flex;
     flex-direction: column;
-    border: solid 0.1px rgba(128, 128, 128, 0.4);
+    border: solid 0.5px gray;
     width: 80%;
     height: 70%;
     padding: 1em;
