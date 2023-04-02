@@ -24,6 +24,10 @@ export const LoginContainer = styled.div`
 
 export const LoginTitle = styled.h1`
     color: ${COLORS.logo};
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 35px;
+    letter-spacing: 1px;
 
     @font-face{
         font-family: "NOTOSANSKR-REGULAR";
@@ -35,7 +39,8 @@ export const LoginTitle = styled.h1`
 export const LoginInputText = styled.input`
     padding: 15px;
     width: 80%;
-    border: solid 0.5px gray;
+    border: none;
+    border-bottom: solid 0.1px rgba(128, 128, 128, 0.5);
     margin-top: 20px;
 
     @font-face{
@@ -48,9 +53,11 @@ export const LoginInputText = styled.input`
 export const LoginButton = styled.div`
     padding: 15px;
     width: 80%;
+    height: 50px;
     background: ${COLORS.color_button};
-    margin-top: 20px;
-    border-radius: 5px;
+    margin-top: 30px;
+    border-radius: 10px;
+    font-weight: bold;
     color: white;
     text-align: center;
     
@@ -59,10 +66,12 @@ export const LoginButton = styled.div`
 export const SignupLink = styled(Link)`
     padding: 15px;
     width: 80%;
+    height: 50px;
     background: ${COLORS.gray_button};
     margin-top: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     color: black;
+    font-weight: bold;
     text-align: center;
     text-decoration: none;
 `;

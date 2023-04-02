@@ -22,10 +22,11 @@ import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { COLORS } from '../../color';
+import styled from 'styled-components';
 import ChangeBoardBox from './ChangeBoardBox';
 import '../../App.css'
 
-const BoardList = ({ boardList }) => {
+const BoardList = ({ boardList, boardListByRecommendation }) => {
     return (
         <>
             <BoardListLayout>
@@ -52,22 +53,36 @@ const BoardList = ({ boardList }) => {
     );
 };
 
-const BoardUtilsButtons = ({ boardId }) => {
+const BoardUtilsButtons = ({ boardId, isActive,setIsActive, BoardList_sortByRecommendation }) => {
+
     return (
         <BoardUtilsButtonsLayout>
             <BoardUtilsButton
                 style={{ borderColor: `${COLORS.gray_button}` }}
                 onClick={() => (window.location.href = `/addpost/${boardId}`)}
-            >
-                글쓰기
+            >글쓰기
             </BoardUtilsButton>
             <SortUtilButtonLayout>
-                <BoardUtilsButton>최신순</BoardUtilsButton>
-                <BoardUtilsButton>인기순</BoardUtilsButton>
+
+                
+                {/*보류- 필요성 문제 의문
+                 <BoardUtilsButton>최신순</BoardUtilsButton> */}
+
+                <BoardUtilsButton
+                onClick={()=>{
+                BoardList_sortByRecommendation();   
+                setIsActive(!isActive);   
+                 }}
+                 style={{ 
+                    // fontWeight: isActive ? 'bold' : 'normal' ,
+                    background: isActive ? `${COLORS.color_button}`: '' }}
+                    //TODO_hyun: 활성화된 배경색 구림, 변경 필요함
+           >인기순</BoardUtilsButton>
             </SortUtilButtonLayout>
         </BoardUtilsButtonsLayout>
     );
 };
+
 
 const BoardToggle = ({ majorName, majorOptions }) => {
     const major_Name = majorName;
@@ -124,7 +139,31 @@ const Board = () => {
     const { major_id, board_id } = useParams();
     const [fade, setFade] = useState('')
 
+    const[ boardListByRecommendation, setBoardListbyReco] = useState([]);
+    const [isActive, setIsActive] = useState(false);
+// -----------------------------------------------------------
+// 인기순 보드리스트
+
+    const BoardList_sortByRecommendation = () => {
+
+        axios
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, 
+                {headers : {
+                Authorization : localStorage.getItem('access_token'),
+                sorting : localStorage.getItem('likes')
+            }})
+            .then((response)=>{
+                setBoardListbyReco(response.data.posts)
+
+            
+        })
+        }
+
+
+// -----------------------------------------------------------
+// 기본 보드리스트
     const setBoardListFromServer = () => {
+
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
                 headers: {
@@ -152,7 +191,9 @@ const Board = () => {
                 setFade('')
             })
         }
-    }, [board_id, boardList.length]);
+
+    }, [board_id, boardList.length, isActive]);
+
 
 
 
@@ -167,8 +208,12 @@ const Board = () => {
                 <ChangeBoardBox majorId={major_id} />
                 <Line />
                 <Search />
-                <BoardUtilsButtons boardId={board_id} />
-                <BoardList boardList={boardList} />
+                <BoardUtilsButtons 
+                boardId={board_id}
+                isActive={isActive}
+                setIsActive={setIsActive} 
+                BoardList_sortByRecommendation={BoardList_sortByRecommendation} />
+                <BoardList boardList={isActive ? boardListByRecommendation : boardList}   />
             </Boardline>
         </BoardLayout>
     );
