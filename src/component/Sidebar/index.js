@@ -18,9 +18,14 @@ const Sidebar = ({ isOpen, toggle, setIsOpen }) => {
                                 <SidebarLink to='board/1/3' onClick={() => setIsOpen(false)}>
                                     학교게시판
                                 </SidebarLink>
-                                <SidebarLink to={`board/${majorList[1].value}/${majorList[1].freeBoard}`} onClick={() => setIsOpen(false)}>
-                                    학과게시판
-                                </SidebarLink>
+                                {majorList[1] && (
+                                    <SidebarLink
+                                        to={`board/${majorList[1].value}/${majorList[1].freeBoard}`}
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        학과게시판
+                                    </SidebarLink>
+                                )}
                                 <SidebarLink to='feedback' onClick={() => setIsOpen(false)}>
                                     피드백게시판
                                 </SidebarLink>
