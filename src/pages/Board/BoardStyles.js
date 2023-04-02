@@ -122,7 +122,7 @@ export const BoardUtilsButtonsLayout = styled.div`
     width: 83%;
     padding: 1.5em 0;
     font-weight: 600;
-    color: #6e6e6e;
+    color: black;
     justify-content: space-between;
 `;
 
