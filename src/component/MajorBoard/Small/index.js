@@ -107,7 +107,10 @@ const MajorBoardSmall = ({ title, boardId, majorOptions }) => {
             .then((response) => {
                 setPreview(response.data);
             })
-            .catch((response) => console.log(response));
+            .catch((response) => {
+                localStorage.clear();
+                console.log(response);
+            });
     }, [preview.length]);
 
     return (
