@@ -25,6 +25,7 @@ const Login = () => {
                     console.log(response);
                     setUserInfoAtLocalStorage(response.data);
                     setUserMajorListInLocalStorage(response.data.access_token).then((response) => {
+                        console.log(response);
                         if (response) {
                             window.location.href = '/';
                         }
@@ -39,8 +40,6 @@ const Login = () => {
                     } else if (response && response.status === 405) {
                         alert('학교 이메일 인증을 완료하지 않았습니다.');
                     } else {
-                        console.log(school_id, '@', password);
-                        console.log(response);
                         alert('로그인 정보가 없습니다.');
                     }
                 });

@@ -18,9 +18,12 @@ const Navbar = ({ toggle }) => {
                                 <NavItem>
                                     <NavLinks to='board/1/3'>학교게시판</NavLinks>
                                 </NavItem>
-                                <NavItem>
-                                    <NavLinks to={`board/${majorList[1].value}/${majorList[1].freeBoard}`}>학과게시판</NavLinks>
-                                </NavItem>
+                                {majorList[1] && (
+                                    <NavItem>
+                                        <NavLinks to={`board/${majorList[1].value}/${majorList[1].freeBoard}`}>학과게시판</NavLinks>
+                                    </NavItem>
+                                )}
+
                                 <NavItem>
                                     <NavLinks to='feedback'>피드백게시판</NavLinks>
                                 </NavItem>
