@@ -14,8 +14,7 @@ import { TiArrowForward } from 'react-icons/ti';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import MajorBoardSmall from '../../component/MajorBoard/Small';
-import { getBoardListFromMajorId } from '../../api/board/boardList';
-import '../../App.css'
+import { setUserMajorListInLocalStorage } from '../../api/auth/usermajors';
 
 const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
@@ -94,26 +93,31 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
 };
 
 const Home = () => {
+    useEffect(() => {
+        if (localStorage.getItem('access_token')) setUserMajorListInLocalStorage(localStorage.getItem('access_token'));
+    }, []);
+
     const majorIdTitleList = JSON.parse(localStorage.getItem('major_options'));
-
-    const [fade, setFade] = useState('');
-    useEffect(()=>{
-        setTimeout(() => {
-            setFade('HomeEnd')
-        }, 100);
-        return (()=>{setFade('')}) 
-    },[])
-
     return (
         <>
-            <HomeLayout className={`HomeStart ${fade}`}>
+            <HomeLayout>
                 <SchoolBoard />
-                {majorIdTitleList && (
-                    <MajorBoardSmall
-                        title={majorIdTitleList[1].label}
-                        boardId={majorIdTitleList[1].freeBoard}
-                        majorOptions={majorIdTitleList}
-                    />
+                {majorIdTitleList ? (
+                    majorIdTitleList[1] ? (
+                        <MajorBoardSmall
+                            title={majorIdTitleList[1].label}
+                            boardId={majorIdTitleList[1].freeBoard}
+                            majorOptions={majorIdTitleList}
+                        />
+                    ) : (
+                        <MajorBoardSmall
+                            title={majorIdTitleList[0].label}
+                            boardId={majorIdTitleList[0].freeBoard}
+                            majorOptions={majorIdTitleList}
+                        />
+                    )
+                ) : (
+                    <></>
                 )}
             </HomeLayout>
         </>

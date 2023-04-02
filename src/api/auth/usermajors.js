@@ -7,6 +7,7 @@ export const setUserMajorListInLocalStorage = (accessToken) => {
             },
         })
         .then((response) => {
+            console.log(response.data);
             const tempMajorList = [];
             const majorIdList = [];
             response.data.forEach((element) => {
@@ -17,6 +18,7 @@ export const setUserMajorListInLocalStorage = (accessToken) => {
             return true;
         })
         .catch((response) => {
+            console.log(response);
             return false;
         });
 };
