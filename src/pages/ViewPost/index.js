@@ -99,6 +99,13 @@ const ViewPostMenu = ({writerName, postId, deletePost}) => {
 };
 
 const WriterUserInfoBlock = ({ writerName, createDate, postId, deletePost, profileImageUrl }) => {
+    let day = '';
+    let time = '';
+    if (createDate) {
+        day = createDate.slice(0, 10);
+        time = createDate.slice(12, 16);
+    }
+
     return (
         <>
             <WriterUserInfoLayout>
@@ -107,7 +114,7 @@ const WriterUserInfoBlock = ({ writerName, createDate, postId, deletePost, profi
                 </ProfileImageLayout>
                 <UserAndPostInfoLayout>
                     <UserNameFiled>{writerName}</UserNameFiled>
-                    <CreateDateField>{createDate}</CreateDateField>
+                    <CreateDateField>{day} {time}</CreateDateField>
                 </UserAndPostInfoLayout>
                 <ViewPostMenuContainer>
                     <ViewPostMenu writerName={writerName} postId={postId} deletePost={deletePost}></ViewPostMenu>
@@ -169,6 +176,9 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
     const textRef = useRef();
     const inputRef = useRef([]);
     const userName = localStorage.nickname;
+    let day = '';
+    let time = '';
+
 
     const refreshPage = () => {
         window.location.reload();
@@ -223,6 +233,10 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                 <>
                     {
                         comments.map((commentArr, i) => {
+                            if (commentArr.created_time) {
+                                day = commentArr.created_time.slice(0, 10);
+                                time = commentArr.created_time.slice(12, 16);
+                            }
                             return (
                                 <ViewCommentContainer visible={visible}>
                                     <ViewCommentUserImgLayout></ViewCommentUserImgLayout>
@@ -258,7 +272,7 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                                     </ViewCommentMenuLayout>
 
                                     <ViewCommentUserNameLayout>{commentArr.username}
-                                            <CreateDateField>{commentArr.created_time}</CreateDateField>
+                                            <CreateDateField>{day} {time}</CreateDateField>
                                     </ViewCommentUserNameLayout>
                                     <ViewCommentLayout rows={1}>{commentArr.content}</ViewCommentLayout>
 
