@@ -22,14 +22,12 @@ export const Boardline = styled.div`
     justify-content: center;
     flex-direction: column;
 
-
-    @media screen and (max-width: 812px) {
-        max-width: 100%;
-    }
-
-    @media screen and (max-width: 360px) {
+    @media screen and (max-width: 768px) {
+        margin: 1rem;
+        padding-bottom: 5rem;
+        max-width: none;
         width: 100%;
-      }
+    }
 `;
 
 export const BoardTableSchema = styled.div`
@@ -64,8 +62,11 @@ export const TitleAndToggle = styled.p`
     width: 90%;
     flex-flow: wrap;
 
-    
-
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
 `;
 
 export const BoardTitle = styled.div`
@@ -78,42 +79,24 @@ export const BoardTitle = styled.div`
     padding-left: 0em;
     text-align: left;
 
-
-    @media screen and (max-width: 812px) {
-
-        width: 50%;
-        
+    @media screen and (max-width: 768px) {
+        width: 40%;
+        font-size: 1.5rem;
     }
-
-    @media screen and (max-width: 360px) {
-        width: 100%;
-        text-align: center;
-        font-size: 2rem;
-    }
-
 `;
 
 export const ToggleBox = styled.div`
-
-    
     border: solid 3px ${COLORS.gray_button};
     border-radius: 50px;
     width: 32%;
-    
 
-    @media screen and (max-width: 812px) {
-
+    @media screen and (max-width: 768px) {
         width: 50%;
-        
     }
 
-    @media screen and (max-width: 410px) {
+    @media screen and (max-width: 480px) {
         width: 100%;
-        margin-bottom: 1rem;
-        
     }
-    
-
 `;
 
 export const BoardUtilsButtonsLayout = styled.div`
@@ -124,6 +107,13 @@ export const BoardUtilsButtonsLayout = styled.div`
     font-weight: 600;
     color: #6e6e6e;
     justify-content: space-between;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 export const BoardUtilsButton = styled.div`
@@ -134,13 +124,21 @@ export const BoardUtilsButton = styled.div`
     text-align: center;
     padding: 0.7em 0.5em;
     font-size: 0.8rem;
+
+    @media screen and (max-width: 768px) {
+        margin: 1rem 0;
+    }
 `;
 
 export const SortUtilButtonLayout = styled.div`
-display:flex;
-flex-direction: row;
-`;
+    display:flex;
+    flex-direction: row;
 
+    @media screen and (max-width: 768px) {
+        margin-top: 1rem;
+        justify-content: center;
+    }
+`;
 
 export const ChangeBoardOutBox = styled.p`
     display:flex;
@@ -149,6 +147,11 @@ export const ChangeBoardOutBox = styled.p`
     width: 90%;
     justify-content: center;
     align-items: center;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        margin: 1rem 0;
+    }
 `;
 
 export const ChangeBoardInBox = styled.p`
@@ -157,29 +160,46 @@ export const ChangeBoardInBox = styled.p`
     padding: 0.5rem;
     font-weight: ${({ active }) => (active ? "bold" : "normal")};
 
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        font-size: 0.8rem;
+        padding: 0.5rem 0;
+    }
 `;
-
 
 export const Line = styled.div`
     margin: 2em;
     margin-bottom: 0;
     width: 90%;
     border-bottom: solid 3px ${COLORS.gray_button};
+
+    @media screen and (max-width: 768px) {
+        margin: 1rem 0;
+    }
 `;
 
 export const SearchBarWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 1.5em 1.5em 0 1.5em;
-  width: 90%;   
+    display: flex;
+    justify-content: center;
+    margin: 1.5em 1.5em 0 1.5em;
+    width: 90%;   
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 export const SearchInput = styled.input`
-  color: gray;
-  font-weight: bold;
-  font-size: 0.9rem;
-  padding: 0.5em;
-  width: 39%;
-  border: solid 3px gray;
-  border-radius: 30px;
+    color: gray;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 0.5em;
+    width: 39%;
+    border: solid 3px gray;
+    border-radius: 30px;
+
+    @media screen and (max-width: 768px) {
+        width: 70%;
+        font-size: 0.8rem;
+    }
 `;
