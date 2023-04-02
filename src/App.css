@@ -19,3 +19,21 @@
     font-family: "GOTHICA1-REGULARR";
     src: url("./font/GOTHICA1-REGULAR.woff") format("woff");
 }
+
+.start{
+    opacity: 0;
+}
+
+.end{
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+.HomeStart{
+    opacity: 0;
+}
+
+.HomeEnd{
+    opacity: 1;
+    transition: opacity 1.5s;
+}
