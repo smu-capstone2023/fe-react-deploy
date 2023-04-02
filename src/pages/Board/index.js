@@ -26,7 +26,7 @@ import styled from 'styled-components';
 import ChangeBoardBox from './ChangeBoardBox';
 import '../../App.css'
 
-const BoardList = ({ boardList, boardListByRecommendation }) => {
+const BoardList = ({ boardList }) => {
     return (
         <>
             <BoardListLayout>
@@ -57,12 +57,13 @@ const BoardUtilsButtons = ({ boardId, isActive,setIsActive, BoardList_sortByReco
 
     return (
         <BoardUtilsButtonsLayout>
+            
+
             <BoardUtilsButton
                 style={{ borderColor: `${COLORS.gray_button}` }}
                 onClick={() => (window.location.href = `/addpost/${boardId}`)}
             >글쓰기
             </BoardUtilsButton>
-            <SortUtilButtonLayout>
 
                 
                 {/*보류- 필요성 문제 의문
@@ -78,7 +79,7 @@ const BoardUtilsButtons = ({ boardId, isActive,setIsActive, BoardList_sortByReco
                     background: isActive ? `${COLORS.color_button}`: '' }}
                     //TODO_hyun: 활성화된 배경색 구림, 변경 필요함
            >인기순</BoardUtilsButton>
-            </SortUtilButtonLayout>
+
         </BoardUtilsButtonsLayout>
     );
 };

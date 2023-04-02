@@ -1,10 +1,12 @@
-import {WriterNameField, NoticeElementLink, NoticeNumberOfComment, NoticeTitle, CreateDateField, NoticeElementLayout, NoticeBasicInfoField, NumberOfViewsField} from './NoticeLongStyles';
-const NoticeLong = ({title, createDate, numberOfComment, postId, numberOfViews, writerName}) => {
+import {MobileVersionBatch, WriterNameField, NoticeElementLink, NoticeNumberOfComment, NoticeTitle, CreateDateField, NoticeElementLayout, NoticeBasicInfoField, NumberOfViewsField} from './NoticeLongStyles';
+const NoticeLong = ({ title, createDate, numberOfComment, postId, numberOfViews, writerName}) => {
     const limitedTitle =  title.length > 20 ? title.slice(0,20) +"..." : title;
-    console.log(title)
+    const detailCreatDate = createDate.slice(5,10)+'일' + createDate.slice(11,16) + '분'
+
     return (
         <>
             <NoticeElementLayout>
+                {/* <MobileVersionBatch> */}
                     <NoticeBasicInfoField>
                         <NoticeElementLink to={"/viewpost/"+postId}>
                             <NoticeTitle>
@@ -18,8 +20,9 @@ const NoticeLong = ({title, createDate, numberOfComment, postId, numberOfViews, 
                         <WriterNameField>
                             {writerName}
                         </WriterNameField>
+                {/* </MobileVersionBatch> */}
                         <CreateDateField>
-                            {createDate}
+                            {detailCreatDate}
                         </CreateDateField>
                         <NumberOfViewsField>
                             {numberOfViews}
