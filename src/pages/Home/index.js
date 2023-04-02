@@ -50,7 +50,8 @@ const SchoolBoard = () => {
                     return (
                         <Notice
                             key={postElement.post_id}
-                            departmentName={postElement.nickName}
+                            // TODO: 필요성 의문 
+                            ///departmentName={postElement.nickName}
                             title={postElement.title}
                             numberOfComment={postElement.comments}
                             createDate={postElement.created_time}
