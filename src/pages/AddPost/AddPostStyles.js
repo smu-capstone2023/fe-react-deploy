@@ -99,6 +99,7 @@ export const WritePostBoardContentLayout = styled.div`
     border-radius: 5px;
     // border: solid 0.5px gray;
     color: gray;
+
 `;
 
 export const WritePostMajorContent = styled.p`
@@ -106,6 +107,9 @@ export const WritePostMajorContent = styled.p`
     font-weight: 600;
     font-size: 1.8em;
     padding: 0.2em;
+    @media (max-width: 700px) {
+        font-size: 1.5em
+    }
 `;
 
 export const WritePostBoardContent = styled.p`
@@ -114,6 +118,9 @@ export const WritePostBoardContent = styled.p`
     font-size: 1.15em;
     margin-left: 0.5em;
     margin-bottom: 1.8em;
+    @media (max-width: 700px) {
+        font-size: 0.9em
+    }
 `;
 
 export const WritePostUserImageLayout = styled.img`

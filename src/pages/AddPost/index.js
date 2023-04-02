@@ -36,14 +36,6 @@ import { upload } from '@testing-library/user-event/dist/upload';
 import { display } from '@mui/system';
 
 const WriteBoardInfoField = ({ setPostDate }) => {
-    // const userName = localStorage.nickname;
-    // let date = new Date();
-    // const year = date.toLocaleString('ko-KR', { year: 'numeric' });
-    // const month = date.toLocaleString('ko-KR', { month: 'long' });
-    // const day = date.toLocaleString('ko-KR', { day: '2-digit' });
-    // const hours = date.getHours();
-    // const minute = date.getMinutes();
-
     return (
         <WritePostBoardContentLayout>
             <WritePostMajorContent>컴퓨터공학과</WritePostMajorContent>
@@ -161,11 +153,9 @@ const AddFileButton = ({ setPostAddFile }) => {
             uploadImageToServer(formData)
             .then((response)=> {
                 console.log(response);
-                console.log('good');
             })
             .catch((response) => {
                 console.log(response);
-                console.log('bad');
             });
         }
 
