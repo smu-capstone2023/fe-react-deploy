@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLORS } from '../../color';
 
+
+
 export const SignCheckBoxTitle = styled.label`
     padding: 5px;
     font-size: 0.9em;
@@ -29,10 +31,11 @@ export const SignContainer = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.2);
+    box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.1);
     border: solid 0.1px rgba(128, 128, 128, 0.3);
-    border-radius: 8px;
+    border-radius: 30px;
     width: 25em;
+
     padding: 2em 0;
     margin-top: 2em;
     @media screen and (max-width: 25em) {
@@ -42,12 +45,17 @@ export const SignContainer = styled.div`
 
 export const SignTitle = styled.h1`
     color: ${COLORS.logo};
+    font-size: 25px;
+
 `;
 
 export const StepBox = styled.div`
     display: flex;
     border-bottom: solid 0.5px gray;
     padding: 1em;
+    width: 100%;
+    height: 0.5em;
+    margin-bottom:10px;
 `;
 
 export const NumberBtn = styled.div`
@@ -65,7 +73,7 @@ export const NumberBtn = styled.div`
 export const SignInnerBox = styled.div`
     display: flex;
     flex-direction: column;
-    border: solid 0.5px gray;
+    border: solid 0.1px rgba(128, 128, 128, 0.2);
     width: 80%;
     height: 70%;
     padding: 1em;
@@ -94,9 +102,10 @@ export const SignInputText = styled.input`
 export const SignButton = styled.div`
     padding: 15px;
     width: 80%;
+    height: 50px;
     background: ${COLORS.color_button};
-    margin-top: 20px;
-    border-radius: 5px;
+    margin-top: 5px;
+    border-radius: 10px;
     color: white;
     text-align: center;
 `;
@@ -138,4 +147,14 @@ border-radius: 5px;
 color: black;
 text-align: center;
 text-decoration: none;
+`;
+
+//"이용약관을 확인해주세요."
+export const AgreementTest = styled.div`
+    margin-bottom:15px;
+
+    @font-face{
+        font-family: "GOTHICA1-REGULARR";
+        src: url("./font/GOTHICA1-REGULAR.woff") format("woff");
+    }
 `;
