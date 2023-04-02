@@ -1,10 +1,8 @@
 import axios from 'axios';
 export const getBoardListFromMajorId = (majorId) => {
-    console.log('major', majorId);
     return axios
         .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/board_list/${majorId}`)
         .then((response) => {
-            console.log(response);
             return response.data;
         })
         .catch((resposne) => {
