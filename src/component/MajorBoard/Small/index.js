@@ -84,12 +84,11 @@ const BoardToggle = ({ title, majorOptions }) => {
                         textAlign: 'center',
                     }),
                 }}
-                //key={majorOptions.value}
                 options={majorOptions}
                 placeholder={title}
                 components={animatedComponents}
                 onChange={(major) => {
-                    window.location.href = `/board/${major.value}`;
+                    window.location.href = `/board/${major.value}/${major.freeBoard}`;
                 }}
             />
         </ToggleBox>
@@ -108,7 +107,10 @@ const MajorBoardSmall = ({ title, boardId, majorOptions }) => {
             .then((response) => {
                 setPreview(response.data);
             })
-            .catch((response) => console.log(response));
+            .catch((response) => {
+                localStorage.clear();
+                console.log(response);
+            });
     }, [preview.length]);
 
     return (

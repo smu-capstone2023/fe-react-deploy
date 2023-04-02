@@ -9,8 +9,6 @@ import {
     BoardTableSchema,
     BoardLayout,
     ToggleBox,
-    ChangeBoardInBox,
-    ChangeBoardOutBox,
     TitleAndToggle,
     Line,
     SearchBarWrapper,
@@ -25,6 +23,8 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { COLORS } from '../../color';
 import styled from 'styled-components';
+import ChangeBoardBox from './ChangeBoardBox';
+import '../../App.css'
 
 const BoardList = ({ boardList, boardListByRecommendation }) => {
     return (
@@ -113,85 +113,12 @@ const BoardToggle = ({ majorName, majorOptions }) => {
                 options={majorOptions}
                 components={animatedComponents}
                 onChange={(selectedOptions) => {
-                    window.location.href = `${selectedOptions.value}`;
+                    window.location.href = `../${selectedOptions.value}/${selectedOptions.freeBoard}`;
                 }}
             />
         </ToggleBox>
     );
 };
-
-const ChangeBoardBox = ({ boardId }) => {
-
-
-    const [major_id, setMajor_id] = useState('');
-    const [boardList, setBoardList] = useState([]);
-    console.log('(위)메이저 아이디',major_id)
-    
-
-useEffect(() => {
-    console.log('rendering')
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/usermajors`, {
-        headers: { Authorization: localStorage.getItem('access_token') },
-      })
-      .then((response) => {
-        setMajor_id(response.data[1].major_id);
-        // console.log('(aixos)메이저아이디',response.data[1].major_id)
-        setBoardList(getBoardList(response.data[1].major_id));
-      })
-      .catch((response) => {
-        alert('접근 불가능한 페이지입니다.');
-        window.history.back();
-    });
-  }, [major_id]);
-
-
-
-
-const getBoardList = (major_id)=>{
-    console.log(major_id)
-    axios
-          .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/board_list/${major_id}`)
-          
-          .then((response) => {
-            // console.log('2데이터반환', response.data);
-            return response.data
-            // console.log('2메이저아이디반환', major_id);
-            // setBoardList(response.data.boardList);
-          })
-          .catch((response) => {
-            console.log(response)
-            
-            return[]
-          });
-}
-        
- 
-      return (
-        <>
-          <ChangeBoardOutBox>
-            {boardList.map((board) => {
-
-
-            //   const isActive = currentPageUrl.includes(String(boardUrl));
-              return (
-                <ChangeBoardInBox
-                  key={board.board_id}
-                //   active={isActive}
-                  onClick={() => {
-                    window.location.href = `./${board.board_id}`;
-                  }}
-                >
-                  {board.board_name}
-
-                </ChangeBoardInBox>
-              );
-            })}
-          </ChangeBoardOutBox>
-        </>
-      );
-    };
-
 
 const Search = () => {
     const handleSearch = (event) => {
@@ -209,7 +136,8 @@ const Board = () => {
     const [boardList, setBoardList] = useState([]);
     const [boardName, setBoardName] = useState('');
     const [majorName, setMajorName] = useState('');
-    const { board_id } = useParams();
+    const { major_id, board_id } = useParams();
+    const [fade, setFade] = useState('')
 
     const[ boardListByRecommendation, setBoardListbyReco] = useState([]);
     const [isActive, setIsActive] = useState(false);
@@ -243,7 +171,6 @@ const Board = () => {
                 },
             })
             .then((response) => {
-
                 setBoardList(response.data.posts);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
@@ -257,19 +184,28 @@ const Board = () => {
     useEffect(() => {
         if (board_id) {
             setBoardListFromServer();
+            setTimeout(() => {
+                setFade('end')
+            }, 100);
+            return(()=>{
+                setFade('')
+            })
         }
 
     }, [board_id, boardList.length, isActive]);
 
 
+
+
+
     return (
-        <BoardLayout>
+        <BoardLayout className= {`start ${fade}`}>
             <Boardline>
                 <TitleAndToggle>
                     <BoardTitle>{boardName}</BoardTitle>
                     <BoardToggle majorName={majorName} majorOptions={JSON.parse(localStorage.getItem('major_options'))} />
                 </TitleAndToggle>
-                {/* <ChangeBoardBox boardId={board_id} /> */}
+                <ChangeBoardBox majorId={major_id} />
                 <Line />
                 <Search />
                 <BoardUtilsButtons 
