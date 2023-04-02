@@ -4,6 +4,7 @@ import { AiFillCamera } from "react-icons/ai";
 
 export const AddPostBackgroundContainer = styled.div`
     background-color: ${COLORS.background_color};
+    min-height: 55em;
 `;
 
 export const ImageContainerDelteLayout = styled.img`
@@ -77,7 +78,7 @@ export const AddFileButtonImgLayout = styled(AiFillCamera)`
 `;
 
 export const AddFileButtonLayout = styled.div`
-    height: 30rem;
+    height: 15rem;
     margin-right: 0.5rem;
     float: left;
 `;
