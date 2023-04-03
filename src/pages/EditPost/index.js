@@ -35,13 +35,6 @@ import { useEffect } from 'react';
 
 
 const WriteUserField = ({setPostDate, setPostNickname}) => {
-    const userName = localStorage.nickname;
-    let date = new Date();
-    const year = date.toLocaleString('ko-KR', {year: "numeric"});
-    const month = date.toLocaleString('ko-KR', {month: 'long'});
-    const day = date.toLocaleString('ko-KR', {day: '2-digit'});
-    const hours = date.getHours();
-    const minute = date.getMinutes();
     return (
         <EditPostBoardContentLayout>
             <EditPostMajorContent>컴퓨터과학과</EditPostMajorContent>

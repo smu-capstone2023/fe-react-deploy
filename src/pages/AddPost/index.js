@@ -27,6 +27,7 @@ import {
     WritePostBoardContent,
     WritePostBoardContentLayout,
 } from './AddPostStyles';
+import { useCallback, useEffect} from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import { AiFillCamera } from 'react-icons/ai';
@@ -35,19 +36,21 @@ import { Navigate, useParams } from 'react-router-dom';
 import { upload } from '@testing-library/user-event/dist/upload';
 import { display } from '@mui/system';
 
-const WriteBoardInfoField = ({ setPostDate }) => {
-    // const userName = localStorage.nickname;
-    // let date = new Date();
-    // const year = date.toLocaleString('ko-KR', { year: 'numeric' });
-    // const month = date.toLocaleString('ko-KR', { month: 'long' });
-    // const day = date.toLocaleString('ko-KR', { day: '2-digit' });
-    // const hours = date.getHours();
-    // const minute = date.getMinutes();
+const WriteBoardInfoField = ({boardName}) => {
+    let boardDetailName = [];
+    let major_name = '';
+    let board_name = '';
+
+    if (boardName) {
+        boardDetailName = boardName.split("-");
+        major_name = boardDetailName[0];
+        board_name = boardDetailName[1];
+    }
 
     return (
         <WritePostBoardContentLayout>
-            <WritePostMajorContent>컴퓨터공학과</WritePostMajorContent>
-            <WritePostBoardContent>자유게시판 글 쓰기</WritePostBoardContent>
+            <WritePostMajorContent>{major_name}</WritePostMajorContent>
+            <WritePostBoardContent>{board_name} 글 쓰기</WritePostBoardContent>
         </WritePostBoardContentLayout>
     );
 };
@@ -161,11 +164,9 @@ const AddFileButton = ({ setPostAddFile }) => {
             uploadImageToServer(formData)
             .then((response)=> {
                 console.log(response);
-                console.log('good');
             })
             .catch((response) => {
                 console.log(response);
-                console.log('bad');
             });
         }
 
@@ -232,7 +233,10 @@ const AddPost = () => {
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
     const [postAddFile, setPostAddFile] = useState([]);
+    const [postDetailInfo, setPostDetailInfo] = useState({});
+    const [postBoardName, setPostBoardName] = useState('');
     const { board_id } = useParams();
+
 
     const savePostInServer = async () => {
         console.log(board_id);
@@ -254,7 +258,7 @@ const AddPost = () => {
             )
             .then((response) => {
                 alert('게시물이 업로드되었습니다.');
-                window.location.href = `/board/${board_id}`;
+                window.history.back(2);
                 console.log(response);
             })
 
@@ -263,12 +267,36 @@ const AddPost = () => {
             });
     };
 
+    const getPostDetailInfo = () => {
+        axios
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/info/${board_id}`, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token'),
+                },
+            })
+            .then((response) => {
+                setPostDetailInfo(response.data);
+                if (response.data.board_name) {
+                    const postBoardInfoList = response.data.board_name.split("-");
+                    setPostBoardName(postBoardInfoList[1]);
+                    console.log(postBoardName);
+                }
+            })
+            .catch((response) => {
+                console.log(response);
+            })
+    }
+
+    useEffect(() => {
+        getPostDetailInfo();
+    }, []);
+
     return (
         <>
             <AddPostBackgroundContainer>
                 <AddPostLayout>
                     <WritePostContainer>
-                        <WriteBoardInfoField></WriteBoardInfoField>
+                        <WriteBoardInfoField boardName={postDetailInfo.board_name}></WriteBoardInfoField>
                         <div>
                             {/* <SelectHashtagField setPostHashtag={setPostHashtag}></SelectHashtagField> */}
                             <WritePostNameField setPostTitle={setPostTitle} />
@@ -277,7 +305,11 @@ const AddPost = () => {
                         <WritePostContentField setPostContent={setPostContent} />
                         <Blank1em />
                         <div>
-                            <AnonymousCheckButton setPostAnonymous={setPostAnonymous} postAnonymous={postAnonymous}></AnonymousCheckButton>
+                            {
+                            
+                                (postBoardName == "비밀게시판") ?  <AnonymousCheckButton setPostAnonymous={setPostAnonymous} postAnonymous={postAnonymous}></AnonymousCheckButton>
+                                : <></>
+                            }
                             <HideWriterAndCompleteButtonLayout>
                                 <CompletePostButton savePostInServer={savePostInServer} boardId={board_id} />
                             </HideWriterAndCompleteButtonLayout>
