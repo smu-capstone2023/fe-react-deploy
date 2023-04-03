@@ -234,7 +234,6 @@ const AddPost = () => {
     const [postContent, setPostContent] = useState('');
     const [postAddFile, setPostAddFile] = useState([]);
     const [postDetailInfo, setPostDetailInfo] = useState({});
-    const [postBoardName, setPostBoardName] = useState('');
     const { board_id } = useParams();
 
 
@@ -276,11 +275,6 @@ const AddPost = () => {
             })
             .then((response) => {
                 setPostDetailInfo(response.data);
-                if (response.data.board_name) {
-                    const postBoardInfoList = response.data.board_name.split("-");
-                    setPostBoardName(postBoardInfoList[1]);
-                    console.log(postBoardName);
-                }
             })
             .catch((response) => {
                 console.log(response);
@@ -307,7 +301,7 @@ const AddPost = () => {
                         <div>
                             {
                             
-                                (postBoardName == "비밀게시판") ?  <AnonymousCheckButton setPostAnonymous={setPostAnonymous} postAnonymous={postAnonymous}></AnonymousCheckButton>
+                                (postDetailInfo.is_can_anonymous) ?  <AnonymousCheckButton setPostAnonymous={setPostAnonymous} postAnonymous={postAnonymous}></AnonymousCheckButton>
                                 : <></>
                             }
                             <HideWriterAndCompleteButtonLayout>
