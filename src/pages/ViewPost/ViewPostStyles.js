@@ -81,6 +81,7 @@ export const ViewPostLayout = styled.div`
     padding: 1em;
     margin: auto;
     margin-top: 3em;
+    max-width: 50em;
     // height: 100vh;
     border: solid 1px lightgray;
     border-radius: 6px;
