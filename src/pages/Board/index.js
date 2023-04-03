@@ -182,7 +182,7 @@ const Board = () => {
         if (board_id) {
             setBoardListFromServer();
             setTimeout(() => {
-                setFade('end');
+                setFade('HomeEnd');
             }, 100);
             return () => {
                 setFade('');
@@ -191,7 +191,7 @@ const Board = () => {
     }, [board_id, boardList.length, isActive]);
 
     return (
-        <BoardLayout className={`start ${fade}`}>
+        <BoardLayout className={`HomeStart ${fade}`}>
             <Boardline>
                 <TitleAndToggle>
                     <BoardTitle>{boardName}</BoardTitle>
