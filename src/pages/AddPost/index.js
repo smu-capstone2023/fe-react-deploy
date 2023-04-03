@@ -27,6 +27,7 @@ import {
     WritePostBoardContent,
     WritePostBoardContentLayout,
 } from './AddPostStyles';
+import { useCallback, useEffect} from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import { AiFillCamera } from 'react-icons/ai';
@@ -35,11 +36,21 @@ import { Navigate, useParams } from 'react-router-dom';
 import { upload } from '@testing-library/user-event/dist/upload';
 import { display } from '@mui/system';
 
-const WriteBoardInfoField = ({ setPostDate }) => {
+const WriteBoardInfoField = ({boardName}) => {
+    let boardDetailName = [];
+    let major_name = '';
+    let board_name = '';
+
+    if (boardName) {
+        boardDetailName = boardName.split("-");
+        major_name = boardDetailName[0];
+        board_name = boardDetailName[1];
+    }
+
     return (
         <WritePostBoardContentLayout>
-            <WritePostMajorContent>컴퓨터공학과</WritePostMajorContent>
-            <WritePostBoardContent>자유게시판 글 쓰기</WritePostBoardContent>
+            <WritePostMajorContent>{major_name}</WritePostMajorContent>
+            <WritePostBoardContent>{board_name} 글 쓰기</WritePostBoardContent>
         </WritePostBoardContentLayout>
     );
 };
@@ -222,6 +233,7 @@ const AddPost = () => {
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
     const [postAddFile, setPostAddFile] = useState([]);
+    const [postDetailInfo, setPostDetailInfo] = useState({});
     const { board_id } = useParams();
 
     const savePostInServer = async () => {
@@ -253,12 +265,31 @@ const AddPost = () => {
             });
     };
 
+    const getPostDetailInfo = () => {
+        axios
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/info/${board_id}`, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token'),
+                },
+            })
+            .then((response) => {
+                setPostDetailInfo(response.data);
+            })
+            .catch((response) => {
+                console.log(response);
+            })
+    }
+
+    useEffect(() => {
+        getPostDetailInfo();
+    }, []);
+
     return (
         <>
             <AddPostBackgroundContainer>
                 <AddPostLayout>
                     <WritePostContainer>
-                        <WriteBoardInfoField></WriteBoardInfoField>
+                        <WriteBoardInfoField boardName={postDetailInfo.board_name}></WriteBoardInfoField>
                         <div>
                             {/* <SelectHashtagField setPostHashtag={setPostHashtag}></SelectHashtagField> */}
                             <WritePostNameField setPostTitle={setPostTitle} />
