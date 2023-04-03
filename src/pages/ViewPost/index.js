@@ -49,9 +49,8 @@ import { colors } from '@mui/material';
 
 
 
-const ViewPostMenu = ({writerName, postId, deletePost}) => {
+const ViewPostMenu = ({writerName, userName, postId, deletePost}) => {
     const [isOpen, setMenu] = useState(false);
-    const userName = localStorage.nickname;
 
     const linkCopy = () => {
         var url = '';
@@ -98,7 +97,7 @@ const ViewPostMenu = ({writerName, postId, deletePost}) => {
     );
 };
 
-const WriterUserInfoBlock = ({ writerName, createDate, postId, deletePost, profileImageUrl }) => {
+const WriterUserInfoBlock = ({ writerName, userName, createDate, postId, deletePost, profileImageUrl }) => {
     let day = '';
     let time = '';
     if (createDate) {
@@ -117,7 +116,7 @@ const WriterUserInfoBlock = ({ writerName, createDate, postId, deletePost, profi
                     <CreateDateField>{day} {time}</CreateDateField>
                 </UserAndPostInfoLayout>
                 <ViewPostMenuContainer>
-                    <ViewPostMenu writerName={writerName} postId={postId} deletePost={deletePost}></ViewPostMenu>
+                    <ViewPostMenu writerName={writerName} userName={userName} postId={postId} deletePost={deletePost}></ViewPostMenu>
                 </ViewPostMenuContainer>
             </WriterUserInfoLayout>
         </>
@@ -348,8 +347,24 @@ const ViewPost = () => {
     const [likeNumber, setLikeNumber] = useState(0);
     const { post_id } = useParams();
     const [postInfo, setPostInfo] = useState({});
+    const [userName, setUserName] = useState('');
     // const [feedComments, setFeedComments] = useState([]);
     // const [feedReplyComments, setFeedReplyComments] = useState([]);
+
+    const getUserInfo = () => {
+        axios
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/user_info` , {
+                headers: {
+                    Authorization: localStorage.getItem('access_token'),
+                },
+            })
+            .then((response) => {
+                setUserName(response.data.username);
+            })
+            .catch((response) => {
+                console.log(response);
+            })
+    }
 
 
     const getPostInfo = () => {
@@ -362,7 +377,6 @@ const ViewPost = () => {
             .then((response) => {
                 setPostInfo(response.data);
                 setUserInfoAtLocalStorage(response.data);
-                console.log(response);
             })
             .catch((response) => console.log(response));
     };
@@ -459,6 +473,7 @@ const ViewPost = () => {
 
     useEffect(() => {
         getPostInfo();
+        getUserInfo();
     }, []);
 
     return (
@@ -467,7 +482,7 @@ const ViewPost = () => {
             <ViewPostLayout>
                 {postInfo ? (
                     <>
-                        <WriterUserInfoBlock writerName={postInfo.username} createDate={postInfo.created_time} postId={post_id} deletePost={deletePost}></WriterUserInfoBlock>
+                        <WriterUserInfoBlock writerName={postInfo.username} userName={userName} createDate={postInfo.created_time} postId={post_id} deletePost={deletePost}></WriterUserInfoBlock>
                         <ViewPostContentBlock postTitle={postInfo.title} postContent={postInfo.content} />
                     </>
                 ) : (
