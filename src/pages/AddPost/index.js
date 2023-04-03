@@ -257,7 +257,7 @@ const AddPost = () => {
             )
             .then((response) => {
                 alert('게시물이 업로드되었습니다.');
-                window.location.href = `/board/${major_id}/${board_id}`;
+                window.history.back(2);
                 console.log(response);
             })
 
