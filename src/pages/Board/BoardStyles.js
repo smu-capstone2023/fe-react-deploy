@@ -263,12 +263,12 @@ export const ChangeBoardInBox = styled.p`
 
 export const Line = styled.div`
     margin: 2em;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     width: 90%;
     border-bottom: solid 1px ${COLORS.gray_button};
 
     @media screen and (max-width: 800px) {
-        margin: 1rem 0;
+        margin: 1rem 2;
     }
 `;
 
