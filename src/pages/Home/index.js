@@ -40,17 +40,13 @@ const SchoolBoard = () => {
         <>
             <SmallBoardLayout>
                 <BoardBannerButton title='학교게시판' backgroundColor={'#FF8686'} boardId={process.env.REACT_APP_SCHOOL_BOARD_ID} />
-                <DetailBoardTitleWithMore
-                    boardIcon={<TiArrowForward />}
-                    boardTitle='학사 공지'
-                    boardId={process.env.REACT_APP_SCHOOL_BOARD_ID}
-                />
+                <DetailBoardTitleWithMore boardIcon={<TiArrowForward />} boardTitle='학사 공지' boardId={'1/3'} />
 
                 {boardList.map((postElement) => {
                     return (
                         <Notice
                             key={postElement.post_id}
-                            // TODO: 필요성 의문 
+                            // TODO: 필요성 의문
                             ///departmentName={postElement.nickName}
                             title={postElement.title}
                             numberOfComment={postElement.comments}
@@ -70,7 +66,7 @@ const DetailBoardTitleWithMore = ({ boardIcon, boardTitle, boardId }) => {
             <DetailBoardTitle>
                 {boardIcon} {boardTitle}
             </DetailBoardTitle>
-            <ShowMoreButton to={`/board/${boardId}`}>+ 더보기</ShowMoreButton>
+            <ShowMoreButton to={`/board/1/3`}>+ 더보기</ShowMoreButton>
         </DetailBoardTitleWithMoreLayout>
     );
 };
