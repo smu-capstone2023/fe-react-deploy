@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLORS } from '../../color';
 
-
-
 export const SignCheckBoxTitle = styled.label`
     padding: 5px;
     font-size: 0.9em;
@@ -46,7 +44,6 @@ export const SignContainer = styled.div`
 export const SignTitle = styled.h1`
     color: ${COLORS.logo};
     font-size: 25px;
-
 `;
 
 export const StepBox = styled.div`
@@ -55,7 +52,7 @@ export const StepBox = styled.div`
     padding: 1em;
     width: 100%;
     height: 0.5em;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 `;
 
 export const NumberBtn = styled.div`
@@ -96,7 +93,7 @@ export const SignCheckBox = styled.input`
 export const SignInputText = styled.input`
     padding: 15px;
     border: solid 0.5px gray;
-    margin: 5px 0 10px 0;
+    margin: 5px 0 3em 0;
 `;
 
 export const SignButton = styled.div`
@@ -110,7 +107,6 @@ export const SignButton = styled.div`
     text-align: center;
 `;
 
-
 export const Line = styled.div`
     width: 90%;
     border-bottom: solid 0.5px gray;
@@ -122,8 +118,6 @@ export const ProfileImage = styled.div`
     border: solid 1px black;
     margin: 0.2rem;
 `;
-
-
 
 export const SignupTitleLayout = styled.div`
     padding: 3em 0 0 0;
@@ -139,22 +133,41 @@ export const SignupAgreeLayout = styled.div`
 `;
 
 export const CertificationLink = styled(Link)`
-padding: 15px;
-width: 80%;
-background: ${COLORS.gray_button};
-margin-top: 20px;
-border-radius: 5px;
-color: black;
-text-align: center;
-text-decoration: none;
+    padding: 15px;
+    width: 80%;
+    background: ${COLORS.gray_button};
+    margin-top: 20px;
+    border-radius: 5px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
 `;
 
 //"이용약관을 확인해주세요."
 export const AgreementTest = styled.div`
-    margin-bottom:15px;
+    margin-bottom: 15px;
 
-    @font-face{
-        font-family: "GOTHICA1-REGULARR";
-        src: url("./font/GOTHICA1-REGULAR.woff") format("woff");
+    @font-face {
+        font-family: 'GOTHICA1-REGULARR';
+        src: url('./font/GOTHICA1-REGULAR.woff') format('woff');
     }
+`;
+
+export const ProfileImageContainer = styled.div`
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: solid 0.5px gray;
+    max-width: 25em;
+    text-align: center;
+    height: 10em;
+`;
+
+export const ProfileImageFrame = styled.img`
+    object-fit: contain;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
 `;

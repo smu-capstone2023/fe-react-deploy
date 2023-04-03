@@ -1,5 +1,5 @@
 .signup-profileImg-label {
-    width: 90%;
+    width: 100%;
     height: 35px;
     text-align: center;
     padding: 7px;
@@ -20,6 +20,4 @@
     --scrollbar-width: 10px;
     --scrollbar-track-color: #f1f1f1;
     --scrollbar-thumb-color: #ccc;
-  }
-  
-  
+}
