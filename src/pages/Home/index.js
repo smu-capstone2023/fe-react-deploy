@@ -39,7 +39,7 @@ const SchoolBoard = () => {
     return (
         <>
             <SmallBoardLayout>
-                <BoardBannerButton title='학교게시판' backgroundColor={'#FF8686'} boardId={process.env.REACT_APP_SCHOOL_BOARD_ID} />
+                <BoardBannerButton title='학교게시판' backgroundColor={'#FF8686'} boardId={'1/3'} />
                 <DetailBoardTitleWithMore boardIcon={<TiArrowForward />} boardTitle='학사 공지' boardId={'1/3'} />
 
                 {boardList.map((postElement) => {
