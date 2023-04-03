@@ -234,8 +234,9 @@ const AddPost = () => {
     const [postContent, setPostContent] = useState('');
     const [postAddFile, setPostAddFile] = useState([]);
     const [postDetailInfo, setPostDetailInfo] = useState({});
+    const [postBoardName, setPostBoardName] = useState('');
     const { board_id } = useParams();
-    const { major_id } = useParams();
+
 
     const savePostInServer = async () => {
         console.log(board_id);
@@ -275,6 +276,11 @@ const AddPost = () => {
             })
             .then((response) => {
                 setPostDetailInfo(response.data);
+                if (response.data.board_name) {
+                    const postBoardInfoList = response.data.board_name.split("-");
+                    setPostBoardName(postBoardInfoList[1]);
+                    console.log(postBoardName);
+                }
             })
             .catch((response) => {
                 console.log(response);
@@ -299,7 +305,11 @@ const AddPost = () => {
                         <WritePostContentField setPostContent={setPostContent} />
                         <Blank1em />
                         <div>
-                            <AnonymousCheckButton setPostAnonymous={setPostAnonymous} postAnonymous={postAnonymous}></AnonymousCheckButton>
+                            {
+                            
+                                (postBoardName == "비밀게시판") ?  <AnonymousCheckButton setPostAnonymous={setPostAnonymous} postAnonymous={postAnonymous}></AnonymousCheckButton>
+                                : <></>
+                            }
                             <HideWriterAndCompleteButtonLayout>
                                 <CompletePostButton savePostInServer={savePostInServer} boardId={board_id} />
                             </HideWriterAndCompleteButtonLayout>
