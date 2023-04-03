@@ -97,13 +97,17 @@ const ViewPostMenu = ({writerName, userName, postId, deletePost}) => {
     );
 };
 
-const WriterUserInfoBlock = ({ writerName, userName, createDate, postId, deletePost, profileImageUrl }) => {
+const WriterUserInfoBlock = ({ writerName, userName, createDate, updateDate, postId, deletePost, profileImageUrl }) => {
     let day = '';
     let time = '';
     if (createDate) {
         day = createDate.slice(0, 10);
-        time = createDate.slice(12, 16);
+        time = createDate.slice(11, 16);
     }
+    if (createDate != updateDate) {
+        day = updateDate.slice(0, 10);
+        time = updateDate.slice(11, 16);
+    } 
 
     return (
         <>
@@ -377,6 +381,7 @@ const ViewPost = () => {
             .then((response) => {
                 setPostInfo(response.data);
                 setUserInfoAtLocalStorage(response.data);
+                console.log(response.data);
             })
             .catch((response) => console.log(response));
     };
@@ -482,7 +487,7 @@ const ViewPost = () => {
             <ViewPostLayout>
                 {postInfo ? (
                     <>
-                        <WriterUserInfoBlock writerName={postInfo.username} userName={userName} createDate={postInfo.created_time} postId={post_id} deletePost={deletePost}></WriterUserInfoBlock>
+                        <WriterUserInfoBlock writerName={postInfo.username} userName={userName} createDate={postInfo.created_time} updateDate={postInfo.updated_time} postId={post_id} deletePost={deletePost}></WriterUserInfoBlock>
                         <ViewPostContentBlock postTitle={postInfo.title} postContent={postInfo.content} />
                     </>
                 ) : (
