@@ -158,3 +158,38 @@ export const AgreementTest = styled.div`
         src: url("./font/GOTHICA1-REGULAR.woff") format("woff");
     }
 `;
+
+//
+export const UploadInput = styled.input``;
+
+export const UploadButton = styled.div`
+    background: ${COLORS.logo};
+    border-radius: 5px;
+    padding: 0.5em;
+`;
+
+export const UploadButtonLabel = styled.label`
+    font-size: 1rem;
+    background: ${COLORS.logo};
+    color: white;
+`;
+
+//뉴프사
+export const ProfileImageFrame = styled.img`
+    object-fit: fill;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+`;
+
+export const ProfileImageContainer = styled.div`
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: solid 0.5px gray;
+    max-width: 25em;
+    text-align: center;
+    height: 15em;
+`;
