@@ -30,12 +30,12 @@ const BoardList = ({ boardList }) => {
     return (
         <>
             <BoardListLayout>
-                <BoardTableSchema>
+                {/* <BoardTableSchema>
                     <TableTitleSchema>제목</TableTitleSchema>
                     <TableSchemaElement>작성자</TableSchemaElement>
                     <TableSchemaElement>작성일</TableSchemaElement>
                     <TableSchemaElement>조회수</TableSchemaElement>
-                </BoardTableSchema>
+                </BoardTableSchema> */}
 
                 {boardList.map((boardElement) => (
                     <NoticeLong
@@ -128,7 +128,7 @@ const Search = () => {
 
     return (
         <SearchBarWrapper>
-            <SearchInput type='search' placeholder='검색하기' onChange={handleSearch} />
+            <SearchInput type='search' placeholder=' 검색하기' onChange={handleSearch} />
         </SearchBarWrapper>
     );
 };
@@ -198,7 +198,7 @@ const Board = () => {
                     <BoardToggle majorName={majorName} majorOptions={JSON.parse(localStorage.getItem('major_options'))} />
                 </TitleAndToggle>
                 <ChangeBoardBox majorId={major_id} />
-                <Line />
+                {/* <Line /> */}
                 <Search />
                 <BoardUtilsButtons
                     boardId={board_id}
@@ -206,6 +206,7 @@ const Board = () => {
                     setIsActive={setIsActive}
                     BoardList_sortByRecommendation={BoardList_sortByRecommendation}
                 />
+                <Line />
                 <BoardList boardList={isActive ? boardListByRecommendation : boardList} />
             </Boardline>
         </BoardLayout>

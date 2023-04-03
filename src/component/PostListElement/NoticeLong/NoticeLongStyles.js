@@ -32,35 +32,39 @@ export const NoticeElementLink = styled(Link)`
 `;
 
 export const NoticeBasicInfoField = styled.div`
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     width:85%;
-    text-indent: 35px;
+    border-right: solid 1px whitesmoke;
 
-    @media screen and (max-width: 1000px) {
-        text-indent: 5px;
-    }
-    @media screen and (max-width: 460px) {
-        text-indent: 5px;
-    }
+
+
+
+
 `;
 
 
 export const NoticeTitle = styled.a`
     color: black;
+
 `;
 
 export const NoticeNumberOfComment = styled.a`
     margin:0 0.5em;
-    color: red;
+    color: #ff6666;
+    font-size: .7rem;
+
+
 `;
 
 export const CreateDateField = styled.div`
-
+    display: flex;
     font-size: 0.6rem;
-    width: 10em;
+    width: 7em;
     text-align: center;
     justify-content:center;
-
+    align-items: center;
+    margin-left: .5rem;
+    
     @media screen and (max-width: 800px) {
         font-size: .6rem;
     }
@@ -72,30 +76,33 @@ export const CreateDateField = styled.div`
 
 
 export const NumberOfViewsField = styled.div`
-    width: 8em;
-    font-size: 0.8rem;
-    width: 6em;
+    display: flex;
+    font-size: 0.7rem;
+    width: 3em;
     text-align: center;
     justify-content:center;
+    align-items: center;
 
     @media screen and (max-width: 800px) {
-        font-size: .7rem;
-    }
-
-    @media screen and (max-width: 460px) {
         font-size: .6rem;
     }
+
 `;
 
 
 export const WriterNameField = styled.div`
-    font-size: 0.8em;
+    font-size: 1em;
+    font-weight: bold;
     width: 10em;
     justify-content: center;
-    text-align: center;
+    // text-align: center;
+
+
+
 
     @media screen and (max-width: 800px) {
         font-size: .7rem;
+
     }
 
     @media screen and (max-width: 460px) {
