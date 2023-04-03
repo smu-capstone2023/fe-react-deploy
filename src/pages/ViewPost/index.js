@@ -142,7 +142,11 @@ const ViewPostContentBlock = ({ postTitle, postContent }) => {
 const ViewPostInfoBlock = ({views, likes, isLiked, likeNumber, setLikeNumber}) => {
 
     const PlusLikeNumber = () => {
-        setLikeNumber(likeNumber+1);
+        setLikeNumber(likes+1);
+    }
+
+    const handleIsLiked = () => {
+        isLiked = !isLiked;
     }
 
     return (
@@ -154,7 +158,8 @@ const ViewPostInfoBlock = ({views, likes, isLiked, likeNumber, setLikeNumber}) =
                 </PostViewNumberLayout>
                 <PostLikeNumberLayout onClick={()=>{
                     if (isLiked) {
-                        alert("이미 추천되었습니다.")
+                        handleIsLiked();
+                        alert("추천이 취소되었습니다.")
                     } else {
                         alert("추천되었습니다.")
                         PlusLikeNumber();
