@@ -235,6 +235,7 @@ const AddPost = () => {
     const [postAddFile, setPostAddFile] = useState([]);
     const [postDetailInfo, setPostDetailInfo] = useState({});
     const { board_id } = useParams();
+    const { major_id } = useParams();
 
     const savePostInServer = async () => {
         console.log(board_id);
@@ -256,7 +257,7 @@ const AddPost = () => {
             )
             .then((response) => {
                 alert('게시물이 업로드되었습니다.');
-                window.location.href = `/board/${board_id}`;
+                window.location.href = `/board/${major_id}/${board_id}`;
                 console.log(response);
             })
 
