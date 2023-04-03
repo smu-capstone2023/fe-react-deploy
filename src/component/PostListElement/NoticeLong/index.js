@@ -1,23 +1,32 @@
-import {WriterNameField, NoticeElementLink, NoticeNumberOfComment, NoticeTitle, CreateDateField, NoticeElementLayout, NoticeBasicInfoField, NumberOfViewsField} from './NoticeLongStyles';
-const NoticeLong = ({title, createDate, numberOfComment, postId, numberOfViews, writerName}) => {
+import {MobileVersionBatch, WriterNameField, NoticeElementLink, NoticeNumberOfComment, NoticeTitle, CreateDateField, NoticeElementLayout, NoticeBasicInfoField, NumberOfViewsField} from './NoticeLongStyles';
+import { BsFillChatFill } from 'react-icons/bs';
+import {COLORS} from '../../../color';
+
+
+const NoticeLong = ({ title, createDate, numberOfComment, postId, numberOfViews, writerName}) => {
+    const limitedTitle =  title.length > 20 ? title.slice(0,23) +"..." : title;
+    const detailCreatDate = ' ' + createDate.slice(5,7)+'/' + createDate.slice(8,10)+'/' + createDate.slice(11,16)
+
     return (
         <>
             <NoticeElementLayout>
+
                     <NoticeBasicInfoField>
+                    <WriterNameField>
+                            {writerName}
+                        </WriterNameField>
                         <NoticeElementLink to={"/viewpost/"+postId}>
                             <NoticeTitle>
-                                {title}
+                                {limitedTitle}
                             </NoticeTitle>
-                            <NoticeNumberOfComment>
+                            <BsFillChatFill  size={'1em'} color={`lightgray`} style={{marginLeft:'.5rem'}}/>
+                            <NoticeNumberOfComment>             
                                 [{numberOfComment}]
                             </NoticeNumberOfComment>
                         </NoticeElementLink>
                     </NoticeBasicInfoField>
-                        <WriterNameField>
-                            {writerName}
-                        </WriterNameField>
                         <CreateDateField>
-                            {createDate}
+                            {detailCreatDate}
                         </CreateDateField>
                         <NumberOfViewsField>
                             {numberOfViews}

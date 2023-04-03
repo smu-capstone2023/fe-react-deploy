@@ -97,7 +97,7 @@ const SignupSection1 = ({ setCurrentSection }) => {
                         type='checkbox'
                         onClick={() => {
                             setIsChecked(!isChecked);
-                        }}
+                        }} 
                     ></SignCheckBox>
                     <DefaultText>모든 약관에 동의합니다.</DefaultText>
                 </SignupAgreeLayout>
@@ -108,7 +108,7 @@ const SignupSection1 = ({ setCurrentSection }) => {
                         setCurrentSection(2);
                     } else {
                         alert('약관동의를 해주세요.');
-                    }
+                    }   
                 }}
             >
                 확인
