@@ -166,7 +166,7 @@ const ViewPostInfoBlock = ({views, likes, isLiked, likeNumber, setLikeNumber}) =
     )
 }
 
-const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setComment, setIs_anonymous, deleteComment}) => {
+const CommentBlock = ({userName, comments, saveCommentInSever, comment, is_anonymous, setComment, setIs_anonymous, deleteComment}) => {
     const [visible, setVisible] = useState(false);
     const [userId, setUserId] = useState('');
     const [isVaild, setIsVaild] = useState(false);
@@ -174,9 +174,9 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
     const [showMenu, setShowMenu] = useState();
     const textRef = useRef();
     const inputRef = useRef([]);
-    const userName = localStorage.nickname;
     let day = '';
     let time = '';
+
 
 
     const refreshPage = () => {
@@ -245,7 +245,7 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                                                 (isOpen && (showMenu === i)) &&
                                                     <ViewPostMenuUI style={{top: '2rem', left: '-8.5rem'}}>
                                                         {
-                                                            userName == userName ? 
+                                                            commentArr.username == userName ? 
                                                             <>
                                                                 <ViewPostMenuContent onClick={()=>{deleteComment(commentArr.comment_id);}}>삭제</ViewPostMenuContent>
                                                             </> :
@@ -491,7 +491,7 @@ const ViewPost = () => {
                 {/* <ViewCommentBlock /> */}
                 {/* <WriteCommentBlock saveCommentInSever={saveCommentInSever} feedComments={feedComments} setFeedComments={setFeedComments} feedReplyComments={feedReplyComments} setFeedReplyComments={setFeedReplyComments} createDate={postInfo.createdAt} writerName={postInfo.author}/> */}
                 <ViewPostInfoBlock views={postInfo.views} likes={postInfo.likes} isLiked={postInfo.isLiked}></ViewPostInfoBlock>
-                <CommentBlock comments={postInfo.comments} saveCommentInSever={saveCommentInSever} comment={comment} is_anonymous={is_anonymous} setComment={setComment} setIs_anonymous={setIs_anonymous} deleteComment={deleteComment}></CommentBlock>
+                <CommentBlock userName={userName} comments={postInfo.comments} saveCommentInSever={saveCommentInSever} comment={comment} is_anonymous={is_anonymous} setComment={setComment} setIs_anonymous={setIs_anonymous} deleteComment={deleteComment}></CommentBlock>
             </ViewPostLayout>
         </ViewPostBackground>
  
