@@ -25,7 +25,7 @@ const Navbar = ({ toggle }) => {
                                 )}
 
                                 <NavItem>
-                                    <NavLinks to='feedback'>피드백게시판</NavLinks>
+                                    <NavLinks to='board/1/17'>피드백게시판</NavLinks>
                                 </NavItem>
                                 <NavItem>
                                     <NavLinks to='mypage'>마이페이지</NavLinks>
