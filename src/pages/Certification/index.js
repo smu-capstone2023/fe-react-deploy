@@ -13,22 +13,9 @@ import {
     SubmitButton,
     SubmitButtonLabel,
 } from './CertificationStyles.ts';
-import axios from 'axios';
+
 import { postCertificationPost } from '../../api/manage/certificate.js';
-
-const uploadImageToServer = (formData) => {
-    return axios
-        .post(`${process.env.REACT_APP_SERVER_URL}:8001/upload`, formData, {
-            headers: {
-                'Contest-Type': 'multipart/form-data',
-            },
-        })
-        .then((response) => {
-            return response.data;
-        })
-        .catch((response) => console.log(response));
-};
-
+import { uploadImageToServer } from '../../api/utils/imageUploader.js';
 const Certification = () => {
     const [profileImgUrl, setProfileImgUrl] = useState(null);
     const [inputtext, setInputText] = useState('');
