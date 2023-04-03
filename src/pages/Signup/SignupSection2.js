@@ -19,10 +19,9 @@ const SignupSection2 = ({ setCurrentSection, setUserSignupInfo }) => {
     const animatedComponents = makeAnimated();
 
     const checkEmailRegExp = (school_id) => {
-      const emailRegex = new RegExp('^[0-9]{9}$');
-      return emailRegex.test(school_id);
-    };
-
+        const emailRegex = new RegExp('^[0-9]{9}$');
+        return emailRegex.test(school_id);
+      };
 
     const checkPasswordRegExp = (password) => {
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
@@ -31,11 +30,12 @@ const SignupSection2 = ({ setCurrentSection, setUserSignupInfo }) => {
 
     const checkAllOfSingUpInfo = () => {
         console.log(selectedMajorList);
-        // if (!checkEmailRegExp(school_id)) {
-        //   alert('이메일 형식을 확인해주세요.');
-        //   setSelectedMajorList([]); // 학과 선택 초기화
-        //   return false;
-        if (!checkPasswordRegExp(password)) {
+        if (!checkEmailRegExp(school_id)) {
+          alert('이메일 형식을 확인해주세요.');
+          setSelectedMajorList([]); // 학과 선택 초기화
+          return false;
+        }
+        else if (!checkPasswordRegExp(password)) {
             alert('비밀번호 형식을 확인해주세요.');
             setSelectedMajorList([]); // 학과 선택 초기화
             return false;
