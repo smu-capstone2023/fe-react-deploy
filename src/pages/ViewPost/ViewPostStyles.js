@@ -81,12 +81,22 @@ export const ViewPostLayout = styled.div`
     padding: 1em;
     margin: auto;
     margin-top: 3em;
+    max-width: 50em;
     // height: 100vh;
     border: solid 1px lightgray;
     border-radius: 6px;
     background-color: white;
-    @media (max-width: 970px) {
-        min-width: 0;
+    @media (max-width: 980px) {
+        min-width: 45em;
+    }
+    @media (max-width: 750px) {
+        min-width: 30em;
+    }
+    @media (max-width: 520px) {
+        min-width: 20em;
+    }
+    @media (max-width: 335px) {
+        min-width: 10em;
     }
 `;
 
@@ -455,6 +465,11 @@ export const ViewCommentLayout= styled.div`
     resize: none;
     :focus {
         outline: none;
+    }
+    @media (max-width: 700px) {
+        margin-left: 2.5rem;
+        padding: 0.2em;
+        font-size: 0.75em;
     }
 `;
 

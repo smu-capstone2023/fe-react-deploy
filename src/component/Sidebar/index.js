@@ -26,7 +26,7 @@ const Sidebar = ({ isOpen, toggle, setIsOpen }) => {
                                         학과게시판
                                     </SidebarLink>
                                 )}
-                                <SidebarLink to='feedback' onClick={() => setIsOpen(false)}>
+                                <SidebarLink to='board/1/17' onClick={() => setIsOpen(false)}>
                                     피드백게시판
                                 </SidebarLink>
                                 <SidebarLink to='mypage' onClick={() => setIsOpen(false)}>

@@ -49,9 +49,8 @@ import { colors } from '@mui/material';
 
 
 
-const ViewPostMenu = ({writerName, postId, deletePost}) => {
+const ViewPostMenu = ({writerName, userName, postId, deletePost}) => {
     const [isOpen, setMenu] = useState(false);
-    const userName = localStorage.nickname;
 
     const linkCopy = () => {
         var url = '';
@@ -98,7 +97,18 @@ const ViewPostMenu = ({writerName, postId, deletePost}) => {
     );
 };
 
-const WriterUserInfoBlock = ({ writerName, createDate, postId, deletePost, profileImageUrl }) => {
+const WriterUserInfoBlock = ({ writerName, userName, createDate, updateDate, postId, deletePost, profileImageUrl }) => {
+    let day = '';
+    let time = '';
+    if (createDate) {
+        day = createDate.slice(0, 10);
+        time = createDate.slice(11, 16);
+    }
+    if (createDate != updateDate) {
+        day = updateDate.slice(0, 10);
+        time = updateDate.slice(11, 16);
+    } 
+
     return (
         <>
             <WriterUserInfoLayout>
@@ -107,10 +117,10 @@ const WriterUserInfoBlock = ({ writerName, createDate, postId, deletePost, profi
                 </ProfileImageLayout>
                 <UserAndPostInfoLayout>
                     <UserNameFiled>{writerName}</UserNameFiled>
-                    <CreateDateField>{createDate}</CreateDateField>
+                    <CreateDateField>{day} {time}</CreateDateField>
                 </UserAndPostInfoLayout>
                 <ViewPostMenuContainer>
-                    <ViewPostMenu writerName={writerName} postId={postId} deletePost={deletePost}></ViewPostMenu>
+                    <ViewPostMenu writerName={writerName} userName={userName} postId={postId} deletePost={deletePost}></ViewPostMenu>
                 </ViewPostMenuContainer>
             </WriterUserInfoLayout>
         </>
@@ -132,7 +142,11 @@ const ViewPostContentBlock = ({ postTitle, postContent }) => {
 const ViewPostInfoBlock = ({views, likes, isLiked, likeNumber, setLikeNumber}) => {
 
     const PlusLikeNumber = () => {
-        setLikeNumber(likeNumber+1);
+        setLikeNumber(likes+1);
+    }
+
+    const handleIsLiked = () => {
+        isLiked = !isLiked;
     }
 
     return (
@@ -144,7 +158,8 @@ const ViewPostInfoBlock = ({views, likes, isLiked, likeNumber, setLikeNumber}) =
                 </PostViewNumberLayout>
                 <PostLikeNumberLayout onClick={()=>{
                     if (isLiked) {
-                        alert("이미 추천되었습니다.")
+                        handleIsLiked();
+                        alert("추천이 취소되었습니다.")
                     } else {
                         alert("추천되었습니다.")
                         PlusLikeNumber();
@@ -160,7 +175,7 @@ const ViewPostInfoBlock = ({views, likes, isLiked, likeNumber, setLikeNumber}) =
     )
 }
 
-const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setComment, setIs_anonymous, deleteComment}) => {
+const CommentBlock = ({userName, comments, saveCommentInSever, comment, is_anonymous, setComment, setIs_anonymous, deleteComment}) => {
     const [visible, setVisible] = useState(false);
     const [userId, setUserId] = useState('');
     const [isVaild, setIsVaild] = useState(false);
@@ -168,7 +183,10 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
     const [showMenu, setShowMenu] = useState();
     const textRef = useRef();
     const inputRef = useRef([]);
-    const userName = localStorage.nickname;
+    let day = '';
+    let time = '';
+
+
 
     const refreshPage = () => {
         window.location.reload();
@@ -223,6 +241,10 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                 <>
                     {
                         comments.map((commentArr, i) => {
+                            if (commentArr.created_time) {
+                                day = commentArr.created_time.slice(0, 10);
+                                time = commentArr.created_time.slice(12, 16);
+                            }
                             return (
                                 <ViewCommentContainer visible={visible}>
                                     <ViewCommentUserImgLayout></ViewCommentUserImgLayout>
@@ -232,7 +254,7 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                                                 (isOpen && (showMenu === i)) &&
                                                     <ViewPostMenuUI style={{top: '2rem', left: '-8.5rem'}}>
                                                         {
-                                                            userName == userName ? 
+                                                            commentArr.username == userName ? 
                                                             <>
                                                                 <ViewPostMenuContent onClick={()=>{deleteComment(commentArr.comment_id);}}>삭제</ViewPostMenuContent>
                                                             </> :
@@ -258,7 +280,7 @@ const CommentBlock = ({comments, saveCommentInSever, comment, is_anonymous, setC
                                     </ViewCommentMenuLayout>
 
                                     <ViewCommentUserNameLayout>{commentArr.username}
-                                            <CreateDateField>{commentArr.created_time}</CreateDateField>
+                                            <CreateDateField>{day} {time}</CreateDateField>
                                     </ViewCommentUserNameLayout>
                                     <ViewCommentLayout rows={1}>{commentArr.content}</ViewCommentLayout>
 
@@ -334,8 +356,24 @@ const ViewPost = () => {
     const [likeNumber, setLikeNumber] = useState(0);
     const { post_id } = useParams();
     const [postInfo, setPostInfo] = useState({});
+    const [userName, setUserName] = useState('');
     // const [feedComments, setFeedComments] = useState([]);
     // const [feedReplyComments, setFeedReplyComments] = useState([]);
+
+    const getUserInfo = () => {
+        axios
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/user_info` , {
+                headers: {
+                    Authorization: localStorage.getItem('access_token'),
+                },
+            })
+            .then((response) => {
+                setUserName(response.data.username);
+            })
+            .catch((response) => {
+                console.log(response);
+            })
+    }
 
 
     const getPostInfo = () => {
@@ -348,7 +386,7 @@ const ViewPost = () => {
             .then((response) => {
                 setPostInfo(response.data);
                 setUserInfoAtLocalStorage(response.data);
-                console.log(response);
+                console.log(response.data);
             })
             .catch((response) => console.log(response));
     };
@@ -445,6 +483,7 @@ const ViewPost = () => {
 
     useEffect(() => {
         getPostInfo();
+        getUserInfo();
     }, []);
 
     return (
@@ -453,7 +492,7 @@ const ViewPost = () => {
             <ViewPostLayout>
                 {postInfo ? (
                     <>
-                        <WriterUserInfoBlock writerName={postInfo.username} createDate={postInfo.created_time} postId={post_id} deletePost={deletePost}></WriterUserInfoBlock>
+                        <WriterUserInfoBlock writerName={postInfo.username} userName={userName} createDate={postInfo.created_time} updateDate={postInfo.updated_time} postId={post_id} deletePost={deletePost}></WriterUserInfoBlock>
                         <ViewPostContentBlock postTitle={postInfo.title} postContent={postInfo.content} />
                     </>
                 ) : (
@@ -462,7 +501,7 @@ const ViewPost = () => {
                 {/* <ViewCommentBlock /> */}
                 {/* <WriteCommentBlock saveCommentInSever={saveCommentInSever} feedComments={feedComments} setFeedComments={setFeedComments} feedReplyComments={feedReplyComments} setFeedReplyComments={setFeedReplyComments} createDate={postInfo.createdAt} writerName={postInfo.author}/> */}
                 <ViewPostInfoBlock views={postInfo.views} likes={postInfo.likes} isLiked={postInfo.isLiked}></ViewPostInfoBlock>
-                <CommentBlock comments={postInfo.comments} saveCommentInSever={saveCommentInSever} comment={comment} is_anonymous={is_anonymous} setComment={setComment} setIs_anonymous={setIs_anonymous} deleteComment={deleteComment}></CommentBlock>
+                <CommentBlock userName={userName} comments={postInfo.comments} saveCommentInSever={saveCommentInSever} comment={comment} is_anonymous={is_anonymous} setComment={setComment} setIs_anonymous={setIs_anonymous} deleteComment={deleteComment}></CommentBlock>
             </ViewPostLayout>
         </ViewPostBackground>
  

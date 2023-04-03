@@ -39,18 +39,15 @@ const SchoolBoard = () => {
     return (
         <>
             <SmallBoardLayout>
-                <BoardBannerButton title='학교게시판' backgroundColor={'#FF8686'} boardId={process.env.REACT_APP_SCHOOL_BOARD_ID} />
-                <DetailBoardTitleWithMore
-                    boardIcon={<TiArrowForward />}
-                    boardTitle='학사 공지'
-                    boardId={process.env.REACT_APP_SCHOOL_BOARD_ID}
-                />
+                <BoardBannerButton title='학교게시판' backgroundColor={'#FF8686'} boardId={'1/3'} />
+                <DetailBoardTitleWithMore boardIcon={<TiArrowForward />} boardTitle='학사 공지' boardId={'1/3'} />
 
                 {boardList.map((postElement) => {
                     return (
                         <Notice
                             key={postElement.post_id}
-                            departmentName={postElement.nickName}
+                            // TODO: 필요성 의문
+                            ///departmentName={postElement.nickName}
                             title={postElement.title}
                             numberOfComment={postElement.comments}
                             createDate={postElement.created_time}

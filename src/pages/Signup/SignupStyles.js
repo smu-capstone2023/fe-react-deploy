@@ -34,7 +34,24 @@ export const SignContainer = styled.div`
     box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.1);
     border: solid 0.1px rgba(128, 128, 128, 0.3);
     border-radius: 30px;
-    width: 25em;
+    width: 23em;
+    height: 30em;
+
+    padding: 2em 0;
+    margin-top: 2em;
+    @media screen and (max-width: 25em) {
+        width: 95%;
+    }
+`;
+export const SignContainer3 = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.1);
+    border: solid 0.1px rgba(128, 128, 128, 0.3);
+    border-radius: 30px;
+    width: 23em;
 
     padding: 2em 0;
     margin-top: 2em;
@@ -74,6 +91,7 @@ export const SignInnerBox = styled.div`
     display: flex;
     flex-direction: column;
     border: solid 0.1px rgba(128, 128, 128, 0.2);
+    border-radius: 10px;
     width: 80%;
     height: 70%;
     padding: 1em;
@@ -95,7 +113,8 @@ export const SignCheckBox = styled.input`
 
 export const SignInputText = styled.input`
     padding: 15px;
-    border: solid 0.5px gray;
+    border: solid 0.1px rgba(128, 128, 128, 0.3);
+    border-radius: 10px;
     margin: 5px 0 10px 0;
 `;
 
@@ -157,4 +176,39 @@ export const AgreementTest = styled.div`
         font-family: "GOTHICA1-REGULARR";
         src: url("./font/GOTHICA1-REGULAR.woff") format("woff");
     }
+`;
+
+//
+export const UploadInput = styled.input``;
+
+export const UploadButton = styled.div`
+    background: ${COLORS.logo};
+    border-radius: 5px;
+    padding: 0.5em;
+`;
+
+export const UploadButtonLabel = styled.label`
+    font-size: 1rem;
+    background: ${COLORS.logo};
+    color: white;
+`;
+
+//뉴프사
+export const ProfileImageFrame = styled.img`
+    object-fit: fill;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+`;
+
+export const ProfileImageContainer = styled.div`
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    border: solid 0.1px rgba(128, 128, 128, 0.4);
+    border-radius: 10px;
+    max-width: 25em;
+    text-align: center;
+    height: 15em;
 `;
