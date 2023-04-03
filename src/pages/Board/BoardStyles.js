@@ -173,19 +173,19 @@ export const ToggleBox = styled.div`
 export const BoardUtilsButtonsLayout = styled.div`
     display: flex;
     flex-direction: row;
-    width: 83%;
+    width: 90%;
     padding: 1.5em 0;
     font-weight: 600;
     color: black;
     justify-content: space-between;
 
     @media screen and (max-width: 800px) {
-        width: 95%;
+        width: 100%;
         padding-bottom: 0px;
         
     }
     @media screen and (max-width: 460px) {
-        width: 95%;
+        width: 100%;
         padding-bottom: 0px;
         padding-top: 20px;
         
@@ -263,9 +263,9 @@ export const ChangeBoardInBox = styled.p`
 
 export const Line = styled.div`
     margin: 2em;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
     width: 90%;
-    border-bottom: solid 3px ${COLORS.gray_button};
+    border-bottom: solid 1px ${COLORS.gray_button};
 
     @media screen and (max-width: 800px) {
         margin: 1rem 0;
@@ -292,19 +292,20 @@ export const SearchBarWrapper = styled.div`
 export const SearchInput = styled.input`
     color: gray;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     padding: 0.5em;
     width: 39%;
-    border: solid 3px gray;
-    border-radius: 30px;
+    border: solid 1.5px white;
+    border-bottom: solid 1px rgba(128, 128, 128, 0.5);
+    border-radius: 1px;
 
     @media screen and (max-width: 800px) {
-        width: 80%;
+        width: 55%;
         font-size: 0.7rem;
     }
 
     @media screen and (max-width: 460px) {
-        font-size: 0.6rem;
+        // font-size: 0.6rem;
     }
 
 `;
