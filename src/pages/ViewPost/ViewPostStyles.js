@@ -271,6 +271,14 @@ export const PostLikeButtonLayout = styled(AiTwotoneLike)`
     margin-top: 0.2rem;
 `;
 
+export const CommentLikeContent = styled.p`
+    display: flex;
+    flex: 3;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: ${COLORS.color_button};
+`;
+
 
 export const WriteCommentContainer = styled.div`
     display: flex;
@@ -374,6 +382,7 @@ export const AnonymousCommentCheckButton = styled.input`
 `;
 
 export const ViewCommentMenuLayout = styled.div`
+    display: flex;
     border-radius: 0.3em;
     width: 1.5rem;
     height: 1.5rem;
@@ -385,10 +394,12 @@ export const ViewCommentMenuLayout = styled.div`
 `;
 
 export const CommentLikeIcon = styled(AiFillLike)`
+    display: flex;
+    flex: 2;
     width: 100%;
     height: 100%;
     padding: 0.2em;
-    color: ${COLORS.logo};
+    color: ${COLORS.color_button};
 `;
 
 export const CommentReplyIcon = styled(FaReply)`
