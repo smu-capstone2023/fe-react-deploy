@@ -153,23 +153,58 @@ const Board = () => {
 
     // -----------------------------------------------------------
     // 기본 보드리스트
+    // const setBoardListFromServer = () => {
+    //     axios
+    //         .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
+    //             headers: {
+    //                 Authorization: localStorage.getItem('access_token'),
+    //             },
+    //         })
+    //         .then((response) => {
+    //             setBoardList(response.data.posts);
+    //             setBoardName(response.data.board_name);
+    //             setMajorName(response.data.major_name);
+    //         })
+    //         .catch((response) => {
+    //             alert('접근 불가능한 페이지입니다.');
+    //             window.history.back();
+    //         });
+    // };
+
+
+    // 페이징==============================
+    const per_page = (10);
+    const [last_id, setLast_id] = useState(0);
+    const [total_page, setTotal_page] = useState();
+
+
+
     const setBoardListFromServer = () => {
+
+
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/cursor?board_id=${board_id}&last_id=${last_id}&per_page=${per_page}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
             })
             .then((response) => {
+                // console.log(response.data);
                 setBoardList(response.data.posts);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
+                setTotal_page(response.data.total_page);
+
+
+
             })
             .catch((response) => {
                 alert('접근 불가능한 페이지입니다.');
                 window.history.back();
             });
     };
+
+
 
     useEffect(() => {
         if (board_id) {
