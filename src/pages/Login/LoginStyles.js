@@ -20,6 +20,13 @@ export const LoginContainer = styled.div`
     padding: 30px;
     margin: 100px 0 0 0;
     align-items: center;
+    
+    /* 반응형 스타일링 */
+    @media (max-width: 654px) {
+        max-width: 200px;
+        margin: 50px 0 0 0;
+        padding: 20px;
+    }
 `;
 
 export const LoginTitle = styled.h1`

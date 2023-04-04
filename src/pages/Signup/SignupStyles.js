@@ -24,51 +24,124 @@ export const SignLayout = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: none;
+
+    
+    @media screen and (max-width: 800px) {
+        
+        background-color: white;
+
+    }
 `;
 
 export const SignContainer = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.1);
     border: solid 0.1px rgba(128, 128, 128, 0.3);
     border-radius: 30px;
     width: 23em;
     height: 30em;
-
     padding: 2em 0;
-    margin-top: 2em;
-    @media screen and (max-width: 25em) {
-        width: 95%;
+    margin-top: 2px;
+
+
+      @media screen and (max-width: 1120px) {
+
+        max-width: 35rem;
+      }
+    
+    @media screen and (max-width: 970px) {
+
+        max-width: 30rem;
+      }
+
+    @media screen and (max-width: 800px) {
+
+        max-width: 25rem;
+        max-height: 30rem;
     }
+
+    @media (max-width: 654px) {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        margin: 20px 0;
+        padding: 20px;
+        width: 90%;
+        max-height: 30rem;
+
+        box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0);
+        border-radius: none;
+        border: none;
+    }
+    
+    @media screen and (max-width: 460px) {
+        box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0);
+        width: 100%;
+        max-height: 30rem;
+        border-radius: none;
+        border: none;
+    }
+
+      
 `;
+
+/* sign3부턴 다름 */
+
 export const SignContainer3 = styled.div`
+    padding: 5rem 0;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+
     box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.1);
     border: solid 0.1px rgba(128, 128, 128, 0.3);
     border-radius: 30px;
-    width: 23em;
 
-    padding: 2em 0;
-    margin-top: 2em;
-    @media screen and (max-width: 25em) {
-        width: 95%;
+    @media screen and (max-width: 1200px) {
+        flex-direction: column;
+        align-items: center;
+    }
+`;
+
+
+export const SignInnerBox3 = styled.div`
+    display: flex;
+    flex-direction: column;
+    border: solid 0.1px rgba(128, 128, 128, 0.2);
+    border-radius: 10px;
+    width: 80%;
+    height: 70%;
+    padding: 1em;
+
+    @media (max-width: 654px) {
+
+        border-radius: none;
+        border: none;
     }
 `;
 
 export const SignTitle = styled.h1`
     color: ${COLORS.logo};
     font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%; /* 높이를 10%로 설정 */
+    
+    
+    @media (max-width: 654px) {
+      display: none;
 
 `;
 
 export const StepBox = styled.div`
     display: flex;
-    border-bottom: solid 0.5px gray;
     padding: 1em;
     width: 100%;
     height: 0.5em;
@@ -95,6 +168,12 @@ export const SignInnerBox = styled.div`
     width: 80%;
     height: 70%;
     padding: 1em;
+
+    @media (max-width: 654px) {
+
+        border-radius: none;
+        border: none;
+    }
 `;
 
 export const TosBox = styled.div`
@@ -103,8 +182,14 @@ export const TosBox = styled.div`
     width: auto;
     max-height: 350px;
     padding: 10px;
-    font-size: 0.9rem;
+    font-size: 0.5rem;
+
+    li {
+        white-space: pre-wrap;
+    }
 `;
+
+
 
 export const SignCheckBox = styled.input`
     background-color: white;
@@ -158,19 +243,20 @@ export const SignupAgreeLayout = styled.div`
 `;
 
 export const CertificationLink = styled(Link)`
-padding: 15px;
-width: 80%;
-background: ${COLORS.gray_button};
-margin-top: 20px;
-border-radius: 5px;
-color: black;
-text-align: center;
-text-decoration: none;
+    padding: 15px;
+    width: 80%;
+    background: ${COLORS.gray_button};
+    margin-top: 20px;
+    border-radius: 5px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
 `;
 
 //"이용약관을 확인해주세요."
 export const AgreementTest = styled.div`
     margin-bottom:15px;
+    font-size: 1rem;
 
     @font-face{
         font-family: "GOTHICA1-REGULARR";

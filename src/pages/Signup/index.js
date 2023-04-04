@@ -27,11 +27,11 @@ const SignupTitle = () => {
         <>
             <SignupTitleLayout>
                 <SignTitle>회원가입</SignTitle>
-                <StepBox>
+                {/* <StepBox>
                     <NumberBtn>1</NumberBtn>
                     <NumberBtn>2</NumberBtn>
                     <NumberBtn>3</NumberBtn>
-                </StepBox>
+                </StepBox> */}
             </SignupTitleLayout>
         </>
     );
@@ -40,8 +40,8 @@ const SignupSection1 = ({ setCurrentSection }) => {
     const [isChecked, setIsChecked] = useState(false);
     return (
         <SignContainer>
+            <AgreementTest>이용약관을 확인해주세요.</AgreementTest>
             <SignInnerBox>
-                <AgreementTest>이용약관을 확인해주세요.</AgreementTest>
                 <TosBox>
                 <ol>
                         <li>스뮤즈 커뮤니티에 가입하려면 만 18세 이상이어야 합니다. 만 18세 미만인 경우 법적 보호자의 승인이 필요합니다.</li>
