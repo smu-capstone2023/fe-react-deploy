@@ -5,6 +5,7 @@ import {
     Line,
     CertificationLink,
     SignContainer,
+    SignContainer3,
     SignInputText,
     SignInnerBox,
     SignButton,
@@ -63,7 +64,7 @@ const SignupSection3 = ({ userSignupInfo }) => {
     };
 
     return (
-        <SignContainer>
+        <SignContainer3>
             <SignInnerBox>
                 <DefaultText>사용하실 닉네임을 입력하세요</DefaultText>
                 <SmallText>닉네임은 설정 후 30일 이후에 변경 가능합니다.</SmallText>
@@ -92,7 +93,7 @@ const SignupSection3 = ({ userSignupInfo }) => {
                 회원가입 완료
             </SignButton>
             <SmallText>학과인증을 통해 더 다양한 권한을 가질 수 있습니다.</SmallText>
-        </SignContainer>
+        </SignContainer3>
     );
 };
 

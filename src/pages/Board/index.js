@@ -4,16 +4,12 @@ import {
     BoardUtilsButton,
     BoardTitle,
     BoardListLayout,
-    TableSchemaElement,
-    TableTitleSchema,
-    BoardTableSchema,
     BoardLayout,
     ToggleBox,
     TitleAndToggle,
     Line,
     SearchBarWrapper,
     SearchInput,
-    SortUtilButtonLayout,
 } from './BoardStyles';
 import NoticeLong from '../../component/PostListElement/NoticeLong';
 import axios from 'axios';
@@ -22,7 +18,6 @@ import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { COLORS } from '../../color';
-import styled from 'styled-components';
 import ChangeBoardBox from './ChangeBoardBox';
 import '../../App.css';
 
@@ -56,8 +51,6 @@ const BoardList = ({ boardList }) => {
 const BoardUtilsButtons = ({ boardId, isActive, setIsActive, BoardList_sortByRecommendation }) => {
     return (
         <BoardUtilsButtonsLayout>
-            
-
             <BoardUtilsButton
                 style={{ borderColor: `${COLORS.gray_button}` }}
                 onClick={() => (window.location.href = `/addpost/${boardId}`)}
@@ -65,22 +58,22 @@ const BoardUtilsButtons = ({ boardId, isActive, setIsActive, BoardList_sortByRec
                 글쓰기
             </BoardUtilsButton>
 
-                {/*보류- 필요성 문제 의문
+            {/*보류- 필요성 문제 의문
                  <BoardUtilsButton>최신순</BoardUtilsButton> */}
 
-                <BoardUtilsButton
-                    onClick={() => {
-                        BoardList_sortByRecommendation();
-                        setIsActive(!isActive);
-                    }}
-                    style={{
-                        // fontWeight: isActive ? 'bold' : 'normal' ,
-                        background: isActive ? `${COLORS.color_button}` : '',
-                    }}
-                    //TODO_hyun: 활성화된 배경색 구림, 변경 필요함
-
-           >인기순</BoardUtilsButton>
-
+            <BoardUtilsButton
+                onClick={() => {
+                    BoardList_sortByRecommendation();
+                    setIsActive(!isActive);
+                }}
+                style={{
+                    // fontWeight: isActive ? 'bold' : 'normal' ,
+                    background: isActive ? `${COLORS.color_button}` : '',
+                }}
+                //TODO_hyun: 활성화된 배경색 구림, 변경 필요함
+            >
+                인기순
+            </BoardUtilsButton>
         </BoardUtilsButtonsLayout>
     );
 };
@@ -182,7 +175,7 @@ const Board = () => {
         if (board_id) {
             setBoardListFromServer();
             setTimeout(() => {
-                setFade('end');
+                setFade('HomeEnd');
             }, 100);
             return () => {
                 setFade('');
@@ -191,7 +184,7 @@ const Board = () => {
     }, [board_id, boardList.length, isActive]);
 
     return (
-        <BoardLayout className={`start ${fade}`}>
+        <BoardLayout className={`HomeStart ${fade}`}>
             <Boardline>
                 <TitleAndToggle>
                     <BoardTitle>{boardName}</BoardTitle>

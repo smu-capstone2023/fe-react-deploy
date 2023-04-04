@@ -16,6 +16,9 @@ export const EditPostMajorContent = styled.p`
     font-weight: 600;
     font-size: 1.8em;
     padding: 0.2em;
+    @media (max-width: 700px) {
+        font-size: 1.5em
+    }
 `;
 
 export const EditPostBoardContent = styled.p`
@@ -24,4 +27,7 @@ export const EditPostBoardContent = styled.p`
     font-size: 1.15em;
     margin-left: 0.5em;
     margin-bottom: 1.8em;
+    @media (max-width: 700px) {
+        font-size: 0.9em
+    }
 `;

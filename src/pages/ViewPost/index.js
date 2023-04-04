@@ -39,12 +39,15 @@ import {
     CommentLikeIcon,
     CommentReplyIcon,
     CommentMenuIcon,
+    CommentLikeContent,
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import {useRef} from 'react';
 import axios from 'axios';
 import { colors } from '@mui/material';
+import styled from 'styled-components';
+import { COLORS } from '../../color';
 
 
 
@@ -139,16 +142,7 @@ const ViewPostContentBlock = ({ postTitle, postContent }) => {
     );
 };
 
-const ViewPostInfoBlock = ({views, likes, isLiked, likeNumber, setLikeNumber}) => {
-
-    const PlusLikeNumber = () => {
-        setLikeNumber(likes+1);
-    }
-
-    const handleIsLiked = () => {
-        isLiked = !isLiked;
-    }
-
+const ViewPostInfoBlock = ({views, setPostLike, likes, isLiked}) => {
     return (
         <>
             <PostViewAndLikeContainer>
@@ -156,16 +150,13 @@ const ViewPostInfoBlock = ({views, likes, isLiked, likeNumber, setLikeNumber}) =
                     <PostViewResponseContent>조회수</PostViewResponseContent>
                     {views}
                 </PostViewNumberLayout>
+
                 <PostLikeNumberLayout onClick={()=>{
-                    if (isLiked) {
-                        handleIsLiked();
-                        alert("추천이 취소되었습니다.")
-                    } else {
-                        alert("추천되었습니다.")
-                        PlusLikeNumber();
-                    }
+                        setPostLike();
                     }}>
-                    <PostLikeButtonLayout></PostLikeButtonLayout>
+                        {
+                            isLiked ? <PostLikeButtonLayout style={{color : `${COLORS.logo}`}}></PostLikeButtonLayout> : <PostLikeButtonLayout></PostLikeButtonLayout>
+                        }
                     {likes}
                 </PostLikeNumberLayout>
                 <div style={{display: "flex", flex: "90"}}/>
@@ -175,7 +166,7 @@ const ViewPostInfoBlock = ({views, likes, isLiked, likeNumber, setLikeNumber}) =
     )
 }
 
-const CommentBlock = ({userName, comments, saveCommentInSever, comment, is_anonymous, setComment, setIs_anonymous, deleteComment}) => {
+const CommentBlock = ({userName, comments, saveCommentInSever, comment, is_anonymous, setComment, setIs_anonymous, deleteComment, setCommentLike}) => {
     const [visible, setVisible] = useState(false);
     const [userId, setUserId] = useState('');
     const [isVaild, setIsVaild] = useState(false);
@@ -248,23 +239,23 @@ const CommentBlock = ({userName, comments, saveCommentInSever, comment, is_anony
                             return (
                                 <ViewCommentContainer visible={visible}>
                                     <ViewCommentUserImgLayout></ViewCommentUserImgLayout>
-                                        <ViewCommentMenuLayout style={{position: 'relative'}} onClick={() => {toggleMenu(); setShowMenu(i);}}>
-                                            <CommentMenuIcon/>
-                                            {
-                                                (isOpen && (showMenu === i)) &&
-                                                    <ViewPostMenuUI style={{top: '2rem', left: '-8.5rem'}}>
-                                                        {
-                                                            commentArr.username == userName ? 
-                                                            <>
-                                                                <ViewPostMenuContent onClick={()=>{deleteComment(commentArr.comment_id);}}>삭제</ViewPostMenuContent>
-                                                            </> :
-                                                            <>
-                                                                <ViewPostMenuContent onClick={()=>{}}>신고</ViewPostMenuContent>
-                                                            </>
-                                                        }
-                                                    </ViewPostMenuUI>
-                                            }
-                                        </ViewCommentMenuLayout>
+                                    <ViewCommentMenuLayout style={{position: 'relative'}} onClick={() => {toggleMenu(); setShowMenu(i);}}>
+                                        <CommentMenuIcon/>
+                                        {
+                                            (isOpen && (showMenu === i)) &&
+                                                <ViewPostMenuUI style={{top: '2rem', left: '-8.5rem'}}>
+                                                    {
+                                                        commentArr.username == userName ? 
+                                                        <>
+                                                            <ViewPostMenuContent onClick={()=>{deleteComment(commentArr.comment_id);}}>삭제</ViewPostMenuContent>
+                                                        </> :
+                                                        <>
+                                                            <ViewPostMenuContent onClick={()=>{}}>신고</ViewPostMenuContent>
+                                                        </>
+                                                    }
+                                                </ViewPostMenuUI>
+                                        }
+                                    </ViewCommentMenuLayout>
 
                                     <ViewCommentMenuLayout onClick={()=>{
                                             // WriteReplyToggle();
@@ -273,11 +264,26 @@ const CommentBlock = ({userName, comments, saveCommentInSever, comment, is_anony
                                             <CommentReplyIcon/>
                                     </ViewCommentMenuLayout>
 
-                                    <ViewCommentMenuLayout onClick={()=>{
-                                                alert("추천되었습니다.")
+                                    <ViewCommentMenuLayout 
+                                    style={{width: '4rem'}}
+                                    onClick={()=>{
+                                        setCommentLike(commentArr.comment_id);
                                     }}>
-                                            <CommentLikeIcon/>
+                                        {
+                                            commentArr.isLiked ? 
+                                            <>
+                                                <CommentLikeContent style={{color : `${COLORS.logo}`}}>{commentArr.likes}</CommentLikeContent>
+                                                <CommentLikeIcon style={{color : `${COLORS.logo}`}}/>
+                                            </>
+                                            :
+                                            <>
+                                                <CommentLikeContent>{commentArr.likes}</CommentLikeContent>
+                                                <CommentLikeIcon/>
+                                            </>
+                                        }
                                     </ViewCommentMenuLayout>
+ 
+                                    
 
                                     <ViewCommentUserNameLayout>{commentArr.username}
                                             <CreateDateField>{day} {time}</CreateDateField>
@@ -353,10 +359,11 @@ const CommentBlock = ({userName, comments, saveCommentInSever, comment, is_anony
 const ViewPost = () => {
     const [comment, setComment] = useState('');
     const [is_anonymous, setIs_anonymous] = useState(false);
-    const [likeNumber, setLikeNumber] = useState(0);
     const { post_id } = useParams();
     const [postInfo, setPostInfo] = useState({});
     const [userName, setUserName] = useState('');
+    const [postTotalLike, setPostTotalLike] = useState(0);
+    const [commentTotalLike, setCommentTotalLike] = useState(0);
     // const [feedComments, setFeedComments] = useState([]);
     // const [feedReplyComments, setFeedReplyComments] = useState([]);
 
@@ -442,7 +449,6 @@ const ViewPost = () => {
 
     const deletePost = () => {
         const url = `${process.env.REACT_APP_SERVER_URL}:8001/board/delete/${post_id}`;
-        //console.log("deletepost 함수 호출");
 
         axios.delete(url, {
             headers: {
@@ -474,6 +480,47 @@ const ViewPost = () => {
             });
     };
 
+    const setPostLike = () => {
+        axios
+            .post(`${process.env.REACT_APP_SERVER_URL}:8001/board/like/${post_id}`, {
+                like : postTotalLike,
+            },
+            {
+                headers: {
+                    Authorization: localStorage.getItem('access_token'),
+                },
+            })
+            .then((response) => {
+                console.log(response.data);
+                setPostTotalLike(response.data.total_likes);
+                alert(response.data.message);
+                window.location.reload();
+            })
+            .catch((response) => {
+                console.log(response);
+            })
+    }
+
+    const setCommentLike = (comment_id) => {
+        axios
+            .post(`${process.env.REACT_APP_SERVER_URL}:8001/comment/like/${comment_id}`, {
+                like : commentTotalLike,
+            },
+            {
+                headers : {
+                    Authorization: localStorage.getItem('access_token'),
+                }
+            })
+            .then((response) => {
+                console.log(response.data);
+                alert(response.data.message);
+                window.location.reload();
+            })
+            .catch((response) => {
+                console.log(response);
+            })
+    }
+
     const setUserInfoAtLocalStorage = (response) => {
         localStorage.setItem("access token", response.access_token);
         localStorage.setItem("refresh token", response.refresh_token);
@@ -500,8 +547,8 @@ const ViewPost = () => {
                 )}
                 {/* <ViewCommentBlock /> */}
                 {/* <WriteCommentBlock saveCommentInSever={saveCommentInSever} feedComments={feedComments} setFeedComments={setFeedComments} feedReplyComments={feedReplyComments} setFeedReplyComments={setFeedReplyComments} createDate={postInfo.createdAt} writerName={postInfo.author}/> */}
-                <ViewPostInfoBlock views={postInfo.views} likes={postInfo.likes} isLiked={postInfo.isLiked}></ViewPostInfoBlock>
-                <CommentBlock userName={userName} comments={postInfo.comments} saveCommentInSever={saveCommentInSever} comment={comment} is_anonymous={is_anonymous} setComment={setComment} setIs_anonymous={setIs_anonymous} deleteComment={deleteComment}></CommentBlock>
+                <ViewPostInfoBlock views={postInfo.views} setPostLike={setPostLike} postTotalLike={postTotalLike} likes={postInfo.likes} isLiked={postInfo.isLiked}></ViewPostInfoBlock>
+                <CommentBlock userName={userName} comments={postInfo.comments} saveCommentInSever={saveCommentInSever} comment={comment} is_anonymous={is_anonymous} setComment={setComment} setIs_anonymous={setIs_anonymous} deleteComment={deleteComment} setCommentLike={setCommentLike}></CommentBlock>
             </ViewPostLayout>
         </ViewPostBackground>
  
