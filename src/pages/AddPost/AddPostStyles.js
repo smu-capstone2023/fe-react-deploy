@@ -4,6 +4,7 @@ import { AiFillCamera } from "react-icons/ai";
 
 export const AddPostBackgroundContainer = styled.div`
     background-color: ${COLORS.background_color};
+    min-height: 55em;
 `;
 
 export const ImageContainerDelteLayout = styled.img`
@@ -77,7 +78,7 @@ export const AddFileButtonImgLayout = styled(AiFillCamera)`
 `;
 
 export const AddFileButtonLayout = styled.div`
-    height: 30rem;
+    height: 15rem;
     margin-right: 0.5rem;
     float: left;
 `;
@@ -99,6 +100,7 @@ export const WritePostBoardContentLayout = styled.div`
     border-radius: 5px;
     // border: solid 0.5px gray;
     color: gray;
+
 `;
 
 export const WritePostMajorContent = styled.p`
@@ -106,6 +108,9 @@ export const WritePostMajorContent = styled.p`
     font-weight: 600;
     font-size: 1.8em;
     padding: 0.2em;
+    @media (max-width: 700px) {
+        font-size: 1.5em
+    }
 `;
 
 export const WritePostBoardContent = styled.p`
@@ -114,6 +119,9 @@ export const WritePostBoardContent = styled.p`
     font-size: 1.15em;
     margin-left: 0.5em;
     margin-bottom: 1.8em;
+    @media (max-width: 700px) {
+        font-size: 0.9em
+    }
 `;
 
 export const WritePostUserImageLayout = styled.img`
