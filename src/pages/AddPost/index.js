@@ -36,21 +36,11 @@ import { Navigate, useParams } from 'react-router-dom';
 import { upload } from '@testing-library/user-event/dist/upload';
 import { display } from '@mui/system';
 
-const WriteBoardInfoField = ({boardName}) => {
-    let boardDetailName = [];
-    let major_name = '';
-    let board_name = '';
-
-    if (boardName) {
-        boardDetailName = boardName.split("-");
-        major_name = boardDetailName[0];
-        board_name = boardDetailName[1];
-    }
-
+const WriteBoardInfoField = ({boardName, majorName}) => {
     return (
         <WritePostBoardContentLayout>
-            <WritePostMajorContent>{major_name}</WritePostMajorContent>
-            <WritePostBoardContent>{board_name} 글 쓰기</WritePostBoardContent>
+            <WritePostMajorContent>{majorName}</WritePostMajorContent>
+            <WritePostBoardContent>{boardName} 글 쓰기</WritePostBoardContent>
         </WritePostBoardContentLayout>
     );
 };
@@ -280,6 +270,7 @@ const AddPost = () => {
             })
             .then((response) => {
                 setPostDetailInfo(response.data);
+                console.log(response.data);
             })
             .catch((response) => {
                 console.log(response);
@@ -295,7 +286,7 @@ const AddPost = () => {
             <AddPostBackgroundContainer>
                 <AddPostLayout>
                     <WritePostContainer>
-                        <WriteBoardInfoField boardName={postDetailInfo.board_name}></WriteBoardInfoField>
+                        <WriteBoardInfoField boardName={postDetailInfo.board_name} majorName={postDetailInfo.major_name}></WriteBoardInfoField>
                         <div>
                             {/* <SelectHashtagField setPostHashtag={setPostHashtag}></SelectHashtagField> */}
                             <WritePostNameField setPostTitle={setPostTitle} />
