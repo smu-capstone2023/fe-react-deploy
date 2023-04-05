@@ -141,19 +141,29 @@ const Board = () => {
                 setBoardListbyReco(response.data.posts);
             });
     };
+// ---------------페이징
+const per_page = 20;
+const [last_id, setLast_id] = useState(0);
 
-    const setBoardListFromServer = () => {
+
+
+    const BoardList_FromServer = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}/board/post_list/${board_id}`, {
+        .get(
+            `${process.env.REACT_APP_SERVER_URL}/board/cursor?board_id=${board_id}&last_id=${last_id}&per_page=${per_page}`,
+             {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
             })
             .then((response) => {
-                setBoardList(response.data.posts);
+                console.log('posts', response.data);
+                setBoardList((prevList) => [...prevList, ...response.data.posts]);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
-            })
+                setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
+
+              })
             .catch((response) => {
                 alert('접근 불가능한 페이지입니다.');
                 window.history.back();
@@ -162,7 +172,7 @@ const Board = () => {
 
     useEffect(() => {
         if (board_id) {
-            setBoardListFromServer();
+            BoardList_FromServer();
             setTimeout(() => {
                 setFade('HomeEnd');
             }, 100);
@@ -170,7 +180,7 @@ const Board = () => {
                 setFade('');
             };
         }
-    }, [board_id, boardList.length, isActive]);
+    }, [board_id, isActive]);
 
 
     useEffect(() => {
@@ -190,7 +200,7 @@ const Board = () => {
                 });
         }
 
-    }, [board_id, boardList.length ,searchKeyword]);
+    }, [searchKeyword, ]);
 
     const handleSearchInputChange = (event) => {
         setSearchKeyword(event.target.value);
