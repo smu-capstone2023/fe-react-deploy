@@ -22,6 +22,8 @@ import ChangeBoardBox from './ChangeBoardBox';
 import '../../App.css';
 
 const BoardList = ({ boardList }) => {
+
+    
     return (
         <>
             <BoardListLayout>
@@ -114,17 +116,7 @@ const BoardToggle = ({ majorName, majorOptions }) => {
     );
 };
 
-const Search = () => {
-    const handleSearch = (event) => {
-        console.log(event.target.value);
-    };
 
-    return (
-        <SearchBarWrapper>
-            <SearchInput type='search' placeholder=' 검색하기' onChange={handleSearch} />
-        </SearchBarWrapper>
-    );
-};
 
 const Board = () => {
     const [boardList, setBoardList] = useState([]);
@@ -132,11 +124,10 @@ const Board = () => {
     const [majorName, setMajorName] = useState('');
     const { major_id, board_id } = useParams();
     const [fade, setFade] = useState('');
-
     const [boardListByRecommendation, setBoardListbyReco] = useState([]);
     const [isActive, setIsActive] = useState(false);
-    // -----------------------------------------------------------
-    // 인기순 보드리스트
+    const [boardListSearch, setBoardListSearch] = useState([]);
+    const [searchKeyword, setSearchKeyword] = useState('');
 
     const BoardList_sortByRecommendation = () => {
         axios
@@ -151,8 +142,6 @@ const Board = () => {
             });
     };
 
-    // -----------------------------------------------------------
-    // 기본 보드리스트
     const setBoardListFromServer = () => {
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}/board/post_list/${board_id}`, {
@@ -183,6 +172,30 @@ const Board = () => {
         }
     }, [board_id, boardList.length, isActive]);
 
+
+    useEffect(() => {
+        if (searchKeyword) {
+            axios
+                .get(`${process.env.REACT_APP_SERVER_URL}/board/search?keyword=${searchKeyword}`, {
+                    headers: {
+                        Authorization: localStorage.getItem('access_token'),
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    setBoardListSearch(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+
+    }, [board_id, boardList.length ,searchKeyword]);
+
+    const handleSearchInputChange = (event) => {
+        setSearchKeyword(event.target.value);
+    };
+
     return (
         <BoardLayout className={`HomeStart ${fade}`}>
             <Boardline>
@@ -191,16 +204,18 @@ const Board = () => {
                     <BoardToggle majorName={majorName} majorOptions={JSON.parse(localStorage.getItem('major_options'))} />
                 </TitleAndToggle>
                 <ChangeBoardBox majorId={major_id} />
-                {/* <Line /> */}
-                <Search />
-                <BoardUtilsButtons
-                    boardId={board_id}
-                    isActive={isActive}
-                    setIsActive={setIsActive}
-                    BoardList_sortByRecommendation={BoardList_sortByRecommendation}
-                />
+
+                <SearchBarWrapper>
+                    <SearchInput type="search" placeholder="검색하기" value={searchKeyword} onChange={handleSearchInputChange} />
+                </SearchBarWrapper>
+
+                <BoardUtilsButtons boardId={board_id} isActive={isActive} setIsActive={setIsActive} BoardList_sortByRecommendation={BoardList_sortByRecommendation} />
                 <Line />
-                <BoardList boardList={isActive ? boardListByRecommendation : boardList} />
+                <BoardList boardList={isActive ? 
+                //TODO: 검색 키워드를 지워도 값이 남음(렌더링 문제인듯?..)
+                    (boardListSearch.length > 0 ? boardListSearch : boardListByRecommendation) 
+                    : (boardListSearch.length > 0 ? boardListSearch : boardList)
+                    } />
             </Boardline>
         </BoardLayout>
     );

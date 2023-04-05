@@ -21,7 +21,7 @@ export const NoticeElementLayout = styled.div`
 
 export const NoticeElementLink = styled(Link)` 
     text-decoration: none;
-
+    color: black;
     @media screen and (max-width: 800px) {
         font-size: .7rem;
     }
