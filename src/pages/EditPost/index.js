@@ -196,7 +196,7 @@ const EditPost = () => {
 
     const getPostInfo = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/detail/${post_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/detail/${post_id}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
@@ -212,7 +212,7 @@ const EditPost = () => {
     const editPostInServer = () => {
         axios
             .patch(
-                `${process.env.REACT_APP_SERVER_URL}:8001/board/update/${post_id}`,
+                `${process.env.REACT_APP_SERVER_URL}/board/update/${post_id}`,
                 {
                     title: postTitle,
                     content: postContent,

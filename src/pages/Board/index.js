@@ -140,7 +140,7 @@ const Board = () => {
 
     const BoardList_sortByRecommendation = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/post_list/${board_id}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                     sorting: localStorage.getItem('likes'),
@@ -155,7 +155,7 @@ const Board = () => {
     // 기본 보드리스트
     const setBoardListFromServer = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/post_list/${board_id}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },

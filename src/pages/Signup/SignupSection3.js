@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import {
-    Line,
     CertificationLink,
     SignContainer,
     SignContainer3,
     SignInputText,
-    SignInnerBox,
+    SignInnerBox as SignInnerBox3,
     SignButton,
     DefaultText,
     SmallText,
@@ -19,7 +18,7 @@ import { uploadImageToServer } from '../../api/utils/imageUploader.js';
 const SignupSection3 = ({ userSignupInfo }) => {
     const [nickname, setNickname] = useState('');
     const [profileImgUrl, setProfileImgUrl] = useState(null);
-    // const [showModal, setShowModal] = useState(false);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -51,7 +50,7 @@ const SignupSection3 = ({ userSignupInfo }) => {
     //TODO: 회원가입할 때 프로필 이미지 url 넘겨주기
     const saveUserInfoAtServer = () => {
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}:8001/auth/join`, {
+            .post(`${process.env.REACT_APP_SERVER_URL}/auth/join`, {
                 school_id: userSignupInfo.school_id,
                 nickname: userSignupInfo.nickname,
                 password: userSignupInfo.password,
@@ -65,7 +64,7 @@ const SignupSection3 = ({ userSignupInfo }) => {
 
     return (
         <SignContainer3>
-            <SignInnerBox>
+            <SignInnerBox3>
                 <DefaultText>사용하실 닉네임을 입력하세요</DefaultText>
                 <SmallText>닉네임은 설정 후 30일 이후에 변경 가능합니다.</SmallText>
                 <SignInputText onChange={(e) => setNickname(e.target.value)} placeholder='닉네임 입력'></SignInputText>
@@ -84,7 +83,7 @@ const SignupSection3 = ({ userSignupInfo }) => {
                         onChange={handleFileChange}
                     />
                 </form>
-            </SignInnerBox>
+            </SignInnerBox3>
             <SignButton
                 onClick={() => {
                     if (checkAllOfSingUpInfo()) saveUserInfoAtServer();
