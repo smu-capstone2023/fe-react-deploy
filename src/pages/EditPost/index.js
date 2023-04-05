@@ -34,17 +34,12 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 
-const WriteUserField = ({setPostDate, setPostNickname}) => {
+const WriteUserField = ({majorName, boardName}) => {
     return (
         <EditPostBoardContentLayout>
-            <EditPostMajorContent>컴퓨터과학과</EditPostMajorContent>
-            <EditPostBoardContent>자유게시판 글 수정</EditPostBoardContent>
+            <EditPostMajorContent>{majorName}</EditPostMajorContent>
+            <EditPostBoardContent>{boardName} 글 수정</EditPostBoardContent>
         </EditPostBoardContentLayout>
-        // <WritePostUserLayout>
-        //     <WritePostUserImageLayout src='https://media.istockphoto.com/id/1197796372/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EB%9E%8C-%EB%B2%A1%ED%84%B0-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=O4BhlKJtKHevLMEJqMIim3IKseu5lEYXBOm3uI8r_vk='></WritePostUserImageLayout>
-        //     <WritePostUserNameLayout>{userName}</WritePostUserNameLayout>
-        //     <WritePostDateLayout>{year} {month} {day}  {hours}:{minute}</WritePostDateLayout>
-        // </WritePostUserLayout>
     );
 };
 
@@ -188,10 +183,10 @@ const EditPost = () => {
     const [postAddFile, setPostAddFile] = useState();
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
+    const [postDetailInfo, setPostDetailInfo] = useState();
 
     useEffect(() => {
         getPostInfo();
-        console.log('render');
     }, []);
 
     const getPostInfo = () => {
@@ -202,7 +197,6 @@ const EditPost = () => {
                 },
             })
             .then((response) => {
-                console.log(response.data.title);
                 setPostTitle(response.data.title);
                 setPostContent(response.data.content);
             })
@@ -233,12 +227,34 @@ const EditPost = () => {
             });
     };
 
+    const getPostDetailInfo = () => {
+        axios
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/info/${post_id}`, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token'),
+                },
+            })
+            .then((response) => {
+                setPostDetailInfo(response.data);
+                console.log(postDetailInfo);
+            })
+            .catch((response) => {
+                console.log(response);
+            })
+    }
+    
+    useEffect(() => {
+        getPostDetailInfo();
+    }, []);
+
     return (
         <>
             <EditPostBackgroundContainer>
                 <AddPostLayout>
                     <WritePostContainer>
-                        <WriteUserField></WriteUserField>
+                        {
+                            postDetailInfo ?  <WriteUserField majorName={postDetailInfo.major_name} boardName={postDetailInfo.board_name}></WriteUserField> : <></>
+                        }
                         <div>
                             {/* <SelectHashtagField></SelectHashtagField> */}
                             <WritePostNameField setPostTitle={setPostTitle} value={postTitle} />
