@@ -131,7 +131,7 @@ const uploadImageToServer = (formData) => {
         },
     })
     .then((response) => {
-        console.log(response);
+        //console.log(response);
         return response.data;
     })
     .catch((response) => console.log(response));
@@ -139,7 +139,7 @@ const uploadImageToServer = (formData) => {
 
 
 
-const AddFileButton = ({ setPostAddFile }) => {
+const AddFileButton = ({ setPostAddFile, postAddFile}) => {
     const [showImages, setShowImages] = useState([]);
     const [formDataArray, setFormDataArray] = useState([]);
 
@@ -157,13 +157,16 @@ const AddFileButton = ({ setPostAddFile }) => {
             formDataArray.push(formData);
         }
 
-        console.log(formDataArray);
+        //console.log(formDataArray);
 
         for (let i = 0; i < formDataArray.length; i++) {
             const formData = formDataArray[i];
             uploadImageToServer(formData)
             .then((response)=> {
-                console.log(response);
+                //console.log(response.imageUrl);
+                postAddFile.push(response.imageUrl);
+                setPostAddFile(postAddFile);
+                console.log(postAddFile);
             })
             .catch((response) => {
                 console.log(response);
@@ -176,6 +179,7 @@ const AddFileButton = ({ setPostAddFile }) => {
 
         setShowImages(imageUrlLists);
         setPostAddFile(showImages);
+        //console.log(postAddFile);
     };
 
     const handleDeleteImage = (id) => {
@@ -239,6 +243,7 @@ const AddPost = () => {
 
     const savePostInServer = async () => {
         console.log(board_id);
+        console.log(postAddFile);
         axios
             .post(
                 `${process.env.REACT_APP_SERVER_URL}/board/create`,
@@ -247,7 +252,7 @@ const AddPost = () => {
                     content: postContent,
                     board_id: board_id,
                     is_anonymous: postAnonymous,
-                    // file: postAddFile,
+                    image_url_list : postAddFile,
                 },
                 {
                     headers: {
@@ -307,7 +312,7 @@ const AddPost = () => {
                             <HideWriterAndCompleteButtonLayout>
                                 <CompletePostButton savePostInServer={savePostInServer} boardId={board_id} />
                             </HideWriterAndCompleteButtonLayout>
-                            <AddFileButton setPostAddFile={setPostAddFile}></AddFileButton>
+                            <AddFileButton setPostAddFile={setPostAddFile} postAddFile={postAddFile}></AddFileButton>
                         </div>
                     </WritePostContainer>
                 </AddPostLayout>

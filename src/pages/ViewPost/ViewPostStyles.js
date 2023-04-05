@@ -223,6 +223,15 @@ export const PostContentField = styled.p`
     }
 `;
 
+export const PostFilecontainer = styled.div`
+    display: flex;
+`;
+
+export const PostFileField = styled.img`
+    width: 5rem;
+    height: 5rem;
+`;
+
 export const PostViewAndLikeContainer = styled.div`
     display: flex;
     padding: 0.3em;
