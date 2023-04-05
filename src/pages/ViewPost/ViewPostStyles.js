@@ -225,11 +225,28 @@ export const PostContentField = styled.p`
 
 export const PostFilecontainer = styled.div`
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 2.5rem 1rem 2.5rem;
+    max-width: 980px;
+    flex-wrap: wrap;
 `;
 
 export const PostFileField = styled.img`
-    width: 5rem;
-    height: 5rem;
+    display: flex;
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    padding: 0.5rem;
+    @media (max-width: 750px) {
+        width: 7rem;
+        height: 7rem;
+    }
+    @media (max-width: 520px) {
+        width: 5rem;
+        height: 5rem;
+    }
 `;
 
 export const PostViewAndLikeContainer = styled.div`
