@@ -22,7 +22,7 @@ const Mypage = () => {
 
     useEffect(() => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/user_info`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/auth/user_info`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },

@@ -369,7 +369,7 @@ const ViewPost = () => {
 
     const getUserInfo = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/user_info` , {
+            .get(`${process.env.REACT_APP_SERVER_URL}/auth/user_info` , {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
@@ -385,7 +385,7 @@ const ViewPost = () => {
 
     const getPostInfo = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/detail/${post_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/detail/${post_id}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
@@ -400,7 +400,7 @@ const ViewPost = () => {
 
     const saveCommentInSever = () => {
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}:8001/comment/create`, {
+            .post(`${process.env.REACT_APP_SERVER_URL}/comment/create`, {
                 post_id : post_id,
                 content: comment,
                 is_anonymous: is_anonymous,
@@ -427,7 +427,7 @@ const ViewPost = () => {
     }
 
     const deleteComment = (comment_id) => {
-        axios.delete(`${process.env.REACT_APP_SERVER_URL}:8001/comment/delete/${comment_id}`, {
+        axios.delete(`${process.env.REACT_APP_SERVER_URL}/comment/delete/${comment_id}`, {
             headers: {
                 Authorization: localStorage.getItem('access_token'),
             },
@@ -448,7 +448,7 @@ const ViewPost = () => {
     }
 
     const deletePost = () => {
-        const url = `${process.env.REACT_APP_SERVER_URL}:8001/board/delete/${post_id}`;
+        const url = `${process.env.REACT_APP_SERVER_URL}/board/delete/${post_id}`;
 
         axios.delete(url, {
             headers: {
@@ -482,7 +482,7 @@ const ViewPost = () => {
 
     const setPostLike = () => {
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}:8001/board/like/${post_id}`, {
+            .post(`${process.env.REACT_APP_SERVER_URL}/board/like/${post_id}`, {
                 like : postTotalLike,
             },
             {
@@ -503,7 +503,7 @@ const ViewPost = () => {
 
     const setCommentLike = (comment_id) => {
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}:8001/comment/like/${comment_id}`, {
+            .post(`${process.env.REACT_APP_SERVER_URL}/comment/like/${comment_id}`, {
                 like : commentTotalLike,
             },
             {

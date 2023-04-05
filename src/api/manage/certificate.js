@@ -3,7 +3,7 @@ import axios from 'axios';
 export const postCertificationPost = (imageUrl, content) => {
     return axios
         .post(
-            `${process.env.REACT_APP_SERVER_URL}:8001/manage/certificate/create`,
+            `${process.env.REACT_APP_SERVER_URL}/manage/certificate/create`,
             {
                 imageUrl: imageUrl,
                 content: content,

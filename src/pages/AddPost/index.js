@@ -125,7 +125,7 @@ const HideWriterNameToggle = ({ setHideWriterName, hideWriterName }) => {
 
 const uploadImageToServer = (formData) => {
     return axios
-    .post(`${process.env.REACT_APP_SERVER_URL}:8001/upload`, formData, {
+    .post(`${process.env.REACT_APP_SERVER_URL}/upload`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
@@ -241,7 +241,7 @@ const AddPost = () => {
         console.log(board_id);
         axios
             .post(
-                `${process.env.REACT_APP_SERVER_URL}:8001/board/create`,
+                `${process.env.REACT_APP_SERVER_URL}/board/create`,
                 {
                     title: postTitle,
                     content: postContent,
@@ -268,7 +268,7 @@ const AddPost = () => {
 
     const getPostDetailInfo = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/info/${board_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/info/${board_id}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
