@@ -40,6 +40,8 @@ import {
     CommentReplyIcon,
     CommentMenuIcon,
     CommentLikeContent,
+    PostFilecontainer,
+    PostFileField,
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
@@ -139,6 +141,21 @@ const ViewPostContentBlock = ({ postTitle, postContent }) => {
             <PostTitleBorderLayout></PostTitleBorderLayout>
             <PostContentField>{postContent}</PostContentField>
         </ViewPostContentLayout>
+    );
+};
+
+const ViewPostFileBlock = ({postFile}) => {
+    return (
+            postFile ? <>
+            {
+                postFile.map((file, i) => {
+                    <PostFilecontainer>
+                        <PostFileField src={file} />
+                    </PostFilecontainer>
+                })
+            }
+            </> : <></>
+
     );
 };
 
@@ -541,6 +558,7 @@ const ViewPost = () => {
                     <>
                         <WriterUserInfoBlock writerName={postInfo.username} userName={userName} createDate={postInfo.created_time} updateDate={postInfo.updated_time} postId={post_id} deletePost={deletePost}></WriterUserInfoBlock>
                         <ViewPostContentBlock postTitle={postInfo.title} postContent={postInfo.content} />
+                        <ViewPostFileBlock postFile={postInfo.image_urls}></ViewPostFileBlock>
                     </>
                 ) : (
                     <></>
