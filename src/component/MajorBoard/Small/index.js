@@ -99,7 +99,7 @@ const MajorBoardSmall = ({ title, boardId, majorOptions }) => {
     const [preview, setPreview] = useState([]);
     useEffect(() => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/preview?board_id=${boardId}&limit_post_num=5`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/preview?board_id=${boardId}&limit_post_num=5`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },

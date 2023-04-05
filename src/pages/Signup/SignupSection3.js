@@ -50,7 +50,7 @@ const SignupSection3 = ({ userSignupInfo }) => {
     //TODO: 회원가입할 때 프로필 이미지 url 넘겨주기
     const saveUserInfoAtServer = () => {
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}:8001/auth/join`, {
+            .post(`${process.env.REACT_APP_SERVER_URL}/auth/join`, {
                 school_id: userSignupInfo.school_id,
                 nickname: userSignupInfo.nickname,
                 password: userSignupInfo.password,
