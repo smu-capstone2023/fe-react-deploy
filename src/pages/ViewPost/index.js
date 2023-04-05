@@ -145,16 +145,28 @@ const ViewPostContentBlock = ({ postTitle, postContent }) => {
 };
 
 const ViewPostFileBlock = ({postFile}) => {
+    let postFileList = [];
+
+    if (postFile) {
+        postFileList = postFile.split(",");
+    }
+
     return (
-            postFile ? <>
+
+        <PostFilecontainer>
             {
-                postFile.map((file, i) => {
-                    <PostFilecontainer>
-                        <PostFileField src={file} />
-                    </PostFilecontainer>
-                })
+                postFile ? <>
+                {
+                    postFileList.map((file, i) => {
+                        return (
+                            <PostFileField src={file} alt=""/>
+                        )
+                    })
+                }
+                </> : <></>
             }
-            </> : <></>
+        </PostFilecontainer>
+
 
     );
 };
