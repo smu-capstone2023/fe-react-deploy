@@ -288,6 +288,13 @@ export const SearchBarWrapper = styled.div`
 
 
 `;
+export const MoreListButton = styled.button`
+    background: ${COLORS.color_button};
+    color: white;
+    padding .8rem;
+    border-radius: 16px;
+    border: solid 1.5px white;
+`;
 
 export const SearchInput = styled.input`
     color: gray;
@@ -309,3 +316,4 @@ export const SearchInput = styled.input`
     }
 
 `;
+

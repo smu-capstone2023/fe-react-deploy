@@ -10,6 +10,7 @@ import {
     Line,
     SearchBarWrapper,
     SearchInput,
+    MoreListButton,
 } from './BoardStyles';
 import NoticeLong from '../../component/PostListElement/NoticeLong';
 import axios from 'axios';
@@ -142,7 +143,7 @@ const Board = () => {
             });
     };
 // ---------------페이징
-const per_page = 20;
+const [per_page, setPer_page] = useState(30);
 const [last_id, setLast_id] = useState(0);
 
 
@@ -162,7 +163,7 @@ const [last_id, setLast_id] = useState(0);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
                 setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
-
+                console.log('1',response.data.posts[response.data.posts.length - 1].post_id);
               })
             .catch((response) => {
                 alert('접근 불가능한 페이지입니다.');
@@ -170,17 +171,18 @@ const [last_id, setLast_id] = useState(0);
             });
     };
 
+
     useEffect(() => {
         if (board_id) {
             BoardList_FromServer();
             setTimeout(() => {
-                setFade('HomeEnd');
+                setFade('End');
             }, 100);
             return () => {
                 setFade('');
             };
         }
-    }, [board_id, isActive]);
+    }, [board_id, isActive, per_page]);
 
 
     useEffect(() => {
@@ -206,8 +208,16 @@ const [last_id, setLast_id] = useState(0);
         setSearchKeyword(event.target.value);
     };
 
+    const MoreButton =  () => {
+    return(
+        <MoreListButton id='w' onClick={() => setPer_page(per_page+1)}>
+        더보기
+        </MoreListButton>
+    )
+}
+
     return (
-        <BoardLayout className={`HomeStart ${fade}`}>
+        <BoardLayout className={`Start ${fade}`}>
             <Boardline>
                 <TitleAndToggle>
                     <BoardTitle>{boardName}</BoardTitle>
@@ -226,9 +236,14 @@ const [last_id, setLast_id] = useState(0);
                     (boardListSearch.length > 0 ? boardListSearch : boardListByRecommendation) 
                     : (boardListSearch.length > 0 ? boardListSearch : boardList)
                     } />
+                <MoreButton/>
+                
             </Boardline>
         </BoardLayout>
     );
 };
+
+
+
 
 export default Board;
