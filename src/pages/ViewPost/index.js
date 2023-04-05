@@ -42,6 +42,9 @@ import {
     CommentLikeContent,
     PostFilecontainer,
     PostFileField,
+    BoardDetailInfocontainer,
+    BoardDetailInfoMajorContent,
+    BoardDetailInfoBoardContent,
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
@@ -50,6 +53,15 @@ import axios from 'axios';
 import { colors } from '@mui/material';
 import styled from 'styled-components';
 import { COLORS } from '../../color';
+
+const BoardDetailInfoBlock = ({majorName, boardName}) => {
+    return (
+        <BoardDetailInfocontainer>
+            <BoardDetailInfoMajorContent>{majorName}</BoardDetailInfoMajorContent>
+            <BoardDetailInfoBoardContent>{boardName} 글쓰기</BoardDetailInfoBoardContent>
+        </BoardDetailInfocontainer>
+    );
+};
 
 
 
@@ -393,6 +405,7 @@ const ViewPost = () => {
     const [userName, setUserName] = useState('');
     const [postTotalLike, setPostTotalLike] = useState(0);
     const [commentTotalLike, setCommentTotalLike] = useState(0);
+    const [boardDetailInfo, setBoardDetailInfo] = useState();
     // const [feedComments, setFeedComments] = useState([]);
     // const [feedReplyComments, setFeedReplyComments] = useState([]);
 
@@ -550,21 +563,39 @@ const ViewPost = () => {
             })
     }
 
+    const getBoardDetailInfo = () => {
+        axios
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/info/${post_id}`, {
+                headers : {
+                    Authorization: localStorage.getItem('access_token'),
+                }
+            })
+            .then((response) => {
+                setBoardDetailInfo(response.data);
+                console.log(response.data);
+            })
+            .catch((response) => {
+                console.log(response);
+            })
+    }
+
     const setUserInfoAtLocalStorage = (response) => {
         localStorage.setItem("access token", response.access_token);
         localStorage.setItem("refresh token", response.refresh_token);
     };
 
-    
-
     useEffect(() => {
         getPostInfo();
         getUserInfo();
+        getBoardDetailInfo();
     }, []);
 
     return (
         <>
         <ViewPostBackground>
+            {
+                boardDetailInfo ? <BoardDetailInfoBlock majorName={boardDetailInfo.major_name} boardName={boardDetailInfo.board_name}></BoardDetailInfoBlock> : <></>
+            }
             <ViewPostLayout>
                 {postInfo ? (
                     <>
