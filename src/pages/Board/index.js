@@ -13,7 +13,7 @@ import {
 } from './BoardStyles';
 import NoticeLong from '../../component/PostListElement/NoticeLong';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -126,17 +126,24 @@ const Search = () => {
     );
 };
 
+
+
+
+  
+
 const Board = () => {
+    const per_page = 50;
+    const [last_id, setLast_id] = useState(0);
+    const [total_page, setTotal_page] = useState();
+    const [offSet, setOffSet] = useState(0);
+    const [loading, setLoading] = useState(false);
     const [boardList, setBoardList] = useState([]);
     const [boardName, setBoardName] = useState('');
     const [majorName, setMajorName] = useState('');
     const { major_id, board_id } = useParams();
     const [fade, setFade] = useState('');
-
     const [boardListByRecommendation, setBoardListbyReco] = useState([]);
     const [isActive, setIsActive] = useState(false);
-    // -----------------------------------------------------------
-    // 인기순 보드리스트
 
     const BoardList_sortByRecommendation = () => {
         axios
@@ -151,25 +158,56 @@ const Board = () => {
             });
     };
 
-    // -----------------------------------------------------------
-    // 기본 보드리스트
-    const setBoardListFromServer = () => {
+    const setBoardListFromServer = useCallback(() => {
+        setLoading(true);
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}/board/post_list/${board_id}`, {
-                headers: {
-                    Authorization: localStorage.getItem('access_token'),
-                },
-            })
-            .then((response) => {
-                setBoardList(response.data.posts);
-                setBoardName(response.data.board_name);
-                setMajorName(response.data.major_name);
-            })
-            .catch((response) => {
-                alert('접근 불가능한 페이지입니다.');
-                window.history.back();
-            });
-    };
+
+          .get(
+            `${process.env.REACT_APP_SERVER_URL}/board/cursor?board_id=${board_id}&last_id=${last_id}&per_page=${per_page}`,
+            {
+              headers: {
+                Authorization: localStorage.getItem('access_token'),
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            setBoardList(boardList => [...boardList, ...response.data.posts]);
+            setBoardName(response.data.board_name);
+            setMajorName(response.data.major_name);
+            setTotal_page(response.data.total_page);
+            setLoading(false);
+          })
+          .catch((response) => {
+            alert('접근 불가능한 페이지입니다.');
+            window.history.back();
+          });
+      }, [board_id, last_id, per_page]);
+    
+      useEffect(() => {
+        if (board_id) {
+          setBoardListFromServer();
+          setTimeout(() => {
+            setFade('HomeEnd');
+          }, 100);
+          return () => {
+            setFade('');
+          };
+        }
+      }, [board_id, setBoardListFromServer]);
+      
+
+    const handleScroll = useCallback(
+        event => {
+            const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
+            if (scrollHeight - scrollTop === clientHeight && !loading && offSet < total_page) {
+              setLast_id(boardList[boardList.length - 1].post_id);
+              setOffSet(offSet => offSet + per_page);
+            }
+        },
+        [loading, boardList, offSet, total_page]
+    );
+
 
     useEffect(() => {
         if (board_id) {
@@ -181,29 +219,44 @@ const Board = () => {
                 setFade('');
             };
         }
-    }, [board_id, boardList.length, isActive]);
+    }, [board_id]);
 
+    useEffect(() => {
+        if (offSet > 0) {
+            setBoardListFromServer();
+        }
+    }, [offSet]);
+
+    useEffect(() => {
+        if (isActive) {
+            BoardList_sortByRecommendation();
+        }
+    }, [isActive]);
+    
     return (
         <BoardLayout className={`HomeStart ${fade}`}>
-            <Boardline>
-                <TitleAndToggle>
-                    <BoardTitle>{boardName}</BoardTitle>
-                    <BoardToggle majorName={majorName} majorOptions={JSON.parse(localStorage.getItem('major_options'))} />
-                </TitleAndToggle>
-                <ChangeBoardBox majorId={major_id} />
-                {/* <Line /> */}
-                <Search />
-                <BoardUtilsButtons
-                    boardId={board_id}
-                    isActive={isActive}
-                    setIsActive={setIsActive}
-                    BoardList_sortByRecommendation={BoardList_sortByRecommendation}
-                />
-                <Line />
-                <BoardList boardList={isActive ? boardListByRecommendation : boardList} />
-            </Boardline>
-        </BoardLayout>
-    );
+        <Boardline>
+        <TitleAndToggle>
+        <BoardTitle>{boardName}</BoardTitle>
+        <BoardToggle majorName={majorName} majorOptions={JSON.parse(localStorage.getItem('major_options'))} />
+        </TitleAndToggle>
+        <ChangeBoardBox majorId={major_id} />
+        {/* <Line /> */}
+        <Search />
+        <BoardUtilsButtons
+                     boardId={board_id}
+                     isActive={isActive}
+                     setIsActive={setIsActive}
+                     BoardList_sortByRecommendation={BoardList_sortByRecommendation}
+                 />
+        <Line />
+        <div onScroll={handleScroll}>
+        <BoardList boardList={isActive ? boardListByRecommendation : boardList} />
+        {loading && <div>Loading...</div>}
+        </div>
+        </Boardline>
+    </BoardLayout>
+        );
 };
 
 export default Board;
