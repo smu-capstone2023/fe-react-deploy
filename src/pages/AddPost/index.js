@@ -129,14 +129,14 @@ const uploadImageToServer = (formData) => {
 
 
 
-const AddFileButton = ({ setPostAddFile, postAddFile}) => {
+const AddFileButton = ({setPostAddFile, postAddFile}) => {
     const [showImages, setShowImages] = useState([]);
     const [formDataArray, setFormDataArray] = useState([]);
-
+    const [transfer, setTransfer] = useState(true);
+    let imageUrlLists = [...showImages];
 
     const handleAddFiles = (e) => {
         const imageList = e.target.files;
-        let imageUrlLists = [...showImages];
 
         for (let i = 0; i < imageList.length; i++) {
             const currentImageUrl = URL.createObjectURL(imageList[i]);
@@ -147,16 +147,12 @@ const AddFileButton = ({ setPostAddFile, postAddFile}) => {
             formDataArray.push(formData);
         }
 
-        //console.log(formDataArray);
-
         for (let i = 0; i < formDataArray.length; i++) {
             const formData = formDataArray[i];
             uploadImageToServer(formData)
             .then((response)=> {
-                //console.log(response.imageUrl);
                 postAddFile.push(response.imageUrl);
                 setPostAddFile(postAddFile);
-                console.log(postAddFile);
             })
             .catch((response) => {
                 console.log(response);
@@ -168,14 +164,19 @@ const AddFileButton = ({ setPostAddFile, postAddFile}) => {
         }
 
         setShowImages(imageUrlLists);
-        setPostAddFile(showImages);
-        //console.log(postAddFile);
     };
 
     const handleDeleteImage = (id) => {
-        handleAddFiles({target : {files:[]}});
-        setFormDataArray(formDataArray.filter((_, index) => index !== id));
-        setShowImages(showImages.filter((_, index) => index !== id));
+        // setPostAddFile(postAddFile.filter((_, index) => index !== id));
+        setPostAddFile((prevPostAddFile) => {
+            const newShowImages = prevPostAddFile.filter((_, index) => index !== id);
+            return newShowImages;
+        });
+        setShowImages((prevShowImages) => {
+            const newShowImages = prevShowImages.filter((_, index) => index !== id);
+            return newShowImages;
+        });
+        console.log(postAddFile);
     };
 
     return (

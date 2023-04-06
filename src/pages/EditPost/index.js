@@ -97,19 +97,63 @@ const AnonymousCheckButton = ({setPostAnonymous}) => {
     );
 };
 
+const uploadImageToServer = (formData) => {
+    return axios
+    .post(`${process.env.REACT_APP_SERVER_URL}/upload`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
+    .then((response) => {
+        //console.log(response);
+        return response.data;
+    })
+    .catch((response) => console.log(response));
+}
 
-//addpost와 달리 get 해와야 함.
-const AddFileButton = ({setPostAddFile}) => {
-    const [uploadNumber, setUploadNumber] = useState(0);
+
+
+const AddFileButton = ({postFile, setPostFileUpdate, postFileUpdate}) => {
     const [showImages, setShowImages] = useState([]);
+    const [transfer, setTransfer] = useState(true);
+    const [formDataArray, setFormDataArray] = useState([]);
+    let imageUrlLists = [...showImages];
+    let originFileList = [];
+
+    if (postFile && transfer) {
+        originFileList = postFile.split(",");
+        if (originFileList.length > 0) {
+            originFileList.map((url, i) => {
+                postFileUpdate.push(url);
+                imageUrlLists.push(url);
+                setShowImages(imageUrlLists);
+            });
+        };
+        setTransfer(false);
+    }
 
     const handleAddFiles = (e) => {
         const imageList = e.target.files;
-        let imageUrlLists = [...showImages];
 
         for (let i = 0; i < imageList.length; i++) {
             const currentImageUrl = URL.createObjectURL(imageList[i]);
             imageUrlLists.push(currentImageUrl);
+
+            const formData = new FormData();
+            formData.append('image', imageList[i]);
+            formDataArray.push(formData);
+        }
+
+        for (let i = 0; i < formDataArray.length; i++) {
+            const formData = formDataArray[i];
+            uploadImageToServer(formData)
+            .then((response)=> {
+                postFileUpdate.push(response.imageUrl);
+                setPostFileUpdate(postFileUpdate);
+            })
+            .catch((response) => {
+                console.log(response);
+            });
         }
 
         if (imageUrlLists.length > 5) {
@@ -117,11 +161,16 @@ const AddFileButton = ({setPostAddFile}) => {
         }
 
         setShowImages(imageUrlLists);
-        setPostAddFile(showImages);
     };
 
     const handleDeleteImage = (id) => {
-        setShowImages(showImages.filter((_, index) => index !== id));
+        handleAddFiles({target : {files:[]}});
+        setPostFileUpdate(postFileUpdate.filter((_, index) => index !== id));
+        setShowImages((prevShowImages) => {
+            const newShowImages = prevShowImages.filter((_, index) => index !== id);
+            return newShowImages;
+        });
+        // setShowImages(showImages.filter((_, index) => index !== id));
     };
 
     return (
@@ -142,6 +191,24 @@ const AddFileButton = ({setPostAddFile}) => {
                         onChange={handleAddFiles}
                     ></AddPostFileLayout>
                 </AddFileButtonLayout>
+                {/* {
+                    originFileList ? 
+                    <>
+                        {originFileList.map((image, id) => (
+                            <ImageContainer key={id}>
+                                <ImageContainerLayout src={image} alt={`${image}-${id}`} />
+                                <ImageContainerDelteLayout src='/img/x.png' onClick={() => handleDeleteImage(id)}></ImageContainerDelteLayout>
+                            </ImageContainer>
+                        ))}
+                    </> : <></>
+                } */}
+{/* 
+                {originFileList.map((image, id) => (
+                    <ImageContainer key={id}>
+                        <ImageContainerLayout src={image} alt={`${image}-${id}`} />
+                        <ImageContainerDelteLayout src='/img/x.png' onClick={() => handleDeleteImage(id)}></ImageContainerDelteLayout>
+                    </ImageContainer>
+                ))}    */}
 
                 {showImages.map((image, id) => (
                     <ImageContainer key={id}>
@@ -180,9 +247,10 @@ const EditPost = () => {
     const [postDate, setPostDate] = useState('');
     const [postHashtag, setPosthashtag] = useState('');
     const [postAnonymous, setPostAnonymous] = useState('');
-    const [postAddFile, setPostAddFile] = useState();
+    const [postFileUpdate, setPostFileUpdate] = useState([]);
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
+    const [postFile, setPostFile] = useState('');
     const [postDetailInfo, setPostDetailInfo] = useState();
 
     useEffect(() => {
@@ -199,6 +267,7 @@ const EditPost = () => {
             .then((response) => {
                 setPostTitle(response.data.title);
                 setPostContent(response.data.content);
+                setPostFile(response.data.image_urls);
             })
             .catch((response) => console.log(response));
     };
@@ -210,6 +279,7 @@ const EditPost = () => {
                 {
                     title: postTitle,
                     content: postContent,
+                    image_url_list : postFileUpdate,
                 },
                 {
                     headers: {
@@ -267,7 +337,7 @@ const EditPost = () => {
                             <HideWriterAndCompleteButtonLayout>
                                 <CompletePostButton editPostInServer={editPostInServer} post_id={post_id}/>
                             </HideWriterAndCompleteButtonLayout>
-                            <AddFileButton></AddFileButton>
+                        <AddFileButton postFile={postFile} setPostFileUpdate={setPostFileUpdate} postFileUpdate={postFileUpdate}></AddFileButton>
                         </div>
                     </WritePostContainer>
                 </AddPostLayout>
