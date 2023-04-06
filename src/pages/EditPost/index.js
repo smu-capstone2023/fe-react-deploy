@@ -169,12 +169,8 @@ const AddFileButton = ({postFile, setPostFileUpdate, postFileUpdate}) => {
     };
 
     const handleDeleteImage = (id) => {
-        // console.log(originFileList);
-        // if (originFileList) {
-        //     const newOriginImages = originFileList.filter((_, index) => index !== id);
-        //     console.log(newOriginImages);
-        //     setOriginFileList(newOriginImages);
-        //   }
+        handleAddFiles({target : {files:[]}});
+        setPostFileUpdate(postFileUpdate.filter((_, index) => index !== id));
         setShowImages((prevShowImages) => {
             const newShowImages = prevShowImages.filter((_, index) => index !== id);
             return newShowImages;
