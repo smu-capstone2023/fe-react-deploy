@@ -23,8 +23,6 @@ import ChangeBoardBox from './ChangeBoardBox';
 import '../../App.css';
 
 const BoardList = ({ boardList }) => {
-
-    
     return (
         <>
             <BoardListLayout>
@@ -117,8 +115,6 @@ const BoardToggle = ({ majorName, majorOptions }) => {
     );
 };
 
-
-
 const Board = () => {
     const [boardList, setBoardList] = useState([]);
     const [boardName, setBoardName] = useState('');
@@ -142,39 +138,50 @@ const Board = () => {
                 setBoardListbyReco(response.data.posts);
             });
     };
-// ---------------페이징
-const [per_page, setPer_page] = useState(30);
+
+const [per_page, setPer_page] = useState(60);
 const [last_id, setLast_id] = useState(0);
-
-
+const [status, setStatus] = useState();
 
     const BoardList_FromServer = () => {
         axios
-        .get(
-            `${process.env.REACT_APP_SERVER_URL}/board/cursor?board_id=${board_id}&last_id=${last_id}&per_page=${per_page}`,
-             {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/cursor?board_id=${board_id}&last_id=${last_id}&per_page=${per_page}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
             })
             .then((response) => {
-                console.log('posts', response.data);
-                setBoardList((prevList) => [...prevList, ...response.data.posts]);
+                // console.log('posts', response.data);
+                if (response.status === 204) {
+                    setStatus(response.status)
+                }
+                else {
+                setBoardList((prevList) => [
+                    ...prevList,
+                    ...(response.data.posts || []),
+                ]);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
                 setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
-                console.log('1',response.data.posts[response.data.posts.length - 1].post_id);
-              })
+                setStatus(response.status)
+                }  
+            })
             .catch((response) => {
                 alert('접근 불가능한 페이지입니다.');
                 window.history.back();
             });
     };
 
+    useEffect(() => {
+        if (searchKeyword.length == 0) {
+            BoardList_FromServer();
+        }
+
+
+    }, [board_id, per_page, searchKeyword]);
 
     useEffect(() => {
         if (board_id) {
-            BoardList_FromServer();
             setTimeout(() => {
                 setFade('End');
             }, 100);
@@ -182,11 +189,10 @@ const [last_id, setLast_id] = useState(0);
                 setFade('');
             };
         }
-    }, [board_id, isActive, per_page]);
-
+    }, [board_id, isActive]);
 
     useEffect(() => {
-        if (searchKeyword) {
+        if (searchKeyword && searchKeyword !== '') {
             axios
                 .get(`${process.env.REACT_APP_SERVER_URL}/board/search?keyword=${searchKeyword}`, {
                     headers: {
@@ -195,25 +201,36 @@ const [last_id, setLast_id] = useState(0);
                 })
                 .then((response) => {
                     console.log(response.data);
+                    console.log((response.data) == 0);
                     setBoardListSearch(response.data);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         }
-
-    }, [searchKeyword, ]);
+    }, [searchKeyword]);
 
     const handleSearchInputChange = (event) => {
         setSearchKeyword(event.target.value);
     };
 
     const MoreButton =  () => {
-    return(
-        <MoreListButton id='w' onClick={() => setPer_page(per_page+1)}>
-        더보기
-        </MoreListButton>
-    )
+
+        if (status == 204) {
+
+            return(<>이 게시판의 마지막에 도달했습니다.</>)
+        }
+        else if (status == 200) {
+            return(
+        
+                <MoreListButton onClick={() => {setPer_page(per_page+1)}}>
+                더보기
+                </MoreListButton>
+            )
+        } 
+            
+        // }
+
 }
 
     return (
@@ -226,24 +243,32 @@ const [last_id, setLast_id] = useState(0);
                 <ChangeBoardBox majorId={major_id} />
 
                 <SearchBarWrapper>
-                    <SearchInput type="search" placeholder="검색하기" value={searchKeyword} onChange={handleSearchInputChange} />
+                    <SearchInput type='search' placeholder='검색하기' value={searchKeyword} onChange={handleSearchInputChange} />
                 </SearchBarWrapper>
 
-                <BoardUtilsButtons boardId={board_id} isActive={isActive} setIsActive={setIsActive} BoardList_sortByRecommendation={BoardList_sortByRecommendation} />
+                <BoardUtilsButtons
+                    boardId={board_id}
+                    isActive={isActive}
+                    setIsActive={setIsActive}
+                    BoardList_sortByRecommendation={BoardList_sortByRecommendation}
+                />
                 <Line />
-                <BoardList boardList={isActive ? 
-                //TODO: 검색 키워드를 지워도 값이 남음(렌더링 문제인듯?..)
-                    (boardListSearch.length > 0 ? boardListSearch : boardListByRecommendation) 
-                    : (boardListSearch.length > 0 ? boardListSearch : boardList)
-                    } />
-                <MoreButton/>
-                
+                <BoardList
+                    boardList={
+                        isActive
+                            ? //TODO: 검색 키워드를 지워도 값이 남음(렌더링 문제인듯?..)
+                              boardListSearch.length > 0
+                                ? boardListSearch
+                                : boardListByRecommendation
+                            : boardListSearch.length > 0
+                            ? boardListSearch
+                            : boardList
+                    }
+                />
+                <MoreButton />
             </Boardline>
         </BoardLayout>
     );
 };
-
-
-
 
 export default Board;

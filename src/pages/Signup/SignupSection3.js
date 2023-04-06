@@ -7,7 +7,7 @@ import {
     SignContainer3,
     SignInputText,
     SignInnerBox as SignInnerBox3,
-    SignButton,
+    SignButton as SignButton3,
     DefaultText,
     SmallText,
     ProfileImageContainer,
@@ -84,13 +84,13 @@ const SignupSection3 = ({ userSignupInfo }) => {
                     />
                 </form>
             </SignInnerBox3>
-            <SignButton
+            <SignButton3
                 onClick={() => {
                     if (checkAllOfSingUpInfo()) saveUserInfoAtServer();
                 }}
             >
                 회원가입 완료
-            </SignButton>
+            </SignButton3>
             <SmallText>학과인증을 통해 더 다양한 권한을 가질 수 있습니다.</SmallText>
         </SignContainer3>
     );
