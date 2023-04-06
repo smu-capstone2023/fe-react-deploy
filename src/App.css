@@ -20,11 +20,11 @@
     src: url("./font/GOTHICA1-REGULAR.woff") format("woff");
 }
 
-.start{
+.Start{
     opacity: 0;
 }
 
-.end{
+.End{
     opacity: 1;
     transition: opacity 1s;
 }

@@ -7,6 +7,36 @@ import { AiFillLike } from "react-icons/ai";
 import { FaReply } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 
+export const BoardDetailInfocontainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+`;
+
+export const BoardDetailInfoMajorContent = styled.h5`
+    display: flex;
+    color: #433b45;
+    font-weight: 600;
+    font-size: 1.5em;
+    padding: 0.2em;
+    @media (max-width: 700px) {
+        font-size: 1.2em;
+    }
+`;
+
+export const BoardDetailInfoBoardContent = styled.p`
+    display: flex;
+    color: #433b45;
+    font-weight: 100;
+    font-size: 1.2em;
+    @media (max-width: 700px) {
+        font-size: 1em;
+    }
+`;
+
 
 
 export const ViewPostMenuUI = styled.ul`
@@ -80,7 +110,7 @@ export const ViewPostLayout = styled.div`
     min-width: 60em;
     padding: 1em;
     margin: auto;
-    margin-top: 3em;
+    margin-top: 1em;
     max-width: 50em;
     // height: 100vh;
     border: solid 1px lightgray;
