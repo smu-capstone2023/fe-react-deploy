@@ -229,7 +229,7 @@ const EditPost = () => {
 
     const getPostDetailInfo = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}/board/info/${post_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/info_by_postid/${post_id}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
