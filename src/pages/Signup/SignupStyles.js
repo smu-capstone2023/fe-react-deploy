@@ -96,7 +96,8 @@ export const SignContainer3 = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: 100vh;
+    width: 23em;
+    height: 30em;
 
     box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.1);
     border: solid 0.1px rgba(128, 128, 128, 0.3);
@@ -115,15 +116,26 @@ export const SignInnerBox3 = styled.div`
     border: solid 0.1px rgba(128, 128, 128, 0.2);
     border-radius: 10px;
     width: 80%;
-    height: 70%;
+    height: 300px;
     padding: 1em;
 
     @media (max-width: 654px) {
-
         border-radius: none;
         border: none;
     }
 `;
+
+export const SignButton3 = styled.div`
+    margin-top: 2rem;
+    padding: 15px;
+    width: 60%;
+    height: 10%; /* 10%로 조절 */
+    background: ${COLORS.color_button};
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+`;
+
 
 export const SignTitle = styled.h1`
     color: ${COLORS.logo};
