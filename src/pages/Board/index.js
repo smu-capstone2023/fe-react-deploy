@@ -10,6 +10,7 @@ import {
     Line,
     SearchBarWrapper,
     SearchInput,
+    MoreListButton,
 } from './BoardStyles';
 import NoticeLong from '../../component/PostListElement/NoticeLong';
 import axios from 'axios';
@@ -141,36 +142,47 @@ const Board = () => {
                 setBoardListbyReco(response.data.posts);
             });
     };
+// ---------------페이징
+const [per_page, setPer_page] = useState(30);
+const [last_id, setLast_id] = useState(0);
 
-    const setBoardListFromServer = () => {
+
+
+    const BoardList_FromServer = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}/board/post_list/${board_id}`, {
+        .get(
+            `${process.env.REACT_APP_SERVER_URL}/board/cursor?board_id=${board_id}&last_id=${last_id}&per_page=${per_page}`,
+             {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
             })
             .then((response) => {
-                setBoardList(response.data.posts);
+                console.log('posts', response.data);
+                setBoardList((prevList) => [...prevList, ...response.data.posts]);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
-            })
+                setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
+                console.log('1',response.data.posts[response.data.posts.length - 1].post_id);
+              })
             .catch((response) => {
                 alert('접근 불가능한 페이지입니다.');
                 window.history.back();
             });
     };
 
+
     useEffect(() => {
         if (board_id) {
-            setBoardListFromServer();
+            BoardList_FromServer();
             setTimeout(() => {
-                setFade('HomeEnd');
+                setFade('End');
             }, 100);
             return () => {
                 setFade('');
             };
         }
-    }, [board_id, boardList.length, isActive]);
+    }, [board_id, isActive, per_page]);
 
 
     useEffect(() => {
@@ -190,14 +202,22 @@ const Board = () => {
                 });
         }
 
-    }, [board_id, boardList.length ,searchKeyword]);
+    }, [searchKeyword, ]);
 
     const handleSearchInputChange = (event) => {
         setSearchKeyword(event.target.value);
     };
 
+    const MoreButton =  () => {
+    return(
+        <MoreListButton id='w' onClick={() => setPer_page(per_page+1)}>
+        더보기
+        </MoreListButton>
+    )
+}
+
     return (
-        <BoardLayout className={`HomeStart ${fade}`}>
+        <BoardLayout className={`Start ${fade}`}>
             <Boardline>
                 <TitleAndToggle>
                     <BoardTitle>{boardName}</BoardTitle>
@@ -216,9 +236,14 @@ const Board = () => {
                     (boardListSearch.length > 0 ? boardListSearch : boardListByRecommendation) 
                     : (boardListSearch.length > 0 ? boardListSearch : boardList)
                     } />
+                <MoreButton/>
+                
             </Boardline>
         </BoardLayout>
     );
 };
+
+
+
 
 export default Board;
