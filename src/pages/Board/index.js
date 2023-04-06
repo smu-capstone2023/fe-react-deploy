@@ -143,7 +143,7 @@ const Board = () => {
             });
     };
 // ---------------페이징
-const [per_page, setPer_page] = useState(30);
+const [per_page, setPer_page] = useState(60);
 const [last_id, setLast_id] = useState(0);
 
 
@@ -163,7 +163,7 @@ const [last_id, setLast_id] = useState(0);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
                 setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
-                console.log('1',response.data.posts[response.data.posts.length - 1].post_id);
+                
               })
             .catch((response) => {
                 alert('접근 불가능한 페이지입니다.');
@@ -173,8 +173,15 @@ const [last_id, setLast_id] = useState(0);
 
 
     useEffect(() => {
-        if (board_id) {
+        if (searchKeyword.length == 0) {
             BoardList_FromServer();
+        }
+
+
+    }, [board_id, per_page, searchKeyword]);
+
+    useEffect(() => {
+        if (board_id) {
             setTimeout(() => {
                 setFade('End');
             }, 100);
@@ -182,7 +189,7 @@ const [last_id, setLast_id] = useState(0);
                 setFade('');
             };
         }
-    }, [board_id, isActive, per_page]);
+    }, [board_id, isActive]);
 
 
     useEffect(() => {
@@ -195,6 +202,7 @@ const [last_id, setLast_id] = useState(0);
                 })
                 .then((response) => {
                     console.log(response.data);
+                    console.log((response.data) == 0);
                     setBoardListSearch(response.data);
                 })
                 .catch((error) => {
@@ -209,11 +217,19 @@ const [last_id, setLast_id] = useState(0);
     };
 
     const MoreButton =  () => {
-    return(
-        <MoreListButton id='w' onClick={() => setPer_page(per_page+1)}>
-        더보기
-        </MoreListButton>
-    )
+        console.log(console.log(last_id));
+        if (last_id <= per_page) {
+            return(<>이 게시판의 마지막에 도달했습니다.</>)
+        }
+        else {
+            return(
+        
+                <MoreListButton onClick={() => setPer_page(per_page+1)}>
+                더보기
+                </MoreListButton>
+            )
+        }
+
 }
 
     return (
