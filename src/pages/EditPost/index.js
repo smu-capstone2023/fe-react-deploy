@@ -125,18 +125,16 @@ const AddFileButton = ({postFile, setPostFileUpdate, postFileUpdate}) => {
     let imageUrlLists = [...showImages];
     let originFileList = [];
 
-    //console.log(postFile);
-
-    const originFilePush = ({list}) => {
-        if (postFile) {
-            originFileList = postFile.split(",");
-            // console.log(originFileList);
-        }
-        if (originFileList && transfer) {
-            originFileList.map((fileUrl, i) => {
-                list.push(fileUrl);
-            })
-        }        
+    if (postFile && transfer) {
+        originFileList = postFile.split(",");
+        if (originFileList.length > 0) {
+            originFileList.map((url, i) => {
+                postFileUpdate.push(url);
+                imageUrlLists.push(url);
+                setShowImages(imageUrlLists);
+            });
+        };
+        setTransfer(false);
     }
 
     const handleAddFiles = (e) => {
@@ -151,16 +149,12 @@ const AddFileButton = ({postFile, setPostFileUpdate, postFileUpdate}) => {
             formDataArray.push(formData);
         }
 
-        
         for (let i = 0; i < formDataArray.length; i++) {
             const formData = formDataArray[i];
             uploadImageToServer(formData)
             .then((response)=> {
-                //console.log(response.imageUrl);
-                // originFilePush(postFileUpdate)
                 postFileUpdate.push(response.imageUrl);
                 setPostFileUpdate(postFileUpdate);
-                //console.log(postFileUpdate);
             })
             .catch((response) => {
                 console.log(response);
@@ -172,8 +166,6 @@ const AddFileButton = ({postFile, setPostFileUpdate, postFileUpdate}) => {
         }
 
         setShowImages(imageUrlLists);
-        setPostFileUpdate(showImages);
-        // setPostAddFile(showImages);
     };
 
     const handleDeleteImage = (id) => {
@@ -189,8 +181,6 @@ const AddFileButton = ({postFile, setPostFileUpdate, postFileUpdate}) => {
         });
         // setShowImages(showImages.filter((_, index) => index !== id));
     };
-
-    console.log(postFileUpdate);
 
     return (
         <>
