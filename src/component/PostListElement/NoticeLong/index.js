@@ -12,10 +12,11 @@ const NoticeLong = ({ title, createDate, numberOfComment, postId, numberOfViews,
             <NoticeElementLayout>
 
                     <NoticeBasicInfoField>
+                    <NoticeElementLink to={"/viewpost/"+postId}>
                     <WriterNameField>
                             {writerName}
                         </WriterNameField>
-                        <NoticeElementLink to={"/viewpost/"+postId}>
+                        
                             <NoticeTitle>
                                 {limitedTitle}
                             </NoticeTitle>
