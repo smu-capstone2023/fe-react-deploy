@@ -143,9 +143,9 @@ const Board = () => {
             });
     };
 // ---------------페이징
-const [per_page, setPer_page] = useState(30);
+const [per_page, setPer_page] = useState(60);
 const [last_id, setLast_id] = useState(0);
-
+const [status, setStatus] = useState();
 
 
     const BoardList_FromServer = () => {
@@ -158,13 +158,21 @@ const [last_id, setLast_id] = useState(0);
                 },
             })
             .then((response) => {
-                console.log('posts', response.data);
-                setBoardList((prevList) => [...prevList, ...response.data.posts]);
+                // console.log('posts', response.data);
+                if (response.status === 204) {
+                    setStatus(response.status)
+                }
+                else {
+                setBoardList((prevList) => [
+                    ...prevList,
+                    ...(response.data.posts || []),
+                ]);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
                 setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
-                console.log('1',response.data.posts[response.data.posts.length - 1].post_id);
-              })
+                setStatus(response.status)
+                }  
+            })
             .catch((response) => {
                 alert('접근 불가능한 페이지입니다.');
                 window.history.back();
@@ -173,8 +181,15 @@ const [last_id, setLast_id] = useState(0);
 
 
     useEffect(() => {
-        if (board_id) {
+        if (searchKeyword.length == 0) {
             BoardList_FromServer();
+        }
+
+
+    }, [board_id, per_page, searchKeyword]);
+
+    useEffect(() => {
+        if (board_id) {
             setTimeout(() => {
                 setFade('End');
             }, 100);
@@ -182,7 +197,7 @@ const [last_id, setLast_id] = useState(0);
                 setFade('');
             };
         }
-    }, [board_id, isActive, per_page]);
+    }, [board_id, isActive]);
 
 
     useEffect(() => {
@@ -195,6 +210,7 @@ const [last_id, setLast_id] = useState(0);
                 })
                 .then((response) => {
                     console.log(response.data);
+                    console.log((response.data) == 0);
                     setBoardListSearch(response.data);
                 })
                 .catch((error) => {
@@ -209,11 +225,22 @@ const [last_id, setLast_id] = useState(0);
     };
 
     const MoreButton =  () => {
-    return(
-        <MoreListButton id='w' onClick={() => setPer_page(per_page+1)}>
-        더보기
-        </MoreListButton>
-    )
+
+        if (status == 204) {
+
+            return(<>이 게시판의 마지막에 도달했습니다.</>)
+        }
+        else if (status == 200) {
+            return(
+        
+                <MoreListButton onClick={() => {setPer_page(per_page+1)}}>
+                더보기
+                </MoreListButton>
+            )
+        } 
+            
+        // }
+
 }
 
     return (
