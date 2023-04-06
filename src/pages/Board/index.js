@@ -23,8 +23,6 @@ import ChangeBoardBox from './ChangeBoardBox';
 import '../../App.css';
 
 const BoardList = ({ boardList }) => {
-
-    
     return (
         <>
             <BoardListLayout>
@@ -117,8 +115,6 @@ const BoardToggle = ({ majorName, majorOptions }) => {
     );
 };
 
-
-
 const Board = () => {
     const [boardList, setBoardList] = useState([]);
     const [boardName, setBoardName] = useState('');
@@ -142,17 +138,13 @@ const Board = () => {
                 setBoardListbyReco(response.data.posts);
             });
     };
-// ---------------페이징
-const [per_page, setPer_page] = useState(30);
-const [last_id, setLast_id] = useState(0);
-
-
+    // ---------------페이징
+    const [per_page, setPer_page] = useState(30);
+    const [last_id, setLast_id] = useState(0);
 
     const BoardList_FromServer = () => {
         axios
-        .get(
-            `${process.env.REACT_APP_SERVER_URL}/board/cursor?board_id=${board_id}&last_id=${last_id}&per_page=${per_page}`,
-             {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/cursor?board_id=${board_id}&last_id=${last_id}&per_page=${per_page}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
@@ -163,14 +155,13 @@ const [last_id, setLast_id] = useState(0);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
                 setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
-                console.log('1',response.data.posts[response.data.posts.length - 1].post_id);
-              })
+                console.log('1', response.data.posts[response.data.posts.length - 1].post_id);
+            })
             .catch((response) => {
                 alert('접근 불가능한 페이지입니다.');
                 window.history.back();
             });
     };
-
 
     useEffect(() => {
         if (board_id) {
@@ -184,9 +175,8 @@ const [last_id, setLast_id] = useState(0);
         }
     }, [board_id, isActive, per_page]);
 
-
     useEffect(() => {
-        if (searchKeyword) {
+        if (searchKeyword && searchKeyword !== '') {
             axios
                 .get(`${process.env.REACT_APP_SERVER_URL}/board/search?keyword=${searchKeyword}`, {
                     headers: {
@@ -201,20 +191,19 @@ const [last_id, setLast_id] = useState(0);
                     console.log(error);
                 });
         }
-
-    }, [searchKeyword, ]);
+    }, [searchKeyword]);
 
     const handleSearchInputChange = (event) => {
         setSearchKeyword(event.target.value);
     };
 
-    const MoreButton =  () => {
-    return(
-        <MoreListButton id='w' onClick={() => setPer_page(per_page+1)}>
-        더보기
-        </MoreListButton>
-    )
-}
+    const MoreButton = () => {
+        return (
+            <MoreListButton id='w' onClick={() => setPer_page(per_page + 1)}>
+                더보기
+            </MoreListButton>
+        );
+    };
 
     return (
         <BoardLayout className={`Start ${fade}`}>
@@ -226,24 +215,32 @@ const [last_id, setLast_id] = useState(0);
                 <ChangeBoardBox majorId={major_id} />
 
                 <SearchBarWrapper>
-                    <SearchInput type="search" placeholder="검색하기" value={searchKeyword} onChange={handleSearchInputChange} />
+                    <SearchInput type='search' placeholder='검색하기' value={searchKeyword} onChange={handleSearchInputChange} />
                 </SearchBarWrapper>
 
-                <BoardUtilsButtons boardId={board_id} isActive={isActive} setIsActive={setIsActive} BoardList_sortByRecommendation={BoardList_sortByRecommendation} />
+                <BoardUtilsButtons
+                    boardId={board_id}
+                    isActive={isActive}
+                    setIsActive={setIsActive}
+                    BoardList_sortByRecommendation={BoardList_sortByRecommendation}
+                />
                 <Line />
-                <BoardList boardList={isActive ? 
-                //TODO: 검색 키워드를 지워도 값이 남음(렌더링 문제인듯?..)
-                    (boardListSearch.length > 0 ? boardListSearch : boardListByRecommendation) 
-                    : (boardListSearch.length > 0 ? boardListSearch : boardList)
-                    } />
-                <MoreButton/>
-                
+                <BoardList
+                    boardList={
+                        isActive
+                            ? //TODO: 검색 키워드를 지워도 값이 남음(렌더링 문제인듯?..)
+                              boardListSearch.length > 0
+                                ? boardListSearch
+                                : boardListByRecommendation
+                            : boardListSearch.length > 0
+                            ? boardListSearch
+                            : boardList
+                    }
+                />
+                <MoreButton />
             </Boardline>
         </BoardLayout>
     );
 };
-
-
-
 
 export default Board;
