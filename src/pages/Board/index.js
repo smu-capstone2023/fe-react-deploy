@@ -145,7 +145,7 @@ const Board = () => {
 // ---------------페이징
 const [per_page, setPer_page] = useState(60);
 const [last_id, setLast_id] = useState(0);
-
+const [status, setStatus] = useState();
 
 
     const BoardList_FromServer = () => {
@@ -158,13 +158,21 @@ const [last_id, setLast_id] = useState(0);
                 },
             })
             .then((response) => {
-                console.log('posts', response.data);
-                setBoardList((prevList) => [...prevList, ...response.data.posts]);
+                // console.log('posts', response.data);
+                if (response.status === 204) {
+                    setStatus(response.status)
+                }
+                else {
+                setBoardList((prevList) => [
+                    ...prevList,
+                    ...(response.data.posts || []),
+                ]);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
                 setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
-                
-              })
+                setStatus(response.status)
+                }  
+            })
             .catch((response) => {
                 alert('접근 불가능한 페이지입니다.');
                 window.history.back();
@@ -217,18 +225,21 @@ const [last_id, setLast_id] = useState(0);
     };
 
     const MoreButton =  () => {
-        console.log(console.log(last_id));
-        if (last_id <= per_page) {
+
+        if (status == 204) {
+
             return(<>이 게시판의 마지막에 도달했습니다.</>)
         }
-        else {
+        else if (status == 200) {
             return(
         
-                <MoreListButton onClick={() => setPer_page(per_page+1)}>
+                <MoreListButton onClick={() => {setPer_page(per_page+1)}}>
                 더보기
                 </MoreListButton>
             )
-        }
+        } 
+            
+        // }
 
 }
 
