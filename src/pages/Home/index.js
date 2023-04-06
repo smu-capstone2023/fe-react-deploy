@@ -21,7 +21,7 @@ const SchoolBoard = () => {
     useEffect(() => {
         axios
             .get(
-                `${process.env.REACT_APP_SERVER_URL}:8001/board/preview?board_id=${process.env.REACT_APP_SCHOOL_BOARD_ID}&limit_post_num=5`,
+                `${process.env.REACT_APP_SERVER_URL}/board/preview?board_id=${process.env.REACT_APP_SCHOOL_BOARD_ID}&limit_post_num=5`,
                 {
                     headers: {
                         Authorization: localStorage.getItem('access_token'),

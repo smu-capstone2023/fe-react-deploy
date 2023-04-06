@@ -10,6 +10,7 @@ import {
     Line,
     SearchBarWrapper,
     SearchInput,
+    MoreListButton,
 } from './BoardStyles';
 import NoticeLong from '../../component/PostListElement/NoticeLong';
 import axios from 'axios';
@@ -22,6 +23,8 @@ import ChangeBoardBox from './ChangeBoardBox';
 import '../../App.css';
 
 const BoardList = ({ boardList }) => {
+
+    
     return (
         <>
             <BoardListLayout>
@@ -114,17 +117,7 @@ const BoardToggle = ({ majorName, majorOptions }) => {
     );
 };
 
-const Search = () => {
-    const handleSearch = (event) => {
-        console.log(event.target.value);
-    };
 
-    return (
-        <SearchBarWrapper>
-            <SearchInput type='search' placeholder=' 검색하기' onChange={handleSearch} />
-        </SearchBarWrapper>
-    );
-};
 
 const Board = () => {
     const [boardList, setBoardList] = useState([]);
@@ -132,15 +125,14 @@ const Board = () => {
     const [majorName, setMajorName] = useState('');
     const { major_id, board_id } = useParams();
     const [fade, setFade] = useState('');
-
     const [boardListByRecommendation, setBoardListbyReco] = useState([]);
     const [isActive, setIsActive] = useState(false);
-    // -----------------------------------------------------------
-    // 인기순 보드리스트
+    const [boardListSearch, setBoardListSearch] = useState([]);
+    const [searchKeyword, setSearchKeyword] = useState('');
 
     const BoardList_sortByRecommendation = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/post_list/${board_id}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                     sorting: localStorage.getItem('likes'),
@@ -150,60 +142,108 @@ const Board = () => {
                 setBoardListbyReco(response.data.posts);
             });
     };
+// ---------------페이징
+const [per_page, setPer_page] = useState(30);
+const [last_id, setLast_id] = useState(0);
 
-    // -----------------------------------------------------------
-    // 기본 보드리스트
-    const setBoardListFromServer = () => {
+
+
+    const BoardList_FromServer = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/post_list/${board_id}`, {
+        .get(
+            `${process.env.REACT_APP_SERVER_URL}/board/cursor?board_id=${board_id}&last_id=${last_id}&per_page=${per_page}`,
+             {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
             })
             .then((response) => {
-                setBoardList(response.data.posts);
+                console.log('posts', response.data);
+                setBoardList((prevList) => [...prevList, ...response.data.posts]);
                 setBoardName(response.data.board_name);
                 setMajorName(response.data.major_name);
-            })
+                setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
+                console.log('1',response.data.posts[response.data.posts.length - 1].post_id);
+              })
             .catch((response) => {
                 alert('접근 불가능한 페이지입니다.');
                 window.history.back();
             });
     };
 
+
     useEffect(() => {
         if (board_id) {
-            setBoardListFromServer();
+            BoardList_FromServer();
             setTimeout(() => {
-                setFade('HomeEnd');
+                setFade('End');
             }, 100);
             return () => {
                 setFade('');
             };
         }
-    }, [board_id, boardList.length, isActive]);
+    }, [board_id, isActive, per_page]);
+
+
+    useEffect(() => {
+        if (searchKeyword) {
+            axios
+                .get(`${process.env.REACT_APP_SERVER_URL}/board/search?keyword=${searchKeyword}`, {
+                    headers: {
+                        Authorization: localStorage.getItem('access_token'),
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    setBoardListSearch(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+
+    }, [searchKeyword, ]);
+
+    const handleSearchInputChange = (event) => {
+        setSearchKeyword(event.target.value);
+    };
+
+    const MoreButton =  () => {
+    return(
+        <MoreListButton id='w' onClick={() => setPer_page(per_page+1)}>
+        더보기
+        </MoreListButton>
+    )
+}
 
     return (
-        <BoardLayout className={`HomeStart ${fade}`}>
+        <BoardLayout className={`Start ${fade}`}>
             <Boardline>
                 <TitleAndToggle>
                     <BoardTitle>{boardName}</BoardTitle>
                     <BoardToggle majorName={majorName} majorOptions={JSON.parse(localStorage.getItem('major_options'))} />
                 </TitleAndToggle>
                 <ChangeBoardBox majorId={major_id} />
-                {/* <Line /> */}
-                <Search />
-                <BoardUtilsButtons
-                    boardId={board_id}
-                    isActive={isActive}
-                    setIsActive={setIsActive}
-                    BoardList_sortByRecommendation={BoardList_sortByRecommendation}
-                />
+
+                <SearchBarWrapper>
+                    <SearchInput type="search" placeholder="검색하기" value={searchKeyword} onChange={handleSearchInputChange} />
+                </SearchBarWrapper>
+
+                <BoardUtilsButtons boardId={board_id} isActive={isActive} setIsActive={setIsActive} BoardList_sortByRecommendation={BoardList_sortByRecommendation} />
                 <Line />
-                <BoardList boardList={isActive ? boardListByRecommendation : boardList} />
+                <BoardList boardList={isActive ? 
+                //TODO: 검색 키워드를 지워도 값이 남음(렌더링 문제인듯?..)
+                    (boardListSearch.length > 0 ? boardListSearch : boardListByRecommendation) 
+                    : (boardListSearch.length > 0 ? boardListSearch : boardList)
+                    } />
+                <MoreButton/>
+                
             </Boardline>
         </BoardLayout>
     );
 };
+
+
+
 
 export default Board;

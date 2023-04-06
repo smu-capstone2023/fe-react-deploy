@@ -7,6 +7,36 @@ import { AiFillLike } from "react-icons/ai";
 import { FaReply } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 
+export const BoardDetailInfocontainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+`;
+
+export const BoardDetailInfoMajorContent = styled.h5`
+    display: flex;
+    color: #433b45;
+    font-weight: 600;
+    font-size: 1.5em;
+    padding: 0.2em;
+    @media (max-width: 700px) {
+        font-size: 1.2em;
+    }
+`;
+
+export const BoardDetailInfoBoardContent = styled.p`
+    display: flex;
+    color: #433b45;
+    font-weight: 100;
+    font-size: 1.2em;
+    @media (max-width: 700px) {
+        font-size: 1em;
+    }
+`;
+
 
 
 export const ViewPostMenuUI = styled.ul`
@@ -80,7 +110,7 @@ export const ViewPostLayout = styled.div`
     min-width: 60em;
     padding: 1em;
     margin: auto;
-    margin-top: 3em;
+    margin-top: 1em;
     max-width: 50em;
     // height: 100vh;
     border: solid 1px lightgray;
@@ -220,6 +250,32 @@ export const PostContentField = styled.p`
     color: #060606;
     @media (max-width: 970px) {
         font-size: 0.95em;
+    }
+`;
+
+export const PostFilecontainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 2.5rem 1rem 2.5rem;
+    max-width: 980px;
+    flex-wrap: wrap;
+`;
+
+export const PostFileField = styled.img`
+    display: flex;
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    padding: 0.5rem;
+    @media (max-width: 750px) {
+        width: 7rem;
+        height: 7rem;
+    }
+    @media (max-width: 520px) {
+        width: 5rem;
+        height: 5rem;
     }
 `;
 

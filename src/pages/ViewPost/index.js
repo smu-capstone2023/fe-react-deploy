@@ -40,6 +40,11 @@ import {
     CommentReplyIcon,
     CommentMenuIcon,
     CommentLikeContent,
+    PostFilecontainer,
+    PostFileField,
+    BoardDetailInfocontainer,
+    BoardDetailInfoMajorContent,
+    BoardDetailInfoBoardContent,
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
@@ -48,6 +53,15 @@ import axios from 'axios';
 import { colors } from '@mui/material';
 import styled from 'styled-components';
 import { COLORS } from '../../color';
+
+const BoardDetailInfoBlock = ({majorName, boardName}) => {
+    return (
+        <BoardDetailInfocontainer>
+            <BoardDetailInfoMajorContent>{majorName}</BoardDetailInfoMajorContent>
+            <BoardDetailInfoBoardContent>{boardName} 글쓰기</BoardDetailInfoBoardContent>
+        </BoardDetailInfocontainer>
+    );
+};
 
 
 
@@ -139,6 +153,33 @@ const ViewPostContentBlock = ({ postTitle, postContent }) => {
             <PostTitleBorderLayout></PostTitleBorderLayout>
             <PostContentField>{postContent}</PostContentField>
         </ViewPostContentLayout>
+    );
+};
+
+const ViewPostFileBlock = ({postFile}) => {
+    let postFileList = [];
+
+    if (postFile) {
+        postFileList = postFile.split(",");
+    }
+
+    return (
+
+        <PostFilecontainer>
+            {
+                postFile ? <>
+                {
+                    postFileList.map((file, i) => {
+                        return (
+                            <PostFileField src={file} alt=""/>
+                        )
+                    })
+                }
+                </> : <></>
+            }
+        </PostFilecontainer>
+
+
     );
 };
 
@@ -364,12 +405,13 @@ const ViewPost = () => {
     const [userName, setUserName] = useState('');
     const [postTotalLike, setPostTotalLike] = useState(0);
     const [commentTotalLike, setCommentTotalLike] = useState(0);
+    const [boardDetailInfo, setBoardDetailInfo] = useState();
     // const [feedComments, setFeedComments] = useState([]);
     // const [feedReplyComments, setFeedReplyComments] = useState([]);
 
     const getUserInfo = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/user_info` , {
+            .get(`${process.env.REACT_APP_SERVER_URL}/auth/user_info` , {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
@@ -385,7 +427,7 @@ const ViewPost = () => {
 
     const getPostInfo = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/detail/${post_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/detail/${post_id}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
@@ -400,7 +442,7 @@ const ViewPost = () => {
 
     const saveCommentInSever = () => {
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}:8001/comment/create`, {
+            .post(`${process.env.REACT_APP_SERVER_URL}/comment/create`, {
                 post_id : post_id,
                 content: comment,
                 is_anonymous: is_anonymous,
@@ -427,7 +469,7 @@ const ViewPost = () => {
     }
 
     const deleteComment = (comment_id) => {
-        axios.delete(`${process.env.REACT_APP_SERVER_URL}:8001/comment/delete/${comment_id}`, {
+        axios.delete(`${process.env.REACT_APP_SERVER_URL}/comment/delete/${comment_id}`, {
             headers: {
                 Authorization: localStorage.getItem('access_token'),
             },
@@ -448,7 +490,7 @@ const ViewPost = () => {
     }
 
     const deletePost = () => {
-        const url = `${process.env.REACT_APP_SERVER_URL}:8001/board/delete/${post_id}`;
+        const url = `${process.env.REACT_APP_SERVER_URL}/board/delete/${post_id}`;
 
         axios.delete(url, {
             headers: {
@@ -482,7 +524,7 @@ const ViewPost = () => {
 
     const setPostLike = () => {
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}:8001/board/like/${post_id}`, {
+            .post(`${process.env.REACT_APP_SERVER_URL}/board/like/${post_id}`, {
                 like : postTotalLike,
             },
             {
@@ -503,7 +545,7 @@ const ViewPost = () => {
 
     const setCommentLike = (comment_id) => {
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}:8001/comment/like/${comment_id}`, {
+            .post(`${process.env.REACT_APP_SERVER_URL}/comment/like/${comment_id}`, {
                 like : commentTotalLike,
             },
             {
@@ -521,26 +563,45 @@ const ViewPost = () => {
             })
     }
 
+    const getBoardDetailInfo = () => {
+        axios
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/info/${post_id}`, {
+                headers : {
+                    Authorization: localStorage.getItem('access_token'),
+                }
+            })
+            .then((response) => {
+                setBoardDetailInfo(response.data);
+                console.log(response.data);
+            })
+            .catch((response) => {
+                console.log(response);
+            })
+    }
+
     const setUserInfoAtLocalStorage = (response) => {
         localStorage.setItem("access token", response.access_token);
         localStorage.setItem("refresh token", response.refresh_token);
     };
 
-    
-
     useEffect(() => {
         getPostInfo();
         getUserInfo();
+        getBoardDetailInfo();
     }, []);
 
     return (
         <>
         <ViewPostBackground>
+            {
+                boardDetailInfo ? <BoardDetailInfoBlock majorName={boardDetailInfo.major_name} boardName={boardDetailInfo.board_name}></BoardDetailInfoBlock> : <></>
+            }
             <ViewPostLayout>
                 {postInfo ? (
                     <>
                         <WriterUserInfoBlock writerName={postInfo.username} userName={userName} createDate={postInfo.created_time} updateDate={postInfo.updated_time} postId={post_id} deletePost={deletePost}></WriterUserInfoBlock>
                         <ViewPostContentBlock postTitle={postInfo.title} postContent={postInfo.content} />
+                        <ViewPostFileBlock postFile={postInfo.image_urls}></ViewPostFileBlock>
                     </>
                 ) : (
                     <></>

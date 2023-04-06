@@ -36,21 +36,11 @@ import { Navigate, useParams } from 'react-router-dom';
 import { upload } from '@testing-library/user-event/dist/upload';
 import { display } from '@mui/system';
 
-const WriteBoardInfoField = ({boardName}) => {
-    let boardDetailName = [];
-    let major_name = '';
-    let board_name = '';
-
-    if (boardName) {
-        boardDetailName = boardName.split("-");
-        major_name = boardDetailName[0];
-        board_name = boardDetailName[1];
-    }
-
+const WriteBoardInfoField = ({boardName, majorName}) => {
     return (
         <WritePostBoardContentLayout>
-            <WritePostMajorContent>{major_name}</WritePostMajorContent>
-            <WritePostBoardContent>{board_name} 글 쓰기</WritePostBoardContent>
+            <WritePostMajorContent>{majorName}</WritePostMajorContent>
+            <WritePostBoardContent>{boardName} 글 쓰기</WritePostBoardContent>
         </WritePostBoardContentLayout>
     );
 };
@@ -125,13 +115,13 @@ const HideWriterNameToggle = ({ setHideWriterName, hideWriterName }) => {
 
 const uploadImageToServer = (formData) => {
     return axios
-    .post(`${process.env.REACT_APP_SERVER_URL}:8001/upload`, formData, {
+    .post(`${process.env.REACT_APP_SERVER_URL}/upload`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
     })
     .then((response) => {
-        console.log(response);
+        //console.log(response);
         return response.data;
     })
     .catch((response) => console.log(response));
@@ -139,7 +129,7 @@ const uploadImageToServer = (formData) => {
 
 
 
-const AddFileButton = ({ setPostAddFile }) => {
+const AddFileButton = ({ setPostAddFile, postAddFile}) => {
     const [showImages, setShowImages] = useState([]);
     const [formDataArray, setFormDataArray] = useState([]);
 
@@ -157,13 +147,16 @@ const AddFileButton = ({ setPostAddFile }) => {
             formDataArray.push(formData);
         }
 
-        console.log(formDataArray);
+        //console.log(formDataArray);
 
         for (let i = 0; i < formDataArray.length; i++) {
             const formData = formDataArray[i];
             uploadImageToServer(formData)
             .then((response)=> {
-                console.log(response);
+                //console.log(response.imageUrl);
+                postAddFile.push(response.imageUrl);
+                setPostAddFile(postAddFile);
+                console.log(postAddFile);
             })
             .catch((response) => {
                 console.log(response);
@@ -176,6 +169,7 @@ const AddFileButton = ({ setPostAddFile }) => {
 
         setShowImages(imageUrlLists);
         setPostAddFile(showImages);
+        //console.log(postAddFile);
     };
 
     const handleDeleteImage = (id) => {
@@ -239,15 +233,16 @@ const AddPost = () => {
 
     const savePostInServer = async () => {
         console.log(board_id);
+        console.log(postAddFile);
         axios
             .post(
-                `${process.env.REACT_APP_SERVER_URL}:8001/board/create`,
+                `${process.env.REACT_APP_SERVER_URL}/board/create`,
                 {
                     title: postTitle,
                     content: postContent,
                     board_id: board_id,
                     is_anonymous: postAnonymous,
-                    // file: postAddFile,
+                    image_url_list : postAddFile,
                 },
                 {
                     headers: {
@@ -268,13 +263,14 @@ const AddPost = () => {
 
     const getPostDetailInfo = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}:8001/board/info/${board_id}`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/info/${board_id}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
             })
             .then((response) => {
                 setPostDetailInfo(response.data);
+                console.log(response.data);
             })
             .catch((response) => {
                 console.log(response);
@@ -290,7 +286,7 @@ const AddPost = () => {
             <AddPostBackgroundContainer>
                 <AddPostLayout>
                     <WritePostContainer>
-                        <WriteBoardInfoField boardName={postDetailInfo.board_name}></WriteBoardInfoField>
+                        <WriteBoardInfoField boardName={postDetailInfo.board_name} majorName={postDetailInfo.major_name}></WriteBoardInfoField>
                         <div>
                             {/* <SelectHashtagField setPostHashtag={setPostHashtag}></SelectHashtagField> */}
                             <WritePostNameField setPostTitle={setPostTitle} />
@@ -307,7 +303,7 @@ const AddPost = () => {
                             <HideWriterAndCompleteButtonLayout>
                                 <CompletePostButton savePostInServer={savePostInServer} boardId={board_id} />
                             </HideWriterAndCompleteButtonLayout>
-                            <AddFileButton setPostAddFile={setPostAddFile}></AddFileButton>
+                            <AddFileButton setPostAddFile={setPostAddFile} postAddFile={postAddFile}></AddFileButton>
                         </div>
                     </WritePostContainer>
                 </AddPostLayout>

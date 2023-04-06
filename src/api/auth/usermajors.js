@@ -1,7 +1,7 @@
 import axios from 'axios';
 export const setUserMajorListInLocalStorage = (accessToken) => {
     return axios
-        .get(`${process.env.REACT_APP_SERVER_URL}:8001/auth/usermajors`, {
+        .get(`${process.env.REACT_APP_SERVER_URL}/auth/usermajors`, {
             headers: {
                 Authorization: accessToken,
             },
