@@ -100,16 +100,6 @@ export const SignContainer3 = styled.div`
 `;
 
 
-export const SignButton3 = styled.div`
-  padding: 15px;
-  width: 80%;
-  height: 50px;
-  background: ${COLORS.color_button};
-  margin-top: 10px;
-  border-radius: 10px;
-  color: white;
-  text-align: center;
-`;
 
 export const SignInnerBox3 = styled.div`
   display: flex;
