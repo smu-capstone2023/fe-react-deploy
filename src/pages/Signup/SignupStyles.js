@@ -126,6 +126,18 @@ export const SignInnerBox3 = styled.div`
   }
 `;
 
+export const SignButton3 = styled.div`
+    margin-top: 2rem;
+    padding: 15px;
+    width: 60%;
+    height: 10%; /* 10%로 조절 */
+    background: ${COLORS.color_button};
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+`;
+
+
 export const SignTitle = styled.h1`
     color: ${COLORS.logo};
     font-size: 25px;
