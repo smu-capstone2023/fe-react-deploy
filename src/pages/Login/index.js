@@ -13,7 +13,7 @@ const Login = () => {
         } else {
             console.log(school_id, '@', password);
             axios
-                .get(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {
+                .post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {
                     headers: {
                         school_id: school_id,
                         password: password,
