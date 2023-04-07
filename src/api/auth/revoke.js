@@ -1,17 +1,11 @@
 import axios from 'axios';
-export const revoke = (schoolId, accessToken) => {
+export const revoke = (accessToken) => {
     return axios
-        .post(
-            `${process.env.REACT_APP_SERVER_URL}/auth/withdrawal`,
-            {
-                school_id: schoolId,
+        .delete(`${process.env.REACT_APP_SERVER_URL}/auth/revoke`, {
+            headers: {
+                Authorization: accessToken,
             },
-            {
-                headers: {
-                    Authorization: accessToken,
-                },
-            }
-        )
+        })
         .then((respone) => {
             if (respone.status === 201) {
                 return true;
