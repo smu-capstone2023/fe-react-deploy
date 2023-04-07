@@ -10,8 +10,8 @@ import {
     UserEmailField,
     UserSettingLayout,
     CertificateButton,
-    SettingsLink,
 } from './MyPageStyles';
+import { revoke } from '../../api/auth/revoke';
 const Mypage = () => {
     const logout = () => {
         localStorage.clear();
@@ -58,7 +58,22 @@ const Mypage = () => {
                         >
                             로그아웃
                         </LogoutButtonLayout>
-                        <SettingsLink to='../MyPage/MyPageSettings'>설정</SettingsLink>
+                        {/* <SettingsLink to='../MyPage/MyPageSettings'>설정</SettingsLink> */}
+                        <LogoutButtonLayout
+                            onClick={(e) => {
+                                revoke(schoolId, localStorage.getItem('access_token')).then((response) => {
+                                    if (response) {
+                                        alert('정상적으로 탈퇴되었습니다.');
+                                        localStorage.clear();
+                                        window.글location.href = '/';
+                                    } else {
+                                        alert('탈퇴하기가 실패했습니다. 잠시 후 시도해주세요.');
+                                    }
+                                });
+                            }}
+                        >
+                            탈퇴하기
+                        </LogoutButtonLayout>
                     </UserSettingLayout>
                 </MyPageContainer>
             </MyPageLayout>

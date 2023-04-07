@@ -23,8 +23,6 @@ import ChangeBoardBox from './ChangeBoardBox';
 import '../../App.css';
 
 const BoardList = ({ boardList }) => {
-
-    
     return (
         <>
             <BoardListLayout>
@@ -117,8 +115,6 @@ const BoardToggle = ({ majorName, majorOptions }) => {
     );
 };
 
-
-
 const Board = () => {
     const [boardList, setBoardList] = useState([]);
     const [boardName, setBoardName] = useState('');
@@ -142,17 +138,14 @@ const Board = () => {
                 setBoardListbyReco(response.data.posts);
             });
     };
-// ---------------페이징
+
 const [per_page, setPer_page] = useState(60);
 const [last_id, setLast_id] = useState(0);
 const [status, setStatus] = useState();
 
-
     const BoardList_FromServer = () => {
         axios
-        .get(
-            `${process.env.REACT_APP_SERVER_URL}/board/cursor?board_id=${board_id}&last_id=${last_id}&per_page=${per_page}`,
-             {
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/cursor?board_id=${board_id}&last_id=${last_id}&per_page=${per_page}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
@@ -179,7 +172,6 @@ const [status, setStatus] = useState();
             });
     };
 
-
     useEffect(() => {
         if (searchKeyword.length == 0) {
             BoardList_FromServer();
@@ -199,9 +191,8 @@ const [status, setStatus] = useState();
         }
     }, [board_id, isActive]);
 
-
     useEffect(() => {
-        if (searchKeyword) {
+        if (searchKeyword && searchKeyword !== '') {
             axios
                 .get(`${process.env.REACT_APP_SERVER_URL}/board/search?keyword=${searchKeyword}`, {
                     headers: {
@@ -217,8 +208,7 @@ const [status, setStatus] = useState();
                     console.log(error);
                 });
         }
-
-    }, [searchKeyword, ]);
+    }, [searchKeyword]);
 
     const handleSearchInputChange = (event) => {
         setSearchKeyword(event.target.value);
@@ -253,24 +243,32 @@ const [status, setStatus] = useState();
                 <ChangeBoardBox majorId={major_id} />
 
                 <SearchBarWrapper>
-                    <SearchInput type="search" placeholder="검색하기" value={searchKeyword} onChange={handleSearchInputChange} />
+                    <SearchInput type='search' placeholder='검색하기' value={searchKeyword} onChange={handleSearchInputChange} />
                 </SearchBarWrapper>
 
-                <BoardUtilsButtons boardId={board_id} isActive={isActive} setIsActive={setIsActive} BoardList_sortByRecommendation={BoardList_sortByRecommendation} />
+                <BoardUtilsButtons
+                    boardId={board_id}
+                    isActive={isActive}
+                    setIsActive={setIsActive}
+                    BoardList_sortByRecommendation={BoardList_sortByRecommendation}
+                />
                 <Line />
-                <BoardList boardList={isActive ? 
-                //TODO: 검색 키워드를 지워도 값이 남음(렌더링 문제인듯?..)
-                    (boardListSearch.length > 0 ? boardListSearch : boardListByRecommendation) 
-                    : (boardListSearch.length > 0 ? boardListSearch : boardList)
-                    } />
-                <MoreButton/>
-                
+                <BoardList
+                    boardList={
+                        isActive
+                            ? //TODO: 검색 키워드를 지워도 값이 남음(렌더링 문제인듯?..)
+                              boardListSearch.length > 0
+                                ? boardListSearch
+                                : boardListByRecommendation
+                            : boardListSearch.length > 0
+                            ? boardListSearch
+                            : boardList
+                    }
+                />
+                <MoreButton />
             </Boardline>
         </BoardLayout>
     );
 };
-
-
-
 
 export default Board;
