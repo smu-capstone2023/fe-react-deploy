@@ -10,6 +10,7 @@ import {
     UserEmailField,
     UserSettingLayout,
     CertificateButton,
+    ChangeInfoButton,
 } from './MyPageStyles';
 import { revoke } from '../../api/auth/revoke';
 const Mypage = () => {
@@ -19,6 +20,8 @@ const Mypage = () => {
     };
     const [nickname, setNickname] = useState('');
     const [schoolId, setSchoolId] = useState('');
+    //프로필 이미지 받아오기
+    const [profileImgUrl, setProfileImgUrl] = useState('');
 
     useEffect(() => {
         axios
@@ -30,6 +33,8 @@ const Mypage = () => {
             .then((response) => {
                 setNickname(response.data.username);
                 setSchoolId(response.data.school_id);
+
+                setProfileImgUrl(response.data.imageUrl);
             });
     }, []);
 
@@ -39,7 +44,7 @@ const Mypage = () => {
         <>
             <MyPageLayout>
                 <MyPageContainer>
-                    <ProfileImageLayout></ProfileImageLayout>
+                    <ProfileImageLayout>이미지파일 받아오기</ProfileImageLayout>
                     <UserNameField>{nickname}</UserNameField>
                     <UserEmailField>{schoolId}@sangmyung.kr</UserEmailField>
                     {majorList.map((major) => {
@@ -50,6 +55,8 @@ const Mypage = () => {
                         );
                     })}
                     <CertificateButton onClick={() => (window.location.href = '../certification')}>학과 인증</CertificateButton>
+                    {/* 닉변 페이지로 이동 */}
+                    {/* <ChangeInfoButton onClick={() => (window.location.href = '../mypagechangeinfo')}>설정 변경</ChangeInfoButton> */}
                     <UserSettingLayout>
                         <LogoutButtonLayout
                             onClick={(e) => {
