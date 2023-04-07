@@ -65,7 +65,7 @@ const Mypage = () => {
                                     if (response) {
                                         alert('정상적으로 탈퇴되었습니다.');
                                         localStorage.clear();
-                                        window.href.location = '/';
+                                        window.글location.href = '/';
                                     } else {
                                         alert('탈퇴하기가 실패했습니다. 잠시 후 시도해주세요.');
                                     }
