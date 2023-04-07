@@ -7,17 +7,12 @@ import {
     AddPostLayout,
     WritePostNameInputText,
     WritePostContentInputText,
-    SelectHashtagLayout,
     AddFileButtonContainer,
     AddFileButtonLayout,
     AnonymousCheckButtonContainer,
     AnonymousContentContainer,
-    WritePostUserImageLayout,
-    WritePostUserNameLayout,
-    WritePostDateLayout,
     AddPostFileLayout,
     AddFileButtonContainerContent,
-    FileUploadNumberLayout,
     ImageContainer,
     ImageContainerLayout,
     ImageContainerDelteLayout,
@@ -27,16 +22,12 @@ import {
     WritePostBoardContent,
     WritePostBoardContentLayout,
 } from './AddPostStyles';
-import { useCallback, useEffect} from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
-import { AiFillCamera } from 'react-icons/ai';
-import makeAnimated from 'react-select/animated';
-import { Navigate, useParams } from 'react-router-dom';
-import { upload } from '@testing-library/user-event/dist/upload';
-import { display } from '@mui/system';
+import { useParams } from 'react-router-dom';
 
-const WriteBoardInfoField = ({boardName, majorName}) => {
+const WriteBoardInfoField = ({ boardName, majorName }) => {
     return (
         <WritePostBoardContentLayout>
             <WritePostMajorContent>{majorName}</WritePostMajorContent>
@@ -90,11 +81,11 @@ const WritePostContentField = ({ setPostContent }) => {
     );
 };
 
-const AnonymousCheckButton = ({ setPostAnonymous, postAnonymous}) => {
+const AnonymousCheckButton = ({ setPostAnonymous, postAnonymous }) => {
     const handleAnonymousChange = () => {
         setPostAnonymous(!postAnonymous);
         console.log(postAnonymous);
-    }
+    };
     return (
         <>
             <AnonymousCheckButtonContainer
@@ -108,75 +99,41 @@ const AnonymousCheckButton = ({ setPostAnonymous, postAnonymous}) => {
     );
 };
 
-const HideWriterNameToggle = ({ setHideWriterName, hideWriterName }) => {
-    const userName = localStorage.nickname;
-    return <></>;
-};
-
 const uploadImageToServer = (formData) => {
     return axios
-    .post(`${process.env.REACT_APP_SERVER_URL}/upload`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    })
-    .then((response) => {
-        //console.log(response);
-        return response.data;
-    })
-    .catch((response) => console.log(response));
-}
+        .post(`${process.env.REACT_APP_SERVER_URL}/upload`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((response) => console.log(response));
+};
 
-
-
-const AddFileButton = ({setPostAddFile, postAddFile}) => {
-    const [showImages, setShowImages] = useState([]);
-    const [formDataArray, setFormDataArray] = useState([]);
-    const [transfer, setTransfer] = useState(true);
-    let imageUrlLists = [...showImages];
-
+const AddFileButton = ({ setImageList, imageList }) => {
     const handleAddFiles = (e) => {
-        const imageList = e.target.files;
-
-        for (let i = 0; i < imageList.length; i++) {
-            const currentImageUrl = URL.createObjectURL(imageList[i]);
-            imageUrlLists.push(currentImageUrl);
-
-            const formData = new FormData();
-            formData.append('image', imageList[i]);
-            formDataArray.push(formData);
+        const imageFile = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', imageFile);
+        if (imageList.length >= 5) {
+            alert('이미지 업로드 가능 개수는 5개입니다.');
+            return;
         }
-
-        for (let i = 0; i < formDataArray.length; i++) {
-            const formData = formDataArray[i];
-            uploadImageToServer(formData)
-            .then((response)=> {
-                postAddFile.push(response.imageUrl);
-                setPostAddFile(postAddFile);
+        uploadImageToServer(formData)
+            .then((response) => {
+                console.log(response);
+                setImageList([response.imageUrl, ...imageList]);
             })
             .catch((response) => {
-                console.log(response);
+                alert('이미지를 불러오는데 실패했습니다. 다시 시도해주세요.');
             });
-        }
-
-        if (imageUrlLists.length > 5) {
-            imageUrlLists = imageUrlLists.slice(0, 5);
-        }
-
-        setShowImages(imageUrlLists);
     };
 
     const handleDeleteImage = (id) => {
-        // setPostAddFile(postAddFile.filter((_, index) => index !== id));
-        setPostAddFile((prevPostAddFile) => {
-            const newShowImages = prevPostAddFile.filter((_, index) => index !== id);
-            return newShowImages;
-        });
-        setShowImages((prevShowImages) => {
-            const newShowImages = prevShowImages.filter((_, index) => index !== id);
-            return newShowImages;
-        });
-        console.log(postAddFile);
+        imageList.splice(id, 1);
+        setImageList([...imageList]);
     };
 
     return (
@@ -197,10 +154,15 @@ const AddFileButton = ({setPostAddFile, postAddFile}) => {
                     ></AddPostFileLayout>
                 </AddFileButtonLayout>
 
-                {showImages.map((image, id) => (
+                {imageList.map((image, id) => (
                     <ImageContainer key={id}>
-                        <ImageContainerLayout src={image} alt={`${image}-${id}`}/>
-                        <ImageContainerDelteLayout src='/img/x.png' onClick={() => {handleDeleteImage(id)}}></ImageContainerDelteLayout>
+                        <ImageContainerLayout src={image} alt={`${image}-${id}`} />
+                        <ImageContainerDelteLayout
+                            src='/img/x.png'
+                            onClick={() => {
+                                handleDeleteImage(id);
+                            }}
+                        ></ImageContainerDelteLayout>
                     </ImageContainer>
                 ))}
             </AddFileButtonContainer>
@@ -231,10 +193,7 @@ const AddPost = () => {
     const [postDetailInfo, setPostDetailInfo] = useState({});
     const { board_id } = useParams();
 
-
     const savePostInServer = async () => {
-        console.log(board_id);
-        console.log(postAddFile);
         axios
             .post(
                 `${process.env.REACT_APP_SERVER_URL}/board/create`,
@@ -243,7 +202,7 @@ const AddPost = () => {
                     content: postContent,
                     board_id: board_id,
                     is_anonymous: postAnonymous,
-                    image_url_list : postAddFile,
+                    image_url_list: postAddFile,
                 },
                 {
                     headers: {
@@ -275,8 +234,8 @@ const AddPost = () => {
             })
             .catch((response) => {
                 console.log(response);
-            })
-    }
+            });
+    };
 
     useEffect(() => {
         getPostDetailInfo();
@@ -287,7 +246,10 @@ const AddPost = () => {
             <AddPostBackgroundContainer>
                 <AddPostLayout>
                     <WritePostContainer>
-                        <WriteBoardInfoField boardName={postDetailInfo.board_name} majorName={postDetailInfo.major_name}></WriteBoardInfoField>
+                        <WriteBoardInfoField
+                            boardName={postDetailInfo.board_name}
+                            majorName={postDetailInfo.major_name}
+                        ></WriteBoardInfoField>
                         <div>
                             {/* <SelectHashtagField setPostHashtag={setPostHashtag}></SelectHashtagField> */}
                             <WritePostNameField setPostTitle={setPostTitle} />
@@ -296,15 +258,18 @@ const AddPost = () => {
                         <WritePostContentField setPostContent={setPostContent} />
                         <Blank1em />
                         <div>
-                            {
-                            
-                                (postDetailInfo.is_can_anonymous) ?  <AnonymousCheckButton setPostAnonymous={setPostAnonymous} postAnonymous={postAnonymous}></AnonymousCheckButton>
-                                : <></>
-                            }
+                            {postDetailInfo.is_can_anonymous ? (
+                                <AnonymousCheckButton
+                                    setPostAnonymous={setPostAnonymous}
+                                    postAnonymous={postAnonymous}
+                                ></AnonymousCheckButton>
+                            ) : (
+                                <></>
+                            )}
                             <HideWriterAndCompleteButtonLayout>
                                 <CompletePostButton savePostInServer={savePostInServer} boardId={board_id} />
                             </HideWriterAndCompleteButtonLayout>
-                            <AddFileButton setPostAddFile={setPostAddFile} postAddFile={postAddFile}></AddFileButton>
+                            <AddFileButton setImageList={setPostAddFile} imageList={postAddFile}></AddFileButton>
                         </div>
                     </WritePostContainer>
                 </AddPostLayout>
