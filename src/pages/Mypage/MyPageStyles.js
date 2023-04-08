@@ -87,3 +87,13 @@ export const CertificateButton = styled.div`
     border-radius: 5px;
     color: white;
 `;
+
+//설정변경 페이지
+export const ChangeInfoButton = styled.div`
+    background: ${COLORS.logo};
+    padding: 0.5em 0;
+    border-radius: 5px;
+    color: white;
+
+    margin-top: 10px;
+`;

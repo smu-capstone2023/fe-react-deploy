@@ -8,24 +8,18 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     const requestLoginToServer = () => {
+        console.log(school_id, password);
         if (school_id === '' || password === '') {
             alert('회원정보를 입력해주세요.');
         } else {
-            console.log(school_id, '@', password);
             axios
                 .post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {
-                    headers: {
-                        school_id: school_id,
-                        password: password,
-                        'Content-type': 'application/json',
-                        Accept: 'application/json',
-                    },
+                    school_id: school_id,
+                    password: password,
                 })
                 .then((response) => {
-                    console.log(response);
                     setUserInfoAtLocalStorage(response.data);
                     setUserMajorListInLocalStorage(response.data.access_token).then((response) => {
-                        console.log(response);
                         if (response) {
                             window.location.href = '/';
                         }
