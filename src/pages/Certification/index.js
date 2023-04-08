@@ -51,8 +51,10 @@ const Certification = () => {
                     <SubmitButtonLabel
                         onClick={() => {
                             postCertificationPost(profileImgUrl, inputtext).then((response) => {
-                                alert('인증 요청을 완료했습니다.');
-                                if (response) window.location.href = '../mypage';
+                                if (response) {
+                                    alert('인증 요청을 완료했습니다.');
+                                    window.location.href = '../mypage';
+                                }
                             });
                         }}
                     >

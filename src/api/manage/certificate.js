@@ -13,6 +13,7 @@ export const postCertificationPost = (imageUrl, content) => {
             }
         )
         .then((response) => {
+            console.log(response);
             return response.data.isSuccess;
         })
         .catch((response) => {
