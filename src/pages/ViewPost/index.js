@@ -272,7 +272,7 @@ const CommentBlock = ({userName, comments, saveCommentInSever, comment, is_anony
             {comments ? 
                 <>
                     {
-                        comments.map((commentArr, i) => {
+                        comments.reserver().map((commentArr, i) => {
                             if (commentArr.created_time) {
                                 day = commentArr.created_time.slice(0, 10);
                                 time = commentArr.created_time.slice(12, 16);
