@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const Nav = styled.div`
     background: white;
@@ -12,7 +11,7 @@ export const Nav = styled.div`
     top: 0;
     z-index: 10;
 
-    font-family: "NANUMGOTHIC-REGULAR";
+    font-family: 'NANUMGOTHIC-REGULAR';
     @media screen and(max-width:960px) {
         transition: 0.8s all ease;
     }
@@ -69,10 +68,10 @@ export const NavMenu = styled.ul`
 
 export const NavItem = styled.li`
     height: 80px;
-    font-family: "NANUMGOTHIC-REGULAR";
+    font-family: 'NANUMGOTHIC-REGULAR';
 `;
 
-export const NavLinks = styled(Link)`
+export const NavLinks = styled.div`
     color: black;
     display: flex;
     align-items: center;

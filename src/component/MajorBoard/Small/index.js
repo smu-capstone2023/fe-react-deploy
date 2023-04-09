@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import {
     SchoolBoardButtonIcon,
     SchoolBoardTitle,
@@ -63,7 +63,6 @@ const DetailBoardTitleWithMore = ({ boardIcon, boardTitle }) => {
 
 const BoardToggle = ({ title, majorOptions }) => {
     const animatedComponents = makeAnimated();
-    console.log('BoardToggle', majorOptions);
     return (
         <ToggleBox>
             <Select
