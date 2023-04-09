@@ -5,7 +5,7 @@ export const postCertificationPost = (imageUrl, content) => {
         .post(
             `${process.env.REACT_APP_SERVER_URL}/manage/certificate/create`,
             {
-                imageUrl: imageUrl,
+                image: imageUrl,
                 content: content,
             },
             {

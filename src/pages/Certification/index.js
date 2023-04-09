@@ -25,8 +25,7 @@ const Certification = () => {
         const formData = new FormData();
         formData.append('image', e.target.files[0]);
         uploadImageToServer(formData).then((response) => {
-            setProfileImgUrl(response.imageUrl);
-            console.log(response.imageUrl);
+            setProfileImgUrl(response.imageUrls);
         });
     };
 

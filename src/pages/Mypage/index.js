@@ -10,7 +10,7 @@ import {
     UserEmailField,
     UserSettingLayout,
     CertificateButton,
-    ChangeInfoButton,
+    ProfileImageFrame,
 } from './MyPageStyles';
 import { revoke } from '../../api/auth/revoke';
 const Mypage = () => {
@@ -18,10 +18,8 @@ const Mypage = () => {
         localStorage.clear();
         window.location.href = '/';
     };
-    const [nickname, setNickname] = useState('');
-    const [schoolId, setSchoolId] = useState('');
-    //프로필 이미지 받아오기
-    const [profileImgUrl, setProfileImgUrl] = useState('');
+
+    const [userInfo, setUserInfo] = useState({});
 
     useEffect(() => {
         axios
@@ -31,10 +29,7 @@ const Mypage = () => {
                 },
             })
             .then((response) => {
-                setNickname(response.data.username);
-                setSchoolId(response.data.school_id);
-
-                setProfileImgUrl(response.data.imageUrl);
+                setUserInfo(response.data);
             });
     }, []);
 
@@ -44,12 +39,17 @@ const Mypage = () => {
         <>
             <MyPageLayout>
                 <MyPageContainer>
-                    <ProfileImageLayout>이미지파일 받아오기</ProfileImageLayout>
-                    <UserNameField>{nickname}</UserNameField>
-                    <UserEmailField>{schoolId}@sangmyung.kr</UserEmailField>
+                    <ProfileImageLayout>
+                        {userInfo.profile_img_url && <ProfileImageFrame src={userInfo.profile_img_url} />}
+                    </ProfileImageLayout>
+                    <UserNameField>{userInfo.username}</UserNameField>
+                    <UserEmailField>{userInfo.school_id}@sangmyung.kr</UserEmailField>
                     {majorList.map((major, index) => {
                         return (
-                            <TogoBoardListWidget key={index} onClick={() => (window.location.href = `/board/${major.value}`)}>
+                            <TogoBoardListWidget
+                                key={index}
+                                onClick={() => (window.location.href = `/board/${major.value}/${major.freeBoard}`)}
+                            >
                                 {major.label}
                             </TogoBoardListWidget>
                         );
@@ -68,11 +68,11 @@ const Mypage = () => {
                         {/* <SettingsLink to='../MyPage/MyPageSettings'>설정</SettingsLink> */}
                         <LogoutButtonLayout
                             onClick={(e) => {
-                                revoke(schoolId, localStorage.getItem('access_token')).then((response) => {
+                                revoke(localStorage.getItem('access_token')).then((response) => {
                                     if (response) {
                                         alert('정상적으로 탈퇴되었습니다.');
                                         localStorage.clear();
-                                        window.글location.href = '/';
+                                        window.location.href = '/';
                                     } else {
                                         alert('탈퇴하기가 실패했습니다. 잠시 후 시도해주세요.');
                                     }
