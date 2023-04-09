@@ -47,14 +47,14 @@ const Mypage = () => {
                     <ProfileImageLayout>이미지파일 받아오기</ProfileImageLayout>
                     <UserNameField>{nickname}</UserNameField>
                     <UserEmailField>{schoolId}@sangmyung.kr</UserEmailField>
-                    {majorList.map((major) => {
+                    {majorList.map((major, index) => {
                         return (
-                            <TogoBoardListWidget onClick={() => (window.location.href = `../board/${major.value}`)}>
+                            <TogoBoardListWidget key={index} onClick={() => (window.location.href = `/board/${major.value}`)}>
                                 {major.label}
                             </TogoBoardListWidget>
                         );
                     })}
-                    <CertificateButton onClick={() => (window.location.href = '../certification')}>학과 인증</CertificateButton>
+                    <CertificateButton onClick={() => (window.location.href = '/certification')}>학과 인증</CertificateButton>
                     {/* 닉변 페이지로 이동 */}
                     {/* <ChangeInfoButton onClick={() => (window.location.href = '../mypagechangeinfo')}>설정 변경</ChangeInfoButton> */}
                     <UserSettingLayout>

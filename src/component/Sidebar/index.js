@@ -18,7 +18,7 @@ const Sidebar = ({ isOpen, toggle, setIsOpen }) => {
                                 <SidebarLink
                                     onClick={() => {
                                         setIsOpen(false);
-                                        window.location.href = "board/1/3'";
+                                        window.location.href = "/board/1/3'";
                                     }}
                                 >
                                     학교게시판
@@ -27,7 +27,7 @@ const Sidebar = ({ isOpen, toggle, setIsOpen }) => {
                                     <SidebarLink
                                         onClick={() => {
                                             setIsOpen(false);
-                                            window.location.href = `board/${majorList[1].value}/${majorList[1].freeBoard}`;
+                                            window.location.href = `/board/${majorList[1].value}/${majorList[1].freeBoard}`;
                                         }}
                                     >
                                         학과게시판
@@ -36,7 +36,7 @@ const Sidebar = ({ isOpen, toggle, setIsOpen }) => {
                                 <SidebarLink
                                     onClick={() => {
                                         setIsOpen(false);
-                                        window.location.href = 'board/1/17';
+                                        window.location.href = '/board/1/17';
                                     }}
                                 >
                                     피드백게시판
@@ -44,7 +44,7 @@ const Sidebar = ({ isOpen, toggle, setIsOpen }) => {
                                 <SidebarLink
                                     onClick={() => {
                                         setIsOpen(false);
-                                        window.location.href = 'mypage';
+                                        window.location.href = '/mypage';
                                     }}
                                 >
                                     마이페이지
@@ -67,7 +67,7 @@ const Sidebar = ({ isOpen, toggle, setIsOpen }) => {
                                 <SidebarLink
                                     onClick={() => {
                                         setIsOpen(false);
-                                        window.location.href = `login`;
+                                        window.location.href = `/login`;
                                     }}
                                 >
                                     로그인

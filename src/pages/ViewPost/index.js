@@ -93,7 +93,7 @@ const ViewPostMenu = ({ writerName, userName, postId, deletePost }) => {
                     <ViewPostMenuUI>
                         {writerName == userName ? (
                             <>
-                                <ViewPostMenuContent onClick={() => (window.location.href = `../editpost/${postId}`)}>
+                                <ViewPostMenuContent onClick={() => (window.location.href = `/editpost/${postId}`)}>
                                     수정
                                 </ViewPostMenuContent>
                                 <ViewPostMenuContent onClick={deletePost}>삭제</ViewPostMenuContent>
