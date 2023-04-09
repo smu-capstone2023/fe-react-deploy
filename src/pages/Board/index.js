@@ -21,8 +21,8 @@ import makeAnimated from 'react-select/animated';
 import { COLORS } from '../../color';
 import ChangeBoardBox from './ChangeBoardBox';
 import '../../App.css';
-
-const BoardList = ({ boardList }) => {
+import { getNotice } from '../../api/board/notice';
+const BoardList = ({ boardList, isNotice = false }) => {
     return (
         <>
             <BoardListLayout>
@@ -35,6 +35,7 @@ const BoardList = ({ boardList }) => {
 
                 {boardList.map((boardElement) => (
                     <NoticeLong
+                        isNotice={isNotice}
                         key={boardElement.post_id}
                         writerName={boardElement.username}
                         title={boardElement.title}
@@ -125,6 +126,7 @@ const Board = () => {
     const [isActive, setIsActive] = useState(false);
     const [boardListSearch, setBoardListSearch] = useState([]);
     const [searchKeyword, setSearchKeyword] = useState('');
+    const [isNotice, setIsNotice] = useState(false);
 
     const BoardList_sortByRecommendation = () => {
         axios
@@ -139,9 +141,9 @@ const Board = () => {
             });
     };
 
-const [per_page, setPer_page] = useState(60);
-const [last_id, setLast_id] = useState(0);
-const [status, setStatus] = useState();
+    const [per_page, setPer_page] = useState(60);
+    const [last_id, setLast_id] = useState(0);
+    const [status, setStatus] = useState();
 
     const BoardList_FromServer = () => {
         axios
@@ -153,18 +155,14 @@ const [status, setStatus] = useState();
             .then((response) => {
                 // console.log('posts', response.data);
                 if (response.status === 204) {
-                    setStatus(response.status)
+                    setStatus(response.status);
+                } else {
+                    setBoardList((prevList) => [...prevList, ...(response.data.posts || [])]);
+                    setBoardName(response.data.board_name);
+                    setMajorName(response.data.major_name);
+                    setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
+                    setStatus(response.status);
                 }
-                else {
-                setBoardList((prevList) => [
-                    ...prevList,
-                    ...(response.data.posts || []),
-                ]);
-                setBoardName(response.data.board_name);
-                setMajorName(response.data.major_name);
-                setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
-                setStatus(response.status)
-                }  
             })
             .catch((response) => {
                 alert('접근 불가능한 페이지입니다.');
@@ -173,11 +171,17 @@ const [status, setStatus] = useState();
     };
 
     useEffect(() => {
+        if (major_id === '1' && board_id === '3') {
+            setIsNotice(true);
+            getNotice(100).then((response) => {
+                setBoardList(response);
+            });
+        } else {
+            setIsNotice(false);
+        }
         if (searchKeyword.length == 0) {
             BoardList_FromServer();
         }
-
-
     }, [board_id, per_page, searchKeyword]);
 
     useEffect(() => {
@@ -201,7 +205,7 @@ const [status, setStatus] = useState();
                 })
                 .then((response) => {
                     console.log(response.data);
-                    console.log((response.data) == 0);
+                    console.log(response.data === 0);
                     setBoardListSearch(response.data);
                 })
                 .catch((error) => {
@@ -214,24 +218,23 @@ const [status, setStatus] = useState();
         setSearchKeyword(event.target.value);
     };
 
-    const MoreButton =  () => {
-
+    const MoreButton = () => {
         if (status == 204) {
-
-            return(<>이 게시판의 마지막에 도달했습니다.</>)
-        }
-        else if (status == 200) {
-            return(
-        
-                <MoreListButton onClick={() => {setPer_page(per_page+1)}}>
-                더보기
+            return <>이 게시판의 마지막에 도달했습니다.</>;
+        } else if (status == 200) {
+            return (
+                <MoreListButton
+                    onClick={() => {
+                        setPer_page(per_page + 1);
+                    }}
+                >
+                    더보기
                 </MoreListButton>
-            )
-        } 
-            
-        // }
+            );
+        }
 
-}
+        // }
+    };
 
     return (
         <BoardLayout className={`Start ${fade}`}>
@@ -254,6 +257,7 @@ const [status, setStatus] = useState();
                 />
                 <Line />
                 <BoardList
+                    isNotice={isNotice}
                     boardList={
                         isActive
                             ? //TODO: 검색 키워드를 지워도 값이 남음(렌더링 문제인듯?..)

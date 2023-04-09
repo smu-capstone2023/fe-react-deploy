@@ -15,22 +15,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import MajorBoardSmall from '../../component/MajorBoard/Small';
 import { setUserMajorListInLocalStorage } from '../../api/auth/usermajors';
+import { getNotice } from '../../api/board/notice';
 
 const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
     useEffect(() => {
-        axios
-            .get(`${process.env.REACT_APP_SERVER_URL}/board/preview?board_id=${process.env.REACT_APP_SCHOOL_BOARD_ID}&limit_post_num=5`, {
-                headers: {
-                    Authorization: localStorage.getItem('access_token'),
-                },
-            })
-            .then((response) => {
-                setBoardList(response.data);
-            })
-            .catch((response) => {
-                localStorage.clear();
-            });
+        getNotice().then((response) => {
+            setBoardList(response);
+        });
     }, []);
 
     return (
@@ -42,9 +34,10 @@ const SchoolBoard = () => {
                 {boardList.map((postElement) => {
                     return (
                         <Notice
+                            isNotice={true}
                             key={postElement.post_id}
                             title={postElement.title}
-                            numberOfComment={postElement.comments}
+                            numberOfComment={null}
                             createDate={postElement.created_time}
                             postId={postElement.post_id}
                         />
