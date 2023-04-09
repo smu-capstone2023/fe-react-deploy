@@ -18,11 +18,22 @@ export const MyPageContainer = styled.div`
 `;
 
 export const ProfileImageLayout = styled.div`
-    display:flex:
-    width:70%;
-    height: 12em;
-    background: #D9D9D9;
-    margin: 2em 0;
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    border: solid 0.1px rgba(128, 128, 128, 0.4);
+    border-radius: 10px;
+    max-width: 25em;
+    text-align: center;
+    height: 15em;
+`;
+
+export const ProfileImageFrame = styled.img`
+    object-fit: fill;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
 `;
 
 export const UserNameField = styled.h2``;
