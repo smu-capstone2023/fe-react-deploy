@@ -20,14 +20,11 @@ const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
     useEffect(() => {
         axios
-            .get(
-                `${process.env.REACT_APP_SERVER_URL}/board/preview?board_id=${process.env.REACT_APP_SCHOOL_BOARD_ID}&limit_post_num=5`,
-                {
-                    headers: {
-                        Authorization: localStorage.getItem('access_token'),
-                    },
-                }
-            )
+            .get(`${process.env.REACT_APP_SERVER_URL}/board/preview?board_id=${process.env.REACT_APP_SCHOOL_BOARD_ID}&limit_post_num=5`, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token'),
+                },
+            })
             .then((response) => {
                 setBoardList(response.data);
             })
@@ -46,8 +43,6 @@ const SchoolBoard = () => {
                     return (
                         <Notice
                             key={postElement.post_id}
-                            // TODO: 필요성 의문
-                            ///departmentName={postElement.nickName}
                             title={postElement.title}
                             numberOfComment={postElement.comments}
                             createDate={postElement.created_time}
@@ -66,7 +61,7 @@ const DetailBoardTitleWithMore = ({ boardIcon, boardTitle, boardId }) => {
             <DetailBoardTitle>
                 {boardIcon} {boardTitle}
             </DetailBoardTitle>
-            <ShowMoreButton to={`/board/${boardId}`}>+ 더보기</ShowMoreButton>
+            <ShowMoreButton onClick={() => (window.location.href = `/board/${boardId}`)}>+ 더보기</ShowMoreButton>
         </DetailBoardTitleWithMoreLayout>
     );
 };
@@ -101,8 +96,6 @@ const Home = () => {
             setFade('');
         };
     }, []);
-
-
 
     const majorIdTitleList = JSON.parse(localStorage.getItem('major_options'));
     return (

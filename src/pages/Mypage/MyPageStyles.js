@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLORS } from '../../color';
 export const MyPageLayout = styled.div`
@@ -70,7 +69,7 @@ export const SettingButtonLayout = styled.div`
 `;
 
 //설정 페이지
-export const SettingsLink = styled(Link)`
+export const SettingsLink = styled.div`
     display: flex;
     flex: 1;
     justify-content: center;

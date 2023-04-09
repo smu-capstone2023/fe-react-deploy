@@ -7,16 +7,17 @@ export const setUserMajorListInLocalStorage = (accessToken) => {
             },
         })
         .then((response) => {
+            console.log(response);
             const tempMajorList = [];
-            const majorIdList = [];
             response.data.forEach((element) => {
                 tempMajorList.push({ value: element.major_id, label: element.major_name, freeBoard: element.free_board_id });
             });
+
             localStorage.setItem('major_options', JSON.stringify(tempMajorList));
-            localStorage.setItem('major_id_list', JSON.stringify(majorIdList));
             return true;
         })
         .catch((response) => {
+            console.log(response);
             return false;
         });
 };

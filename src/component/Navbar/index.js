@@ -16,25 +16,43 @@ const Navbar = ({ toggle }) => {
                         {localStorage.getItem('access_token') && (
                             <>
                                 <NavItem>
-                                    <NavLinks to='board/1/3'>학교게시판</NavLinks>
+                                    <NavLinks
+                                        onClick={() => {
+                                            window.location.href = `board/1/3`;
+                                        }}
+                                    >
+                                        학교게시판
+                                    </NavLinks>
                                 </NavItem>
                                 {majorList && majorList[1] && (
                                     <NavItem>
-                                        <NavLinks to={`board/${majorList[1].value}/${majorList[1].freeBoard}`}>학과게시판</NavLinks>
+                                        <NavLinks
+                                            onClick={() => {
+                                                window.location.href = `board/${majorList[1].value}/${majorList[1].freeBoard}`;
+                                            }}
+                                        >
+                                            학과게시판
+                                        </NavLinks>
                                     </NavItem>
                                 )}
 
                                 <NavItem>
-                                    <NavLinks to='board/1/17'>피드백게시판</NavLinks>
+                                    <NavLinks
+                                        onClick={() => {
+                                            window.location.href = 'board/1/17';
+                                        }}
+                                    >
+                                        피드백게시판
+                                    </NavLinks>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLinks to='mypage'>마이페이지</NavLinks>
+                                    <NavLinks onClick={() => (window.location.href = 'mypage')}>마이페이지</NavLinks>
                                 </NavItem>
                             </>
                         )}
                         <NavItem>
                             {!localStorage.getItem('access_token') ? (
-                                <NavLinks to='login'>로그인</NavLinks>
+                                <NavLinks onClick={() => (window.location.href = 'login')}>로그인</NavLinks>
                             ) : (
                                 <NavLinks
                                     onClick={() => {

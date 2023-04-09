@@ -17,6 +17,7 @@ export const postCertificationPost = (imageUrl, content) => {
             return response.data.isSuccess;
         })
         .catch((response) => {
+            console.log(response);
             return false;
         });
 };

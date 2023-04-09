@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
 export const NoticeElementLayout = styled.div`
     // border-bottom: solid 0.3px gray;
     display: flex;
@@ -9,7 +7,7 @@ export const NoticeElementLayout = styled.div`
     justify-content: space-between;
 `;
 
-export const NoticeElementLink = styled(Link)`
+export const NoticeElementLink = styled.div`
     text-decoration: none;
     color: black;
 `;
