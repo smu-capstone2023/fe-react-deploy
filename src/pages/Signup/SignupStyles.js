@@ -10,6 +10,11 @@ export const SignCheckBoxTitle = styled.label`
 export const DefaultText = styled.p`
   padding: 5px;
   font-size: 0.9em;
+
+  //galaxy fold 기준 
+  @media (max-width: 290px) {
+    font-size: 0.7em;
+  }
 `;
 
 export const SmallText = styled.p`
@@ -97,6 +102,11 @@ export const SignContainer3 = styled.div`
         flex-direction: column;
         align-items: center;
     }
+
+    //아이폰 11 기준 
+    // @media (max-width: 400px) {
+    //   max-height: 250px;
+    // }
 `;
 
 
@@ -176,6 +186,11 @@ export const SignInnerBox = styled.div`
     border-radius: none;
     border: none;
   }
+  //아이폰 11 기준 
+  @media (max-width: 390px) {
+    border-radius: none;
+    border: none;
+  }
 `;
 
 export const TosBox = styled.div`
@@ -188,6 +203,16 @@ export const TosBox = styled.div`
 
   li {
     white-space: pre-wrap;
+  }
+
+  //아이폰 11 기준 
+  @media (max-width: 400px) {
+    max-height: 250px;
+  }
+  //galaxy fold 기준 
+  @media (max-width: 290px) {
+    max-height: 200px;
+    max-width: 200px;
   }
 `;
 
@@ -261,7 +286,6 @@ export const AgreementTest = styled.div`
   }
 `;
 
-//
 export const UploadInput = styled.input``;
 
 export const UploadButton = styled.div`

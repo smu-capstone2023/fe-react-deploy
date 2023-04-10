@@ -81,6 +81,11 @@ export const LoginButton = styled.div`
     width: 90%;
     font-size: 15px;
   }
+  @media (max-width: 290px) {
+    width: 90%;
+    height: 50%;
+    font-size: 14px;
+  }
 `;
 
 export const SignupLink = styled(Link)`
@@ -98,5 +103,10 @@ export const SignupLink = styled(Link)`
   @media (max-width: 755px) {
     width: 90%;
     font-size: 15px;
+  }
+  @media (max-width: 290px) {
+    width: 90%;
+    height: 50%;
+    font-size: 14px;
   }
 `;
