@@ -548,13 +548,9 @@ const ViewPost = () => {
                 },
             })
             .then((response) => {
-                if (response.status_code === 200) {
-                    setUserInfoAtLocalStorage(response.data);
-                    alert(response.message);
-                    window.history.back();
-                }
                 alert('게시물이 삭제되었습니다.');
-                window.history.back();
+                window.location = document.referrer;
+                window.location.back();
             })
             .catch((response) => {
                 if (response.code === 400) {
