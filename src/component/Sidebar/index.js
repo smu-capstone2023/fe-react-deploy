@@ -18,7 +18,7 @@ const Sidebar = ({ isOpen, toggle, setIsOpen }) => {
                                 <SidebarLink
                                     onClick={() => {
                                         setIsOpen(false);
-                                        window.location.href = "/board/1/3'";
+                                        window.location.href = '/board/1/3';
                                     }}
                                 >
                                     학교게시판
