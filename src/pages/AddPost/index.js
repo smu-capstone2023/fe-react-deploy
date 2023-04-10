@@ -124,7 +124,7 @@ const AddFileButton = ({ setImageList, imageList }) => {
         uploadImageToServer(formData)
             .then((response) => {
                 console.log(response);
-                setImageList([response.imageUrl, ...imageList]);
+                setImageList([response.imageUrls, ...imageList]);
             })
             .catch((response) => {
                 alert('이미지를 불러오는데 실패했습니다. 다시 시도해주세요.');

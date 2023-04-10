@@ -71,7 +71,6 @@ const BoardUtilsButtons = ({ boardId, isActive, setIsActive, BoardList_sortByRec
                     setIsActive(!isActive);
                 }}
                 style={{
-                    // fontWeight: isActive ? 'bold' : 'normal' ,
                     background: isActive ? `${COLORS.color_button}` : '',
                 }}
                 //TODO_hyun: 활성화된 배경색 구림, 변경 필요함
@@ -135,7 +134,7 @@ const Board = () => {
             .get(`${process.env.REACT_APP_SERVER_URL}/board/post_list/${board_id}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
-                    sorting: localStorage.getItem('likes'),
+                    sorting: isActive ? 'likes' : null,
                 },
             })
             .then((response) => {
