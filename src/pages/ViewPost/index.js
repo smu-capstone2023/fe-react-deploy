@@ -63,7 +63,7 @@ const BoardDetailInfoBlock = ({ majorName, boardName }) => {
     );
 };
 
-const ViewPostMenu = ({ writerName, userName, postId, deletePost }) => {
+const ViewPostMenu = ({ writerName, is_author, postId, deletePost }) => {
     const [isOpen, setMenu] = useState(false);
 
     const linkCopy = () => {
@@ -91,7 +91,7 @@ const ViewPostMenu = ({ writerName, userName, postId, deletePost }) => {
                 <ViewPostMenuImg src='/img/dots.png' onClick={toggleMenu}></ViewPostMenuImg>
                 {isOpen && (
                     <ViewPostMenuUI>
-                        {writerName == userName ? (
+                        {is_author ? (
                             <>
                                 <ViewPostMenuContent onClick={() => (window.location.href = `/editpost/${postId}`)}>
                                     수정
@@ -124,7 +124,7 @@ const ViewPostMenu = ({ writerName, userName, postId, deletePost }) => {
     );
 };
 
-const WriterUserInfoBlock = ({ writerName, userName, createDate, updateDate, postId, deletePost, profileImageUrl }) => {
+const WriterUserInfoBlock = ({ writerName, is_author, createDate, updateDate, postId, deletePost, profileImageUrl }) => {
     let day = '';
     let time = '';
     if (createDate) {
@@ -149,7 +149,7 @@ const WriterUserInfoBlock = ({ writerName, userName, createDate, updateDate, pos
                     </CreateDateField>
                 </UserAndPostInfoLayout>
                 <ViewPostMenuContainer>
-                    <ViewPostMenu writerName={writerName} userName={userName} postId={postId} deletePost={deletePost}></ViewPostMenu>
+                    <ViewPostMenu writerName={writerName} is_author={is_author} postId={postId} deletePost={deletePost}></ViewPostMenu>
                 </ViewPostMenuContainer>
             </WriterUserInfoLayout>
         </>
@@ -659,7 +659,7 @@ const ViewPost = () => {
                         <>
                             <WriterUserInfoBlock
                                 writerName={postInfo.username}
-                                userName={userName}
+                                is_author={postInfo.is_author}
                                 createDate={postInfo.created_time}
                                 updateDate={postInfo.updated_time}
                                 postId={post_id}
