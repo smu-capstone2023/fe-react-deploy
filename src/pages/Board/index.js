@@ -194,9 +194,11 @@ const Board = () => {
     }, [board_id, isActive]);
 
     useEffect(() => {
-        getSearchKeyword(board_id, searchKeyword, last_id, per_page).then((response) => {
-            setBoardList(response);
-        });
+        if (major_id !== '1' || board_id !== '3') {
+            getSearchKeyword(board_id, searchKeyword, last_id, per_page).then((response) => {
+                setBoardList(response);
+            });
+        }
     }, [searchKeyword]);
 
     const handleSearchInputChange = (event) => {
