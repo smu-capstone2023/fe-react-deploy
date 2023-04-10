@@ -231,10 +231,18 @@ const CommentBlock = ({
     const [isVaild, setIsVaild] = useState(false);
     const [isOpen, setMenu] = useState(false);
     const [showMenu, setShowMenu] = useState();
+    const [commentText, setCommentText] = useState(''); 
+    const [reverseComments, setReverseComments] = useState([]);
     const textRef = useRef();
     const inputRef = useRef([]);
     let day = '';
     let time = '';
+
+    useEffect(()=> {
+        if (comments) {
+            setReverseComments(comments.reverse());
+        }
+    }, [comments]);
 
     const refreshPage = () => {
         window.location.reload();
@@ -281,11 +289,12 @@ const CommentBlock = ({
         }
     };
 
+    
     return (
         <>
-            {comments ? (
+            {reverseComments ? (
                 <>
-                    {comments.map((commentArr, i) => {
+                    {reverseComments.map((commentArr, i) => {
                         if (commentArr.created_time) {
                             day = commentArr.created_time.slice(0, 10);
                             time = commentArr.created_time.slice(12, 16);
