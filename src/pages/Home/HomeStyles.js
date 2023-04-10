@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { COLORS } from '../../color';
 
 export const SchoolBoardButtonLayout = styled.div`
@@ -45,6 +44,8 @@ export const HomeLayout = styled.div`
     @media screen and (max-width: 1200px) {
         flex-direction: column;
         align-items: center;
+        padding: 2rem 0;
+        justify-content: start;
     }
 `;
 
@@ -56,7 +57,7 @@ export const DetailBoardTitleWithMoreLayout = styled.div`
 
 export const DetailBoardTitle = styled.p``;
 
-export const ShowMoreButton = styled(Link)`
+export const ShowMoreButton = styled.div`
     text-decoration: none;
     color: black;
     font-size: 0.7rem;

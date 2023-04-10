@@ -1,15 +1,13 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const CommonElementLayout = styled.div`
-
     display: flex;
     border-radius: 5px;
     padding: 0.5em;
     justify-content: space-between;
 `;
 
-export const CommonElementLink = styled(Link)`
+export const CommonElementLink = styled.div`
     text-decoration: none;
     color: black;
 `;

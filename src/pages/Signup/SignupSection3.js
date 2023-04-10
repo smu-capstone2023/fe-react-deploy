@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import {
-    CertificationLink,
-    SignContainer,
     SignContainer3,
     SignInputText,
     SignInnerBox as SignInnerBox3,
@@ -18,7 +16,6 @@ import { uploadImageToServer } from '../../api/utils/imageUploader.js';
 const SignupSection3 = ({ userSignupInfo }) => {
     const [nickname, setNickname] = useState('');
     const [profileImgUrl, setProfileImgUrl] = useState(null);
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -43,7 +40,7 @@ const SignupSection3 = ({ userSignupInfo }) => {
         const formData = new FormData();
         formData.append('image', e.target.files[0]);
         uploadImageToServer(formData).then((response) => {
-            setProfileImgUrl(response.imageUrl);
+            setProfileImgUrl(response.imageUrls);
         });
     };
 
@@ -54,6 +51,7 @@ const SignupSection3 = ({ userSignupInfo }) => {
                 school_id: userSignupInfo.school_id,
                 nickname: userSignupInfo.nickname,
                 password: userSignupInfo.password,
+                image: profileImgUrl,
             })
             .then((response) => {
                 console.log(response);

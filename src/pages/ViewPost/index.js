@@ -48,13 +48,13 @@ import {
 } from './ViewPostStyles';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
-import {useRef} from 'react';
+import { useRef } from 'react';
 import axios from 'axios';
 import { colors } from '@mui/material';
 import styled from 'styled-components';
 import { COLORS } from '../../color';
 
-const BoardDetailInfoBlock = ({majorName, boardName}) => {
+const BoardDetailInfoBlock = ({ majorName, boardName }) => {
     return (
         <BoardDetailInfocontainer>
             <BoardDetailInfoMajorContent>{majorName}</BoardDetailInfoMajorContent>
@@ -63,58 +63,68 @@ const BoardDetailInfoBlock = ({majorName, boardName}) => {
     );
 };
 
-
-
-
-const ViewPostMenu = ({writerName, userName, postId, deletePost}) => {
+const ViewPostMenu = ({ writerName, is_author, postId, deletePost }) => {
     const [isOpen, setMenu] = useState(false);
 
     const linkCopy = () => {
         var url = '';
-        var textArea = document.createElement("textarea");
+        var textArea = document.createElement('textarea');
         document.body.appendChild(textArea);
         url = window.document.location.href;
         textArea.value = url;
         textArea.select();
         navigator.clipboard.writeText(url);
         document.body.removeChild(textArea);
-        alert("링크가 복사되었습니다.");
-    }
+        alert('링크가 복사되었습니다.');
+    };
     const refreshPage = () => {
         window.location.reload();
-    }
+    };
 
     const toggleMenu = (e) => {
-        setMenu(isOpen => !isOpen);
-    }
-    
+        setMenu((isOpen) => !isOpen);
+    };
+
     return (
         <>
             <ViewPostMenuImgContainer>
                 <ViewPostMenuImg src='/img/dots.png' onClick={toggleMenu}></ViewPostMenuImg>
-                {
-                    isOpen &&
-                        <ViewPostMenuUI>
-                            {
-                                writerName == userName ? 
-                                <>
-                                    <ViewPostMenuContent onClick={() => (window.location.href = `../editpost/${postId}`)}>수정</ViewPostMenuContent>
-                                    <ViewPostMenuContent onClick={deletePost}>삭제</ViewPostMenuContent>
-                                </> :
-                                <>
-                                    <ViewPostMenuContent onClick={()=>{}}>신고</ViewPostMenuContent>
-                                </>
-                            }
-                            <ViewPostMenuContent onClick={()=>{linkCopy()}}>링크 복사</ViewPostMenuContent>
-                            <ViewPostMenuContent onClick={()=>{refreshPage()}}>새로고침</ViewPostMenuContent>
-                        </ViewPostMenuUI>
-                }   
+                {isOpen && (
+                    <ViewPostMenuUI>
+                        {is_author ? (
+                            <>
+                                <ViewPostMenuContent onClick={() => (window.location.href = `/editpost/${postId}`)}>
+                                    수정
+                                </ViewPostMenuContent>
+                                <ViewPostMenuContent onClick={deletePost}>삭제</ViewPostMenuContent>
+                            </>
+                        ) : (
+                            <>
+                                <ViewPostMenuContent onClick={() => {}}>신고</ViewPostMenuContent>
+                            </>
+                        )}
+                        <ViewPostMenuContent
+                            onClick={() => {
+                                linkCopy();
+                            }}
+                        >
+                            링크 복사
+                        </ViewPostMenuContent>
+                        <ViewPostMenuContent
+                            onClick={() => {
+                                refreshPage();
+                            }}
+                        >
+                            새로고침
+                        </ViewPostMenuContent>
+                    </ViewPostMenuUI>
+                )}
             </ViewPostMenuImgContainer>
         </>
     );
 };
 
-const WriterUserInfoBlock = ({ writerName, userName, createDate, updateDate, postId, deletePost, profileImageUrl }) => {
+const WriterUserInfoBlock = ({ writerName, is_author, createDate, updateDate, postId, deletePost, profileImageUrl }) => {
     let day = '';
     let time = '';
     if (createDate) {
@@ -124,27 +134,27 @@ const WriterUserInfoBlock = ({ writerName, userName, createDate, updateDate, pos
     if (createDate != updateDate) {
         day = updateDate.slice(0, 10);
         time = updateDate.slice(11, 16);
-    } 
+    }
 
     return (
         <>
             <WriterUserInfoLayout>
                 <ProfileImageLayout>
-                    <ProfileImage/>
+                    <ProfileImage />
                 </ProfileImageLayout>
                 <UserAndPostInfoLayout>
                     <UserNameFiled>{writerName}</UserNameFiled>
-                    <CreateDateField>{day} {time}</CreateDateField>
+                    <CreateDateField>
+                        {day} {time}
+                    </CreateDateField>
                 </UserAndPostInfoLayout>
                 <ViewPostMenuContainer>
-                    <ViewPostMenu writerName={writerName} userName={userName} postId={postId} deletePost={deletePost}></ViewPostMenu>
+                    <ViewPostMenu writerName={writerName} is_author={is_author} postId={postId} deletePost={deletePost}></ViewPostMenu>
                 </ViewPostMenuContainer>
             </WriterUserInfoLayout>
         </>
-
     );
 };
-
 
 const ViewPostContentBlock = ({ postTitle, postContent }) => {
     return (
@@ -156,34 +166,29 @@ const ViewPostContentBlock = ({ postTitle, postContent }) => {
     );
 };
 
-const ViewPostFileBlock = ({postFile}) => {
+const ViewPostFileBlock = ({ postFile }) => {
     let postFileList = [];
 
     if (postFile) {
-        postFileList = postFile.split(",");
+        postFileList = postFile.split(',');
     }
 
     return (
-
         <PostFilecontainer>
-            {
-                postFile ? <>
-                {
-                    postFileList.map((file, i) => {
-                        return (
-                            <PostFileField src={file} alt=""/>
-                        )
-                    })
-                }
-                </> : <></>
-            }
+            {postFile ? (
+                <>
+                    {postFileList.map((file, i) => {
+                        return <PostFileField src={file} alt='' />;
+                    })}
+                </>
+            ) : (
+                <></>
+            )}
         </PostFilecontainer>
-
-
     );
 };
 
-const ViewPostInfoBlock = ({views, setPostLike, likes, isLiked}) => {
+const ViewPostInfoBlock = ({ views, setPostLike, likes, isLiked }) => {
     return (
         <>
             <PostViewAndLikeContainer>
@@ -192,56 +197,75 @@ const ViewPostInfoBlock = ({views, setPostLike, likes, isLiked}) => {
                     {views}
                 </PostViewNumberLayout>
 
-                <PostLikeNumberLayout onClick={()=>{
+                <PostLikeNumberLayout
+                    onClick={() => {
                         setPostLike();
-                    }}>
-                        {
-                            isLiked ? <PostLikeButtonLayout style={{color : `${COLORS.logo}`}}></PostLikeButtonLayout> : <PostLikeButtonLayout></PostLikeButtonLayout>
-                        }
+                    }}
+                >
+                    {isLiked ? (
+                        <PostLikeButtonLayout style={{ color: `${COLORS.logo}` }}></PostLikeButtonLayout>
+                    ) : (
+                        <PostLikeButtonLayout></PostLikeButtonLayout>
+                    )}
                     {likes}
                 </PostLikeNumberLayout>
-                <div style={{display: "flex", flex: "90"}}/>
+                <div style={{ display: 'flex', flex: '90' }} />
             </PostViewAndLikeContainer>
         </>
+    );
+};
 
-    )
-}
-
-const CommentBlock = ({userName, comments, saveCommentInSever, comment, is_anonymous, setComment, setIs_anonymous, deleteComment, setCommentLike}) => {
+const CommentBlock = ({
+    userName,
+    comments,
+    saveCommentInSever,
+    comment,
+    is_anonymous,
+    setComment,
+    setIs_anonymous,
+    deleteComment,
+    setCommentLike,
+}) => {
     const [visible, setVisible] = useState(false);
     const [userId, setUserId] = useState('');
     const [isVaild, setIsVaild] = useState(false);
     const [isOpen, setMenu] = useState(false);
     const [showMenu, setShowMenu] = useState();
+    const [commentText, setCommentText] = useState(''); 
+    const [reverseComments, setReverseComments] = useState([]);
     const textRef = useRef();
     const inputRef = useRef([]);
     let day = '';
     let time = '';
 
-
+    useEffect(()=> {
+        if (comments) {
+            setReverseComments(comments.reverse());
+        }
+    }, [comments]);
 
     const refreshPage = () => {
         window.location.reload();
-    }
+    };
 
     const post = (e) => {
         const copyComment = [...comment];
         copyComment.push(comment);
         setComment(copyComment);
         textRef.current.style.height = 'auto';
-    }
+    };
 
     const handleAnonymousChange = () => {
         setIs_anonymous(!is_anonymous);
-    }
+    };
 
     const handleViewComments = () => {
         setVisible(true);
-    }
+    };
 
     const toggleMenu = () => {
-        setMenu(isOpen => !isOpen);
-    }
+        setMenu((isOpen) => !isOpen);
+    };
 
     const handleResizeHeight = () => {
         textRef.current.style.height = 'auto';
@@ -249,90 +273,102 @@ const CommentBlock = ({userName, comments, saveCommentInSever, comment, is_anony
     };
 
     const enterPress = (e) => {
-        if (e.key === "Enter" && e.shiftKey) {
+        if (e.key === 'Enter' && e.shiftKey) {
             return;
-        }
-        else if (e.key === "Enter" && !e.shiftKey) {
+        } else if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             if (comment.length > 0) {
                 post();
-                console.log("댓글이 작성되었습니다.");
+                console.log('댓글이 작성되었습니다.');
                 handleViewComments();
                 saveCommentInSever();
                 setComment('');
-            }
-            else {
-                alert("댓글을 작성해주세요.");
+            } else {
+                alert('댓글을 작성해주세요.');
             }
         }
-    }
+    };
 
+    
     return (
         <>
-            {comments ? 
+            {reverseComments ? (
                 <>
-                    {
-                        comments.map((commentArr, i) => {
-                            if (commentArr.created_time) {
-                                day = commentArr.created_time.slice(0, 10);
-                                time = commentArr.created_time.slice(12, 16);
-                            }
-                            return (
-                                <ViewCommentContainer visible={visible}>
-                                    <ViewCommentUserImgLayout></ViewCommentUserImgLayout>
-                                    <ViewCommentMenuLayout style={{position: 'relative'}} onClick={() => {toggleMenu(); setShowMenu(i);}}>
-                                        <CommentMenuIcon/>
-                                        {
-                                            (isOpen && (showMenu === i)) &&
-                                                <ViewPostMenuUI style={{top: '2rem', left: '-8.5rem'}}>
-                                                    {
-                                                        commentArr.username == userName ? 
-                                                        <>
-                                                            <ViewPostMenuContent onClick={()=>{deleteComment(commentArr.comment_id);}}>삭제</ViewPostMenuContent>
-                                                        </> :
-                                                        <>
-                                                            <ViewPostMenuContent onClick={()=>{}}>신고</ViewPostMenuContent>
-                                                        </>
-                                                    }
-                                                </ViewPostMenuUI>
-                                        }
-                                    </ViewCommentMenuLayout>
+                    {reverseComments.map((commentArr, i) => {
+                        if (commentArr.created_time) {
+                            day = commentArr.created_time.slice(0, 10);
+                            time = commentArr.created_time.slice(12, 16);
+                        }
+                        return (
+                            <ViewCommentContainer visible={visible}>
+                                <ViewCommentUserImgLayout></ViewCommentUserImgLayout>
+                                <ViewCommentMenuLayout
+                                    style={{ position: 'relative' }}
+                                    onClick={() => {
+                                        toggleMenu();
+                                        setShowMenu(i);
+                                    }}
+                                >
+                                    <CommentMenuIcon />
+                                    {isOpen && showMenu === i && (
+                                        <ViewPostMenuUI style={{ top: '2rem', left: '-8.5rem' }}>
+                                            {commentArr.username == userName ? (
+                                                <>
+                                                    <ViewPostMenuContent
+                                                        onClick={() => {
+                                                            deleteComment(commentArr.comment_id);
+                                                        }}
+                                                    >
+                                                        삭제
+                                                    </ViewPostMenuContent>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <ViewPostMenuContent onClick={() => {}}>신고</ViewPostMenuContent>
+                                                </>
+                                            )}
+                                        </ViewPostMenuUI>
+                                    )}
+                                </ViewCommentMenuLayout>
 
-                                    <ViewCommentMenuLayout onClick={()=>{
-                                            // WriteReplyToggle();
-                                            // setShowReply(i);
-                                    }}>
-                                            <CommentReplyIcon/>
-                                    </ViewCommentMenuLayout>
+                                <ViewCommentMenuLayout
+                                    onClick={() => {
+                                        // WriteReplyToggle();
+                                        // setShowReply(i);
+                                    }}
+                                >
+                                    <CommentReplyIcon />
+                                </ViewCommentMenuLayout>
 
-                                    <ViewCommentMenuLayout 
-                                    style={{width: '4rem'}}
-                                    onClick={()=>{
+                                <ViewCommentMenuLayout
+                                    style={{ width: '4rem' }}
+                                    onClick={() => {
                                         setCommentLike(commentArr.comment_id);
-                                    }}>
-                                        {
-                                            commentArr.isLiked ? 
-                                            <>
-                                                <CommentLikeContent style={{color : `${COLORS.logo}`}}>{commentArr.likes}</CommentLikeContent>
-                                                <CommentLikeIcon style={{color : `${COLORS.logo}`}}/>
-                                            </>
-                                            :
-                                            <>
-                                                <CommentLikeContent>{commentArr.likes}</CommentLikeContent>
-                                                <CommentLikeIcon/>
-                                            </>
-                                        }
-                                    </ViewCommentMenuLayout>
- 
-                                    
+                                    }}
+                                >
+                                    {commentArr.isLiked ? (
+                                        <>
+                                            <CommentLikeContent style={{ color: `${COLORS.logo}` }}>{commentArr.likes}</CommentLikeContent>
+                                            <CommentLikeIcon style={{ color: `${COLORS.logo}` }} />
+                                        </>
+                                    ) : (
+                                        <>
+                                            <CommentLikeContent>{commentArr.likes}</CommentLikeContent>
+                                            <CommentLikeIcon />
+                                        </>
+                                    )}
+                                </ViewCommentMenuLayout>
 
-                                    <ViewCommentUserNameLayout>{commentArr.username}
-                                            <CreateDateField>{day} {time}</CreateDateField>
-                                    </ViewCommentUserNameLayout>
-                                    <ViewCommentLayout rows={1}>{commentArr.content}</ViewCommentLayout>
+                                <ViewCommentUserNameLayout>
+                                    {commentArr.username}
+                                    <CreateDateField>
+                                        {day} {time}
+                                    </CreateDateField>
+                                </ViewCommentUserNameLayout>
+                                <ViewCommentLayout rows={1}>{commentArr.content}</ViewCommentLayout>
 
-                                        {/*대댓글*/}
-                                        {/* {
+                                {/*대댓글*/}
+                                {/* {
                                             (replyIsOpen && showReply === i) && 
                                                 userName === feedComments[i].userId ?
                                                 <>
@@ -354,48 +390,58 @@ const CommentBlock = ({userName, comments, saveCommentInSever, comment, is_anony
                                                 <>
                                                 </>
                                         } */}
-                                </ViewCommentContainer>
-                            )
-                        })
-                    }
+                            </ViewCommentContainer>
+                        );
+                    })}
                 </>
-            : <></>
-            }
-    
+            ) : (
+                <></>
+            )}
+
             <WriteCommentContainer>
-                    <WriteCommentLayout type={'text'} rows={1} placeholder={"댓글을 입력해주세요"}
+                <WriteCommentLayout
+                    type={'text'}
+                    rows={1}
+                    placeholder={'댓글을 입력해주세요'}
                     onKeyDown={enterPress}
                     ref={textRef}
-                    onChange={(e)=>{
+                    onChange={(e) => {
                         setComment(e.target.value);
                         setUserId(userName);
                         handleResizeHeight();
                     }}
-                    onkeyup={(e)=>{
-                        e.target.value.length > 0
-                            ? setIsVaild(true) : setIsVaild(false);
-                    }} value={comment}></WriteCommentLayout>
-                    <AnonymousCommentCheckContent>익명</AnonymousCommentCheckContent>
-                    <AnonymousCommentCheckButton type={'checkbox'} onChange={(e)=>{handleAnonymousChange()}}></AnonymousCommentCheckButton>
-                    <UploadCommentLayout onClick={()=>{
+                    onkeyup={(e) => {
+                        e.target.value.length > 0 ? setIsVaild(true) : setIsVaild(false);
+                    }}
+                    value={comment}
+                ></WriteCommentLayout>
+                <AnonymousCommentCheckContent>익명</AnonymousCommentCheckContent>
+                <AnonymousCommentCheckButton
+                    type={'checkbox'}
+                    onChange={(e) => {
+                        handleAnonymousChange();
+                    }}
+                ></AnonymousCommentCheckButton>
+                <UploadCommentLayout
+                    onClick={() => {
                         if (comment.length > 0) {
                             post();
-                            console.log("댓글이 작성되었습니다.");
+                            console.log('댓글이 작성되었습니다.');
                             handleViewComments();
                             saveCommentInSever();
                             setComment('');
+                        } else {
+                            alert('댓글을 작성해주세요.');
                         }
-                        else {
-                            alert("댓글을 작성해주세요.");
-                        }
-                    }} disabled={isVaild ? false : true}>작성</UploadCommentLayout>
+                    }}
+                    disabled={isVaild ? false : true}
+                >
+                    작성
+                </UploadCommentLayout>
             </WriteCommentContainer>
-        
         </>
-        
-    )
-}
-
+    );
+};
 
 const ViewPost = () => {
     const [comment, setComment] = useState('');
@@ -411,7 +457,7 @@ const ViewPost = () => {
 
     const getUserInfo = () => {
         axios
-            .get(`${process.env.REACT_APP_SERVER_URL}/auth/user_info` , {
+            .get(`${process.env.REACT_APP_SERVER_URL}/auth/user_info`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
                 },
@@ -421,9 +467,8 @@ const ViewPost = () => {
             })
             .catch((response) => {
                 console.log(response);
-            })
-    }
-
+            });
+    };
 
     const getPostInfo = () => {
         axios
@@ -442,96 +487,97 @@ const ViewPost = () => {
 
     const saveCommentInSever = () => {
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}/comment/create`, {
-                post_id : post_id,
-                content: comment,
-                is_anonymous: is_anonymous,
-            },
-            {
-                headers: {
-                    Authorization: localStorage.getItem('access_token'),
-                    'Content-type': 'application/json',
-                    Accept: 'application/json'
+            .post(
+                `${process.env.REACT_APP_SERVER_URL}/comment/create`,
+                {
+                    post_id: post_id,
+                    content: comment,
+                    is_anonymous: is_anonymous,
                 },
-            })
-            .then((response)=>{
+                {
+                    headers: {
+                        Authorization: localStorage.getItem('access_token'),
+                        'Content-type': 'application/json',
+                        Accept: 'application/json',
+                    },
+                }
+            )
+            .then((response) => {
                 if (response.status === 201) {
                     setUserInfoAtLocalStorage(response.data);
                     console.log(response.message);
-                    alert("댓글이 작성되었습니다.");
+                    alert('댓글이 작성되었습니다.');
                     window.location.reload();
                 }
             })
-            .catch((response)=>{
+            .catch((response) => {
                 console.log(response.message);
                 console.log(response);
-            })
-    }
+            });
+    };
 
     const deleteComment = (comment_id) => {
-        axios.delete(`${process.env.REACT_APP_SERVER_URL}/comment/delete/${comment_id}`, {
-            headers: {
-                Authorization: localStorage.getItem('access_token'),
-            },
-        })
-        .then((response) => {
-            if (response.status == 201) {
-                setUserInfoAtLocalStorage(response.data);
+        axios
+            .delete(`${process.env.REACT_APP_SERVER_URL}/comment/delete/${comment_id}`, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token'),
+                },
+            })
+            .then((response) => {
+                if (response.status == 201) {
+                    setUserInfoAtLocalStorage(response.data);
+                    console.log(response.message);
+                    alert('댓글이 삭제되었습니다.');
+                    window.location.reload();
+                }
+            })
+            .catch((response) => {
+                console.log(response);
                 console.log(response.message);
-                alert("댓글이 삭제되었습니다.");
-                window.location.reload();
-            }
-        })
-        .catch((response) => {
-            console.log(response);
-            console.log(response.message);
-            alert(response.message);
-        })
-    }
+                alert(response.message);
+            });
+    };
 
     const deletePost = () => {
         const url = `${process.env.REACT_APP_SERVER_URL}/board/delete/${post_id}`;
 
-        axios.delete(url, {
-            headers: {
-                Authorization: localStorage.getItem('access_token'),
-            },
-        })
+        axios
+            .delete(url, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token'),
+                },
+            })
             .then((response) => {
-                if (response.status_code === 200) {
-                    setUserInfoAtLocalStorage(response.data);
-                    alert(response.message);
-                    window.history.back();
-                }
-                alert("게시물이 삭제되었습니다.");
-                window.history.back();
+                alert('게시물이 삭제되었습니다.');
+                window.location = document.referrer;
+                window.location.back();
             })
             .catch((response) => {
                 if (response.code === 400) {
-                    console.log("요청 문법 오류");
-                } 
-                else if (response.code === 401) {
-                    console.log("존재하지 않는 사용자");
-                }
-                else if (response.code === 402) {
-                    console.log("존재하지 않는 게시물");
-                }
-                else if (response.code === 403) {
-                    console.log("게시글 수정 권한 없음");
+                    console.log('요청 문법 오류');
+                } else if (response.code === 401) {
+                    console.log('존재하지 않는 사용자');
+                } else if (response.code === 402) {
+                    console.log('존재하지 않는 게시물');
+                } else if (response.code === 403) {
+                    console.log('게시글 수정 권한 없음');
                 }
             });
     };
 
     const setPostLike = () => {
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}/board/like/${post_id}`, {
-                like : postTotalLike,
-            },
-            {
-                headers: {
-                    Authorization: localStorage.getItem('access_token'),
+            .post(
+                `${process.env.REACT_APP_SERVER_URL}/board/like/${post_id}`,
+                {
+                    like: postTotalLike,
                 },
-            })
+                {
+                    headers: {
+                        Authorization: localStorage.getItem('access_token'),
+                    },
+                }
+            )
             .then((response) => {
                 console.log(response.data);
                 setPostTotalLike(response.data.total_likes);
@@ -540,19 +586,22 @@ const ViewPost = () => {
             })
             .catch((response) => {
                 console.log(response);
-            })
-    }
+            });
+    };
 
     const setCommentLike = (comment_id) => {
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}/comment/like/${comment_id}`, {
-                like : commentTotalLike,
-            },
-            {
-                headers : {
-                    Authorization: localStorage.getItem('access_token'),
+            .post(
+                `${process.env.REACT_APP_SERVER_URL}/comment/like/${comment_id}`,
+                {
+                    like: commentTotalLike,
+                },
+                {
+                    headers: {
+                        Authorization: localStorage.getItem('access_token'),
+                    },
                 }
-            })
+            )
             .then((response) => {
                 console.log(response.data);
                 alert(response.data.message);
@@ -560,15 +609,15 @@ const ViewPost = () => {
             })
             .catch((response) => {
                 console.log(response);
-            })
-    }
+            });
+    };
 
     const getBoardDetailInfo = () => {
         axios
             .get(`${process.env.REACT_APP_SERVER_URL}/board/info_by_postid/${post_id}`, {
-                headers : {
+                headers: {
                     Authorization: localStorage.getItem('access_token'),
-                }
+                },
             })
             .then((response) => {
                 setBoardDetailInfo(response.data);
@@ -576,12 +625,12 @@ const ViewPost = () => {
             })
             .catch((response) => {
                 console.log(response);
-            })
-    }
+            });
+    };
 
     const setUserInfoAtLocalStorage = (response) => {
-        localStorage.setItem("access token", response.access_token);
-        localStorage.setItem("refresh token", response.refresh_token);
+        localStorage.setItem('access token', response.access_token);
+        localStorage.setItem('refresh token', response.refresh_token);
     };
 
     useEffect(() => {
@@ -592,27 +641,54 @@ const ViewPost = () => {
 
     return (
         <>
-        <ViewPostBackground>
-            {
-                boardDetailInfo ? <BoardDetailInfoBlock majorName={boardDetailInfo.major_name} boardName={boardDetailInfo.board_name}></BoardDetailInfoBlock> : <></>
-            }
-            <ViewPostLayout>
-                {postInfo ? (
-                    <>
-                        <WriterUserInfoBlock writerName={postInfo.username} userName={userName} createDate={postInfo.created_time} updateDate={postInfo.updated_time} postId={post_id} deletePost={deletePost}></WriterUserInfoBlock>
-                        <ViewPostContentBlock postTitle={postInfo.title} postContent={postInfo.content} />
-                        <ViewPostFileBlock postFile={postInfo.image_urls}></ViewPostFileBlock>
-                    </>
+            <ViewPostBackground>
+                {boardDetailInfo ? (
+                    <BoardDetailInfoBlock
+                        majorName={boardDetailInfo.major_name}
+                        boardName={boardDetailInfo.board_name}
+                    ></BoardDetailInfoBlock>
                 ) : (
                     <></>
                 )}
-                {/* <ViewCommentBlock /> */}
-                {/* <WriteCommentBlock saveCommentInSever={saveCommentInSever} feedComments={feedComments} setFeedComments={setFeedComments} feedReplyComments={feedReplyComments} setFeedReplyComments={setFeedReplyComments} createDate={postInfo.createdAt} writerName={postInfo.author}/> */}
-                <ViewPostInfoBlock views={postInfo.views} setPostLike={setPostLike} postTotalLike={postTotalLike} likes={postInfo.likes} isLiked={postInfo.isLiked}></ViewPostInfoBlock>
-                <CommentBlock userName={userName} comments={postInfo.comments} saveCommentInSever={saveCommentInSever} comment={comment} is_anonymous={is_anonymous} setComment={setComment} setIs_anonymous={setIs_anonymous} deleteComment={deleteComment} setCommentLike={setCommentLike}></CommentBlock>
-            </ViewPostLayout>
-        </ViewPostBackground>
- 
+                <ViewPostLayout>
+                    {postInfo ? (
+                        <>
+                            <WriterUserInfoBlock
+                                writerName={postInfo.username}
+                                is_author={postInfo.is_author}
+                                createDate={postInfo.created_time}
+                                updateDate={postInfo.updated_time}
+                                postId={post_id}
+                                deletePost={deletePost}
+                            ></WriterUserInfoBlock>
+                            <ViewPostContentBlock postTitle={postInfo.title} postContent={postInfo.content} />
+                            <ViewPostFileBlock postFile={postInfo.image_urls}></ViewPostFileBlock>
+                        </>
+                    ) : (
+                        <></>
+                    )}
+                    {/* <ViewCommentBlock /> */}
+                    {/* <WriteCommentBlock saveCommentInSever={saveCommentInSever} feedComments={feedComments} setFeedComments={setFeedComments} feedReplyComments={feedReplyComments} setFeedReplyComments={setFeedReplyComments} createDate={postInfo.createdAt} writerName={postInfo.author}/> */}
+                    <ViewPostInfoBlock
+                        views={postInfo.views}
+                        setPostLike={setPostLike}
+                        postTotalLike={postTotalLike}
+                        likes={postInfo.likes}
+                        isLiked={postInfo.isLiked}
+                    ></ViewPostInfoBlock>
+                    <CommentBlock
+                        userName={userName}
+                        comments={postInfo.comments}
+                        saveCommentInSever={saveCommentInSever}
+                        comment={comment}
+                        is_anonymous={is_anonymous}
+                        setComment={setComment}
+                        setIs_anonymous={setIs_anonymous}
+                        deleteComment={deleteComment}
+                        setCommentLike={setCommentLike}
+                    ></CommentBlock>
+                </ViewPostLayout>
+            </ViewPostBackground>
         </>
     );
 };
