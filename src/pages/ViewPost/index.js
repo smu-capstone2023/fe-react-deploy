@@ -63,7 +63,7 @@ const BoardDetailInfoBlock = ({ majorName, boardName }) => {
     );
 };
 
-const ViewPostMenu = ({ writerName, userName, postId, deletePost }) => {
+const ViewPostMenu = ({ writerName, is_author, postId, deletePost }) => {
     const [isOpen, setMenu] = useState(false);
 
     const linkCopy = () => {
@@ -91,7 +91,7 @@ const ViewPostMenu = ({ writerName, userName, postId, deletePost }) => {
                 <ViewPostMenuImg src='/img/dots.png' onClick={toggleMenu}></ViewPostMenuImg>
                 {isOpen && (
                     <ViewPostMenuUI>
-                        {writerName == userName ? (
+                        {is_author ? (
                             <>
                                 <ViewPostMenuContent onClick={() => (window.location.href = `/editpost/${postId}`)}>
                                     수정
@@ -124,7 +124,7 @@ const ViewPostMenu = ({ writerName, userName, postId, deletePost }) => {
     );
 };
 
-const WriterUserInfoBlock = ({ writerName, userName, createDate, updateDate, postId, deletePost, profileImageUrl }) => {
+const WriterUserInfoBlock = ({ writerName, is_author, createDate, updateDate, postId, deletePost, profileImageUrl }) => {
     let day = '';
     let time = '';
     if (createDate) {
@@ -149,7 +149,7 @@ const WriterUserInfoBlock = ({ writerName, userName, createDate, updateDate, pos
                     </CreateDateField>
                 </UserAndPostInfoLayout>
                 <ViewPostMenuContainer>
-                    <ViewPostMenu writerName={writerName} userName={userName} postId={postId} deletePost={deletePost}></ViewPostMenu>
+                    <ViewPostMenu writerName={writerName} is_author={is_author} postId={postId} deletePost={deletePost}></ViewPostMenu>
                 </ViewPostMenuContainer>
             </WriterUserInfoLayout>
         </>
@@ -231,10 +231,18 @@ const CommentBlock = ({
     const [isVaild, setIsVaild] = useState(false);
     const [isOpen, setMenu] = useState(false);
     const [showMenu, setShowMenu] = useState();
+    const [commentText, setCommentText] = useState(''); 
+    const [reverseComments, setReverseComments] = useState([]);
     const textRef = useRef();
     const inputRef = useRef([]);
     let day = '';
     let time = '';
+
+    useEffect(()=> {
+        if (comments) {
+            setReverseComments(comments.reverse());
+        }
+    }, [comments]);
 
     const refreshPage = () => {
         window.location.reload();
@@ -281,11 +289,12 @@ const CommentBlock = ({
         }
     };
 
+    
     return (
         <>
-            {comments ? (
+            {reverseComments ? (
                 <>
-                    {comments.map((commentArr, i) => {
+                    {reverseComments.map((commentArr, i) => {
                         if (commentArr.created_time) {
                             day = commentArr.created_time.slice(0, 10);
                             time = commentArr.created_time.slice(12, 16);
@@ -539,13 +548,9 @@ const ViewPost = () => {
                 },
             })
             .then((response) => {
-                if (response.status_code === 200) {
-                    setUserInfoAtLocalStorage(response.data);
-                    alert(response.message);
-                    window.history.back();
-                }
                 alert('게시물이 삭제되었습니다.');
-                window.history.back();
+                window.location = document.referrer;
+                window.location.back();
             })
             .catch((response) => {
                 if (response.code === 400) {
@@ -650,7 +655,7 @@ const ViewPost = () => {
                         <>
                             <WriterUserInfoBlock
                                 writerName={postInfo.username}
-                                userName={userName}
+                                is_author={postInfo.is_author}
                                 createDate={postInfo.created_time}
                                 updateDate={postInfo.updated_time}
                                 postId={post_id}
