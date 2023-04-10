@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { COLORS } from '../../color';
 
 export const SchoolBoardButtonLayout = styled.div`
@@ -56,7 +55,7 @@ export const DetailBoardTitleWithMoreLayout = styled.div`
 
 export const DetailBoardTitle = styled.p``;
 
-export const ShowMoreButton = styled(Link)`
+export const ShowMoreButton = styled.div`
     text-decoration: none;
     color: black;
     font-size: 0.7rem;

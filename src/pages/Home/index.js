@@ -15,25 +15,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import MajorBoardSmall from '../../component/MajorBoard/Small';
 import { setUserMajorListInLocalStorage } from '../../api/auth/usermajors';
+import { getNotice } from '../../api/board/notice';
 
 const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
     useEffect(() => {
-        axios
-            .get(
-                `${process.env.REACT_APP_SERVER_URL}/board/preview?board_id=${process.env.REACT_APP_SCHOOL_BOARD_ID}&limit_post_num=5`,
-                {
-                    headers: {
-                        Authorization: localStorage.getItem('access_token'),
-                    },
-                }
-            )
-            .then((response) => {
-                setBoardList(response.data);
-            })
-            .catch((response) => {
-                localStorage.clear();
-            });
+        getNotice().then((response) => {
+            setBoardList(response);
+        });
     }, []);
 
     return (
@@ -45,11 +34,10 @@ const SchoolBoard = () => {
                 {boardList.map((postElement) => {
                     return (
                         <Notice
+                            isNotice={true}
                             key={postElement.post_id}
-                            // TODO: 필요성 의문
-                            ///departmentName={postElement.nickName}
                             title={postElement.title}
-                            numberOfComment={postElement.comments}
+                            numberOfComment={null}
                             createDate={postElement.created_time}
                             postId={postElement.post_id}
                         />
@@ -66,7 +54,7 @@ const DetailBoardTitleWithMore = ({ boardIcon, boardTitle, boardId }) => {
             <DetailBoardTitle>
                 {boardIcon} {boardTitle}
             </DetailBoardTitle>
-            <ShowMoreButton to={`/board/${boardId}`}>+ 더보기</ShowMoreButton>
+            <ShowMoreButton onClick={() => (window.location.href = `/board/${boardId}`)}>+ 더보기</ShowMoreButton>
         </DetailBoardTitleWithMoreLayout>
     );
 };
@@ -101,8 +89,6 @@ const Home = () => {
             setFade('');
         };
     }, []);
-
-
 
     const majorIdTitleList = JSON.parse(localStorage.getItem('major_options'));
     return (
