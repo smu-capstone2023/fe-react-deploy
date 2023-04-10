@@ -44,6 +44,8 @@ export const HomeLayout = styled.div`
     @media screen and (max-width: 1200px) {
         flex-direction: column;
         align-items: center;
+        padding: 2rem 0;
+        justify-content: start;
     }
 `;
 
