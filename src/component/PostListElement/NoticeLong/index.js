@@ -8,8 +8,11 @@ import {
     NoticeElementLayout,
     NoticeBasicInfoField,
     NumberOfViewsField,
+    CommentField,
+    Infofield,
 } from './NoticeLongStyles';
 import { BsFillChatFill } from 'react-icons/bs';
+import { AiOutlineEye } from 'react-icons/ai';
 import { COLORS } from '../../../color';
 
 const NoticeLong = ({ title, createDate, numberOfComment, postId, numberOfViews, writerName, isNotice = false }) => {
@@ -30,13 +33,18 @@ const NoticeLong = ({ title, createDate, numberOfComment, postId, numberOfViews,
                         }}
                     >
                         <WriterNameField>{writerName}</WriterNameField>
-                        <NoticeTitle>{limitedTitle}</NoticeTitle>
-                        <BsFillChatFill size={'1em'} color={`lightgray`} style={{ marginLeft: '.5rem' }} />
-                        {numberOfComment && <NoticeNumberOfComment>[{numberOfComment}]</NoticeNumberOfComment>}
+                        <NoticeTitle>{limitedTitle}</NoticeTitle>                           
                     </NoticeElementLink>
                 </NoticeBasicInfoField>
+                <Infofield>
+                <CommentField>
+                <BsFillChatFill size={'1em'} color={`#87CEFA`} style={{ marginLeft: '.5rem', marginRight: '.2rem',}} />
+                {numberOfComment && <NoticeNumberOfComment>{numberOfComment}</NoticeNumberOfComment>}
+                </CommentField>
+                <NumberOfViewsField><AiOutlineEye size={'1.5em'} color='gray'style={{ marginRight: '.2rem'}}/>{numberOfViews} </NumberOfViewsField>
                 <CreateDateField>{detailCreatDate}</CreateDateField>
-                <NumberOfViewsField>{numberOfViews}</NumberOfViewsField>
+
+                </Infofield>
             </NoticeElementLayout>
         </>
     );

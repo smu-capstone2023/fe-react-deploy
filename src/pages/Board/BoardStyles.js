@@ -47,6 +47,7 @@ export const Boardline = styled.div`
     @media screen and (max-width: 460px) {
         width: 100%;
     }
+
 `;
 
 export const BoardTableSchema = styled.div`
@@ -195,16 +196,6 @@ export const BoardUtilsButton = styled.div`
 
 `;
 
-// export const SortUtilButtonLayout = styled.div`
-//     display:flex;
-//     flex-direction: row;
-
-//     @media screen and (max-width: 800px) {
-//         margin-top: 1rem;
-//         justify-content: center;
-//     }
-// `;
-
 export const ChangeBoardOutBox = styled.div`
     display: flex;
     border-radius: 30px;
@@ -247,7 +238,7 @@ export const Line = styled.div`
     border-bottom: solid 1px ${COLORS.gray_button};
 
     @media screen and (max-width: 800px) {
-        margin: 1rem 2;
+        margin: 1rem ;
     }
 `;
 
