@@ -216,6 +216,7 @@ const ViewPostInfoBlock = ({ views, setPostLike, likes, isLiked }) => {
 };
 
 const CommentBlock = ({
+    profile_image_url,
     userName,
     comments,
     saveCommentInSever,
@@ -289,7 +290,7 @@ const CommentBlock = ({
         }
     };
 
-    
+
     return (
         <>
             {reverseComments ? (
@@ -301,7 +302,19 @@ const CommentBlock = ({
                         }
                         return (
                             <ViewCommentContainer visible={visible}>
-                                <ViewCommentUserImgLayout></ViewCommentUserImgLayout>
+                                {
+                                    profile_image_url ? 
+                                    <img src={profile_image_url} style={{
+                                        width : "2.5rem",
+                                        height: "2.5rem",
+                                        float: "left",
+                                        border: 'solid 0.05em lightgray',
+                                        borderRadius: '2rem',
+                                        margin: '0.2rem',
+                                    }}></img>
+                                    : <ViewCommentUserImgLayout></ViewCommentUserImgLayout>
+                                }
+
                                 <ViewCommentMenuLayout
                                     style={{ position: 'relative' }}
                                     onClick={() => {
@@ -448,7 +461,7 @@ const ViewPost = () => {
     const [is_anonymous, setIs_anonymous] = useState(false);
     const { post_id } = useParams();
     const [postInfo, setPostInfo] = useState({});
-    const [userName, setUserName] = useState('');
+    const [userInfo, setUserInfo] = useState({});
     const [postTotalLike, setPostTotalLike] = useState(0);
     const [commentTotalLike, setCommentTotalLike] = useState(0);
     const [boardDetailInfo, setBoardDetailInfo] = useState();
@@ -463,7 +476,8 @@ const ViewPost = () => {
                 },
             })
             .then((response) => {
-                setUserName(response.data.username);
+                setUserInfo(response.data);
+                console.log(response);
             })
             .catch((response) => {
                 console.log(response);
@@ -677,7 +691,8 @@ const ViewPost = () => {
                         isLiked={postInfo.isLiked}
                     ></ViewPostInfoBlock>
                     <CommentBlock
-                        userName={userName}
+                        profile_image_url={userInfo.profile_image_url}
+                        userName={userInfo.username}
                         comments={postInfo.comments}
                         saveCommentInSever={saveCommentInSever}
                         comment={comment}
