@@ -12,7 +12,6 @@ import AddPost from './pages/AddPost';
 import Board from './pages/Board';
 import ViewPost from './pages/ViewPost';
 import EditPost from './pages/EditPost';
-import SignupSection3 from './pages/Signup/SignupSection3';
 import Certification from './pages/Certification';
 
 function App() {

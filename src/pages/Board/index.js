@@ -22,6 +22,7 @@ import { COLORS } from '../../color';
 import ChangeBoardBox from './ChangeBoardBox';
 import '../../App.css';
 import { getNotice } from '../../api/board/notice';
+import { getSearchKeyword } from '../../api/board/getSearchKeyword';
 const BoardList = ({ boardList, isNotice = false }) => {
     return (
         <>
@@ -33,18 +34,19 @@ const BoardList = ({ boardList, isNotice = false }) => {
                     <TableSchemaElement>조회수</TableSchemaElement>
                 </BoardTableSchema> */}
 
-                {boardList.map((boardElement) => (
-                    <NoticeLong
-                        isNotice={isNotice}
-                        key={boardElement.post_id}
-                        writerName={boardElement.username}
-                        title={boardElement.title}
-                        numberOfComment={boardElement.comments}
-                        createDate={boardElement.created_time.split('T')[0]}
-                        postId={boardElement.post_id}
-                        numberOfViews={boardElement.views}
-                    />
-                ))}
+                {boardList &&
+                    boardList.map((boardElement) => (
+                        <NoticeLong
+                            isNotice={isNotice}
+                            key={boardElement.post_id}
+                            writerName={boardElement.username}
+                            title={boardElement.title}
+                            numberOfComment={boardElement.comments}
+                            createDate={boardElement.created_time.split('T')[0]}
+                            postId={boardElement.post_id}
+                            numberOfViews={boardElement.views}
+                        />
+                    ))}
             </BoardListLayout>
         </>
     );
@@ -69,7 +71,6 @@ const BoardUtilsButtons = ({ boardId, isActive, setIsActive, BoardList_sortByRec
                     setIsActive(!isActive);
                 }}
                 style={{
-                    // fontWeight: isActive ? 'bold' : 'normal' ,
                     background: isActive ? `${COLORS.color_button}` : '',
                 }}
                 //TODO_hyun: 활성화된 배경색 구림, 변경 필요함
@@ -133,7 +134,7 @@ const Board = () => {
             .get(`${process.env.REACT_APP_SERVER_URL}/board/post_list/${board_id}`, {
                 headers: {
                     Authorization: localStorage.getItem('access_token'),
-                    sorting: localStorage.getItem('likes'),
+                    sorting: isActive ? 'likes' : null,
                 },
             })
             .then((response) => {
@@ -153,14 +154,11 @@ const Board = () => {
                 },
             })
             .then((response) => {
-                // console.log('posts', response.data);
                 if (response.status === 204) {
                     setStatus(response.status);
                 } else {
-                    setBoardList((prevList) => [...prevList, ...(response.data.posts || [])]);
                     setBoardName(response.data.board_name);
                     setMajorName(response.data.major_name);
-                    setLast_id(response.data.posts[response.data.posts.length - 1].post_id);
                     setStatus(response.status);
                 }
             })
@@ -196,21 +194,10 @@ const Board = () => {
     }, [board_id, isActive]);
 
     useEffect(() => {
-        if (searchKeyword && searchKeyword !== '') {
-            axios
-                .get(`${process.env.REACT_APP_SERVER_URL}/board/search?keyword=${searchKeyword}`, {
-                    headers: {
-                        Authorization: localStorage.getItem('access_token'),
-                    },
-                })
-                .then((response) => {
-                    console.log(response.data);
-                    console.log(response.data === 0);
-                    setBoardListSearch(response.data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+        if (major_id !== '1' || board_id !== '3') {
+            getSearchKeyword(board_id, searchKeyword, last_id, per_page).then((response) => {
+                setBoardList(response);
+            });
         }
     }, [searchKeyword]);
 
@@ -225,7 +212,8 @@ const Board = () => {
             return (
                 <MoreListButton
                     onClick={() => {
-                        setPer_page(per_page + 1);
+                        // setPer_page(per_page + 1);
+                        setLast_id(boardList[0].post_id);
                     }}
                 >
                     더보기
