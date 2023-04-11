@@ -51,7 +51,7 @@ const Login = () => {
                 <LoginContainer>
                     <LoginTitle>LOGIN</LoginTitle>
                     <LoginInputText onChange={(e) => setSchoolId(e.target.value)} placeholder='학교이메일 입력' />
-                    <LoginInputText type="password" onChange={(e) => setPassword(e.target.value)} placeholder='비밀번호 입력' />
+                    <LoginInputText type="password"  onChange={(e) => setPassword(e.target.value)} placeholder='비밀번호 입력' />
                     <LoginButton onClick={() => requestLoginToServer()}>로그인</LoginButton>
                     <SignupLink onClick={() => (window.location.href = '../signup')}>회원가입하기</SignupLink>
                 </LoginContainer>
