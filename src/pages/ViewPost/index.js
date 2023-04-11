@@ -290,7 +290,7 @@ const CommentBlock = ({
         }
     };
 
-    
+
     return (
         <>
             {reverseComments ? (
@@ -302,16 +302,19 @@ const CommentBlock = ({
                         }
                         return (
                             <ViewCommentContainer visible={visible}>
-                                {/* {
+                                {
                                     profile_image_url ? 
-                                    <img src={profile_image_url}></img>
+                                    <img src={profile_image_url} style={{
+                                        width : "2.5rem",
+                                        height: "2.5rem",
+                                        float: "left",
+                                        border: 'solid 0.05em lightgray',
+                                        borderRadius: '2rem',
+                                        margin: '0.2rem',
+                                    }}></img>
                                     : <ViewCommentUserImgLayout></ViewCommentUserImgLayout>
-                                } */}
-                                <img src={profile_image_url} style={{
-                                    width : "2.5rem",
-                                    height: "2.5rem",
-                                    float: "left",
-                                }}></img>
+                                }
+
                                 <ViewCommentMenuLayout
                                     style={{ position: 'relative' }}
                                     onClick={() => {
