@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const ChangeNickname = (nickname) => {
-    axios
+    return axios
         .put(`${process.env.REACT_APP_SERVER_URL}/auth/user/nickname`, 
         {
             nickname : nickname,

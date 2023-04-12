@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const RefreshAccessTokenIssue = () => {
-    axios
+    return axios
         .get(`${process.env.REACT_APP_SERVER_URL}/auth/refresh_access_token`, {
             headers : {
                 Authorization: localStorage.getItem('access_token'),

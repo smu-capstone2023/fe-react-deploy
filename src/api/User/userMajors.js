@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const GetUserMajorsInfo = () => {
-    axios
+    return axios
         .get(`${process.env.REACT_APP_SERVER_URL}/auth/usermajors`, {
             headers: {
                 Authorization: localStorage.getItem('access_token'),
