@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const ChangePassword = (old_password, new_password, confirm_password) => {
-    axios
+    return axios
         .put(`${process.env.REACT_APP_SERVER_URL}/auth/user/password`, 
         {
             old_password : old_password,

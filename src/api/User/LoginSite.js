@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const LoginSite = (school_id, password) => {
-    axios
+    return axios
         .post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, 
         {
             school_id : school_id,

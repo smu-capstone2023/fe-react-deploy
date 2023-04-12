@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const checkDuplicationSchoolId = (shcool_id) => {
-    axios
+    return axios
         .get(`${process.env.REACT_APP_SERVER_URL}/auth/check_school_id`, {
             headers: {
                 Authorization: localStorage.getItem('access_token'),

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const revokeJoinSite = () => {
-    axios
+    return axios
         .delete(`${process.env.REACT_APP_SERVER_URL}/auth/revoke`, {
             headers: {
                 Authorization: localStorage.getItem('access_token'),

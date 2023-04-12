@@ -1,7 +1,7 @@
 const { default: axios } = require("axios")
 
 const getUserInfo = () => {
-    axios
+    return axios
         .get(`${process.env.REACT_APP_SERVER_URL}/auth/user_info`, {
             headers: {
                 Authorization: localStorage.getItem('access_token'),
