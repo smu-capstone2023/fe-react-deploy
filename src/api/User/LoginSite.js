@@ -9,11 +9,11 @@ export const loginSite = (school_id, password) => {
         })
         .then((response) => {
             if (response.data.status_code === 200) {
-                return response.data.access_token;
+                return response.data;
             }
         })
         .catch((response) => {
             console.log(response);
-            return '';
+            return {};
         })
 }
