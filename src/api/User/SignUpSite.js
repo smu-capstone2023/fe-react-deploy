@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const SignUpSite = (shcool_id, nickname, password, image) => {
+export const signUpSite = (shcool_id, nickname, password, image) => {
     return axios
         .post(`${process.env.REACT_APP_SERVER_URL}/auth/join`, 
         {
@@ -8,11 +8,6 @@ export const SignUpSite = (shcool_id, nickname, password, image) => {
             nickname: nickname,
             password: password,
             image: image,
-        },
-        {
-            headers: {
-                Authorization: localStorage.getItem('access_token'),
-            },
         })
         .then((response) => {
             if (response.data.status_code === 201) {

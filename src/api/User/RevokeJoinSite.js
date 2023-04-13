@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const RevokeJoinSite = () => {
+export const revokeJoinSite = () => {
     return axios
         .delete(`${process.env.REACT_APP_SERVER_URL}/auth/revoke`, {
             headers: {

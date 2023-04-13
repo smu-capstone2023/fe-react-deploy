@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const ChangeProfileImage = (image) => {
+export const changeProfileImage = (image) => {
     return axios
         .put(`${process.env.REACT_APP_SERVER_URL}/auth/user/profile_image`,
         {
@@ -12,10 +12,10 @@ export const ChangeProfileImage = (image) => {
             },
         })
         .then((response) => {
-            return response.data.image;
+            return true;
         })
         .catch((response) => {
             console.log(response);
-            return '';
+            return false;
         })
 }

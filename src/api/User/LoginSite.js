@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const LoginSite = (school_id, password) => {
+export const loginSite = (school_id, password) => {
     return axios
         .post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, 
         {
@@ -9,11 +9,11 @@ export const LoginSite = (school_id, password) => {
         })
         .then((response) => {
             if (response.data.status_code === 200) {
-                return response.data.access_token;
+                return response.data;
             }
         })
         .catch((response) => {
             console.log(response);
-            return '';
+            return {};
         })
 }
