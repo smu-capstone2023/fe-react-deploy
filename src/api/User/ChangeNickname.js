@@ -12,10 +12,10 @@ export const changeNickname = (nickname) => {
             },
         })
         .then((response) => {
-            return response.data.nickname;
+            return true;
         })
         .catch((response) => {
             console.log(response);
-            return '';
+            return false;
         })
 }
