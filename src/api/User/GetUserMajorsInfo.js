@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const GetUserMajorsInfo = () => {
+export const GetUserMajorsInfo = () => {
     return axios
         .get(`${process.env.REACT_APP_SERVER_URL}/auth/usermajors`, {
             headers: {

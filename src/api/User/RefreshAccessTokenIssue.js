@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const RefreshAccessTokenIssue = () => {
+export const RefreshAccessTokenIssue = () => {
     return axios
         .get(`${process.env.REACT_APP_SERVER_URL}/auth/refresh_access_token`, {
             headers : {
