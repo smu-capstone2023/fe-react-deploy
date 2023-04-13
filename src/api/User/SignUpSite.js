@@ -8,11 +8,6 @@ export const signUpSite = (shcool_id, nickname, password, image) => {
             nickname: nickname,
             password: password,
             image: image,
-        },
-        {
-            headers: {
-                Authorization: localStorage.getItem('access_token'),
-            },
         })
         .then((response) => {
             if (response.data.status_code === 201) {
