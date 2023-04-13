@@ -21,7 +21,7 @@ Object.freeze(SIZE_KIND);
  * @param bold 'bold'
  * @returns
  */
-const Text = ({ children, color = 'black', size = 'medium', bold }) => {
+const Text = ({ children, color = 'black', size = 'medium', bold, onClick }) => {
     let styles = { fontSize: '1em', color: `${COLORS.logo}`, fontWeight: 'normal' };
     switch (color) {
         case COLOR_KIND.BLACK:
@@ -46,7 +46,11 @@ const Text = ({ children, color = 'black', size = 'medium', bold }) => {
             styles.fontSize = '0.8em';
             break;
     }
-    return <p style={styles}>{children}</p>;
+    return (
+        <p onClick={onClick} style={styles}>
+            {children}
+        </p>
+    );
 };
 
 export default Text;
