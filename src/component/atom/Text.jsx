@@ -18,11 +18,11 @@ Object.freeze(SIZE_KIND);
  *
  * @param color 'black', 'gray', 'blue'
  * @param size 'large', 'medium', 'small'
- * @param bold 'bold'
+ * @param fontWeight 'bold', 'normal',
  * @returns
  */
-const Text = ({ children, color = 'black', size = 'medium', bold, onClick }) => {
-    let styles = { fontSize: '1em', color: `${COLORS.logo}`, fontWeight: 'normal' };
+const Text = ({ children, color = 'black', size = 'medium', fontWeight = 'normal', onClick }) => {
+    let styles = { fontSize: '1em', color: `${COLORS.logo}`, fontWeight: fontWeight };
     switch (color) {
         case COLOR_KIND.BLACK:
             styles.color = 'black';
