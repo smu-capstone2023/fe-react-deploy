@@ -14,10 +14,10 @@ export const changePassword = (old_password, new_password, confirm_password) => 
             },
         })
         .then((response) => {
-            return response.data;
+            return true;
         })
         .catch((response) => {
             console.log(response);
-            return {};
+            return false;
         });
 };
