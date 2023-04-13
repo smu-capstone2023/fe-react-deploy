@@ -3,6 +3,48 @@ import axios from 'axios';
 import { LoginButton, LoginContainer, LoginInputText, SignupLink, LoginTitle, LoginLayout } from './LoginStyles';
 import { setUserMajorListInLocalStorage } from '../../api/auth/usermajors';
 
+const checkLoginFormat = (schoolId, password) => {
+    if (schoolId) {
+        if (password) {
+            return true;
+        } else {
+            alert("비밀번호를 입력해주세요.");
+            return false;
+        }
+    } else {
+        alert("아이디를 입력해주세요.");
+        return false;
+    }
+};
+
+const setRefreshTokenInLocalStorage = (refreshToken) => {
+    localStorage.setItem('refresh_token', refreshToken);
+};
+
+const setAccessTokenInLocalStorage = (accessToken) => {
+    localStorage.setItem('access_token', accessToken);
+};
+
+const setMajorListInLocalStorage = (majorList) => {
+    localStorage.setItem('major_list', majorList);
+};
+
+const login = (schoolId, password) => {
+    if (checkLoginFormat(schoolId, password)) {
+        const responseData = LoginSite(schoolId, password);
+        if (responseData) {
+            setAccessTokenInLocalStorage(responseData.access_token);
+            setRefreshTokenInLocalStorage(responseData.refresh_token);
+
+            const majorList = GetUserMajorsInfo();
+            if (majorList) {
+                setMajorListInLocalStorage(majorList);
+                window.location.href = '/';
+            }
+        }
+    }
+};
+
 const Login = () => {
     const [school_id, setSchoolId] = useState(''); // setEmail을 setSchoolId로 변경
     const [password, setPassword] = useState('');
