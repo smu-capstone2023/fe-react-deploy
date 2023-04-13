@@ -1,6 +1,6 @@
 const { default: axios } = require("axios")
 
-export const GetUserInfo = () => {
+export const getUserInfo = () => {
     return axios
         .get(`${process.env.REACT_APP_SERVER_URL}/auth/user_info`, {
             headers: {

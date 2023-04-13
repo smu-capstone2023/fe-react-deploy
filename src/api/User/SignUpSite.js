@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const SignUpSite = (shcool_id, nickname, password, image) => {
+export const signUpSite = (shcool_id, nickname, password, image) => {
     return axios
         .post(`${process.env.REACT_APP_SERVER_URL}/auth/join`, 
         {

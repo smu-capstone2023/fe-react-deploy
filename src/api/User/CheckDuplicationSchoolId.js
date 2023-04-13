@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const CheckDuplicationSchoolId = (shcool_id) => {
+export const checkDuplicationSchoolId = (shcool_id) => {
     return axios
         .get(`${process.env.REACT_APP_SERVER_URL}/auth/check_school_id`, {
             headers: {

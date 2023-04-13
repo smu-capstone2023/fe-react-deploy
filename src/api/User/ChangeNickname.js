@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const ChangeNickname = (nickname) => {
+export const changeNickname = (nickname) => {
     return axios
         .put(`${process.env.REACT_APP_SERVER_URL}/auth/user/nickname`, 
         {
