@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const ChangeProfileImage = (image) => {
+export const ChangeProfileImage = (image) => {
     return axios
         .put(`${process.env.REACT_APP_SERVER_URL}/auth/user/profile_image`,
         {

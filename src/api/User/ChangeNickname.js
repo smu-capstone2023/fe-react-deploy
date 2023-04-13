@@ -1,19 +1,21 @@
 import axios from "axios"
 
-const revokeJoinSite = () => {
+export const ChangeNickname = (nickname) => {
     return axios
-        .delete(`${process.env.REACT_APP_SERVER_URL}/auth/revoke`, {
+        .put(`${process.env.REACT_APP_SERVER_URL}/auth/user/nickname`, 
+        {
+            nickname : nickname,
+        },
+        {
             headers: {
                 Authorization: localStorage.getItem('access_token'),
             },
         })
         .then((response) => {
-            if (response.status === 201) {
-                return true;
-            }
+            return response.data.nickname;
         })
         .catch((response) => {
             console.log(response);
-            return false;
+            return '';
         })
 }
