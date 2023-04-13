@@ -12,10 +12,10 @@ export const changeProfileImage = (image) => {
             },
         })
         .then((response) => {
-            return response.data.image;
+            return true;
         })
         .catch((response) => {
             console.log(response);
-            return '';
+            return false;
         })
 }
