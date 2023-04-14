@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { LoginButton, LoginContainer, LoginInputText, SignupLink, LoginTitle, LoginLayout } from './LoginStyles';
 import { setUserMajorListInLocalStorage } from '../../api/auth/usermajors';
-import { LoginSite } from '../../api/User/LoginSite' ;
-import { GetUserMajorsInfo } from '../../api/User/GetUserMajorsInfo' ;
+import { loginSite } from '../../api/User/LoginSite' ;
+import { getUserMajorsInfo } from '../../api/User/GetUserMajorsInfo' ;
 
 const checkLoginFormat = (schoolId, password) => {
     if (schoolId) {
@@ -33,12 +33,12 @@ const setMajorListInLocalStorage = (majorList) => {
 
 const login = (schoolId, password) => {
     if (checkLoginFormat(schoolId, password)) {
-        LoginSite(schoolId, password).then(response => {
+        loginSite(schoolId, password).then(response => {
             if (response){
             setAccessTokenInLocalStorage(response.access_token);
             setRefreshTokenInLocalStorage(response.refresh_token);
             
-            GetUserMajorsInfo().then(response => {
+            getUserMajorsInfo().then(response => {
             setMajorListInLocalStorage(response);
             window.location.href='/';
             })}
