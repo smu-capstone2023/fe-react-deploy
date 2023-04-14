@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const loginSite = (school_id, password) => {
+export const LoginSite = (school_id, password) => {
     return axios
         .post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, 
         {

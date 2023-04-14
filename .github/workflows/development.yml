@@ -45,7 +45,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Deploy to S3
-        run: aws s3 sync build/ s3://${{ secrets.DEV_AWS_S3_BUCKET }} --delete
+        run: aws s3 sync build/ s3://${{ secrets.DEV_AWS_S3_BUCKET }}
 
       - name: Invalidate CloudFront Cache
         run: aws cloudfront create-invalidation \
