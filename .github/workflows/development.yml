@@ -26,13 +26,13 @@ jobs:
 
       - name: create env file
         working-directory: ./
-              run: 
-                  pwd
-                  touch .env
-                  echo REACT_APP_SCHOOL_BOARD_ID=${{ secrets.REACT_APP_SCHOOL_BOARD_ID }} >> .env
-                  echo REACT_APP_SCHOOL_ID=${{ secrets.REACT_APP_SCHOOL_ID }} >> .env
-                  echo REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }} >> .env
-                  cat .env
+        run: |
+            pwd
+            touch .env
+            echo REACT_APP_SCHOOL_BOARD_ID=${{ secrets.REACT_APP_SCHOOL_BOARD_ID }} >> .env
+            echo REACT_APP_SCHOOL_ID=${{ secrets.REACT_APP_SCHOOL_ID }} >> .env
+            echo REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }} >> .env
+            cat .env
 
       - name: Build
         run: npm run build
