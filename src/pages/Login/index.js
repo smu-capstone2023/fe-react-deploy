@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { LoginButton, LoginContainer, LoginInputText, SignupLink, LoginTitle, LoginLayout } from './LoginStyles';
 import { setUserMajorListInLocalStorage } from '../../api/auth/usermajors';
+import { LoginSite } from '../../api/User/LoginSite' ;
+import { GetUserMajorsInfo } from '../../api/User/GetUserMajorsInfo' ;
 
 const checkLoginFormat = (schoolId, password) => {
     if (schoolId) {
@@ -31,17 +33,16 @@ const setMajorListInLocalStorage = (majorList) => {
 
 const login = (schoolId, password) => {
     if (checkLoginFormat(schoolId, password)) {
-        const responseData = LoginSite(schoolId, password);
-        if (responseData) {
-            setAccessTokenInLocalStorage(responseData.access_token);
-            setRefreshTokenInLocalStorage(responseData.refresh_token);
-
-            const majorList = GetUserMajorsInfo();
-            if (majorList) {
-                setMajorListInLocalStorage(majorList);
-                window.location.href = '/';
-            }
-        }
+        LoginSite(schoolId, password).then(response => {
+            if (response){
+            setAccessTokenInLocalStorage(response.access_token);
+            setRefreshTokenInLocalStorage(response.refresh_token);
+            
+            GetUserMajorsInfo().then(response => {
+            setMajorListInLocalStorage(response);
+            window.location.href='/';
+            })}
+        })
     }
 };
 
@@ -94,7 +95,7 @@ const Login = () => {
                     <LoginTitle>LOGIN</LoginTitle>
                     <LoginInputText onChange={(e) => setSchoolId(e.target.value)} placeholder='학교이메일 입력' />
                     <LoginInputText type="password"  onChange={(e) => setPassword(e.target.value)} placeholder='비밀번호 입력' />
-                    <LoginButton onClick={() => requestLoginToServer()}>로그인</LoginButton>
+                    <LoginButton onClick={() => login(school_id, password)}>로그인</LoginButton>
                     <SignupLink onClick={() => (window.location.href = '../signup')}>회원가입하기</SignupLink>
                 </LoginContainer>
             </LoginLayout>
