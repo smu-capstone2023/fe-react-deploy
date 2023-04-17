@@ -2,6 +2,49 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { LoginButton, LoginContainer, LoginInputText, SignupLink, LoginTitle, LoginLayout } from './LoginStyles';
 import { setUserMajorListInLocalStorage } from '../../api/auth/usermajors';
+import { loginSite } from '../../api/User/LoginSite' ;
+import { getUserMajorsInfo } from '../../api/User/GetUserMajorsInfo' ;
+
+const checkLoginFormat = (schoolId, password) => {
+    if (schoolId) {
+        if (password) {
+            return true;
+        } else {
+            alert("비밀번호를 입력해주세요.");
+            return false;
+        }
+    } else {
+        alert("아이디를 입력해주세요.");
+        return false;
+    }
+};
+
+const setRefreshTokenInLocalStorage = (refreshToken) => {
+    localStorage.setItem('refresh_token', refreshToken);
+};
+
+const setAccessTokenInLocalStorage = (accessToken) => {
+    localStorage.setItem('access_token', accessToken);
+};
+
+const setMajorListInLocalStorage = (majorList) => {
+    localStorage.setItem('major_list', majorList);
+};
+
+const login = (schoolId, password) => {
+    if (checkLoginFormat(schoolId, password)) {
+        loginSite(schoolId, password).then(response => {
+            if (response){
+            setAccessTokenInLocalStorage(response.access_token);
+            setRefreshTokenInLocalStorage(response.refresh_token);
+            
+            getUserMajorsInfo().then(response => {
+            setMajorListInLocalStorage(response);
+            window.location.href='/';
+            })}
+        })
+    }
+};
 
 const Login = () => {
     const [school_id, setSchoolId] = useState(''); // setEmail을 setSchoolId로 변경
@@ -52,7 +95,7 @@ const Login = () => {
                     <LoginTitle>LOGIN</LoginTitle>
                     <LoginInputText onChange={(e) => setSchoolId(e.target.value)} placeholder='학교이메일 입력' />
                     <LoginInputText type="password"  onChange={(e) => setPassword(e.target.value)} placeholder='비밀번호 입력' />
-                    <LoginButton onClick={() => requestLoginToServer()}>로그인</LoginButton>
+                    <LoginButton onClick={() => login(school_id, password)}>로그인</LoginButton>
                     <SignupLink onClick={() => (window.location.href = '../signup')}>회원가입하기</SignupLink>
                 </LoginContainer>
             </LoginLayout>
