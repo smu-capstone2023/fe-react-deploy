@@ -8,7 +8,7 @@ const Navbar = ({ toggle }) => {
         <>
             <Nav>
                 <NavbarContainer>
-                    <NavLogo onClick={() => (window.location.href = '/')}>스뮤즈!!!</NavLogo>
+                    <NavLogo onClick={() => (window.location.href = '/')}>SMUS</NavLogo>
                     <MobileIcon onClick={toggle}>
                         <FaBars />
                     </MobileIcon>
