@@ -13,3 +13,5 @@ export const LostPreviewElement = ({onClick, content}) => {
         </>
     )
 };
+
+export default LostPreviewElement;
