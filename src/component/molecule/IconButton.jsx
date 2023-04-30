@@ -16,6 +16,6 @@ const IconButtonLayout = styled.div`
     display:flex;
     flex-direction: column;
     align-items: center;
-    padding: 1em;
-    ;
+    padding: .3rem;
+    cursor: pointer;
 `;
