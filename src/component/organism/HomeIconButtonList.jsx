@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {IconButton} from '../molecule/IconButton';
+import IconButton from '../molecule/IconButton';
 import { IoSchoolOutline,IoChatbubbleEllipsesOutline,IoCalendarOutline,IoCallOutline } from 'react-icons/io5'
 import styled from 'styled-components';
 
@@ -32,3 +32,5 @@ export const HomeIconButtonList = () => {
 export const IconsButtonLayout = styled.div`
     display:flex;
 `;
+
+export default HomeIconButtonList;

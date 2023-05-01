@@ -19,3 +19,5 @@ const IconButtonLayout = styled.div`
     padding: .3rem;
     cursor: pointer;
 `;
+
+export default IconButton;
