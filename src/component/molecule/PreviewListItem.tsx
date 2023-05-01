@@ -15,9 +15,12 @@ const PreviewListItem = ({ title, onClick }) => {
       }}
       onClick={onClick}
     >
-    <div>{title}</div>
-      <LikeView></LikeView>
-      <CommentView></CommentView>
+      <div style={{ flex: 1 }}>{title}</div>
+      <div style={{ display: 'flex' }}>
+        {/* 수동으로 지정 */}
+        <LikeView likeCount={0} />
+        <CommentView commentCount={0} />
+      </div>
     </div>
   );
 };
