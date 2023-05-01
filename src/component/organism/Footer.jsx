@@ -9,8 +9,8 @@ export const Footer = () => {
         <FooterInfo>
             <h1 style={{fontFamily:"nexon-regular"}}>상명대학교 자체 커뮤니티</h1>
             <br/>
-            <p style={{fontFamily:"nexon-regular"}}>개인정보처리방침 &gt;</p>
-            <p style={{fontFamily:"nexon-regular"}}>서비스 이용약관</p>
+            <p onClick={()=>{alert('준비 중입니다.(개인정보처리방침)')}} style={{fontFamily:"nexon-regular", cursor:"pointer"}}>개인정보처리방침 &gt;</p>
+            <p onClick={()=>{alert('준비 중입니다.(서비스 이용약관)')}} style={{fontFamily:"nexon-regular", cursor:"pointer"}}>서비스 이용약관</p>
             <p>대표 관리자 | 백종원</p>
             <p>이메일 | ❗❗@sangmyung.kr</p>
             <p>주소 | 상명대학교 제 1공학관 어디선가</p>
