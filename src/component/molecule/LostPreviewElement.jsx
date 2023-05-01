@@ -1,15 +1,28 @@
-import { 
-    Box,
-    Text,
-} from '@chakra-ui/react'
-
 export const LostPreviewElement = ({onClick, content}) => {
+
     return (
         <>
-            <Box bg='#EBF0FF' w='30%' p={4} borderWidth='1px' borderRadius='lg' color='#3E3E3E' onClick={onClick}>
-                <Text as='b' fontSize='lg' color='#4169E1'>NEW!</Text>
-                <Text fontSize='md'>{content}</Text>
-            </Box>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                background: '#EBF0FF',
+                width: '30%',
+                padding: '1rem',
+                borderWidth: '1px',
+                borderRadius: '0.8rem',
+                color: '#3E3E3E',
+            }} onClick={onClick}>
+                <h5 style={{
+                    fontFamily: 'nexon-bold',
+                    fontSize: '18px',
+                    color: '#4169E1',
+                }}>NEW!</h5>
+                <p style={{
+                    fontFamily: 'nexon-regular',
+                    fontSize: '16px',
+                    color: '#3E3E3E',
+                }}>{content}</p>
+            </div>
         </>
     )
 };
