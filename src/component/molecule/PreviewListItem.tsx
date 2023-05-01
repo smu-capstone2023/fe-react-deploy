@@ -2,7 +2,7 @@ import React from 'react';
 import LikeView from '../molecule/LikeView';
 import CommentView from '../molecule/CommentView';
 
-const PreviewListItem = ({ title, onClick, commentCount, likeCount }) => {
+export const PreviewListItem = ({ title, onClick, commentCount, likeCount }) => {
   return (
     <div
       style={{
@@ -19,6 +19,7 @@ const PreviewListItem = ({ title, onClick, commentCount, likeCount }) => {
       <div style={{ flex: 1 }}>{title}</div>
       <div style={{ display: 'flex' }}>
         <LikeView likeCount={likeCount} />
+        &nbsp;
         <CommentView commentCount={commentCount} />
       </div>
     </div>
