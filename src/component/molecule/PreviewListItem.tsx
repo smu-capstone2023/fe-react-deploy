@@ -2,7 +2,7 @@ import React from 'react';
 import LikeView from '../molecule/LikeView';
 import CommentView from '../molecule/CommentView';
 
-const PreviewListItem = ({ title, onClick }) => {
+const PreviewListItem = ({ title, onClick, commentCount, likeCount }) => {
   return (
     <div
       style={{
@@ -12,14 +12,14 @@ const PreviewListItem = ({ title, onClick }) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0 16px',
+        backgroundColor: 'white',
       }}
       onClick={onClick}
     >
       <div style={{ flex: 1 }}>{title}</div>
       <div style={{ display: 'flex' }}>
-        {/* 수동으로 지정 */}
-        <LikeView likeCount={0} />
-        <CommentView commentCount={0} />
+        <LikeView likeCount={likeCount} />
+        <CommentView commentCount={commentCount} />
       </div>
     </div>
   );
