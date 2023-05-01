@@ -1,13 +1,14 @@
+/**
+ * @param userInfo : { nickname: string, major: string, schoolId: string, mbti:string }
+ * @returns
+ */
+
 export const MyInfo = ({userInfo}) => {
-    const nickname = userInfo.nickname;
-    const major = userInfo.major;
+    const {nickname, major, mbti} = userInfo;
     let schoolId = '';
     if (userInfo.schoolId) {
         schoolId = userInfo.schoolId.toString().substr(2, 2);
-    } else {
-        schoolId = null;
-    }
-    const mbti = userInfo.mbti;
+    } 
 
     const NameFontStyles = {
         color: '#4168E1',
