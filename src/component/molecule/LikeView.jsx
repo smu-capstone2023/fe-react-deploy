@@ -7,7 +7,7 @@ export const LikeView = ({ likeCount }) => {
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <AiOutlineLike size={14} color="#FF5A5A" />
       <span 
-        style={{ fontSize: 14, marginLeft: 4 }}>
+        style={{ fontSize: 14,color: "#FF5A5A", marginLeft: 4 }}>
         {likeCount}
       </span>
     </div>
