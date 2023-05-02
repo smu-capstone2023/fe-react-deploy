@@ -16,7 +16,7 @@ export const Footer = () => {
     }
     return(
      <FooterLayout>
-        <Logo/>
+        <Logo width={"3.7"}/>
         <Info/>
      </FooterLayout>
     )

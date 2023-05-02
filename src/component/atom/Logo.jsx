@@ -1,5 +1,5 @@
-export const Logo = () => {
+export const Logo = ({width}) => {
     return(<img src="../../img/logo.svg" 
-    style={{width:"3.7rem", marginTop:".2rem"}} />)};
+    style={{width:`${width}em`, marginTop:".2rem"}} />)};
 
 export default Logo;
