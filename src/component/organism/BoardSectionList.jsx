@@ -1,0 +1,34 @@
+import React from 'react';
+import styled from 'styled-components';
+import SectionListHeader from '../molecule/SectionListHeader';
+import PreviewListItem from '../molecule/PreviewListItem';
+
+/**
+ * @param title : 헤더의 제목
+ * @param headerOnClick : 헤더를 클릭했을 때 실행되는 함수 
+ * @param previewList : { title, onClick, commentCount, likeCount}[]  뿌려줄 데이터 리스트
+ * @returns
+ */
+
+
+const BoardSectionList = ({ title, headerOnClick, previewList }) => {
+  return (
+
+//동적으로 할당 
+    <div>
+      <SectionListHeader title={title} onClick={headerOnClick} />
+      {previewList.map((previewItem, index) => (
+        <PreviewListItem
+          key={index}
+          title={previewItem.title}
+          onClick={previewItem.onClick}
+          commentCount={previewItem.commentCount}
+          likeCount={previewItem.likeCount}
+        />
+      ))}
+    </div>
+  );
+};
+
+
+export default BoardSectionList;

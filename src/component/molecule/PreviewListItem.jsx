@@ -18,9 +18,9 @@ export const PreviewListItem = ({ title, onClick, commentCount, likeCount }) => 
     >
       <div style={{ flex: 1 }}>{title}</div>
       <div style={{ display: 'flex' }}>
-        <LikeView likeCount={likeCount} />
-        &nbsp;
         <CommentView commentCount={commentCount} />
+        &nbsp;
+        <LikeView likeCount={likeCount} />
       </div>
     </div>
   );
