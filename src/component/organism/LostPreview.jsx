@@ -17,7 +17,6 @@ export const LostPreview =({previewList}) => {
                     display: 'flex',
                     borderBottom: 'solid 1px #E8E8E8',
                     padding: '0.1rem',
-                    width: '30%',
                     minWidth: '15rem',
                 }}>
                     <SectionListHeader onClick={onClick} title={title}></SectionListHeader>
