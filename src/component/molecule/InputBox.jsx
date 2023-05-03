@@ -27,7 +27,7 @@ const InputBox = ({ placeholder }) => {
         border: "1px solid #B6B6B6",
         borderRadius: "5px",
         fontSize: "16px",
-        background: '#FFFFFF',
+        background: '#FAFAFA',
         color: "#B6B6B6",
       }}
     />
