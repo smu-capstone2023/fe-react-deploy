@@ -15,6 +15,7 @@ export const Button = ({title, onClick}) => {
                     color: '#FFFFFF',
                     background: '#4169E1',
                     height: '3rem',
+                    width: '100%',
                     padding: '1rem 2rem 1rem 2rem',
                     borderRadius: '6px',
                 }}>{title}</button>
