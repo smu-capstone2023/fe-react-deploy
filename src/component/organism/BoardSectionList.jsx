@@ -11,12 +11,11 @@ import PreviewListItem from '../molecule/PreviewListItem';
  */
 
 
-const BoardSectionList = ({ title, headerOnClick, previewList }) => {
-  return (
 
-//동적으로 할당 
-    <div>
-      <SectionListHeader title={title} onClick={headerOnClick} />
+export const BoardSectionList = ({ title, headerOnClick, previewList }) => {
+  return (
+    <BoardSectionListLayout>
+      <SectionListHeader title={title} onClick={headerOnClick} font="nexon-regular" />
       {previewList.map((previewItem, index) => (
         <PreviewListItem
           key={index}
@@ -26,9 +25,12 @@ const BoardSectionList = ({ title, headerOnClick, previewList }) => {
           likeCount={previewItem.likeCount}
         />
       ))}
-    </div>
+    </BoardSectionListLayout>
   );
 };
 
+const BoardSectionListLayout = styled.div`
+  border-bottom: 1px solid #ddd;
+`;
 
 export default BoardSectionList;

@@ -6,7 +6,7 @@ export const PreviewListItem = ({ title, onClick, commentCount, likeCount }) => 
   return (
     <div
       style={{
-        height: 49,
+        height: '40px',
         width: '100%',
         display: 'flex',
         alignItems: 'center',

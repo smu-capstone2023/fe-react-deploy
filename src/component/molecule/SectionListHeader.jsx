@@ -18,6 +18,7 @@ const SectionListHeaderLayout = styled.div`
   align-items: center;
   padding: 1em;
   width: 100%;
+  height: 48px;
 `;
 
 
