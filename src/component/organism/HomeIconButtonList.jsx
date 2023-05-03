@@ -3,14 +3,14 @@ import IconButton from '../molecule/IconButton';
 import { IoSchoolOutline,IoChatbubbleEllipsesOutline,IoCalendarOutline,IoCallOutline } from 'react-icons/io5'
 import styled from 'styled-components';
 
-export const HomeIconButtonList = () => {
+export const HomeIconButtonList = ({iconProps, fontProps}) => {
     const [title] = useState(['학교게시판','학과게시판','학사일정','문의하기']);
     const [icon] = useState([<IoSchoolOutline/>,<IoChatbubbleEllipsesOutline/>,<IoCalendarOutline/>,<IoCallOutline/>]); 
     const onClick = (title) => {alert(title)}
-    const iconSize = 1.3 
+    const iconSize = iconProps; 
     const fontStyles = {
         fontFamily: 'nexon-regular',
-        fontSize: '.5em',
+        fontSize: fontProps,
       };
 
     return(
