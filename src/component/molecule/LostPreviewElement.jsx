@@ -6,7 +6,7 @@ export const LostPreviewElement = ({onClick, content}) => {
                 display: 'flex',
                 flexDirection: 'column',
                 background: '#EBF0FF',
-                width: '30%',
+                width: '100%',
                 padding: '1rem',
                 borderWidth: '1px',
                 borderRadius: '0.8rem',
