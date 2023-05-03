@@ -4,8 +4,6 @@ import Logo from '../atom/Logo';
 import { RxHamburgerMenu } from 'react-icons/rx'
 
 export const Header = () => {
-    const [title] = useState(['학교게시판','학과게시판','학사일정','문의하기']);
-    const [login] = useState(['로그아웃','로그인']);
     const Hamberger = () => {
         return(
             <HambergerLayout onClick={()=>{alert("준비 중")}}>
@@ -19,11 +17,14 @@ export const Header = () => {
             <LogoWrapper onClick={()=>{window.location.href = '/'}}>
                 <Logo width={"5"} />
             </LogoWrapper>
-            {title.map((title)=>(
-                <HeaderElement onClick={()=>{alert(title)}} title={title}>{title}</HeaderElement>
-            ))}
-            <HeaderElement>{login[0]}</HeaderElement>
-            <Hamberger></Hamberger>
+
+            <HeaderElement onClick={()=>{alert("준비중")}}>학교게시판</HeaderElement> 
+            <HeaderElement onClick={()=>{alert("준비중")}}>학과게시판</HeaderElement> 
+            <HeaderElement onClick={()=>{alert("준비중")}}>학사일정</HeaderElement> 
+            <HeaderElement onClick={()=>{alert("준비중")}}>문의하기</HeaderElement> 
+            <HeaderElement onClick={()=>{alert("준비중")}}>로그인</HeaderElement> 
+
+            <Hamberger/>
         </HeaderLayout>
     )
 }
@@ -67,7 +68,7 @@ const HeaderElement = styled.div`
     padding: .1rem;
     padding-left: .6rem;
     cursor: pointer;
-    
+
     @media (max-width: 768px) {
         display:none;
     }
