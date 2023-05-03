@@ -13,6 +13,7 @@ export const PreviewListItem = ({ title, onClick, commentCount, likeCount }) => 
         justifyContent: 'space-between',
         padding: '0 16px',
         backgroundColor: 'white',
+        fontSize: '12px', 
       }}
       onClick={onClick}
     >
