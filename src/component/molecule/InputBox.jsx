@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 
+/**
+ * @param placeholder : string
+ * @param onChange: () => {}
+ * @returns
+ */
+
 const InputBox = ({ placeholder }) => {
   const [value, setValue] = useState('');
 
@@ -10,7 +16,7 @@ const InputBox = ({ placeholder }) => {
   return (
     <input
       type="text"
-      placeholder="학번"
+      placeholder={placeholder}
       onChange={handleChange}
       value={value}
       style={{
@@ -21,8 +27,8 @@ const InputBox = ({ placeholder }) => {
         border: "1px solid #B6B6B6",
         borderRadius: "5px",
         fontSize: "16px",
-        fontFamily: "NEXON Lv1 Gothic",
-        color: "#B6B6B6"
+        background: '#FFFFFF',
+        color: "#B6B6B6",
       }}
     />
   );

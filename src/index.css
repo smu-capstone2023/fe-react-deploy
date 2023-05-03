@@ -9,8 +9,16 @@
 }
 
 @font-face{
-    font-family: "nexon-bold";
-    src: url("./font/NEXON Lv1 Gothic Low OTF Bold.woff") format("woff");
+    font-family: "NEXONLv1GothicLight";
+    src: url("./font/NEXONLv1GothicLight.ttf") format("ttf");
+}
+@font-face{
+    font-family: "NEXONLv1GothicRegular";
+    src: url("./font/NEXONLv1GothicRegular.ttf")format("ttf");
+}
+@font-face{
+    font-family: "NEXONLv1GothicBold";
+    src: url("./font/NEXONLv1GothicBold.ttf") format("ttf");
 }
 
 * {
