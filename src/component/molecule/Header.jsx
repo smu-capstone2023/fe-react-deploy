@@ -8,7 +8,7 @@ export const Header = () => {
     const [login] = useState(['로그아웃','로그인']);
     const Hamberger = () => {
         return(
-            <HambergerLayout>
+            <HambergerLayout onClick={()=>{alert("준비 중")}}>
                 <RxHamburgerMenu fontSize={"1.3rem"}/>
             </HambergerLayout>
         )
@@ -16,11 +16,11 @@ export const Header = () => {
     return(
     <HeaderLayout>
             <EmptyBox/>
-            <LogoWrapper>
+            <LogoWrapper onClick={()=>{window.location.href = '/'}}>
                 <Logo width={"5"} />
             </LogoWrapper>
             {title.map((title)=>(
-                <HeaderElement title={title}>{title}</HeaderElement>
+                <HeaderElement onClick={()=>{alert(title)}} title={title}>{title}</HeaderElement>
             ))}
             <HeaderElement>{login[0]}</HeaderElement>
             <Hamberger></Hamberger>
@@ -37,8 +37,9 @@ const EmptyBox = styled.div`
       }  
 `
 const LogoWrapper = styled.div`
-  display: flex;
-  margin-right: auto;
+    display: flex;
+    margin-right: auto;
+    cursor: pointer;
 
   @media screen and (max-width: 768px) {
     flex: 1;
@@ -65,6 +66,7 @@ const HeaderLayout = styled.div`
 const HeaderElement = styled.div`
     padding: .1rem;
     padding-left: .6rem;
+    cursor: pointer;
     
     @media (max-width: 768px) {
         display:none;
