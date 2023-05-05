@@ -11,6 +11,7 @@ import {useState, useEffect} from 'react';
  * @param hotPreviewList : {title, id, commenCount, likeCount}[]
  * @param majorInfo: {majorName, majorId}
  * @param majorPreviewList: {title, id, commentCount, likeCount}[]
+ * @param lostPreviewList: {content , onClick}[]
  * @returns
  */
 
