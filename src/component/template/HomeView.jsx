@@ -14,7 +14,7 @@ import {useState, useEffect} from 'react';
  * @returns
  */
 
-export const HomeView = ({userInfo, hotPreviewList, majorInfo, majorPreviewList})=>{
+export const HomeView = ({userInfo, hotPreviewList, majorInfo, majorPreviewList, lostPreviewList})=>{
     const {majorName, majorId} = majorInfo;
     const [resize, setResize] = useState();
     const hotBoardTitle = "HOT 게시판";
@@ -73,7 +73,7 @@ export const HomeView = ({userInfo, hotPreviewList, majorInfo, majorPreviewList}
                                 <HomeIconButtonList iconProps={2} fontProps={14}></HomeIconButtonList>
                             </div>
                             <div style={{display: 'flex', alignItems: 'center', width: '80%'}}>
-                                <LostPreview previewList={[{content: '분실ㅇ물 있어요dhchdhdhdhdhdhdhdh', onClick:()=>{}}, {content: '분실ㅇ물 있어요', onClick:()=>{}}, {content: '분실ㅇ물 있어요', onClick:()=>{}}]}></LostPreview>
+                                <LostPreview previewList={lostPreviewList}></LostPreview>
                             </div>
                         </div>
 
@@ -118,7 +118,7 @@ export const HomeView = ({userInfo, hotPreviewList, majorInfo, majorPreviewList}
                                 <HomeIconButtonList iconProps={2} fontProps={11}></HomeIconButtonList>
                             </div>
                             <div style={{display: 'flex', alignItems: 'center', width: '100%', margin: '1rem 0 1rem 0'}}>
-                                <LostPreview previewList={[{content: '분실ㅇ물 있어요dhchdhdhdhdhdhdhdh', onClick:()=>{}}, {content: '분실ㅇ물 있어요', onClick:()=>{}}]}></LostPreview>
+                                <LostPreview previewList={lostPreviewList}></LostPreview>
                             </div>
                         </div>
 
