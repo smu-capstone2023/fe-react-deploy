@@ -12,7 +12,7 @@ export const LostPreview =({previewList}) => {
 
     return (
         <>
-            <div>
+            <div style={{width: '100%'}}>
                 <div style={{
                     display: 'flex',
                     borderBottom: 'solid 1px #E8E8E8',
@@ -25,6 +25,7 @@ export const LostPreview =({previewList}) => {
                 <div style={{
                     display: 'flex', 
                     padding: '0.7rem',
+                    overflow: 'auto',
                 }}>
                 { previewList.map((data, i)=>{
                     return (

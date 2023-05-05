@@ -4,6 +4,7 @@ import {HomeIconButtonList} from '../../component/organism/HomeIconButtonList';
 import {LostPreview} from '../../component/organism/LostPreview';
 import {BoardSectionList} from '../../component/organism/BoardSectionList';
 import {Footer} from '../../component/organism/Footer';
+import {useState, useEffect} from 'react';
 
 /**
  * @param userInfo: {nickname, major, shoolId, mbti}
@@ -15,56 +16,122 @@ import {Footer} from '../../component/organism/Footer';
 
 export const HomeView = ({userInfo, hotPreviewList, majorInfo, majorPreviewList})=>{
     const {majorName, majorId} = majorInfo;
+    const [resize, setResize] = useState();
+    const hotBoardTitle = "HOT 게시판";
+
+    const handleResize = () => {
+        setResize(window.innerWidth);
+    };
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     return (
         <>
-            {/* <Navbar toggle={true}></Navbar> */}
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',
                 padding: '4rem',
             }}>
-                <div style={{display: 'flex', width: '100%', marginBottom: '2rem'}}>
-                    <MyInfo userInfo={userInfo}></MyInfo>
-                    <div style={{
-                        display: 'flex', 
-                        background: '#E8E8E8', 
-                        width: '80%',
-                        height: '10rem',
-                        marginLeft: '0.5rem',
-                        padding: '1rem',
-                    }}></div>
+                <div style={{display: 'flex', width: '100%', margin: '1rem 0 1rem 0', justifyContent: 'center'}}>
+                    {
+                        resize >= 768 ?
+                        <>
+                            <MyInfo userInfo={userInfo}></MyInfo>
+                            <div style={{
+                                display: 'flex', 
+                                background: '#E8E8E8', 
+                                width: '80%',
+                                height: '10rem',
+                                marginLeft: '0.5rem',
+                                padding: '1rem',
+                            }}></div>
+                        </> 
+                        :
+                        <>
+                            <div style={{
+                                display: 'flex', 
+                                background: '#E8E8E8', 
+                                width: '100%',
+                                height: '10rem',
+                                marginLeft: '0.5rem',
+                                padding: '1rem',
+                            }}></div>
+                        </>
+                    }
                 </div>
                 
-                <div style={{display: 'flex', width: '100%', marginBottom: '2rem', flexWrap: 'wrap'}}>
-                    <div style={{display: 'flex', alignItems: 'center', width: '20%'}}>
-                        <HomeIconButtonList iconProps={2} fontProps={16}></HomeIconButtonList>
-                    </div>
-                    <div style={{display: 'flex', alignItems: 'center', width: '80%'}}>
-                        <LostPreview previewList={[{content: '분실ㅇ물 있어요dhchdhdhdhdhdhdhdh', onClick:()=>{}}, {content: '분실ㅇ물 있어요', onClick:()=>{}}]}></LostPreview>
-                    </div>
-                </div>
+                {
+                    resize >= 1300 ? 
+                    <>
+                        <div style={{display: 'flex', width: '100%', margin: '1rem 0 1rem 0', flexWrap: 'wrap'}}>
+                            <div style={{display: 'flex', alignItems: 'center', width: '20%', justifyContent: 'center'}}>
+                                <HomeIconButtonList iconProps={2} fontProps={14}></HomeIconButtonList>
+                            </div>
+                            <div style={{display: 'flex', alignItems: 'center', width: '80%'}}>
+                                <LostPreview previewList={[{content: '분실ㅇ물 있어요dhchdhdhdhdhdhdhdh', onClick:()=>{}}, {content: '분실ㅇ물 있어요', onClick:()=>{}}, {content: '분실ㅇ물 있어요', onClick:()=>{}}]}></LostPreview>
+                            </div>
+                        </div>
 
-                <div style={{display: 'flex', width: '100%', marginBottom: '2rem', flexWrap: 'wrap'}}>
-                    <div style={{
-                        display: 'flex',
-                        background: '#EBF0FF',
-                        width: '20rem',
-                        height: '30rem',
-                        padding: '1rem',
-                    }}>
-                        <div>스뭉이</div>
-                        <div>SMUS OPEN!</div>
-                    </div>
+                        <div style={{display: 'flex', width: '100%', margin: '1rem 0 1rem 0', flexWrap: 'wrap'}}>
+                            <div style={{
+                                display: 'flex',
+                                background: '#EBF0FF',
+                                width: '20%',
+                                height: '18rem',
+                                padding: '1rem',
+                            }}>
+                                <img style={{
+                                    background: '#4169E1',
+                                    display: 'flex',
+                                    width: '50%',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}></img>
+                                <h1 style={{
+                                    display: 'flex', 
+                                    width: '50%', 
+                                    fontFamily: 'nexon-bold', 
+                                    fontSize: '40px', 
+                                    color: '#4169E1',  
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>SMUS OPEN!</h1>
+                            </div>
 
-                    <div style={{widtn: '100%', padding: '0.5rem'}}>
-                        <BoardSectionList title={"HOT 게시판"} headerOnClick={true} previewList={hotPreviewList}></BoardSectionList>
-                    </div>
-                    <div style={{padding: '0.5rem'}}>
-                        <BoardSectionList title={majorName} headerOnClick={true} previewList={majorPreviewList}></BoardSectionList>
-                    </div>
-                    
-                </div>
+                            <div style={{width: '40%', padding: '0.5rem'}}>
+                                <BoardSectionList title={"HOT 게시판"} headerOnClick={true} previewList={hotPreviewList}></BoardSectionList>
+                            </div>
+                            <div style={{width: '40%', padding: '0.5rem'}}>
+                                <BoardSectionList title={majorName} headerOnClick={true} previewList={majorPreviewList}></BoardSectionList>
+                            </div>
+                        </div>
+                    </> 
+                    : 
+                    <>
+                        <div style={{display: 'flex', width: '100%', margin: '1rem 0 1rem 0', flexWrap: 'wrap', flexDirection: 'column'}}>
+                            <div style={{display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center'}}>
+                                <HomeIconButtonList iconProps={2} fontProps={11}></HomeIconButtonList>
+                            </div>
+                            <div style={{display: 'flex', alignItems: 'center', width: '100%', margin: '1rem 0 1rem 0'}}>
+                                <LostPreview previewList={[{content: '분실ㅇ물 있어요dhchdhdhdhdhdhdhdh', onClick:()=>{}}, {content: '분실ㅇ물 있어요', onClick:()=>{}}]}></LostPreview>
+                            </div>
+                        </div>
+
+                        <div style={{display: 'flex', width: '100%', margin: '1rem 0 1rem 0', flexWrap: 'wrap', flexDirection: 'column'}}>
+                            <div style={{width: '100%', padding: '0.5rem'}}>
+                                <BoardSectionList title={hotBoardTitle} headerOnClick={true} previewList={hotPreviewList}></BoardSectionList>
+                            </div>
+                            <div style={{width: '100%', padding: '0.5rem'}}>
+                                <BoardSectionList title={majorName} headerOnClick={true} previewList={majorPreviewList}></BoardSectionList>
+                            </div>
+                        </div>
+                    </>
+                }
             </div>
             <Footer></Footer>
         </>
