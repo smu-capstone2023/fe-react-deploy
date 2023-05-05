@@ -1,5 +1,6 @@
-import {SectionListHeader} from '../../component/molecule/SectionListHeader';
-import {LostPreviewElement} from '../../component/molecule/LostPreviewElement';
+import React from 'react';
+import SectionListHeader from '../../component/molecule/SectionListHeader';
+import LostPreviewElement from '../../component/molecule/LostPreviewElement';
 
 /**
  * @param previewList : { content , onClick }[]  뿌려줄 데이터 리스트
@@ -7,7 +8,7 @@ import {LostPreviewElement} from '../../component/molecule/LostPreviewElement';
  */
 
 export const LostPreview =({previewList}) => {
-    const {onClick} = previewList;
+    const {content, onClick} = previewList;
     const title = '분실물 게시판';
 
     return (
@@ -15,11 +16,10 @@ export const LostPreview =({previewList}) => {
             <div>
                 <div style={{
                     display: 'flex',
-                    borderBottom: 'solid 1px #E8E8E8',
                     padding: '0.1rem',
                     minWidth: '15rem',
                 }}>
-                    <SectionListHeader onClick={onClick} title={title}></SectionListHeader>
+                    <SectionListHeader onClick={()=>{}} title={title}></SectionListHeader>
                 </div>
 
                 <div style={{
