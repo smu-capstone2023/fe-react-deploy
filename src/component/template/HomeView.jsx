@@ -1,10 +1,10 @@
 // import {Navbar} from '../../component/Navbar/index';
-import {MyInfo} from '../../component/organism/MyInfo';
-import {HomeIconButtonList} from '../../component/organism/HomeIconButtonList';
-import {LostPreview} from '../../component/organism/LostPreview';
-import {BoardSectionList} from '../../component/organism/BoardSectionList';
-import {Footer} from '../../component/organism/Footer';
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
+import MyInfo from '../../component/organism/MyInfo';
+import HomeIconButtonList from '../../component/organism/HomeIconButtonList';
+import LostPreview from '../../component/organism/LostPreview';
+import BoardSectionList from '../../component/organism/BoardSectionList';
+import Footer from '../../component/organism/Footer';
 
 /**
  * @param userInfo: {nickname, major, shoolId, mbti}
@@ -33,12 +33,8 @@ export const HomeView = ({userInfo, hotPreviewList, majorInfo, majorPreviewList,
 
     return (
         <>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '4rem',
-            }}>
-                <div style={{display: 'flex', width: '100%', margin: '1rem 0 1rem 0', justifyContent: 'center'}}>
+            <div style={{display: 'flex', flexDirection: 'column', padding: '2rem'}}>
+                <div style={{display: 'flex', width: '100%', margin: '1rem 0', justifyContent: 'center'}}>
                     {
                         resize >= 768 ?
                         <>
@@ -69,7 +65,7 @@ export const HomeView = ({userInfo, hotPreviewList, majorInfo, majorPreviewList,
                 {
                     resize >= 1300 ? 
                     <>
-                        <div style={{display: 'flex', width: '100%', margin: '1rem 0 1rem 0', flexWrap: 'wrap'}}>
+                        <div style={{display: 'flex', width: '100%', margin: '1rem 0', flexWrap: 'wrap'}}>
                             <div style={{display: 'flex', alignItems: 'center', width: '20%', justifyContent: 'center'}}>
                                 <HomeIconButtonList iconProps={2} fontProps={14}></HomeIconButtonList>
                             </div>
@@ -78,7 +74,7 @@ export const HomeView = ({userInfo, hotPreviewList, majorInfo, majorPreviewList,
                             </div>
                         </div>
 
-                        <div style={{display: 'flex', width: '100%', margin: '1rem 0 1rem 0', flexWrap: 'wrap'}}>
+                        <div style={{display: 'flex', width: '100%', margin: '1rem 0', flexWrap: 'wrap'}}>
                             <div style={{
                                 display: 'flex',
                                 background: '#EBF0FF',
@@ -94,8 +90,8 @@ export const HomeView = ({userInfo, hotPreviewList, majorInfo, majorPreviewList,
                                     justifyContent: 'center',
                                 }}></img>
                                 <h1 style={{
-                                    display: 'flex', 
-                                    width: '50%', 
+                                    display: 'flex',
+                                    width: '50%',
                                     fontFamily: 'nexon-bold', 
                                     fontSize: '40px', 
                                     color: '#4169E1',  
@@ -103,7 +99,7 @@ export const HomeView = ({userInfo, hotPreviewList, majorInfo, majorPreviewList,
                                     justifyContent: 'center'
                                 }}>SMUS OPEN!</h1>
                             </div>
-
+                            
                             <div style={{width: '40%', padding: '0.5rem'}}>
                                 <BoardSectionList title={"HOT 게시판"} headerOnClick={true} previewList={hotPreviewList}></BoardSectionList>
                             </div>
@@ -114,16 +110,16 @@ export const HomeView = ({userInfo, hotPreviewList, majorInfo, majorPreviewList,
                     </> 
                     : 
                     <>
-                        <div style={{display: 'flex', width: '100%', margin: '1rem 0 1rem 0', flexWrap: 'wrap', flexDirection: 'column'}}>
+                        <div style={{display: 'flex', width: '100%', margin: '1rem 0', flexWrap: 'wrap', flexDirection: 'column'}}>
                             <div style={{display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center'}}>
                                 <HomeIconButtonList iconProps={2} fontProps={11}></HomeIconButtonList>
                             </div>
-                            <div style={{display: 'flex', alignItems: 'center', width: '100%', margin: '1rem 0 1rem 0'}}>
+                            <div style={{display: 'flex', alignItems: 'center', width: '100%', margin: '1rem 0'}}>
                                 <LostPreview previewList={lostPreviewList}></LostPreview>
                             </div>
                         </div>
 
-                        <div style={{display: 'flex', width: '100%', margin: '1rem 0 1rem 0', flexWrap: 'wrap', flexDirection: 'column'}}>
+                        <div style={{display: 'flex', width: '100%', margin: '1rem 0', flexWrap: 'wrap', flexDirection: 'column'}}>
                             <div style={{width: '100%', padding: '0.5rem'}}>
                                 <BoardSectionList title={hotBoardTitle} headerOnClick={true} previewList={hotPreviewList}></BoardSectionList>
                             </div>
