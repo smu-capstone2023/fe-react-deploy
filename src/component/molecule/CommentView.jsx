@@ -12,7 +12,7 @@ export const CommentView = ({ commentCount, fontSize = 12, iconSize = 12 }) => {
     return (
         <div style={{ display: "flex", alignItems: "center" }}>
             <IoChatboxOutline size={iconSize} color="#4169E1" />
-            <span style={{ fontSize: fontSize, color: "#4169E1", marginLeft: 4 }}>{commentCount}</span>
+            <span style={{ fontSize: fontSize, color: "#4169E1", marginLeft: 4, fontFamily: "nexon-regular" }}>{commentCount}</span>
         </div>
     );
 };
