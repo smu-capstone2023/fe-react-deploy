@@ -8,7 +8,6 @@ import LostPreviewElement from '../../component/molecule/LostPreviewElement';
  */
 
 export const LostPreview =({previewList}) => {
-    const {content, onClick} = previewList;
     const title = '분실물 게시판';
 
     return (
