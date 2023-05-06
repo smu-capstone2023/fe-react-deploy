@@ -17,8 +17,6 @@ import MajorBoardSmall from '../../component/MajorBoard/Small';
 import { setUserMajorListInLocalStorage } from '../../api/auth/usermajors';
 import { getNotice } from '../../api/board/notice';
 
-import PostListElement from '../../component/molecule/PostListElement';
-
 const SchoolBoard = () => {
     const [boardList, setBoardList] = useState([]);
     useEffect(() => {
@@ -94,11 +92,7 @@ const Home = () => {
 
     const majorIdTitleList = JSON.parse(localStorage.getItem('major_options'));
     return (
-        <>
-        <PostListElement onClick={onClick} commentCount={5} 
-        likeCount={2} title={'동생 친해?'} content={'ㅋㅋ몰라zzzzzzzㅋㅋ몰라zzzzzzzㅋㅋ몰라zzzzzzz'} 
-        createdDate={'zz123'}></PostListElement>
-        
+        <>        
             <HomeLayout className={`start ${fade}`}>
                 <SchoolBoard />
                 {majorIdTitleList ? (
