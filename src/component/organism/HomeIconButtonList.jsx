@@ -4,9 +4,6 @@ import { IoSchoolOutline,IoChatbubbleEllipsesOutline,IoCalendarOutline,IoCallOut
 import styled from 'styled-components';
 
 export const HomeIconButtonList = () => {
-    const [title] = useState(['학교게시판','학과게시판','학사일정','문의하기']);
-    const [icon] = useState([<IoSchoolOutline/>,<IoChatbubbleEllipsesOutline/>,<IoCalendarOutline/>,<IoCallOutline/>]); 
-    const onClick = (title) => {alert(title)}
     const iconSize = 1.3 
     const fontStyles = {
         fontFamily: 'nexon-regular',
@@ -16,21 +13,43 @@ export const HomeIconButtonList = () => {
     return(
 
         <IconsButtonLayout>
-            {icon.map((icon, index) => (
+
                 <IconButton 
-                key={index} 
-                icon={icon} 
-                title={title[index]} 
-                onClick={()=>onClick(title[index])} 
+                icon={<IoSchoolOutline/>} 
+                title={'학교게시판'} 
+                onClick={()=>alert('학교게시판')} 
                 fontStyles={fontStyles} 
-                iconSize={iconSize} />
-            ))}
+                iconSize={iconSize}></IconButton>
+
+                <IconButton 
+                icon={<IoChatbubbleEllipsesOutline/>} 
+                title={'학과게시판'} 
+                onClick={()=>alert('학과게시판')} 
+                fontStyles={fontStyles} 
+                iconSize={iconSize}></IconButton>
+
+                <IconButton 
+                icon={<IoCalendarOutline/>} 
+                title={'학사일정'} 
+                onClick={()=>alert('학사일정')} 
+                fontStyles={fontStyles} 
+                iconSize={iconSize}></IconButton>
+
+                <IconButton 
+                icon={<IoCallOutline/>} 
+                title={'문의하기'} 
+                onClick={()=>alert('문의하기')} 
+                fontStyles={fontStyles} 
+                iconSize={iconSize}></IconButton>
+
         </IconsButtonLayout>
 
     )
 }
 export const IconsButtonLayout = styled.div`
     display:flex;
+    width: 100%;
+    justify-content: center;
 `;
 
 export default HomeIconButtonList;
