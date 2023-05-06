@@ -4,6 +4,8 @@ import { LoginButton, LoginContainer, LoginInputText, SignupLink, LoginTitle, Lo
 import { setUserMajorListInLocalStorage } from '../../api/auth/usermajors';
 import { loginSite } from '../../api/User/LoginSite' ;
 import { getUserMajorsInfo } from '../../api/User/GetUserMajorsInfo' ;
+import LoginView from '../../component/template/LoginView';
+
 
 const checkLoginFormat = (schoolId, password) => {
     if (schoolId) {
@@ -90,15 +92,8 @@ const Login = () => {
 
     return (
         <>
-            <LoginLayout>
-                <LoginContainer>
-                    <LoginTitle>LOGIN</LoginTitle>
-                    <LoginInputText onChange={(e) => setSchoolId(e.target.value)} placeholder='학교이메일 입력' />
-                    <LoginInputText type="password"  onChange={(e) => setPassword(e.target.value)} placeholder='비밀번호 입력' />
-                    <LoginButton onClick={() => login(school_id, password)}>로그인</LoginButton>
-                    <SignupLink onClick={() => (window.location.href = '../signup')}>회원가입하기</SignupLink>
-                </LoginContainer>
-            </LoginLayout>
+
+            <LoginView/>
         </>
     );
 };

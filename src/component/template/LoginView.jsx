@@ -39,13 +39,7 @@ const LoginView = ({
             <FindAccountButton onClick={onClickFindAccount}>아이디/비밀번호 찾기</FindAccountButton>
             <SignUpButton onClick={onClickSignUp}>아직 <span style={{color: "#4169E1"}}>SMUS 회원</span>이 아니신가요?</SignUpButton>
         </LoginContainer>
-
-        <ImageContainer style={{flex: 2}}>
-          <ImageWrapper>
-            <LoginImage src="../../img/loginframe.png" />
-          </ImageWrapper>
-        </ImageContainer>
-        
+        <ImageContainer style={{ flex: 2 }}/>
       </LoginVeiwLayout>
 
       </>
@@ -137,14 +131,15 @@ const SignUpButton = styled.button`
 `;
 
 const ImageContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background-image: url("../../img/loginframe.png");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  @media (max-width: 760px) {
-    display: none;
-  }
+    @media (max-width: 760px) {
+        display: none;
+    }
 `;
 
 const ImageWrapper = styled.div`
