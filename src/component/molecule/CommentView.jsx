@@ -8,7 +8,7 @@ import { IoChatboxOutline } from "react-icons/io5";
  * @param iconSize: number
  * @returns
  */
-export const CommentView = ({ commentCount, fontSize = 12, iconSize = 12 }) => {
+export const CommentView = ({ commentCount, fontSize, iconSize}) => {
     return (
         <div style={{ display: "flex", alignItems: "center" }}>
             <IoChatboxOutline size={iconSize} color="#4169E1" />

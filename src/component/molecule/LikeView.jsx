@@ -8,7 +8,7 @@ import { AiOutlineLike } from "react-icons/ai";
  * @param iconSize : number
  * @returns
  */
-export const LikeView = ({ likeCount, fontSize = 12, iconSize = 12 }) => {
+export const LikeView = ({ likeCount, fontSize, iconSize }) => {
     return (
         <div style={{ display: "flex", alignItems: "center" }}>
             <AiOutlineLike size={iconSize} color="#FF5A5A" />

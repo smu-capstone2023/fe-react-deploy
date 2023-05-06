@@ -79,7 +79,7 @@ const BoardBannerButton = ({ title, boardId, backgroundColor }) => {
 
 const Home = () => {
     const [fade, setFade] = useState('');
-
+    const onClick = () => {alert('PostListElement클릭됨')}
     useEffect(() => {
         if (localStorage.getItem('access_token')) setUserMajorListInLocalStorage(localStorage.getItem('access_token'));
         setTimeout(() => {
@@ -92,7 +92,7 @@ const Home = () => {
 
     const majorIdTitleList = JSON.parse(localStorage.getItem('major_options'));
     return (
-        <>
+        <>        
             <HomeLayout className={`start ${fade}`}>
                 <SchoolBoard />
                 {majorIdTitleList ? (
