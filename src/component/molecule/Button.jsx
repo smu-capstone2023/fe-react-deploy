@@ -7,7 +7,7 @@
 export const Button = ({title, onClick}) => {
     return (
         <>
-            <div style={{display: 'flex'}} onClick={onClick}>
+        <div style={{ display: "flex", width: "100%" }} onClick={onClick}>
                 <button style={{
                     display: 'flex',
                     alignItems: 'center',

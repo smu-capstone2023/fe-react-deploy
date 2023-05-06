@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import InputBox from "../molecule/InputBox";
+import Button from "../molecule/Button";
 
 
 /**
@@ -44,7 +45,14 @@ const SignUpView = ({
             </InputBoxContainer>
 
 
-            <SignUpButton onClick={onClickSignupButton}>다음</SignUpButton>
+            <div style={{ width: 'inherit', margin: '50px 0 100px' }}>
+            <Button
+              title="다음"
+              onClick={onClickSignupButton}
+              style={{ marginTop: '50px', width: 'inherit' }}
+            />
+            </div>
+
         </SignUpContainer>
 
         <ImageContainer style={{ flex: 2 }}/>
@@ -169,21 +177,7 @@ const InputBoxContainer = styled.div`
 
 
 
-const SignUpButton = styled.button`
-  background-color: #4169E1;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  font-size: 1rem;
-  margin-top: 20px;
-  margin-bottom: 100px;
-  width: 100%;
 
-  @media (max-width: 760px) {
-    margin-bottom: 0px;
-  }
-`;
 
 
   const ImageContainer = styled.div`
