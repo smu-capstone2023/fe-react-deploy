@@ -14,18 +14,18 @@ import PreviewListItem from '../molecule/PreviewListItem';
 
 export const BoardSectionList = ({ title, headerOnClick, previewList }) => {
   return (
-    <BoardSectionListLayout>
-      <SectionListHeader title={title} onClick={headerOnClick} font="nexon-regular" />
-      {previewList.map((previewItem, index) => (
-        <PreviewListItem
-          key={index}
-          title={previewItem.title}
-          onClick={previewItem.onClick}
-          commentCount={previewItem.commentCount}
-          likeCount={previewItem.likeCount}
-        />
-      ))}
-    </BoardSectionListLayout>
+      <BoardSectionListLayout>
+          <SectionListHeader title={title} onClick={headerOnClick} font="nexon-regular" />
+          {previewList && previewList.map((previewItem, index) => ( //이부분 입니다.
+              <PreviewListItem
+                  key={index}
+                  title={previewItem.title}
+                  onClick={previewItem.onClick}
+                  commentCount={previewItem.commentCount}
+                  likeCount={previewItem.likeCount}
+              />
+          ))}
+      </BoardSectionListLayout>
   );
 };
 
