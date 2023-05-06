@@ -1,17 +1,20 @@
-import React from 'react';
-import { AiOutlineLike } from 'react-icons/ai';
+import React from "react";
+import { AiOutlineLike } from "react-icons/ai";
 
-//좋아요 수
-export const LikeView = ({ likeCount }) => {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <AiOutlineLike size={12} color="#FF5A5A" />
-      <span 
-        style={{ fontSize: 12,color: "#FF5A5A", marginLeft: 4 }}>
-        {likeCount}
-      </span>
-    </div>
-  );
+/**
+ *
+ * @param likeCount : number
+ * @param fontSize : number
+ * @param iconSize : number
+ * @returns
+ */
+export const LikeView = ({ likeCount, fontSize = 12, iconSize = 12 }) => {
+    return (
+        <div style={{ display: "flex", alignItems: "center" }}>
+            <AiOutlineLike size={iconSize} color="#FF5A5A" />
+            <span style={{ fontSize: fontSize, color: "#FF5A5A", marginLeft: 4, fontFamily: "nexon-regular" }}>{likeCount}</span>
+        </div>
+    );
 };
 
 export default LikeView;
