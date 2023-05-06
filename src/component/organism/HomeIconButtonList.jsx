@@ -1,18 +1,24 @@
-import { useState } from 'react';
+import React from 'react';
 import IconButton from '../molecule/IconButton';
 import { IoSchoolOutline,IoChatbubbleEllipsesOutline,IoCalendarOutline,IoCallOutline } from 'react-icons/io5'
 import styled from 'styled-components';
 
-export const HomeIconButtonList = () => {
-    const iconSize = 1.3 
+/**
+ * @param width : string
+ * @param fontSize: string
+ * @param iconSize: number 
+ * @returns
+ */
+
+export const HomeIconButtonList = ({width, fontSize, iconSize}) => {
     const fontStyles = {
         fontFamily: 'nexon-regular',
-        fontSize: '.5em',
+        fontSize: fontSize,
       };
 
     return(
 
-        <IconsButtonLayout>
+        <div style={{display:'flex', justifyContent:'space-between', width:width}}>
 
                 <IconButton 
                 icon={<IoSchoolOutline/>} 
@@ -41,15 +47,13 @@ export const HomeIconButtonList = () => {
                 onClick={()=>alert('문의하기')} 
                 fontStyles={fontStyles} 
                 iconSize={iconSize}></IconButton>
-
-        </IconsButtonLayout>
+        </div>
 
     )
 }
 export const IconsButtonLayout = styled.div`
     display:flex;
-    width: 100%;
-    justify-content: center;
+    justify-content: space-between;
 `;
 
 export default HomeIconButtonList;
