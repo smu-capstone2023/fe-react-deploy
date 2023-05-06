@@ -5,7 +5,7 @@ import Sidebar from './component/Sidebar';
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import Login from './pages/Login';
+import Login from '../src/component/page/Login';
 import Mypage from './pages/Mypage';
 import Signup from './pages/Signup';
 import AddPost from './pages/AddPost';
