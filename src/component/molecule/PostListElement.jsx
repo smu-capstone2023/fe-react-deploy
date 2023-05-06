@@ -16,8 +16,8 @@ import styled from "styled-components";
 const PostListElement = ({onClick, commentCount, likeCount, title, content, createdDate}) => {
     return(
         <PostListElementLayout onClick={onClick}>
-            <div style={{flex: 1, fontFamily:'nexon-regular'}}>{title}</div>
-            <div style={{flex: 1, fontSize:'.8em'}}>{content}</div>
+            <div style={{flex: 1, fontFamily:'nexon-regular', fontSize:'1.1em'}}>{title}</div>
+            <div style={{flex: 1, fontSize:'1em'}}>{content}</div>
             <div style={{flex: 1, display: 'flex', flexDirection: 'row', gap: '.5rem', paddingLeft:'.3rem'}}>
                 <CommentView commentCount={commentCount}/>
                 <LikeView likeCount={likeCount}/>
@@ -32,7 +32,6 @@ const PostListElementLayout = styled.div`
     flex-direction: column;
     width: 100%;
     padding: .9rem;
-    font-size: .8em;
     gap: .1em;
     cursor: pointer;
     border-bottom: .5px solid #B8B8B8;
