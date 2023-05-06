@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 
-export const IconButton = ({width, icon, title, onClick, fontStyles, iconSize}) => {
+export const IconButton = ({icon, title, onClick, fontStyles, iconSize}) => {
     
     return(
-        <IconButtonLayout width={width} onClick={onClick}>
+        <IconButtonLayout onClick={onClick}>
             <p style={{fontSize:`${iconSize}em`}}>{icon}</p> 
             <p style={fontStyles}>{title}</p> 
         </IconButtonLayout>
