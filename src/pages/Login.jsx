@@ -1,6 +1,5 @@
 import React from "react";
-// import LoginView from "../component/template/LoginView";
-import LoginView from '../template/LoginView'
+import LoginView from "../component/template/LoginView";
 
 const Login = () => {
     return <LoginView />;
