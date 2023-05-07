@@ -1,9 +1,8 @@
 import React from "react";
-import SignUpView from "../component/template/SignUpView";
 import UserCertificateView from "../component/template/UserCertificateView";
 
-const Signup = () => {
+const UserCertificate = () => {
     return <UserCertificateView/>
 };
 
-export default Signup;
+export default UserCertificate;
