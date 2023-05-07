@@ -2,24 +2,24 @@ import React from "react";
 
 /**
  * @param options: {id, name}[]
- * @param title: string
  * @param onChange: () => {}
+ * @param fontSize: string
  * @returns
  */
 
-const SelectBox = ({ options, onChange }) => {
+const SelectBox = ({ options, onChange, fontSize }) => {
     return (
         <>
             <form>
-                <Select options={options} initValue={options[0]} onChange={onChange} />
+                <Select options={options} initValue={options[0]} onChange={onChange} fontSize={fontSize} />
             </form>
         </>
     );
 };
 
-const Select = ({ options, onChange }) => {
+const Select = ({ options, onChange, fontSize}) => {
     return (
-        <select initValue={options[0]} onChange={onChange} style={{ fontFamily: "nexon-regular" }}>
+        <select initValue={options[0]} onChange={onChange} style={{ fontFamily: "nexon-regular", fontSize:`${fontSize}` }}>
             {options &&
                 options.map((option) => {
                     return (
