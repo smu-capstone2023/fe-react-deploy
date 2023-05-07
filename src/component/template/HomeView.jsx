@@ -68,8 +68,8 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                 {resize >= 1300 ? (
                     <>
                         <div style={{ display: "flex", width: "100%", margin: "1rem 0", flexWrap: "wrap" }}>
-                            <div style={{ display: "flex", alignItems: "center", width: "20%", justifyContent: "center" }}>
-                                <HomeIconButtonList iconProps={2} fontProps={14}></HomeIconButtonList>
+                            <div style={{ display: "flex", alignItems: "center", width: "20%" }}>
+                                <HomeIconButtonList width={"100%"} fontSize={"16px"} iconSize={2}></HomeIconButtonList>
                             </div>
                             <div style={{ display: "flex", alignItems: "center", width: "80%" }}>
                                 <LostPreview previewList={lostPreviewList}></LostPreview>
@@ -122,7 +122,7 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                     <>
                         <div style={{ display: "flex", width: "100%", margin: "1rem 0", flexWrap: "wrap", flexDirection: "column" }}>
                             <div style={{ display: "flex", alignItems: "center", width: "100%", justifyContent: "center" }}>
-                                <HomeIconButtonList iconProps={2} fontProps={11}></HomeIconButtonList>
+                                <HomeIconButtonList width={"100%"} fontSize={"13px"} iconSize={2}></HomeIconButtonList>
                             </div>
                             <div style={{ display: "flex", alignItems: "center", width: "100%", margin: "1rem 0" }}>
                                 <LostPreview previewList={lostPreviewList}></LostPreview>
