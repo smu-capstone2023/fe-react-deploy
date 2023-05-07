@@ -7,39 +7,29 @@ import React from "react";
  * @returns
  */
 
-const SelectBox = ({options, title, onChange}) => {
-
-
-    return(
+const SelectBox = ({ options, onChange }) => {
+    return (
         <>
             <form>
-                <Select options={options} defaultValue={title} onChange={onChange} />
+                <Select options={options} initValue={options[0]} onChange={onChange} />
             </form>
         </>
-    )
-}
+    );
+};
 
-const Select =({options, defaultValue, onChange}) => {
-    return(
-        <select defaultValue={defaultValue} onChange={onChange} style={{fontFamily:'nexon-regular'}}>
-            {options && options.map((option) => {
-                return(
-                    <option
-                        style={{fontSize:'1em',fontFamily:'nexon-regular' }}
-                        key={option.id} 
-                        value={option.name}
-                    >
-                        {option.name}
-                    </option>
-                )
-            })}
+const Select = ({ options, onChange }) => {
+    return (
+        <select initValue={options[0]} onChange={onChange} style={{ fontFamily: "nexon-regular" }}>
+            {options &&
+                options.map((option) => {
+                    return (
+                        <option value={option.id} style={{ fontSize: "1em", fontFamily: "nexon-regular" }} key={option.id}>
+                            {option.name}
+                        </option>
+                    );
+                })}
         </select>
-    )
-}
+    );
+};
 
 export default SelectBox;
-
-
-
-
-
