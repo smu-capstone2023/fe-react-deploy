@@ -5,19 +5,23 @@
 }
 
 
-@font-face{
-    font-family: "NOTOSANSKR-REGULAR";
-    src: url("./font/NOTOSANSKR-REGULAR.woff") format("woff");
+@font-face {
+    font-family: "nexon-regular";
+    src: url("./font/NEXON Lv1 Gothic Low OTF.woff") format("woff");
 }
 
-@font-face{
-    font-family: "NANUMGOTHIC-REGULAR";
-    src: url("./font/NANUMGOTHIC-REGULAR.woff") format("woff");
+@font-face {
+    font-family: "nexon-light";
+    src: url("./font/NEXON Lv1 Gothic Low OTF Light.woff") format("woff");
 }
 
-@font-face{
-    font-family: "GOTHICA1-REGULARR";
-    src: url("./font/GOTHICA1-REGULAR.woff") format("woff");
+@font-face {
+    font-family: "nexon-bold";
+    src: url("./font/NEXON Lv1 Gothic Low OTF Bold.woff") format("woff");
+}
+
+* {
+    font-family: "nexon-light";
 }
 
 .Start{

@@ -12,7 +12,7 @@ import AddPost from "./pages/AddPost";
 import Board from "./pages/Board";
 import ViewPost from "./pages/ViewPost";
 import EditPost from "./pages/EditPost";
-import Certification from "./pages/Certification";
+import UserCertificate from "./pages/UserCertificate";
 import Header from "./component/molecule/Header";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
                 <Route path="/board/:major_id/:board_id" element={<Board />}></Route>
                 <Route path="/viewpost/:post_id" element={<ViewPost />}></Route>
                 <Route path="/editpost/:post_id" element={<EditPost />}></Route>
-                <Route path="/certification" element={<Certification />}></Route>
+                <Route path="/user-certification" element={<UserCertificate/>}></Route>
             </Routes>
         </div>
     );
