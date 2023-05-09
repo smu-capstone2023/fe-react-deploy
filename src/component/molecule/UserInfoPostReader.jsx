@@ -14,7 +14,7 @@ import styled from "styled-components";
  * @returns
  */
 
-const UserInfoPostReader = ({ userName, iconSize = 17, fontSize = '1rem' }) => {
+const UserInfoPostReader = ({ userName, iconSize = 17, fontSize = '1rem', postId, commentId }) => {
 
     const handleLikeClick = (postId) => {
         //alert 띄우기
@@ -27,7 +27,7 @@ const UserInfoPostReader = ({ userName, iconSize = 17, fontSize = '1rem' }) => {
     
     return (
       <UserInfoPostReaderLayout style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'nexon-regular' }}>
           <BiUserCircle size={iconSize} style={{ marginRight: '8px', color: '#747474' }} />
           <div style={{ fontSize }}>{userName}</div>
         </div>
