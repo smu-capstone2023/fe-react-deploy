@@ -47,6 +47,6 @@ const UserInfoPostReader = ({ userName, iconSize = 17, fontSize = '1rem' }) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'NEXON Lv1 Gothic';
+    font-family: 'nexon-regular';
   `;
   export default UserInfoPostReader;
