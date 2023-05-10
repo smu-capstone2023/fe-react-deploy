@@ -16,14 +16,13 @@ import styled from "styled-components";
 
 const UserInfoPostReader = ({ userName, iconSize = 17, fontSize = '1rem', postId, commentId }) => {
 
-    const handleLikeClick = (postId) => {
-        //alert 띄우기
-        alert(`좋아요 눌림 ${postId}`);
-      };
-      
-      const handleCommentClick = (postId) => {
-        alert(`댓글달기 눌림 ${postId}`);
-      };
+  const handleLikeClick = () => {
+    alert(`좋아요 눌림 ${postId}`);
+    };
+  
+  const handleCommentClick = () => {
+    alert(`댓글달기 눌림 ${postId}`);
+    };
     
     return (
       <UserInfoPostReaderLayout style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
