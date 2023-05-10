@@ -15,7 +15,7 @@ import { BiUserCircle } from "react-icons/bi";
  * @returns
  */
 
-const UserInfoPostWriter = ({ userName, iconSize = 17, fontSize = '1rem' }) => {
+const UserInfoPostWriter = ({ userName, iconSize = 17, fontSize = '1rem', postId, commentId }) => {
 
     const handleEditClick = () => {
         //alert 띄우기
