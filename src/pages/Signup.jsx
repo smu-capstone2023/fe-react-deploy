@@ -7,21 +7,29 @@ const Signup = () => {
     const [rePassword, setRePassword] = useState("");
 
     const checkIdRegExp = () => {
-        //여기에 id가 학번 형식이 맞는지 체크하는 로직을 작성해주세요.
-    };
-
+        //Ex) 123456789(9자리 숫자)
+        // console.log(id)
+        return /^\d{9}/.test(id);
+        
+    }
     const checkPasswordExp = () => {
-        //여기에 비밀번호 형식이 맞는지 체크하는 로직을 작성해주세요
+        //Ex) qwer1234! (숫자,문자 필수, 특수문자 허용, 8~16자리)
+        return(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+]{8,16}$/.test(password))
     };
 
     const checkRePasswordExp = () => {
-        //여기에 비밀번호와 re비밀번호의 입력값이 같은지 체크하는 로직을 작성해주세요.
+        if (password === rePassword) {
+            return(true)
+        } else {
+            return(false)
+        }
     };
 
     const onClickSignupButton = () => {
-        //api/signUpSite 함수를 사용해주세요.
-        //위에 정의된 함수 3개를 이용해서 작성해주세요.
-        //여기에 회원가입 버튼을 누르면 발생할 로직을 작성해주세요.
+        if (checkIdRegExp() == false) {console.log('ID 형식을 확인해주세요.')} 
+        else if (checkPasswordExp() == false) {alert('비밀번호 형식을 확인해주세요.')} 
+        else if (checkRePasswordExp() == false) {alert('비밀번호가 일치하지 않습니다.')} 
+
     };
 
     return (
