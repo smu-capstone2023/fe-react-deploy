@@ -24,8 +24,8 @@ const BoardSelectBoxLayout = styled.div`
 
 const BoardSelectdiv = styled.div`
     display: flex;
-    padding-bottom: 0.6rem;
     font-family: nexon-regular;
+    padding: .8em 0em 1em 1em;
 
     @media screen and (max-width: 600px) {
         font-size: 0.8em;
