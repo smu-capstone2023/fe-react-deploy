@@ -36,7 +36,7 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                 </RowToColumnResponsableView>
                 <div style={{ flex: 1, display: "flex", gap: 10 }}>
                     <HideResponsableView style={{ flex: 1, background: "gray", minWidth: "20em" }} />
-                    <RowToColumnResponsableView style={{ flex: 3 }}>
+                    <RowToColumnResponsableView style={{ flex: 3, gap: 10 }}>
                         <BoardSectionList title="HOT 게시판" previewList={hotPreviewList} />
                         <BoardSectionList title={majorName} previewList={majorPreviewList} />
                     </RowToColumnResponsableView>
@@ -51,7 +51,6 @@ export default HomeView;
 
 const RowToColumnResponsableView = styled.div`
     display: flex;
-    gap: 10;
     @media (max-width: 760px) {
         flex-direction: column;
     }
