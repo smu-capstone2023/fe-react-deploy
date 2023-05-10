@@ -1,9 +1,8 @@
-import axios from "axios"
+import axios from "axios";
 
 export const signUpSite = (shcool_id, nickname, password, image) => {
     return axios
-        .post(`${process.env.REACT_APP_SERVER_URL}/auth/join`, 
-        {
+        .post(`${process.env.REACT_APP_SERVER_URL}/auth/join`, {
             school_id: shcool_id,
             nickname: nickname,
             password: password,
@@ -11,11 +10,11 @@ export const signUpSite = (shcool_id, nickname, password, image) => {
         })
         .then((response) => {
             if (response.data.status_code === 201) {
-                return response.data.profile_image_url;
+                return response.data;
             }
         })
         .catch((response) => {
             console.log(response);
-            return '';
+            return false;
         });
 };
