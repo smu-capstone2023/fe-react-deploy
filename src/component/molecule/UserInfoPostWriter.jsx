@@ -17,12 +17,12 @@ import { BiUserCircle } from "react-icons/bi";
 
 const UserInfoPostWriter = ({ userName, iconSize = 17, fontSize = '1rem' }) => {
 
-    const handleEditClick = (postId) => {
+    const handleEditClick = () => {
         //alert 띄우기
         alert(`게시글 수정 ${postId}`);
       };
       
-      const handleDeleteClick = (postId) => {
+      const handleDeleteClick = () => {
         alert(`게시글 삭제 ${postId}`);
       };
     
