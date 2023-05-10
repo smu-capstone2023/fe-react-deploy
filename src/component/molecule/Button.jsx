@@ -2,10 +2,11 @@
  * @param title: {string}
  * @param onClick: () => {}
  * @param width: number | string
+ * @param height: number | string
  * @returns
  */
 
-export const Button = ({ title, onClick, width = "100%" }) => {
+export const Button = ({ title, onClick, width = "100%", height = "3rem" }) => {
     return (
         <>
             <div style={{ display: "flex", width: width }} onClick={onClick}>
@@ -16,9 +17,8 @@ export const Button = ({ title, onClick, width = "100%" }) => {
                         justifyContent: "center",
                         color: "#FFFFFF",
                         background: "#4169E1",
-                        height: "3rem",
+                        height: height,
                         width: "100%",
-                        padding: "1rem 2rem 1rem 2rem",
                         borderRadius: "6px",
                     }}
                 >
