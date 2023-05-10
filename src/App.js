@@ -14,6 +14,7 @@ import ViewPost from "./pages/ViewPost";
 import EditPost from "./pages/EditPost";
 import UserCertificate from "./pages/UserCertificate";
 import Header from "./component/molecule/Header";
+import Footer from "./component/organism/Footer";
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/editpost/:post_id" element={<EditPost />}></Route>
                 <Route path="/user-certification" element={<UserCertificate/>}></Route>
             </Routes>
+            <Footer/>
         </div>
     );
 }
