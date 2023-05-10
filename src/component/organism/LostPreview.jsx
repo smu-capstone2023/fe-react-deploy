@@ -30,14 +30,15 @@ export const LostPreview = ({ previewList }) => {
                         overflow: "auto",
                     }}
                 >
-                    {previewList.map((data, i) => {
-                        return (
-                            <>
-                                <div style={{ padding: "0.2rem" }}></div>
-                                <LostPreviewElement onClick={data.onClick} content={data.content}></LostPreviewElement>
-                            </>
-                        );
-                    })}
+                    {previewList &&
+                        previewList.map((data, i) => {
+                            return (
+                                <>
+                                    <div style={{ padding: "0.2rem" }}></div>
+                                    <LostPreviewElement onClick={data.onClick} content={data.content}></LostPreviewElement>
+                                </>
+                            );
+                        })}
                 </div>
             </div>
         </>
