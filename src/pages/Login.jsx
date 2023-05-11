@@ -23,9 +23,10 @@ const Login = () => {
     const onClickLoginButton = () => {
         loginSite(id, password)
             .then((response) => {
-                if ( response.status_code === 200 ) {
+                if ( response.access_token ) {
                     setUserInfoInLocalStorage(id, response.access_token, response.refresh_token);
-                    window.location.href = '/'}
+                    window.location.href = '/'                  
+                }
                 else {
                     alert('로그인 정보가 없습니다. 다시 시도해주세요! ')}
             })
