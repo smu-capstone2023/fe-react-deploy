@@ -19,31 +19,35 @@ import Footer from "../organism/Footer";
 
 const BoardView = ({ majorOptions, onChangeMajorSelect, fontSize, postListData, boardList, onClickBoard }) => {
     return (
-        <div style={{ display: "flex", margin: "3%", flexDirection: "column" }}>
-            <SelectBox options={majorOptions} onChange={onChangeMajorSelect} fontSize={fontSize}></SelectBox>
-            <BoardSelectBox boardList={boardList} onClickBoard={onClickBoard}></BoardSelectBox>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ margin: "3%" }}>
+                <SelectBox options={majorOptions} onChange={onChangeMajorSelect} fontSize={fontSize}></SelectBox>
+                <BoardSelectBox boardList={boardList} onClickBoard={onClickBoard}></BoardSelectBox>
 
-            <BoardLayout>
-                <div style={{ display: "flex", width: "100%", flexDirection: "row", padding: "1em", gap: "20px", paddingRight: "0rem" }}>
-                    <InputBoxContainer style={{ flex: "1" }}>
-                        <InputBox placeholder="검색어를 입력해주세요." />
-                    </InputBoxContainer>
+                <BoardLayout>
+                    <div
+                        style={{ display: "flex", width: "100%", flexDirection: "row", padding: "1em", gap: "20px", paddingRight: "0rem" }}
+                    >
+                        <InputBoxContainer style={{ flex: "1" }}>
+                            <InputBox placeholder="검색어를 입력해주세요." />
+                        </InputBoxContainer>
 
-                    <ButtonLayout>
-                        <Button
-                            title={"글쓰기"}
-                            onClick={() => {
-                                alert("글쓰기");
-                            }}
-                            width={"130px"}
-                            fontSize={"20px"}
-                            height={"50px"}
-                        ></Button>
-                    </ButtonLayout>
-                </div>
+                        <ButtonLayout>
+                            <Button
+                                title={"글쓰기"}
+                                onClick={() => {
+                                    alert("글쓰기");
+                                }}
+                                width={"130px"}
+                                fontSize={"20px"}
+                                height={"50px"}
+                            ></Button>
+                        </ButtonLayout>
+                    </div>
 
-                <PostListView postListData={postListData}></PostListView>
-            </BoardLayout>
+                    <PostListView postListData={postListData}></PostListView>
+                </BoardLayout>
+            </div>
             <Footer />
         </div>
     );
