@@ -23,9 +23,9 @@ export const Footer = () => {
 }
 
 const FooterLayout = styled.div`
-    background: F6F6F6;
+    background: #F6F6F6;
     padding: 1rem;
-    border: 1px solid #898989;
+    border-top: 1px solid #898989;
     width: 100%; 
 `
 const FooterInfo = styled.div`

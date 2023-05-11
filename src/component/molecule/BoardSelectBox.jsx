@@ -20,16 +20,25 @@ const BoardSelectBoxLayout = styled.div`
     width: 100%;
     border-bottom: 0.3px solid #b6b6b6;
     gap: 1rem;
+
+    @media screen and (max-width: 1200px) {
+        padding-top: .2rem;
+        font-size: 0.8em;
+
+    }
+    
+    @media screen and (max-width: 500px) {
+        padding-top: .2rem;
+        font-size: 0.55em;
+        gap: .5rem;
+    }
 `;
 
 const BoardSelectdiv = styled.div`
     display: flex;
-    padding-bottom: 0.6rem;
     font-family: nexon-regular;
+    padding: .8em 0em 1em 0em;
 
-    @media screen and (max-width: 600px) {
-        font-size: 0.8em;
-    }
 `;
 
 export default BoardSelectBox;

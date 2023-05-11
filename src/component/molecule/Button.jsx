@@ -6,7 +6,7 @@
  * @returns
  */
 
-export const Button = ({ title, onClick, width = "100%", height = "3rem" }) => {
+export const Button = ({ title, onClick, width = "100%", height = "3rem", fontSize = "1em" }) => {
     return (
         <>
             <div style={{ display: "flex", width: width }} onClick={onClick}>
@@ -20,6 +20,7 @@ export const Button = ({ title, onClick, width = "100%", height = "3rem" }) => {
                         height: height,
                         width: "100%",
                         borderRadius: "6px",
+                        fontSize: fontSize
                     }}
                 >
                     {title}
