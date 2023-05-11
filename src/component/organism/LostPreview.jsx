@@ -17,7 +17,6 @@ export const LostPreview = ({ previewList }) => {
                     style={{
                         display: "flex",
                         padding: "0.1rem",
-                        minWidth: "15rem",
                     }}
                 >
                     <SectionListHeader onClick={() => {}} title={title}></SectionListHeader>

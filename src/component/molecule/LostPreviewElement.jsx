@@ -1,17 +1,10 @@
+import styled from "styled-components";
+
 export const LostPreviewElement = ({onClick, content}) => {
 
     return (
         <>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                background: '#EBF0FF',
-                width: '100%',
-                padding: '1rem',
-                borderWidth: '1px',
-                borderRadius: '0.8rem',
-                color: '#3E3E3E',
-            }} onClick={onClick}>
+            <LPELayout onClick={onClick}>
                 <h5 style={{
                     fontFamily: 'nexon-bold',
                     fontSize: '18px',
@@ -22,9 +15,23 @@ export const LostPreviewElement = ({onClick, content}) => {
                     fontSize: '16px',
                     color: '#3E3E3E',
                 }}>{content}</p>
-            </div>
+            </LPELayout>
         </>
     )
 };
 
+const LPELayout = styled.div`
+    display: flex;
+    flex-direction: column;
+    background: #EBF0FF;
+    width: 100%;
+    padding: 1rem;
+    border-width: 1px;
+    border-radius: 0.8rem;
+    color: #3E3E3E;
+
+    @media screen and (max-width: 380px) {
+        padding: .6rem;
+      }
+`
 export default LostPreviewElement;
