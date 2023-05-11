@@ -20,17 +20,19 @@ const BoardSelectBoxLayout = styled.div`
     width: 100%;
     border-bottom: 0.3px solid #b6b6b6;
     gap: 1rem;
+    font-size: 23px;
 
     @media screen and (max-width: 1200px) {
         padding-top: .2rem;
-        font-size: 0.8em;
+        font-size: 21px;
 
     }
     
     @media screen and (max-width: 500px) {
         padding-top: .2rem;
-        font-size: 0.55em;
         gap: .5rem;
+        font-size: 20px;
+
     }
 `;
 

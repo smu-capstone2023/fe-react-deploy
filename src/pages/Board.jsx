@@ -6,7 +6,7 @@ import PostListView from '../component/organism/PostListView';
 const Board = () => {
     const majorOptions = [{id:0,name:'상명대학교'},{id:1,name:'컴퓨터과학과'}]
     const onChangeMajorSelect = () => alert('z');
-    const fontSize = '1em'
+    const fontSize = '25px'
     const postListData = [
         {
           onClick: () => alert("Post 1 clicked!"),
