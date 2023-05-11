@@ -1,8 +1,5 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./component/Navbar";
-import Sidebar from "./component/Sidebar";
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "../src/pages/Login";
@@ -14,13 +11,11 @@ import ViewPost from "./pages/ViewPost";
 import EditPost from "./pages/EditPost";
 import UserCertificate from "./pages/UserCertificate";
 import Header from "./component/molecule/Header";
-import Footer from "./component/organism/Footer";
 
 function App() {
     return (
         <div>
             <Header />
-
             <Routes>
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/login" element={<Login />}></Route>
