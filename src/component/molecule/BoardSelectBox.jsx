@@ -24,14 +24,12 @@ const BoardSelectBoxLayout = styled.div`
     @media screen and (max-width: 1200px) {
         padding-top: .2rem;
         font-size: 0.8em;
-        justify-content: center;
 
     }
     
     @media screen and (max-width: 500px) {
         padding-top: .2rem;
         font-size: 0.55em;
-        justify-content: center;
         gap: .5rem;
     }
 `;

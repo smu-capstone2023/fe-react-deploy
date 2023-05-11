@@ -32,7 +32,7 @@ const BoardView = ({majorOptions, onChangeMajorSelect, fontSize, postListData, b
                   </InputBoxContainer>
 
                   <ButtonLayout>
-                    <Button title={'글쓰기'} onClick={()=>{alert('글쓰기')}} width={'4rem'} fontSize={'.8em'} height={'2.5em'} ></Button>
+                    <Button title={'글쓰기'} onClick={()=>{alert('글쓰기')}} width={'130px'} fontSize={'20px'} height={'50px'} ></Button>
                   </ButtonLayout>
               </div>
 
@@ -46,8 +46,7 @@ const BoardView = ({majorOptions, onChangeMajorSelect, fontSize, postListData, b
 
 const InputBoxContainer = styled.div`
     display: flex;
-    font-family: 'NEXON Lv1 Gothic';
-    font-style: normal;
+    font-family: nexon-regular;
     font-weight: 300;
     color: #B6B6B6;
     justify-content: center;
@@ -75,7 +74,6 @@ const ButtonLayout = styled.div`
       position: fixed;
       right: 1rem;
       bottom: 1rem;
-      border-radius: 50px;
     }
 `;
 
