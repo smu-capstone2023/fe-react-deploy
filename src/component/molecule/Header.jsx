@@ -14,7 +14,13 @@ export const Header = () => {
                 { name: "학과게시판" },
                 { name: "학사일정" },
                 { name: "문의하기" },
-                { name: "로그아웃", onClick: () => localStorage.clear() },
+                {
+                    name: "로그아웃",
+                    onClick: () => {
+                        localStorage.clear();
+                        window.location.href = "/";
+                    },
+                },
             ]);
         } else {
             setMenu([{ name: "로그인", onClick: () => (window.location.href = "/login") }]);
