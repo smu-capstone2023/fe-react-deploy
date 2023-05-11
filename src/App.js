@@ -30,9 +30,8 @@ function App() {
                 <Route path="/board/:major_id/:board_id" element={<Board />}></Route>
                 <Route path="/viewpost/:post_id" element={<ViewPost />}></Route>
                 <Route path="/editpost/:post_id" element={<EditPost />}></Route>
-                <Route path="/user-certification" element={<UserCertificate/>}></Route>
+                <Route path="/user-certification" element={<UserCertificate />}></Route>
             </Routes>
-            <Footer/>
         </div>
     );
 }
