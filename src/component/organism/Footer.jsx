@@ -29,13 +29,10 @@ const FooterLayout = styled.div`
     width: 100%; 
 `
 const FooterInfo = styled.div`
-    font-size: .6em;
+    font-size: .8em;
     padding-top: .3rem;
     font-family: "nexon-bold";
 
-    @media screen and (max-width: 768px) {
-        font-size: .55em;
-      }
 `
 
 export default Footer;
