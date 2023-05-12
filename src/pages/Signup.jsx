@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SignUpView from "../component/template/SignUpView";
+import PostContent from "../component/organism/PostContent";
 
 const Signup = () => {
     const [id, setId] = useState("");
@@ -25,12 +26,13 @@ const Signup = () => {
     };
 
     return (
-        <SignUpView
-            onChangeId={setId}
-            onChangePassword={setPassword}
-            onChangeRePassword={setRePassword}
-            onClickSignupButton={onClickSignupButton}
-        />
+        // <SignUpView
+        //     onChangeId={setId}
+        //     onChangePassword={setPassword}
+        //     onChangeRePassword={setRePassword}
+        //     onClickSignupButton={onClickSignupButton}
+        // />
+        <PostContent/>
     );
 };
 
