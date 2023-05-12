@@ -34,8 +34,8 @@ const PostContent = ({ post, author, isAuthor }) => {
       <PostContentText>{content}</PostContentText>
       <PostContentInfo_Layout>
         {/* 댓글수,좋아요수,작성일 */}
-        <PostContentInfo>{commentCount} Comments</PostContentInfo>
-        <PostContentInfo>{likeCount} Likes</PostContentInfo>
+        <PostContentInfo>{commentCount}</PostContentInfo>
+        <PostContentInfo>{likeCount}</PostContentInfo>
         <PostContentInfo>{createDate}</PostContentInfo>
       </PostContentInfo_Layout>
     </PostContentLayout>
