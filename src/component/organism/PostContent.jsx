@@ -1,15 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+
 import UserInfoPostReader from '../molecule/UserInfoPostReader';
 import UserInfoPostWriter from "../molecule/UserInfoPostWriter";
-
-/**
- * @param post: {id, commentCount, likeCount, title, content, createDate}
- * @param author : {id, userName}
- * @param isAuthor : boolean
- * @returns
- */
-
+import LikeView from "../molecule/LikeView";
+import CommentView from "../molecule/CommentView";
 
 const PostContent = ({ post, author, isAuthor }) => {
   const { 
@@ -19,54 +14,66 @@ const PostContent = ({ post, author, isAuthor }) => {
     title, 
     content, 
     createDate, 
-    authorName } = post;
+    authorName 
+  } = post;
 
   return (
     <PostContentLayout>
       {isAuthor ? ( 
-        //글쓴이
+        // 글쓴이
         <UserInfoPostWriter userName={author.userName} postId={id}/>
       ) : (
-        //글쓴이 아닌 사람
+        // 글쓴이 아닌 사람
         <UserInfoPostReader userName={authorName} postId={id}/>
       )}
       <PostContentTitle>{title}</PostContentTitle>
       <PostContentText>{content}</PostContentText>
-      <PostContentInfo_Layout>
-        {/* 댓글수,좋아요수,작성일 */}
-        <PostContentInfo>{commentCount}</PostContentInfo>
-        <PostContentInfo>{likeCount}</PostContentInfo>
+        {/* 댓글수, 좋아요수, 작성일 */}
+        <InfoContainer>
+          <CommentView commentCount={commentCount} iconSize={11} fontSize="10px" />
+          <Spacing/>
+          <LikeView likeCount={likeCount} iconSize={11} fontSize="10px" />
+          <Spacing/>
         <PostContentInfo>{createDate}</PostContentInfo>
-      </PostContentInfo_Layout>
+        </InfoContainer>
     </PostContentLayout>
   );
 };
 
 const PostContentLayout = styled.div`
   width: 100%;
+  padding: 1rem;
 `;
 
+//글 제목
 const PostContentTitle = styled.h2`
-  font-size: 1.5rem;
-  font-family: 'nexon-bold';
-  margin: 1rem 0;
+  font-size: 13px;
+  font-family: 'nexon-regular';
+  padding: 1rem;
 `;
 
+//글 내용
 const PostContentText = styled.p`
-  font-size: 1.2rem;
-  font-family: 'nexon-regular';
+  font-size: 10px;
+  font-family: 'nexon-light';
+  padding: 1rem;
   margin-bottom: 2rem;
 `;
 
-const PostContentInfo_Layout = styled.div`
+const InfoContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
 `;
 
 const PostContentInfo = styled.p`
-  font-size: 0.8rem;
-  color: #FFFFFF;
+  font-size: 0.1rem;
+  color: #747474;
   font-family: 'nexon-regular';
+`;
+
+const Spacing = styled.div`
+  width: 10px;
 `;
 
 export default PostContent;
