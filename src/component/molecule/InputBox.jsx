@@ -3,10 +3,11 @@ import React, { useState } from "react";
 /**
  * @param placeholder : string
  * @param onChange: () => {}
+ * @param background: string;
  * @returns
  */
 
-const InputBox = ({ placeholder, onChange }) => {
+const InputBox = ({ placeholder, onChange, background = "#FAFAFA" }) => {
     return (
         <input
             type="text"
@@ -20,7 +21,7 @@ const InputBox = ({ placeholder, onChange }) => {
                 border: "1px solid #B6B6B6",
                 borderRadius: "5px",
                 fontSize: "16px",
-                background: "#FAFAFA",
+                background: background,
                 color: "#B6B6B6",
             }}
         />
