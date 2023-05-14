@@ -44,6 +44,7 @@ const SectionListLayout = styled.div`
     font-size: 1em;
 
     @media (max-width: 768px) {
+        padding: 1rem;
         display: block;
         font-size: 0.8em;
     }
