@@ -17,6 +17,7 @@ export const InputTextAreaBox = ({placeholder, onChange, background, width, heig
 };
 
 const WriteTextArea = styled.textarea`
+    display: flex;
     border: solid 0.5px #E5E5E5;
     border-radius: 5px;
     width: ${(props) => props.width || '100%'};
