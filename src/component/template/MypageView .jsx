@@ -18,9 +18,24 @@ const MypageView = ({ onClickRevoke, onClickLogout }) => {
                         title={"학과인증"}
                         onClick={() => (window.location.href = "/major-certification")}
                     ></SectionListHeader>
-                    <SectionListHeader title={"닉네임 설정"} onClick={() => alert("준비중(닉네임 설정)")}></SectionListHeader>
-                    <SectionListHeader title={"프로필 이미지 변경"} onClick={() => alert("준비중(프로필 이미지 변경)")}></SectionListHeader>
-                    <SectionListHeader title={"비밀번호 변경"} onClick={() => alert("준비중(비밀번호 변경)")}></SectionListHeader>
+                    <SectionListHeader
+                        title={"닉네임 설정"}
+                        onClick={() => {
+                            //여기에 swal inputAlert가 띄워져야 합니다.
+                        }}
+                    ></SectionListHeader>
+                    <SectionListHeader
+                        title={"프로필 이미지 변경"}
+                        onClick={() => {
+                            //여기에 swal alert가 띄워져야 합니다. ('준비중 입니다!')
+                        }}
+                    ></SectionListHeader>
+                    <SectionListHeader
+                        title={"비밀번호 변경"}
+                        onClick={() => {
+                            //여기에 swal inputAlert가 띄워져야 합니다.
+                        }}
+                    ></SectionListHeader>
                     <SectionListHeader title={"로그아웃"} onClick={onClickLogout}></SectionListHeader>
                     <SectionListHeader title={"탈퇴하기"} onClick={onClickRevoke}></SectionListHeader>
                 </SectionList1>
