@@ -78,11 +78,9 @@ const LogoWrapper = styled.div`
     }
 `;
 const HeaderLayout = styled.div`
-    height: 60px;
     display: flex;
-    align-items: center;
+    padding: 1rem;
     width: 100%;
-    padding: 0 1rem;
     flex-direction: row;
     font-size: 1em;
     justify-content: flex-end;
