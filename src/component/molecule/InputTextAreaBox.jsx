@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 /**
  * @param placeholder : string
@@ -10,19 +10,17 @@ import styled from 'styled-components';
  * @returns
  */
 
-export const InputTextAreaBox = ({placeholder, onChange, background, width, height}) => {
-    return (
-        <WriteTextArea width={width} height={height} background={background} placeholder={placeholder} onChange={onChange}/>
-    )
+export const InputTextAreaBox = ({ placeholder, onChange, background, width, height }) => {
+    return <WriteTextArea width={width} height={height} background={background} placeholder={placeholder} onChange={onChange} />;
 };
 
 const WriteTextArea = styled.textarea`
     display: flex;
-    border: solid 0.5px #E5E5E5;
+    border: solid 0.5px #e5e5e5;
     border-radius: 5px;
-    width: ${(props) => props.width || '100%'};
-    height: ${(props) => props.height || '10rem'};
-    background: ${(props) => props.background || 'white'};
+    width: ${(props) => props.width || "100%"};
+    height: ${(props) => props.height || "10rem"};
+    background: ${(props) => props.background || "white"};
     padding: 0.3rem;
     overflow: auto;
     resize: none;
@@ -38,6 +36,7 @@ const WriteTextArea = styled.textarea`
     }
     :focus {
         outline: none;
-    }`;
+    }
+`;
 
 export default InputTextAreaBox;

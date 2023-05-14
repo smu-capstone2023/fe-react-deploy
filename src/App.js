@@ -11,6 +11,7 @@ import ViewPost from "./pages/ViewPost";
 import EditPost from "./pages/EditPost";
 import UserCertificate from "./pages/UserCertificate";
 import Header from "./component/molecule/Header";
+import MajorCertificate from "./pages/MajorCertificate";
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/viewpost/:post_id" element={<ViewPost />}></Route>
                 <Route path="/editpost/:post_id" element={<EditPost />}></Route>
                 <Route path="/user-certification" element={<UserCertificate />}></Route>
+                <Route path="/major-certification" element={<MajorCertificate />}></Route>
             </Routes>
         </div>
     );
