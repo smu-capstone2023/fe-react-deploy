@@ -4,7 +4,6 @@ export const getHotBoardPreviewList = () => {
         .get(`${process.env.REACT_APP_SERVER_URL}/board/hot`)
         
         .then((response) => {
-            console.log(response.data)
             return response.data; 
         })
 
