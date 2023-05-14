@@ -36,14 +36,17 @@ const MypageView = ( { onClickRevoke, onClickLogout } ) => {
     )
 }
 
+
 const SectionListLayout = styled.div`
     display: flex;
     gap: 2rem;
     padding: 2rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 10rem;
+    font-size: 1em;
 
-    @media (max-width: 600px) {
-        display: block;    
+    @media (max-width: 768px) {
+        display: block;   
+        font-size: .8em; 
       }
 `
 const SectionList_1 = styled.div`
