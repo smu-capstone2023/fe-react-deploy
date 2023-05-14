@@ -2,62 +2,59 @@ import React from "react";
 import styled from "styled-components";
 import UserInfoPostReader from "../molecule/UserInfoPostReader";
 import UserInfoPostWriter from "../molecule/UserInfoPostWriter";
-import CommentView from "../molecule/CommentView";
 import LikeView from "../molecule/LikeView";
+import CommentView from "../molecule/CommentView";
+
 /**
- * @param post: {id, commentCount, likeCount, title, content, createDate}
+ * @param comment: {id, commentCount, likeCount, content, createDate}
  * @param author : {id, userName}
  * @param isAuthor : boolean
+ * @param children: ReactElement
  * @returns
  */
 
-const PostContent = ({ post, author, isAuthor }) => {
-    //구조 분해 할당 역영입니다.
-    const { id, commentCount, likeCount, title, content, createDate } = post;
+const CommentContentView = ({ comment, author, isAuthor, children }) => {
+    const { id, commentCount, likeCount, content, createDate } = comment;
+
     return (
-        <PostContentLayout>
+        <CommentContentLayout>
             {isAuthor ? (
-                //글쓴이
+                //댓글 작성자
                 <UserInfoPostWriter iconSize="1.8em" fontSize="1.3em" userName={author.userName} postId={id} />
             ) : (
-                //글쓴이 아닌 사람
+                //댓글 작성자 외
                 <UserInfoPostReader iconSize="1.8em" fontSize="1.3em" userName={author.userName} postId={id} />
             )}
-            <div>
-                <PostContentTitle>{title}</PostContentTitle>
-                <PostContentText>{content}</PostContentText>
-            </div>
-            <PostContentInfoLayout>
-                {/* 댓글수,좋아요수,작성일 */}
+            <TextContentText>{content}</TextContentText>
+            {/* 대댓글수, 좋아요수, 작성일 */}
+            <CommentContentInfoLayout>
                 <CommentView commentCount={commentCount} fontSize={15} iconSize={15} />
                 <LikeView likeCount={likeCount} fontSize={15} iconSize={15} />
                 <p style={{ color: "gray", fontSize: "0.8em" }}>{createDate}</p>
-            </PostContentInfoLayout>
-        </PostContentLayout>
+            </CommentContentInfoLayout>
+            {/*대댓글 컴포넌트 위치*/}
+            {children}
+        </CommentContentLayout>
     );
 };
 
-const PostContentLayout = styled.div`
+const CommentContentLayout = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 15px;
 `;
 
-const PostContentTitle = styled.p`
-    font-size: 1.3rem;
-    font-family: nexon-regular;
-`;
-
-const PostContentText = styled.p`
+//댓글내용
+const TextContentText = styled.p`
     font-size: 1rem;
     font-family: nexon-light;
 `;
 
-const PostContentInfoLayout = styled.div`
+const CommentContentInfoLayout = styled.div`
     align-items: center;
     display: flex;
     gap: 10px;
 `;
 
-export default PostContent;
+export default CommentContentView;
