@@ -16,7 +16,7 @@ export const ImageViewList = ({onChangeImageList, imageList, iconSize, size}) =>
             <ImageViewListLayout>
             {imageList && imageList.map((image, i)=>{
                 return(
-                    <ImageView iconSize={iconSize} size={size} onClickDelete={onChangeImageList} imageUrl={image}/>  
+                    <ImageView key={i} iconSize={iconSize} size={size} onClickDelete={onChangeImageList} imageUrl={image}/>  
                 )
             })} 
             </ImageViewListLayout>
