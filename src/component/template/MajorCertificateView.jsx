@@ -68,8 +68,8 @@ const MCVLayout =  styled.div`
     height: 30rem;
 
     @media (max-width: 768px) {
-        width: 70%;
-        font-size: .8em;
+        width: 95%;
+        font-size: .7em;
       }
 
 `
