@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LoginView from "../component/template/LoginView";
 import { loginSite } from "../api/User/LoginSite";
-import { getUserInfo } from "../api/User/GetUserInfo";
+import { getUserInfo } from "../api/User/getUserInfo";
 
 const Login = () => {
     const [id, setId] = useState("");
@@ -16,35 +16,35 @@ const Login = () => {
         window.location.href = "/signup";
     };
 
-    const setUserInfoInLocalStorage = (userId, accessToken, refreshToken, userName, schoolId, profileImageUrl, majorList) => {
-        localStorage.setItem("user_id", userId);
-        localStorage.setItem("access_token", accessToken);
-        localStorage.setItem("refresh_token", refreshToken);
+    const setUserInfoInLocalStorage = (userName, schoolId, profileImageUrl, majorList) => {
         localStorage.setItem("user_name", userName);
         localStorage.setItem("shool_id", schoolId);
         localStorage.setItem("profile_img_url", profileImageUrl);
         localStorage.setItem("majorList", JSON.stringify(majorList));
     };
-    //로그인
-        // 1. getUserInfo()함수를 이용해서 user의 정보를 가져옵니다.
-        // - 만약 getUserInfo의 response가 빈 객체 {}이면 alert로 '네트워크 문제! 잠시 다시 시도해주세요'라는 문구를 출력해줍니다.
-        // - 정상적으로 가져왔으면, setUserInfoLocalStorage를 통해서 localStorage에 값을 저장합니다.
-        // - loginSite의 output값을 postman에서 확인하시고 같은 setUserInfoLocalStorage을 통해서 localStorage에 값을 저장합니다.
+    const setUserTokenInLocalStorage = (userId, accessToken, refreshToken) => {
+        localStorage.setItem("user_id", userId); //TODO: 수정필요
+        localStorage.setItem("access_token", accessToken);
+        localStorage.setItem("refresh_token", refreshToken);
+    };
+
     const onClickLoginButton = () => {
         loginSite(id, password).then((response) => {
             if (response.access_token) {
-            getUserInfo()
-            .then((userInfoResponse) => {
-              if (Object.keys(userInfoResponse).length === 0) { //빈{}
-                alert("네트워크 문제! 잠시 다시 시도해주세요");
-              } 
-              else {
-                const { userId, accessToken, refreshToken } = response;
-                const { userName, schoolId, profileImageUrl, majorList } = userInfoResponse;
-                setUserInfoInLocalStorage(userId, accessToken, refreshToken, userName, schoolId, profileImageUrl, majorList);
-              }
-            })
-                window.location.href = "/";
+                console.log(response);
+                const { access_token, refresh_token } = response;
+                setUserTokenInLocalStorage(id, access_token, refresh_token);
+
+                getUserInfo().then((userInfoResponse) => {
+                    console.log(userInfoResponse);
+                    if (userInfoResponse === {}) {
+                        alert("네트워크 문제! 잠시 다시 시도해주세요");
+                    } else {
+                        const { username, school_id, profile_img_url, majors } = userInfoResponse;
+                        setUserInfoInLocalStorage(username, school_id, profile_img_url, majors);
+                        window.location.href = "/";
+                    }
+                });
             } else {
                 alert("로그인 정보가 없습니다. 다시 시도해주세요! ");
             }
