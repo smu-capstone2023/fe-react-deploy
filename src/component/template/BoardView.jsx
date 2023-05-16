@@ -73,7 +73,7 @@ const BoardLayout = styled.div`
 
     @media screen and (max-width: 780px) {
         width: 100%;
-        font-size: 0.8em;
+        font-size: 15px;
     }
 `;
 
