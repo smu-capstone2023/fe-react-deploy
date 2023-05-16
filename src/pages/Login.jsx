@@ -14,23 +14,29 @@ const Login = () => {
         window.location.href = "/signup";
     };
 
-    const setUserInfoInLocalStorage = (userId, accessToken, refreshToken) => {
+    const setUserInfoInLocalStorage = (userId, accessToken, refreshToken, userName, schoolId, profileImageUrl, majorList) => {
         localStorage.setItem("user_id", userId);
         localStorage.setItem("access_token", accessToken);
         localStorage.setItem("refresh_token", refreshToken);
+        localStorage.setItem("user_name", userName);
+        localStorage.setItem("shool_id", schoolId);
+        localStorage.setItem("profile_img_url", profileImageUrl);
+        localStorage.setItem("majorList", JSON.stringify(majorList));
     };
 
     const onClickLoginButton = () => {
-        loginSite(id, password)
-            .then((response) => {
-                if ( response.access_token ) {
-                    setUserInfoInLocalStorage(id, response.access_token, response.refresh_token);
-                    window.location.href = '/'                  
-                }
-                else {
-                    alert('로그인 정보가 없습니다. 다시 시도해주세요! ')}
-            })
-      };
+        loginSite(id, password).then((response) => {
+            if (response.access_token) {
+                // 1. getUserInfo()함수를 이용해서 user의 정보를 가져옵니다.
+                // 2. 정상적으로 가져왔으면, setUserInfoLocalStorage를 통해서 localStorage에 값을 저장합니다.
+                // 3. loginSite의 output값을 postman에서 확인하시고 같은 setUserInfoLocalStorage을 통해서 localStorage에 값을 저장합니다.
+
+                window.location.href = "/";
+            } else {
+                alert("로그인 정보가 없습니다. 다시 시도해주세요! ");
+            }
+        });
+    };
 
     return (
         <LoginView
