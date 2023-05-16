@@ -23,11 +23,12 @@ const ViewPostView = ({ post, author, isAuthor, commentList }) => {
 const ViewPostLayout = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  width: 100%
 `;
 
 const PostCommentGap = styled.div`
   height: 5px;
+  width: 100%;
   background-color: #E5E5E5;
 `;
 
