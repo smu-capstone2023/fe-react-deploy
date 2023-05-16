@@ -50,6 +50,7 @@ const PostContentTitle = styled.p`
 `;
 
 const PostContentText = styled.p`
+    margin-top:20px;
     font-size: 1rem;
     font-family: nexon-light;
 `;
