@@ -31,6 +31,7 @@ const Login = () => {
     const onClickLoginButton = () => {
         loginSite(id, password).then((response) => {
             if (response.access_token) {
+                console.log(response);
                 const { access_token, refresh_token } = response;
                 setUserTokenInLocalStorage(id, access_token, refresh_token);
 
