@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LoginView from "../component/template/LoginView";
 import { loginSite } from "../api/User/LoginSite";
+import { getUserInfo } from "../api/User/GetUserInfo";
 
 const Login = () => {
     const [id, setId] = useState("");
@@ -28,8 +29,9 @@ const Login = () => {
         loginSite(id, password).then((response) => {
             if (response.access_token) {
                 // 1. getUserInfo()함수를 이용해서 user의 정보를 가져옵니다.
-                // 2. 정상적으로 가져왔으면, setUserInfoLocalStorage를 통해서 localStorage에 값을 저장합니다.
-                // 3. loginSite의 output값을 postman에서 확인하시고 같은 setUserInfoLocalStorage을 통해서 localStorage에 값을 저장합니다.
+                // - 만약 getUserInfo의 response가 빈 객체 {}이면 alert로 '네트워크 문제! 잠시 다시 시도해주세요'라는 문구를 출력해줍니다.
+                // - 정상적으로 가져왔으면, setUserInfoLocalStorage를 통해서 localStorage에 값을 저장합니다.
+                // - loginSite의 output값을 postman에서 확인하시고 같은 setUserInfoLocalStorage을 통해서 localStorage에 값을 저장합니다.
 
                 window.location.href = "/";
             } else {
