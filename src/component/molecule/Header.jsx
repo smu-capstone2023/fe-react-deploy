@@ -4,16 +4,37 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { useEffect, useState } from "react";
 
 export const Header = () => {
-    console.log("header-render");
     const [menu, setMenu] = useState([]);
 
     useEffect(() => {
         if (localStorage.getItem("access_token")) {
             setMenu([
-                { name: "학교게시판" },
-                { name: "학과게시판" },
-                { name: "학사일정" },
-                { name: "문의하기" },
+                {
+                    name: "학교게시판",
+                    onClick: () => {
+                        //localStorage의 majorList[0]의 majorId값과, free boardId 값을 이용해서
+                        //상명대학교 자유게시판으로 이동할 수 있도록 로직 작성해주세요.
+                    },
+                },
+                {
+                    name: "학과게시판",
+                    onClick: () => {
+                        //localStorage의 majorList[1]의 majorId값과, free boardId 값을 이용해서
+                        //해당 학과의 자유게시판으로 이동할 수 있도록 로직 작성해주세요.
+                    },
+                },
+                {
+                    name: "학사일정",
+                    onClick: () => {
+                        //학교의 학사일정 페이지로 들어갈 수 있도록 로직 작성해주세요.
+                    },
+                },
+                {
+                    name: "마이페이지",
+                    onClick: () => {
+                        window.location.href = "/mypage";
+                    },
+                },
                 {
                     name: "로그아웃",
                     onClick: () => {
