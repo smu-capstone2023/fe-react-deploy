@@ -39,7 +39,8 @@ const Login = () => {
                 alert("네트워크 문제! 잠시 다시 시도해주세요");
               } 
               else {
-                const { userId, accessToken, refreshToken, userName, schoolId, profileImageUrl, majorList } = response;
+                const { userId, accessToken, refreshToken } = response;
+                const { userName, schoolId, profileImageUrl, majorList } = userInfoResponse;
                 setUserInfoInLocalStorage(userId, accessToken, refreshToken, userName, schoolId, profileImageUrl, majorList);
               }
             })
