@@ -12,7 +12,7 @@ export const loginSite = (school_id, password) => {
             }
         })
         .catch((response) => {
-            console.log(response);
+            console.error("loginSite", response);
             return {};
         });
 };
