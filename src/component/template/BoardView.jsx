@@ -25,9 +25,7 @@ const BoardView = ({ majorOptions, onChangeMajorSelect, fontSize, postListData, 
                 <BoardSelectBox boardList={boardList} onClickBoard={onClickBoard}></BoardSelectBox>
 
                 <BoardLayout>
-                    <div
-                        style={{ display: "flex", width: "100%", flexDirection: "row", padding: "1em", gap: "20px", paddingRight: "0rem" }}
-                    >
+                    <SearchAndWriteLayout>                  
                         <InputBoxContainer style={{ flex: "1" }}>
                             <InputBox placeholder="검색어를 입력해주세요." />
                         </InputBoxContainer>
@@ -43,7 +41,7 @@ const BoardView = ({ majorOptions, onChangeMajorSelect, fontSize, postListData, 
                                 height={"50px"}
                             ></Button>
                         </ButtonLayout>
-                    </div>
+                    </SearchAndWriteLayout>
 
                     <PostListView postListData={postListData}></PostListView>
                 </BoardLayout>
@@ -53,6 +51,19 @@ const BoardView = ({ majorOptions, onChangeMajorSelect, fontSize, postListData, 
     );
 };
 
+const SearchAndWriteLayout = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    padding: 1rem;
+    gap: 20px;
+    padding-right: 0rem;
+
+    @media screen and (max-width: 780px) {
+        padding: 0rem;
+    }
+`;
+
 const InputBoxContainer = styled.div`
     display: flex;
     font-family: nexon-regular;
@@ -61,7 +72,7 @@ const InputBoxContainer = styled.div`
     justify-content: center;
 
     @media screen and (max-width: 780px) {
-        padding: 1em;
+        padding: 0rem 1rem 0rem 1rem;
     }
 `;
 
