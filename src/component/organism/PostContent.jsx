@@ -18,10 +18,10 @@ const PostContent = ({ post, author, isAuthor }) => {
         <PostContentLayout>
             {isAuthor ? (
                 //글쓴이
-                <UserInfoPostWriter iconSize="1.8em" fontSize="1.3em" userName={author.userName} postId={id} />
+                <UserInfoPostWriter iconSize="1.3em" fontSize="1.3em" userName={author.userName} postId={id} />
             ) : (
                 //글쓴이 아닌 사람
-                <UserInfoPostReader iconSize="1.8em" fontSize="1.3em" userName={author.userName} postId={id} />
+                <UserInfoPostReader iconSize="1.3em" fontSize="1.3em" userName={author.userName} postId={id} />
             )}
             <div>
                 <PostContentTitle>{title}</PostContentTitle>
@@ -50,7 +50,7 @@ const PostContentTitle = styled.p`
 `;
 
 const PostContentText = styled.p`
-    margin-top:20px;
+    margin-top: 20px;
     font-size: 1rem;
     font-family: nexon-light;
 `;
@@ -59,6 +59,7 @@ const PostContentInfoLayout = styled.div`
     align-items: center;
     display: flex;
     gap: 10px;
+    margin-bottom: 1rem;
 `;
 
 export default PostContent;
