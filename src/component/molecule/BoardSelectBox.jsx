@@ -23,13 +23,11 @@ const BoardSelectBoxLayout = styled.div`
     font-size: 23px;
 
     @media screen and (max-width: 1200px) {
-        padding-top: .2rem;
         font-size: 21px;
-
+        
     }
     
     @media screen and (max-width: 500px) {
-        padding-top: .2rem;
         gap: .5rem;
         font-size: 18px;
 
@@ -41,6 +39,10 @@ const BoardSelectdiv = styled.div`
     font-family: nexon-regular;
     padding: .8em 0em 1em 0em;
 
+    @media screen and (max-width: 500px) {
+        padding: .3em 0em .5em 0em;
+
+    }
 `;
 
 export default BoardSelectBox;
