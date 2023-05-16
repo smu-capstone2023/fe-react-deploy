@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 /**
  * @param options: {id, name}[]
@@ -7,23 +8,25 @@ import React from "react";
  * @returns
  */
 
-const SelectBox = ({ options, onChange, fontSize }) => {
+const SelectBox = ({ options, onChange }) => {
     return (
         <>
             <form>
-                <Select options={options} initValue={options[0]} onChange={onChange} fontSize={fontSize} />
+                <SelectLayout>
+                    <Select options={options} initValue={options[0]} onChange={onChange} />
+                </SelectLayout>
             </form>
         </>
     );
 };
 
-const Select = ({ options, onChange, fontSize}) => {
+const Select = ({ options, onChange }) => {
     return (
-        <select initValue={options[0]} onChange={onChange} style={{ fontFamily: "nexon-regular", fontSize:`${fontSize}` }}>
+        <select initValue={options[0]} onChange={onChange} style={{ fontFamily: "nexon-regular"}}>
             {options &&
                 options.map((option) => {
                     return (
-                        <option value={option.id} style={{ fontSize: "1em", fontFamily: "nexon-regular" }} key={option.id}>
+                        <option value={option.id} style={{ fontFamily: "nexon-regular" }} key={option.id}>
                             {option.name}
                         </option>
                     );
@@ -31,5 +34,24 @@ const Select = ({ options, onChange, fontSize}) => {
         </select>
     );
 };
+
+const SelectLayout = styled.div`
+    font-size: 28px; 
+    
+    @media screen and (max-width: 1300px) {
+        font-size: 25px;    
+    }  
+
+    @media screen and (max-width: 768px) {
+        font-size: 22px;    
+    }
+    
+    @media screen and (max-width: 500px) {
+        gap: .5rem;
+        font-size: 20px;
+
+    }   
+
+`
 
 export default SelectBox;

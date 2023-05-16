@@ -17,11 +17,11 @@ import Footer from "../organism/Footer";
  * @returns
  */
 
-const BoardView = ({ majorOptions, onChangeMajorSelect, fontSize, postListData, boardList, onClickBoard }) => {
+const BoardView = ({ majorOptions, onChangeMajorSelect, postListData, boardList, onClickBoard }) => {
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ margin: "3%" }}>
-                <SelectBox options={majorOptions} onChange={onChangeMajorSelect} fontSize={fontSize}></SelectBox>
+                <SelectBox options={majorOptions} onChange={onChangeMajorSelect}></SelectBox>
                 <BoardSelectBox boardList={boardList} onClickBoard={onClickBoard}></BoardSelectBox>
 
                 <BoardLayout>
@@ -81,10 +81,10 @@ const BoardLayout = styled.div`
     width: 70%;
     flex-direction: column;
     margin: 1rem auto;
-
+    
     @media screen and (max-width: 780px) {
         width: 100%;
-        font-size: 15px;
+        font-size: 22px;
     }
 `;
 

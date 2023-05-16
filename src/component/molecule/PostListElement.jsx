@@ -34,6 +34,7 @@ const PostListElementLayout = styled.div`
     padding: 1.2rem;
     cursor: pointer;
     border-bottom: .5px solid #B8B8B8;
+    font-size: .7em;
     `
 
 export default PostListElement;
