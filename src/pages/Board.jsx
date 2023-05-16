@@ -6,14 +6,14 @@ import PostListView from '../component/organism/PostListView';
 const Board = () => {
     const majorOptions = [{id:0,name:'상명대학교'},{id:1,name:'컴퓨터과학과'}]
     const onChangeMajorSelect = () => alert('z');
-    const fontSize = '.8em'
+    const fontSize = '21px'
     const postListData = [
         {
           onClick: () => alert("Post 1 clicked!"),
           commentCount: 10,
           likeCount: 5,
-          title: "Post 1",
-          content: "This is the first post.",
+          title: "포스트 1",
+          content: "이것은 첫번째 포스트 입니다. This is the first post.",
           createdate: "2022-05-10",
         },
         {
