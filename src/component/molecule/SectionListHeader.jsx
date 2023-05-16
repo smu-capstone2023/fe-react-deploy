@@ -5,7 +5,7 @@ export const SectionListHeader = ({ onClick, title }) => {
     
   return (
     <SectionListHeaderLayout onClick={onClick} style={{ display: "flex", alignItems: "center" }}>
-      <h2 style={{ marginRight: "10px" }}>{title}</h2>
+      <h2 style={{ marginRight: "10px", fontFamily: 'nexon-regular' }}>{title}</h2>
       <IoChevronForwardOutline size={22} color="#888" />
     </SectionListHeaderLayout>
   );
@@ -19,7 +19,7 @@ const SectionListHeaderLayout = styled.div`
   padding: 1em;
   width: 100%;
   height: 48px;
-  font-family: 'nexon-regular';
+  cursor: pointer;
 `;
 
 

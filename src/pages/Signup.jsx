@@ -29,11 +29,11 @@ const Signup = () => {
     };
 
     const onClickSignupButton = () => {
-        if (checkIdRegExp() == false) {
+        if (checkIdRegExp() === false) {
             alert("ID 형식을 확인해주세요.");
-        } else if (checkPasswordExp() == false) {
+        } else if (checkPasswordExp() === false) {
             alert("비밀번호 형식을 확인해주세요.");
-        } else if (checkRePasswordExp() == false) {
+        } else if (checkRePasswordExp() === false) {
             alert("비밀번호가 일치하지 않습니다.");
         } else {
             signUpSite(id, password, nickname).then((response) => {

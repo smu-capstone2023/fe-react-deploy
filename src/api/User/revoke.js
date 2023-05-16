@@ -1,10 +1,10 @@
-import axios from "axios"
+import axios from "axios";
 
-export const revokeJoinSite = () => {
+export const revoke = () => {
     return axios
         .delete(`${process.env.REACT_APP_SERVER_URL}/auth/revoke`, {
             headers: {
-                Authorization: localStorage.getItem('access_token'),
+                Authorization: localStorage.getItem("access_token"),
             },
         })
         .then((response) => {
@@ -15,5 +15,5 @@ export const revokeJoinSite = () => {
         .catch((response) => {
             console.log(response);
             return false;
-        })
-}
+        });
+};
