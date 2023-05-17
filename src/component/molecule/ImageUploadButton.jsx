@@ -10,8 +10,27 @@ import { AiOutlineCamera } from "react-icons/ai";
  */
 
 export const ImageUploadButton = ({ iconSize, size, onClick }) => {
+    //image 업로드 로직
+    const fileInput = useRef();
+
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+        // iamge 업로드 api 
+    };
+
+    const handleClick = () => {
+        fileInput.current.click();
+    };
+
     return (
-        <ImageUploadButtonLayout size={size} onClick={onClick}>
+        <ImageUploadButtonLayout size={size} onClick={handleClick}>
+            <input
+                type="file"
+                accept="image/jpg, image/jpeg, image/png" 
+                style={{ display: "none" }}
+                ref={fileInput}
+                onChange={handleFileUpload}
+            />
             <CameraIcon iconSize={iconSize} />
         </ImageUploadButtonLayout>
     );
