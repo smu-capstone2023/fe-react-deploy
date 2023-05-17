@@ -29,7 +29,7 @@ const BoardSelectBoxLayout = styled.div`
     
     @media screen and (max-width: 500px) {
         gap: .5rem;
-        font-size: 18px;
+        font-size: 15px;
 
     }
 `;
@@ -40,7 +40,7 @@ const BoardSelectdiv = styled.div`
     padding: .8em 0em 1em 0em;
 
     @media screen and (max-width: 500px) {
-        padding: .3em 0em 1em 0em;
+        margin-left: .3em;
 
     }
 `;
