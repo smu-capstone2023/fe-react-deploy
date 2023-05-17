@@ -14,19 +14,29 @@ export const Header = () => {
                     onClick: () => {
                         //localStorage의 majorList[0]의 majorId값과, free boardId 값을 이용해서
                         //상명대학교 자유게시판으로 이동할 수 있도록 로직 작성해주세요.
+                        const majorId = localStorage.getItem("majorList")
+                            ? JSON.parse(localStorage.getItem("majorList"))[0].majorId
+                            : null;
+                        window.location.href = `/board/${majorId}`;                    
                     },
                 },
                 {
                     name: "학과게시판",
                     onClick: () => {
                         //localStorage의 majorList[1]의 majorId값과, free boardId 값을 이용해서
-                        //해당 학과의 자유게시판으로 이동할 수 있도록 로직 작성해주세요.
+                        //해당 학과의 게시판으로 이동할 수 있도록 로직 작성해주세요.
+                        const majorId = localStorage.getItem("majorList")
+                            ? JSON.parse(localStorage.getItem("majorList"))[1].majorId
+                            : null;
+                        window.location.href = `/board/${majorId}`;
                     },
                 },
                 {
                     name: "학사일정",
+                         //학교의 학사일정 페이지로 들어갈 수 있도록 로직 작성해주세요.
                     onClick: () => {
-                        //학교의 학사일정 페이지로 들어갈 수 있도록 로직 작성해주세요.
+                        window.location.href = "https://www.smu.ac.kr/ko/life/academicCalendar.do";
+
                     },
                 },
                 {
