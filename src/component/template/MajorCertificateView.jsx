@@ -26,6 +26,7 @@ const MajorCertificateView = ({ onClickImageUploadButton, onClickDeleteImageButt
                 </div>
 
                 <div style={{ width: "100%", height: "15em" }}>
+                    {/* 이 곳에, imageUrl이 ''이면 ImageUploadButton이, 아니면, image가 띄워지도록 ImageUploadButton과 같은 크기, 모양으로 뜰 수 있도록 component/molecule/ImageView 를 이용해서 구현해주세요. */}
                     <ImageUploadButton iconSize={"1.5rem"} size={"100%"} onClick={onClickImageUploadButton}></ImageUploadButton>
                 </div>
 
