@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { AiOutlineCamera } from "react-icons/ai";
 
 /**
  * @param iconSize: string
  * @param size: string
- * @param onClick : () => {}
+ * @param onClickImageButton : () => {}
  * @returns
  */
 
-export const ImageUploadButton = ({ iconSize, size, onClick }) => {
+export const ImageUploadButton = ({ iconSize, size, onClickImageButton }) => {
     //image 업로드 로직
     const fileInput = useRef();
 
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
-        // iamge 업로드 api 
+        //src/utils/imageUploader.js를 이용해서 업로드 후에 받은 url response값을 아래 주석처럼 onClickImageButton에 인자값으로 넣어주세요.
+        //onClickImageButton(imageUrl);
     };
 
     const handleClick = () => {
@@ -26,7 +27,7 @@ export const ImageUploadButton = ({ iconSize, size, onClick }) => {
         <ImageUploadButtonLayout size={size} onClick={handleClick}>
             <input
                 type="file"
-                accept="image/jpg, image/jpeg, image/png" 
+                accept="image/jpg, image/jpeg, image/png"
                 style={{ display: "none" }}
                 ref={fileInput}
                 onChange={handleFileUpload}
