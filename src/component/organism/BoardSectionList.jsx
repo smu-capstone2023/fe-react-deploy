@@ -25,7 +25,7 @@ export const BoardSectionList = ({ title, headerOnClick, previewList }) => {
                             title={previewItem.title}
                             onClick={previewItem.onClick}
                             commentCount={previewItem.comments}
-                            likeCount={previewItem.likeCount}
+                            likeCount={previewItem.likes}
                         />
                     )
                 )}
