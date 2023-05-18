@@ -20,7 +20,7 @@ export const ImageViewList = ({ onChangeImageList, imageList, iconSize, size }) 
                             <ImageView
                                 key={i}
                                 iconSize={iconSize}
-                                widht={size}
+                                width={size}
                                 height={size}
                                 onClickDelete={onChangeImageList}
                                 imageUrl={image}
