@@ -10,24 +10,23 @@ import ImageView from "../molecule/ImageView";
  * @returns
  */
 
-export const ImageViewList = ({onChangeImageList, imageList, iconSize, size}) => {
+export const ImageViewList = ({ onChangeImageList, imageList, iconSize, size }) => {
     return (
         <>
             <ImageViewListLayout>
-            {imageList && imageList.map((image, i)=>{
-                return(
-                    <ImageView key={i} iconSize={iconSize} size={size} onClickDelete={onChangeImageList} imageUrl={image}/>  
-                )
-            })} 
+                {imageList &&
+                    imageList.map((image, i) => {
+                        return <ImageView key={i} iconSize={iconSize} size={size} onClickDelete={onChangeImageList} imageUrl={image} />;
+                    })}
             </ImageViewListLayout>
         </>
-    )
+    );
 };
 
 const ImageViewListLayout = styled.div`
     display: flex;
     gap: 10px;
-    width: 100%;
+    background: red;
     flex-wrap: wrap;
 `;
 
