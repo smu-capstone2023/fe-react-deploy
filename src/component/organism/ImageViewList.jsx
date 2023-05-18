@@ -26,7 +26,6 @@ export const ImageViewList = ({ onChangeImageList, imageList, iconSize, size }) 
 const ImageViewListLayout = styled.div`
     display: flex;
     gap: 10px;
-    background: red;
     flex-wrap: wrap;
 `;
 
