@@ -21,6 +21,7 @@ const MajorCertificate = () => {
 
     return (
         <MajorCertificateView
+            imageUrl={"https://pdfimages.wondershare.com/pdfelement/7-guide/batch-process.jp"}
             onClickImageUploadButton={onClickImageUploadButton}
             onClickDeleteImageButton={onClickDeleteImageButton}
             onChangeContent={setContent}

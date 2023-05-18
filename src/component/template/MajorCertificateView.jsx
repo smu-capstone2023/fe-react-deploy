@@ -10,10 +10,11 @@ import Button from "../molecule/Button";
  * @param onClickDeleteImageButton: () => {}
  * @param onChangeContent: () => {}
  * @param onClickCompleteButton: () => {}
+ * @param imageUrl: string;
  * @returns
  */
 
-const MajorCertificateView = ({ onClickImageUploadButton, onClickDeleteImageButton, onChangeContent, onClickCompleteButton }) => {
+const MajorCertificateView = ({ onClickImageUploadButton, onClickDeleteImageButton, onChangeContent, onClickCompleteButton, imageUrl }) => {
     return (
         <>
             <MCVLayout>
