@@ -34,7 +34,7 @@ const MajorCertificateView = ({ onClickImageUploadButton, onClickDeleteImageButt
                     <p style={{ fontFamily: "nexon-regular", color: "#747474", fontSize: ".7em" }}>(선택)</p>
                 </div>
 
-                <InputTextAreaInput placeholder={"내용을 입력해주세요."} onChange={onChangeContent} height={"100%"} />
+                <InputTextAreaInput placeholder={"내용을 입력해주세요."} onChange={(e) => onChangeContent(e)} height={"100%"} />
 
                 <div
                     style={{
