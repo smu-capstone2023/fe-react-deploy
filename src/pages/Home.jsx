@@ -8,15 +8,11 @@ const Home = () => {
     const [hotPreviewList, setHotPreviewList] = useState([]);
     const [lostPreviewList, setLostPreviewList] = useState([]);
     useEffect(() => {
-        if (localStorage.user_id) {
-            const {user_name, user_id, majorList} = localStorage;
-            setUserInfo({
-                nickname: user_name,
-                schoolId: user_id,
-                major: "",
-                mbti: "",
-            });
-            if (JSON.parse(majorList)[1]) {
+        if (localStorage) {
+            const user_name = localStorage.getItem('user_name');
+            const user_id = localStorage.getItem('user_id');
+            const majorList = localStorage.getItem('majorList');
+            if (majorList && JSON.parse(majorList)[1]) {
                 const major_name = JSON.parse(majorList)[1].major_name;
                 const major_id = JSON.parse(majorList)[1].major_id;
                 setUserInfo({
@@ -29,6 +25,13 @@ const Home = () => {
                     majorName: major_name,
                     majorId: major_id,
                 });
+            } else {
+                setUserInfo({
+                    nickname: user_name,
+                    schoolId: user_id,
+                    major: "",
+                    mbti: "",
+                })
             }
         };
         getHotBoardPreviewList().then((response) => {
