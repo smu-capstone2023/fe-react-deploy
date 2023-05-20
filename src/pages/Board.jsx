@@ -71,6 +71,7 @@ const Board = () => {
                 onChangeMajorSelect={onChangeMajorSelect}
                 postListData={postListData}
                 boardList={boardList}
+                currentBoardId={1}
             />
         </>
     );

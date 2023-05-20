@@ -16,6 +16,8 @@ const BoardSelectBox = ({ boardList, onClick, currentBoardId }) => {
                 boardList.map((item) => {
                     if (item.id === currentBoardId) {
                         color = COLORS.logo;
+                    } else {
+                        color = "black";
                     }
                     return (
                         <BoardSelectdiv color={color} key={item.id} onClick={() => onClick}>
@@ -45,6 +47,7 @@ const BoardSelectBoxLayout = styled.div`
 `;
 
 const BoardSelectdiv = styled.div`
+    color: ${(props) => props.color};
     display: flex;
     font-family: nexon-regular;
     padding: 0.8em 0em 1em 0em;
