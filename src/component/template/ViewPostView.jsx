@@ -5,12 +5,13 @@ import PostContent from "../organism/PostContent";
 import Footer from "../organism/Footer";
 
 /**
- * @param post: {id, commentCount, likeCount, title, content, createDate}
+ * @param post: {post_id, comments, likes, title, content, created_time}
  * @param author: {id, userName}
  * @param isAuthor: boolean
- * @param commentList: {comment: {id, commentCount, likeCount, content, createDate}, author: {id, userName}, isAuthor: boolean, children: ReactElement}[]
+ * @param commentList: {comment_id, username, user_id, content, likes, created_time, isLiked, children: ReactElement}[]
  * @returns
  */
+
 const ViewPostView = ({ post, author, isAuthor, commentList }) => {
     return (
         <ViewPostLayout>

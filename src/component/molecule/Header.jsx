@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Logo from "../atom/Logo";
-import { RxHamburgerMenu } from "react-icons/rx";
+import HambergerMenu from "./HambergerMenu";
 import { useEffect, useState } from "react";
 
 export const Header = () => {
@@ -8,66 +8,79 @@ export const Header = () => {
 
     useEffect(() => {
         if (localStorage.getItem("access_token")) {
-            setMenu([
-                {
-                    name: "학교게시판",
-                    onClick: () => {
-                        //localStorage의 majorList[0]의 majorId값과, free boardId 값을 이용해서
-                        //상명대학교 자유게시판으로 이동할 수 있도록 로직 작성해주세요.
+            const majorList = JSON.parse(localStorage.getItem("majorList"));
+            if (majorList.length >= 2) {
+                setMenu([
+                    {
+                        name: "학교게시판",
+                        onClick: () => {
+                            window.location.href = `/board/${majorList[0].major_id}/${majorList[0].free_board_id}`;
+                        },
                     },
-                },
-                {
-                    name: "학과게시판",
-                    onClick: () => {
-                        //localStorage의 majorList[1]의 majorId값과, free boardId 값을 이용해서
-                        //해당 학과의 자유게시판으로 이동할 수 있도록 로직 작성해주세요.
+                    {
+                        name: "학과게시판",
+                        onClick: () => {
+                            window.location.href = `/board/${majorList[1].major_id}/${majorList[1].free_board_id}`;
+                        },
                     },
-                },
-                {
-                    name: "학사일정",
-                    onClick: () => {
-                        //학교의 학사일정 페이지로 들어갈 수 있도록 로직 작성해주세요.
+                    {
+                        name: "학사일정",
+                        onClick: () => {
+                            window.location.href = "https://www.smu.ac.kr/ko/life/academicCalendar.do";
+                        },
                     },
-                },
-                {
-                    name: "마이페이지",
-                    onClick: () => {
-                        window.location.href = "/mypage";
+                    {
+                        name: "마이페이지",
+                        onClick: () => {
+                            window.location.href = "/mypage";
+                        },
                     },
-                },
-                {
-                    name: "로그아웃",
-                    onClick: () => {
-                        localStorage.clear();
-                        window.location.href = "/";
+                    {
+                        name: "로그아웃",
+                        onClick: () => {
+                            localStorage.clear();
+                            window.location.href = "/";
+                        },
                     },
-                },
-            ]);
+                ]);
+            } else {
+                setMenu([
+                    {
+                        name: "학교게시판",
+                        onClick: () => {
+                            window.location.href = `/board/${majorList[0].major_id}/${majorList[0].free_board_id}`;
+                        },
+                    },
+                    {
+                        name: "학사일정",
+                        onClick: () => {
+                            window.location.href = "https://www.smu.ac.kr/ko/life/academicCalendar.do";
+                        },
+                    },
+                    {
+                        name: "마이페이지",
+                        onClick: () => {
+                            window.location.href = "/mypage";
+                        },
+                    },
+                    {
+                        name: "로그아웃",
+                        onClick: () => {
+                            localStorage.clear();
+                            window.location.href = "/";
+                        },
+                    },
+                ]);
+            }
         } else {
             setMenu([{ name: "로그인", onClick: () => (window.location.href = "/login") }]);
         }
     }, []);
 
-    const Hamberger = () => {
-        return (
-            <HambergerLayout
-                onClick={() => {
-                    alert("준비 중");
-                }}
-            >
-                <RxHamburgerMenu fontSize={"1.3rem"} />
-            </HambergerLayout>
-        );
-    };
-
     return (
         <HeaderLayout>
             <EmptyBox />
-            <LogoWrapper
-                onClick={() => {
-                    window.location.href = "/";
-                }}
-            >
+            <LogoWrapper onClick={() => (window.location.href = "/")}>
                 <Logo width={"5"} />
             </LogoWrapper>
             {menu.map((item) => (
@@ -75,7 +88,9 @@ export const Header = () => {
                     {item.name}
                 </HeaderElement>
             ))}
-            <Hamberger />
+            <HambergerLayout>
+                <HambergerMenu menu={menu} />
+            </HambergerLayout>
         </HeaderLayout>
     );
 };

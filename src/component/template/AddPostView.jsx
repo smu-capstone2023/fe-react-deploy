@@ -13,10 +13,22 @@ import Button from "../molecule/Button";
  * @param onDeleteImage : (value: string[]) => void;
  * @param onAddImage: (value: string) => void;
  * @param onClickSavePost: () => void;
+ * @param content: string
+ * @param title: string
  * @returns
  */
 
-const AddPostView = ({ boardInfo, onChangeTitle, onChangeContent, imageList, onDeleteImage, onClickSavePost, onAddImage }) => {
+const AddPostView = ({
+    boardInfo,
+    onChangeTitle,
+    onChangeContent,
+    imageList,
+    onDeleteImage,
+    onClickSavePost,
+    onAddImage,
+    title,
+    content,
+}) => {
     return (
         <AddPostViewContainer>
             <AddPostViewLayout>
@@ -27,6 +39,7 @@ const AddPostView = ({ boardInfo, onChangeTitle, onChangeContent, imageList, onD
                 </div>
 
                 <InputTextAreaBox
+                    value={title}
                     placeholder={"제목"}
                     onChange={(e) => onChangeTitle(e)}
                     background={"white"}
@@ -34,6 +47,7 @@ const AddPostView = ({ boardInfo, onChangeTitle, onChangeContent, imageList, onD
                     height={"2.3rem"}
                 />
                 <InputTextAreaBox
+                    value={content}
                     placeholder={"내용을 입력해주세요"}
                     onChange={(e) => onChangeContent(e)}
                     background={"white"}
