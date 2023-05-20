@@ -20,7 +20,7 @@ const BoardSelectBox = ({ boardList, onClick, currentBoardId }) => {
                         color = "black";
                     }
                     return (
-                        <BoardSelectdiv color={color} key={item.id} onClick={() => onClick}>
+                        <BoardSelectdiv color={color} key={item.id} onClick={() => onClick(item.id)}>
                             {item.name}
                         </BoardSelectdiv>
                     );

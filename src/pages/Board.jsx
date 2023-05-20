@@ -2,92 +2,56 @@ import React, { useState, useEffect } from "react";
 import BoardView from "../component/template/BoardView";
 
 const Board = () => {
-    const [majorOptions, setMajorOptions] = useState([
-        { id: 1, name: "상명대학교" },
-        { id: 2, name: "컴퓨터과학과" },
-    ]);
+    const [majorOptions, setMajorOptions] = useState([]);
+    const [postListData, setPostListData] = useState([]);
+    const [boardList, setBoardList] = useState([]);
 
     useEffect(() => {
         /**
          * 1. localStorage에 있는 majorList값을 이용하여 setMajorOptions을 해주세요.
          */
+        /**
+         * 2. api/Board/getBoardPostList 를 이용해서 setPostListData를 해주세요.
+         * 참고로 받아야 하는 값의 형식은 {comments, likes, title, title, createdate, preview}[] 입니다.
+         */
+        /**
+         * 3. api/Board/getMajorBoardList 를 이용해서 setBoardList를 해주세요.
+         * 이때, boardList의 형식은 {id: number, name: string}[] 이렇게 와야 합니다.
+         * 백엔드에서 오는 형식과 다르니, 백엔드에서 어떻게 나오는지 보시고, 해당 형식에 맞게 set해주세요
+         */
     });
+
     const onChangeMajorSelect = (value) => {
-        alert(value);
         /**
          * 1. 해당 눌려진 전공 id의 자유게시판으로 페이지가 이동할 수 있도록 구현해주세요.
+         * argument에 있는 value값은 해당 전공의 id값입니다.
          */
     };
 
-    const onChangeBoard = () => {
+    const onChangeBoard = (value) => {
         /**
-         *
+         * 1. 해당 눌러진 보드 id게시판으로 페이지가 이동할 수 있도록 구현해주세요.
+         * argument에 있는 value값은 해당 board의 id 값입니다.
          */
     };
-    const postListData = [
-        {
-            onClick: () => alert("Post 1 clicked!"),
-            commentCount: 10,
-            likeCount: 5,
-            title: "포스트 1",
-            content: "이것은 첫번째 포스트 입니다. This is the first post.",
-            createdate: "2022-05-10",
-        },
-        {
-            onClick: () => alert("Post 2 clicked!"),
-            commentCount: 3,
-            likeCount: 8,
-            title: "Post 2",
-            content: "This is the second post.",
-            createdate: "2022-05-11",
-        },
-        {
-            onClick: () => alert("Post 3 clicked!"),
-            commentCount: 7,
-            likeCount: 2,
-            title: "Post 3",
-            content: "This is the third post.",
-            createdate: "2022-05-12",
-        },
-        {
-            onClick: () => alert("Post 4 clicked!"),
-            commentCount: 2,
-            likeCount: 6,
-            title: "Post 4",
-            content: "This is the fourth post.",
-            createdate: "2022-05-13",
-        },
-        {
-            onClick: () => alert("Post 5 clicked!"),
-            commentCount: 5,
-            likeCount: 3,
-            title: "Post 5",
-            content: "This is the fifth post.",
-            createdate: "2022-05-14",
-        },
-        {
-            onClick: () => alert("Post 6 clicked!"),
-            commentCount: 9,
-            likeCount: 1,
-            title: "Post 6",
-            content: "This is the sixth post.",
-            createdate: "2022-05-15",
-        },
-    ];
-    const boardList = [
-        { id: 1, name: "자유게시판" },
-        { id: 2, name: "비밀게시판" },
-        { id: 3, name: "공지게시판" },
-        { id: 4, name: "홍보게시판" },
-    ];
+
+    const onClickPost = (postId) => {
+        /**
+         * 1. postId를 눌렀을 때, viewpost의 해당 postId로 넘어가게 구현해주세요.
+         */
+    };
+
     return (
         <>
             <BoardView
                 majorOptions={majorOptions}
                 onChangeMajorSelect={onChangeMajorSelect}
+                onChangeBoard={onChangeBoard}
                 postListData={postListData}
                 boardList={boardList}
-                currentBoardId={1}
+                onClickPost={onClickPost}
+                //currentMajorId={url값을 가지고 여기 현재 majorId값을 넣어주세요}
+                //currentBoardId={url값을 가지고 여기 현재 boardId값을 넣어주세요}
             />
         </>
     );
