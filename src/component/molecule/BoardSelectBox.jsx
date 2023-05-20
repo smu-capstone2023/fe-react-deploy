@@ -1,19 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-
+import { COLORS } from "../../color";
 /**
  * @param boardList : {id: number, name: string}[]
- * @param onClick: () => {} 
+ * @param onClick: () => {}
+ * @param currentBoardId: number
  * @returns
  */
 
-const  BoardSelectBox = ({boardList, onClick}) => {
-    return(
-    <BoardSelectBoxLayout>
-        {boardList && boardList.map(item => (<BoardSelectdiv key={item.id} onClick={()=>onClick}>{item.name}</BoardSelectdiv>))}
-    </BoardSelectBoxLayout>
-    )
-}
+const BoardSelectBox = ({ boardList, onClick, currentBoardId }) => {
+    let color = "black";
+    return (
+        <BoardSelectBoxLayout>
+            {boardList &&
+                boardList.map((item) => {
+                    if (item.id === currentBoardId) {
+                        color = COLORS.logo;
+                    }
+                    return (
+                        <BoardSelectdiv color={color} key={item.id} onClick={() => onClick}>
+                            {item.name}
+                        </BoardSelectdiv>
+                    );
+                })}
+        </BoardSelectBoxLayout>
+    );
+};
 
 const BoardSelectBoxLayout = styled.div`
     display: flex;
@@ -24,29 +36,22 @@ const BoardSelectBoxLayout = styled.div`
 
     @media screen and (max-width: 768px) {
         font-size: 20px;
-        
     }
-    
-    @media screen and (max-width: 500px) {
-        gap: .5rem;
-        font-size: 15px;
 
+    @media screen and (max-width: 500px) {
+        gap: 0.5rem;
+        font-size: 15px;
     }
 `;
 
 const BoardSelectdiv = styled.div`
     display: flex;
     font-family: nexon-regular;
-    padding: .8em 0em 1em 0em;
+    padding: 0.8em 0em 1em 0em;
 
     @media screen and (max-width: 500px) {
-        margin-left: .3em;
-
+        margin-left: 0.3em;
     }
 `;
 
 export default BoardSelectBox;
-
-
-
-

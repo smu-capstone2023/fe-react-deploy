@@ -14,18 +14,19 @@ import Footer from "../organism/Footer";
  * @param majorOptions: {id: number, name: string}[]
  * @param postListData: {onClick, commentCount, likeCount, title, content, createdate}[]
  * @param fontSize: {string}
+ * @param currentBoardId: number
  * @returns
  */
 
-const BoardView = ({ majorOptions, onChangeMajorSelect, postListData, boardList, onClickBoard }) => {
+const BoardView = ({ majorOptions, onChangeMajorSelect, postListData, boardList, onClickBoard, currentBoardId }) => {
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ margin: "3%" }}>
                 <SelectBox options={majorOptions} onChange={onChangeMajorSelect}></SelectBox>
-                <BoardSelectBox boardList={boardList} onClickBoard={onClickBoard}></BoardSelectBox>
+                <BoardSelectBox boardList={boardList} onClickBoard={onClickBoard} currentBoardId={currentBoardId}></BoardSelectBox>
 
                 <BoardLayout>
-                    <SearchAndWriteLayout>                  
+                    <SearchAndWriteLayout>
                         <InputBoxContainer style={{ flex: "1" }}>
                             <InputBox placeholder="검색어를 입력해주세요." />
                         </InputBoxContainer>
@@ -81,7 +82,7 @@ const BoardLayout = styled.div`
     width: 70%;
     flex-direction: column;
     margin: 1rem auto;
-    
+
     @media screen and (max-width: 780px) {
         width: 100%;
         font-size: 21px;
