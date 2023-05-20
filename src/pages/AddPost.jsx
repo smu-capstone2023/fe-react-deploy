@@ -22,12 +22,14 @@ const AddPost = () => {
          * api/Post/createPost를 이용해서 return false이면 alert로 네트워크 문제! 잠시 후에 다시 시도해주세요 문구를 띄워줍니다.
          * 만약 false가 아닌 postId 숫자가 반환된다면, 해당 postId의 viewpost로 넘어가게 구현해주세요.
          * 임시로 is_anonymous 값은 true로 요청을 보냅니다. board_id는 url값의 숫자를 사용합니다.
+         * 임시로 imageUrl값은 ""값으로 요청을 보냅니다.
          */
         /**
          * 2. 만약 url값의 post_id값에 숫자가 온다면, 아래와 같은 액션이 이루어져야 합니다.
          * api/Post/updatePost를 이용해서 return이 false면 alert로 네트워크 문제! 잠시 후에 다시 시도해주세요 문구를 띄워줍니다.
          * 만약 true면 url의 값의 post_id값을 이용해서 해당 postId의 viewpost로 넘어가게 구현해주세요.
          * 임시로 is_anonymous 값은 true로 요청을 보냅니다. board_id는 url값의 숫자를 사용합니다.
+         * 임시로 imageUrl값은 ""값으로 요청을 보냅니다.
          */
     };
 
