@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BoardView from "../component/template/BoardView";
-import PostListView from "../component/organism/PostListView";
 
 const Board = () => {
-    const majorOptions = [
-        { id: 0, name: "상명대학교" },
-        { id: 1, name: "컴퓨터과학과" },
-    ];
-    const onChangeMajorSelect = () => alert("z");
+    const [majorOptions, setMajorOptions] = useState([
+        { id: 1, name: "상명대학교" },
+        { id: 2, name: "컴퓨터과학과" },
+    ]);
+
+    useEffect(() => {
+        /**
+         * 1. localStorage에 있는 majorList값을 이용하여 setMajorOptions을 해주세요.
+         */
+    });
+    const onChangeMajorSelect = (value) => {
+        alert(value);
+        /**
+         * 1. 해당 눌려진 전공 id의 자유게시판으로 페이지가 이동할 수 있도록 구현해주세요.
+         */
+    };
+
+    const onChangeBoard = () => {
+        /**
+         *
+         */
+    };
     const postListData = [
         {
             onClick: () => alert("Post 1 clicked!"),
