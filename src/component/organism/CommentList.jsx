@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CommentContentView from "./CommentContentView";
 
 /**
- * @param commentList: {comment: {id, commentCount, likeCount, content, createDate}, author: {id, userName}, isAuthor: boolean}[]
+ * @param commentList: {comment_id, username, user_id, content, likes, created_time, isLiked, children: ReactElement}[]
  * @returns
  */
 
@@ -11,11 +11,19 @@ const CommentList = ({ commentList }) => {
     return (
         <div>
             {commentList &&
-                commentList.map((comment, index) => (
-                    <CommentWrapper key={index}>
-                        <CommentContentView key={index} comment={comment.comment} author={comment.author} isAuthor={comment.isAuthor} />
-                    </CommentWrapper>
-                ))}
+                commentList.map((comment, index) => {
+                    const { comment_id, likes, comments, content, create_time, user_id, username } = comment;
+                    return (
+                        <CommentWrapper key={index}>
+                            <CommentContentView
+                                key={index}
+                                comment={{ comment_id, likes, comments, content, create_time }}
+                                author={{ user_id, username }}
+                                isAuthor={localStorage.getItem("user_id") === user_id}
+                            />
+                        </CommentWrapper>
+                    );
+                })}
         </div>
     );
 };
