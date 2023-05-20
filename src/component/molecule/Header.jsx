@@ -8,41 +8,54 @@ export const Header = () => {
 
     useEffect(() => {
         if (localStorage.getItem("access_token")) {
-            setMenu([
-                {
-                    name: "학교게시판",
-                    onClick: () => {
-                        //localStorage의 majorList[0]의 majorId값과, free boardId 값을 이용해서
-                        //상명대학교 자유게시판으로 이동할 수 있도록 로직 작성해주세요.
+            const majorList = localStorage.getItem("majorList") ? JSON.parse(localStorage.getItem("majorList")) : [];
+            if (majorList.length >= 2) {
+                setMenu([
+                    {
+                    //localStorage의 majorList[0]의 majorId값과, freeboard Id 값을 이용해서
+                    //상명대학교 자유게시판으로 이동할 수 있도록 로직 작성해주세요.
+                        name: "학교게시판",
+                        onClick: () => {
+                            const majorId = majorList[0]?.majorId;
+                            const freeboardId = "자유게시판";
+                            if (majorId) {
+                                window.location.href = `/board/${majorId}/${freeboardId}`;
+                            }
+                        },
                     },
-                },
-                {
-                    name: "학과게시판",
-                    onClick: () => {
-                        //localStorage의 majorList[1]의 majorId값과, free boardId 값을 이용해서
-                        //해당 학과의 자유게시판으로 이동할 수 있도록 로직 작성해주세요.
+                    {
+                        name: "학과게시판",
+                        onClick: () => {
+                            const majorId = majorList[1]?.majorId;
+                            const freeboardId = "자유게시판";
+                            if (majorId) {
+                                window.location.href = `/board/${majorId}/${freeboardId}`;
+                            }
+                        },
                     },
-                },
-                {
-                    name: "학사일정",
-                    onClick: () => {
-                        //학교의 학사일정 페이지로 들어갈 수 있도록 로직 작성해주세요.
+                    {
+                        name: "학사일정",
+                        onClick: () => {
+                            window.location.href = "https://www.smu.ac.kr/ko/life/academicCalendar.do";
+                        },
                     },
-                },
-                {
-                    name: "마이페이지",
-                    onClick: () => {
-                        window.location.href = "/mypage";
+                    {
+                        name: "마이페이지",
+                        onClick: () => {
+                            window.location.href = "/mypage";
+                        },
                     },
-                },
-                {
-                    name: "로그아웃",
-                    onClick: () => {
-                        localStorage.clear();
-                        window.location.href = "/";
+                    {
+                        name: "로그아웃",
+                        onClick: () => {
+                            localStorage.clear();
+                            window.location.href = "/";
+                        },
                     },
-                },
-            ]);
+                ]);
+            } else {
+                setMenu([{ name: "로그인", onClick: () => (window.location.href = "/login") }]);
+            }
         } else {
             setMenu([{ name: "로그인", onClick: () => (window.location.href = "/login") }]);
         }
@@ -51,11 +64,7 @@ export const Header = () => {
     return (
         <HeaderLayout>
             <EmptyBox />
-            <LogoWrapper
-                onClick={() => {
-                    window.location.href = "/";
-                }}
-            >
+            <LogoWrapper onClick={handleLogoClick}>
                 <Logo width={"5"} />
             </LogoWrapper>
             {menu.map((item) => (
