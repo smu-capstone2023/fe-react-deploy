@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const createPost = ({ title, content, board_id, is_anonymous, image_url_list }) => {
     return axios
@@ -13,16 +13,18 @@ export const createPost = ({ title, content, board_id, is_anonymous, image_url_l
             },
             {
                 headers: {
-                    Authorization: localStorage.getItem('access_token'),
+                    Authorization: localStorage.getItem("access_token"),
                 },
             }
         )
         .then((response) => {
-            console.log(response.data);
-            return true;
+            if (response.data.status_code === 201) {
+                return true;
+            }
+            return false;
         })
         .catch((response) => {
-            console.log(response);
+            console.error("createPost", response);
             return false;
         });
 };

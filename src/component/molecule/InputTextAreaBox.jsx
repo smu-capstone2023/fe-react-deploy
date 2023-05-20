@@ -7,11 +7,21 @@ import styled from "styled-components";
  * @param background: string
  * @param width: string
  * @param height: string
+ * @param value: string
  * @returns
  */
 
-export const InputTextAreaBox = ({ placeholder, onChange, background, width, height }) => {
-    return <WriteTextArea width={width} height={height} background={background} placeholder={placeholder} onChange={onChange} />;
+export const InputTextAreaBox = ({ placeholder, onChange, background, width, height, value }) => {
+    return (
+        <WriteTextArea
+            defaultValue={value}
+            width={width}
+            height={height}
+            background={background}
+            placeholder={placeholder}
+            onChange={onChange}
+        />
+    );
 };
 
 const WriteTextArea = styled.textarea`

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Logo from "../atom/Logo";
-import { RxHamburgerMenu } from "react-icons/rx";
+import HambergerMenu from "./HambergerMenu";
 import { useEffect, useState } from "react";
 
 export const Header = () => {
@@ -61,22 +61,6 @@ export const Header = () => {
         }
     }, []);
 
-    const Hamberger = () => {
-        return (
-            <HambergerLayout
-                onClick={() => {
-                    alert("준비 중");
-                }}
-            >
-                <RxHamburgerMenu fontSize={"1.3rem"} />
-            </HambergerLayout>
-        );
-    };
-
-    const handleLogoClick = () => {
-        window.location.href = "/";
-    };
-
     return (
         <HeaderLayout>
             <EmptyBox />
@@ -88,7 +72,9 @@ export const Header = () => {
                     {item.name}
                 </HeaderElement>
             ))}
-            <Hamberger />
+            <HambergerLayout>
+                <HambergerMenu menu={menu} />
+            </HambergerLayout>
         </HeaderLayout>
     );
 };

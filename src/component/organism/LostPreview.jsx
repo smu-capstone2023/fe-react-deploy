@@ -3,13 +3,11 @@ import SectionListHeader from "../../component/molecule/SectionListHeader";
 import LostPreviewElement from "../../component/molecule/LostPreviewElement";
 
 /**
- * @param previewList : { content , onClick }[]  뿌려줄 데이터 리스트
+ * @param previewList : { title , post_id }[]  뿌려줄 데이터 리스트
  * @returns
  */
 
 export const LostPreview = ({ previewList }) => {
-    const title = "분실물 게시판";
-
     return (
         <>
             <div style={{ width: "100%" }}>
@@ -19,7 +17,7 @@ export const LostPreview = ({ previewList }) => {
                         padding: "0.1rem",
                     }}
                 >
-                    <SectionListHeader onClick={() => {}} title={title}></SectionListHeader>
+                    <SectionListHeader onClick={() => {}} title={"분실물 게시판"}></SectionListHeader>
                 </div>
 
                 <div
@@ -34,7 +32,7 @@ export const LostPreview = ({ previewList }) => {
                             return (
                                 <>
                                     <div style={{ padding: "0.2rem" }}></div>
-                                    <LostPreviewElement onClick={data.onClick} content={data.content}></LostPreviewElement>
+                                    <LostPreviewElement onClick={() => alert(data.post_id)} content={data.title}></LostPreviewElement>
                                 </>
                             );
                         })}

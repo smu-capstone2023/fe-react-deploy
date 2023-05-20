@@ -5,7 +5,7 @@ import UserInfoPostWriter from "../molecule/UserInfoPostWriter";
 import CommentView from "../molecule/CommentView";
 import LikeView from "../molecule/LikeView";
 /**
- * @param post: {id, commentCount, likeCount, title, content, createDate}
+ * @param post: {post_id, comments, likes, title, content, created_time}
  * @param author : {id, userName}
  * @param isAuthor : boolean
  * @returns
@@ -13,15 +13,15 @@ import LikeView from "../molecule/LikeView";
 
 const PostContent = ({ post, author, isAuthor }) => {
     //구조 분해 할당 역영입니다.
-    const { id, commentCount, likeCount, title, content, createDate } = post;
+    const { post_id, comments, likes, title, content, created_time } = post;
     return (
         <PostContentLayout>
             {isAuthor ? (
                 //글쓴이
-                <UserInfoPostWriter iconSize="1.3em" fontSize="1.3em" userName={author.userName} postId={id} />
+                <UserInfoPostWriter iconSize="1.3em" fontSize="1.3em" userName={author.userName} postId={post_id} />
             ) : (
                 //글쓴이 아닌 사람
-                <UserInfoPostReader iconSize="1.3em" fontSize="1.3em" userName={author.userName} postId={id} />
+                <UserInfoPostReader iconSize="1.3em" fontSize="1.3em" userName={author.userName} postId={post_id} />
             )}
             <div>
                 <PostContentTitle>{title}</PostContentTitle>
@@ -29,9 +29,9 @@ const PostContent = ({ post, author, isAuthor }) => {
             </div>
             <PostContentInfoLayout>
                 {/* 댓글수,좋아요수,작성일 */}
-                <CommentView commentCount={commentCount} fontSize={15} iconSize={15} />
-                <LikeView likeCount={likeCount} fontSize={15} iconSize={15} />
-                <p style={{ color: "gray", fontSize: "0.8em" }}>{createDate}</p>
+                <CommentView commentCount={comments} fontSize={15} iconSize={15} />
+                <LikeView likeCount={likes} fontSize={15} iconSize={15} />
+                <p style={{ color: "gray", fontSize: "0.8em" }}>{created_time}</p>
             </PostContentInfoLayout>
         </PostContentLayout>
     );

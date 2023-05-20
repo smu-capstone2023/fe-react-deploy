@@ -1,5 +1,5 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { AiFillMinusCircle } from "react-icons/ai";
 
 /**
@@ -10,20 +10,20 @@ import { AiFillMinusCircle } from "react-icons/ai";
  * @returns
  */
 
-export const ImageView = ({iconSize, size, onClickDelete, imageUrl}) => {
+export const ImageView = ({ iconSize, width, height, onClickDelete, imageUrl }) => {
     return (
-        <ImageViewLayout size={size} imageUrl={imageUrl}>
-            <DeleteImageButton iconSize={iconSize} onClick={onClickDelete}/>
+        <ImageViewLayout width={width} height={height} imageUrl={imageUrl}>
+            <DeleteImageButton iconSize={iconSize} onClick={onClickDelete} />
         </ImageViewLayout>
-    )
+    );
 };
 
 const ImageViewLayout = styled.div`
     display: flex;
     border-radius: 5px;
-    width: ${(props)=>props.size};
-    height: ${(props)=>props.size};
-    background-image: url(${(props)=>props.imageUrl});
+    width: ${(props) => props.width};
+    height: ${(props) => props.height};
+    background-image: url(${(props) => props.imageUrl});
     background-size: cover;
     object-fit: cover;
     justify-content: end;
@@ -32,9 +32,9 @@ const ImageViewLayout = styled.div`
 
 const DeleteImageButton = styled(AiFillMinusCircle)`
     display: flex;
-    width: ${(props)=>props.iconSize};
-    height: ${(props)=>props.iconSize};
-    color: #FF5A5A;
+    width: ${(props) => props.iconSize};
+    height: ${(props) => props.iconSize};
+    color: #ff5a5a;
 `;
 
 export default ImageView;

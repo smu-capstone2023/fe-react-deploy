@@ -7,10 +7,10 @@ import Footer from "../../component/organism/Footer";
 import styled from "styled-components";
 /**
  * @param userInfo: {nickname, major, shoolId, mbti}
- * @param hotPreviewList : {title, id, commenCount, likeCount}[]
+ * @param hotPreviewList : {title, post_id, commens, likeCount}[]
  * @param majorInfo: {majorName, majorId}
- * @param majorPreviewList: {title, id, commentCount, likeCount}[]
- * @param lostPreviewList: {content , onClick}[]
+ * @param majorPreviewList: {title, post_id, comments, likeCount}[]
+ * @param lostPreviewList: {title , post_id}[]
  * @returns
  */
 
@@ -38,7 +38,7 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                     <HideResponsableView style={{ flex: 1, background: "gray", minWidth: "20em" }} />
                     <RowToColumnResponsableView style={{ flex: 3, gap: 10 }}>
                         <BoardSectionList title="HOT 게시판" previewList={hotPreviewList} />
-                        <BoardSectionList title={majorName} previewList={majorPreviewList} />
+                        {majorName && <BoardSectionList title={majorName} previewList={majorPreviewList} />}
                     </RowToColumnResponsableView>
                 </div>
             </div>

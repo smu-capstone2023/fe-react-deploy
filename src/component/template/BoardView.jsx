@@ -9,29 +9,37 @@ import Footer from "../organism/Footer";
 
 /**
  * @param boardList : {id: number, name: string}[]
- * @param onClickBoard: () => {}
+ * @param onChangeBoard: () => {}
  * @param onChangeMajorSelect: () => {}
  * @param majorOptions: {id: number, name: string}[]
- * @param postListData: {onClick, commentCount, likeCount, title, content, createdate}[]
+ * @param postListData: {comments, likes, title, preview, post_id, created_time}[]
  * @param fontSize: {string}
+ * @param currentBoardId: number
+ * @param currentMajorId: number
+ * @param onClickPost: (value: number) => void
  * @returns
  */
 
-const BoardView = ({ majorOptions, onChangeMajorSelect, fontSize, postListData, boardList, onClickBoard }) => {
+const BoardView = ({
+    majorOptions,
+    onChangeMajorSelect,
+    postListData,
+    boardList,
+    onChangeBoard,
+    currentBoardId,
+    currentMajorId,
+    onClickPost,
+}) => {
     return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
             <div style={{ margin: "3%" }}>
-                <SelectBox options={majorOptions} onChange={onChangeMajorSelect} fontSize={fontSize}></SelectBox>
-                <BoardSelectBox boardList={boardList} onClickBoard={onClickBoard}></BoardSelectBox>
-
+                <SelectBox options={majorOptions} onChange={onChangeMajorSelect} initValue={currentMajorId}></SelectBox>
+                <BoardSelectBox boardList={boardList} onClick={onChangeBoard} currentBoardId={currentBoardId}></BoardSelectBox>
                 <BoardLayout>
-                    <div
-                        style={{ display: "flex", width: "100%", flexDirection: "row", padding: "1em", gap: "20px", paddingRight: "0rem" }}
-                    >
+                    <SearchAndWriteLayout>
                         <InputBoxContainer style={{ flex: "1" }}>
                             <InputBox placeholder="검색어를 입력해주세요." />
                         </InputBoxContainer>
-
                         <ButtonLayout>
                             <Button
                                 title={"글쓰기"}
@@ -43,15 +51,27 @@ const BoardView = ({ majorOptions, onChangeMajorSelect, fontSize, postListData, 
                                 height={"50px"}
                             ></Button>
                         </ButtonLayout>
-                    </div>
-
-                    <PostListView postListData={postListData}></PostListView>
+                    </SearchAndWriteLayout>
+                    <PostListView postListData={postListData} onClickPost={onClickPost}></PostListView>
                 </BoardLayout>
             </div>
             <Footer />
         </div>
     );
 };
+
+const SearchAndWriteLayout = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    padding: 1rem;
+    gap: 20px;
+    padding-right: 0rem;
+
+    @media screen and (max-width: 780px) {
+        padding: 0rem;
+    }
+`;
 
 const InputBoxContainer = styled.div`
     display: flex;
@@ -61,7 +81,7 @@ const InputBoxContainer = styled.div`
     justify-content: center;
 
     @media screen and (max-width: 780px) {
-        padding: 1em;
+        padding: 0rem 1rem 0rem 1rem;
     }
 `;
 
@@ -73,7 +93,7 @@ const BoardLayout = styled.div`
 
     @media screen and (max-width: 780px) {
         width: 100%;
-        font-size: 15px;
+        font-size: 21px;
     }
 `;
 
