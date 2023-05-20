@@ -17,7 +17,7 @@ const ViewPost = () => {
          */
     }, []);
 
-    return <ViewPostView post={post} author={author} isAuthor={true} commentList={commentList} />;
+    return <ViewPostView post={post} author={author} isAuthor={isAuthor} commentList={commentList} />;
 };
 
 export default ViewPost;
