@@ -1,47 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ViewPostView from "../component/template/ViewPostView";
 
 const ViewPost = () => {
-    //post 예시 데이터입니다.
-    const [post, setPost] = useState({
-        id: 2,
-        commentCount: 3,
-        likeCount: 2,
-        title: "예시데이터 제목입니다.1",
-        content:
-            "예시데이터 내용입니다내용입니다내용입니다내용입니다내용입니다내용니다내용입니다내용입입니다내용입니다내용입용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다.1",
-        createDate: "2020-05-14",
-    });
-    const [author, setAuthor] = useState({ id: 3, userName: "User1" });
+    const [post, setPost] = useState({});
+    const [author, setAuthor] = useState({});
+    const [commentList, setCommentList] = useState([]);
+    const [isAuthor, setIsAuthor] = useState(false);
 
-    //comment 예시 데이터입니다.
-    const [commentList, setCommentList] = useState([
-        {
-            comment: { commentCount: 3, likeCount: 2, content: "예시데이터", createDate: "2020-02-12" },
-            author: { id: 4, userName: "user1" },
-            isAuthor: true,
-        },
-        {
-            comment: { commentCount: 3, likeCount: 2, content: "예시데이터", createDate: "2020-02-12" },
-            author: { id: 5, userName: "user2" },
-            isAuthor: false,
-        },
-        {
-            comment: { commentCount: 3, likeCount: 2, content: "예시데이터", createDate: "2020-02-12" },
-            author: { id: 6, userName: "user3" },
-            isAuthor: false,
-        },
-        {
-            comment: { commentCount: 3, likeCount: 2, content: "예시데이터", createDate: "2020-02-12" },
-            author: { id: 6, userName: "user3" },
-            isAuthor: false,
-        },
-        {
-            comment: { commentCount: 3, likeCount: 2, content: "예시데이터", createDate: "2020-02-12" },
-            author: { id: 6, userName: "user3" },
-            isAuthor: false,
-        },
-    ]);
+    useEffect(() => {
+        /**
+         * 1. api/Post/getPostDetail 를 사용해서 setPost, setAuthor, setCommnetList, setIsAuthor을 해주세요.
+         * post의 값 형식은 {post_id, comments, likes, title, content, created_time} 입니다.
+         * post의 comments값은 백엔드의 comments.length로 set해주셔야 합니다.
+         * setCommnetList는 백엔드의 comments를 받으면 됩니다.
+         * 이때, author의 형식은 {id, userName}입니다. 백엔드에서 오는 요청형식이 다르니 확인해보시고 해당형식으로 set해주세요.
+         */
+    }, []);
 
     return <ViewPostView post={post} author={author} isAuthor={true} commentList={commentList} />;
 };
