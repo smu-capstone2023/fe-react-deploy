@@ -17,9 +17,11 @@ export const ImageUploadButton = ({ iconSize, size, onClickImageButton }) => {
         const file = event.target.files[0];
         //src/utils/imageUploader.js를 이용해서 업로드 후에 받은 url response값을 아래 주석처럼 onClickImageButton에 인자값으로 넣어주세요.
         //onClickImageButton(imageUrl); <- callback
+        if (file) {
         uploadImageToServer(file, (imageUrl) => {
-            onClickImageButton(imageUrl);
-          });
+        onClickImageButton(imageUrl);
+        });
+        };
     };
 
     const handleClick = () => {
