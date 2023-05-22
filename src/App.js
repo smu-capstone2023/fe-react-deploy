@@ -22,7 +22,7 @@ function App() {
                 <Route path="/login" element={<Login />}></Route>
                 <Route path="/mypage" element={<Mypage />}></Route>
                 <Route path="/signup" element={<Signup />}></Route>
-                <Route path="/addpost/:board_id" element={<AddPost />}></Route>
+                <Route path="/addpost/:board_id/:post_id" element={<AddPost />}></Route>
                 <Route path="/board/:major_id/:board_id" element={<Board />}></Route>
                 <Route path="/viewpost/:post_id" element={<ViewPost />}></Route>
                 {/* <Route path="/editpost/:post_id" element={<EditPost />}></Route> */}

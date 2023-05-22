@@ -6,7 +6,6 @@ const ViewPost = () => {
     const [author, setAuthor] = useState({});
     const [commentList, setCommentList] = useState([]);
     const [isAuthor, setIsAuthor] = useState(false);
-
     useEffect(() => {
         /**
          * 1. api/Post/getPostDetail 를 사용해서 setPost, setAuthor, setCommnetList, setIsAuthor을 해주세요.

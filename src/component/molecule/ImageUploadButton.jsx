@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import { AiOutlineCamera } from "react-icons/ai";
-
+import { uploadImageToServer } from "../../api/utils/imageUploader";
 /**
  * @param iconSize: string
  * @param size: string
@@ -10,13 +10,17 @@ import { AiOutlineCamera } from "react-icons/ai";
  */
 
 export const ImageUploadButton = ({ iconSize, size, onClickImageButton }) => {
-    //image 업로드 로직
     const fileInput = useRef();
 
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
-        //src/utils/imageUploader.js를 이용해서 업로드 후에 받은 url response값을 아래 주석처럼 onClickImageButton에 인자값으로 넣어주세요.
-        //onClickImageButton(imageUrl);
+        uploadImageToServer(file).then((response) => {
+            if (response !== "") {
+                onClickImageButton(response);
+            } else {
+                alert("네트워크 오류! 잠시 후에 시도해주세요");
+            }
+        });
     };
 
     const handleClick = () => {
