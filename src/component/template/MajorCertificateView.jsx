@@ -28,10 +28,17 @@ const MajorCertificateView = ({ onClickImageUploadButton, onClickDeleteImageButt
                 </div>
 
                 <div style={{ width: "100%", height: "15em" }}>
-                    {
-                    imageUrl === '' ? <ImageUploadButton iconSize={"1.5rem"} size={"100%"} onClick={onClickImageUploadButton}/>  : <ImageView imageUrl={imageUrl} onClickDelete={onClickDeleteImageButton} iconSize={"1.5rem"} width={'100%'} height={'100%'} />
-                    }
-                    
+                    {imageUrl === "" ? (
+                        <ImageUploadButton iconSize={"1.5rem"} size={"100%"} onClickImageButton={onClickImageUploadButton} />
+                    ) : (
+                        <ImageView
+                            imageUrl={imageUrl}
+                            onClickDelete={onClickDeleteImageButton}
+                            iconSize={"1.5rem"}
+                            width={"100%"}
+                            height={"100%"}
+                        />
+                    )}
                 </div>
 
                 <div style={{ margin: "2rem 0 1rem 0" }}>
