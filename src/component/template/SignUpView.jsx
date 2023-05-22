@@ -4,14 +4,15 @@ import InputBox from "../molecule/InputBox";
 import Button from "../molecule/Button";
 
 /**
- * @param onChangeId: () => {}
- * @param onChangePassword: () => {}
- * @param onChangeRePassword: () => {}
+ * @param onChangeId: (value: string) => {}
+ * @param onChangeNickname: (value: string) => {}
+ * @param onChangePassword: (value: string) => {}
+ * @param onChangeRePassword: (value: string) => {}
  * @param onClickSignupButton: () => {}
  * @returns
  */
 
-const SignUpView = ({ onChangeId, onChangePassword, onChangeRePassword, onClickSignupButton }) => {
+const SignUpView = ({ onChangeId, onChangePassword, onChangeRePassword, onClickSignupButton, onChangeNickname }) => {
     return (
         <>
             <SignupViewLayout>
