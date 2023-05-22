@@ -26,8 +26,8 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
                     if (!user_id) {
                         alert("로그인이 필요한 기능입니다.");
                     } else if (majorList.length >= 1) {
-                        const majorId = majorList[0];
-                        window.location.href = `/board/${majorId}`;
+                        const major = majorList[0];
+                        window.location.href = `/board/${major.major_id}/${major.free_board_id}`;
                     }
                 }}
                 fontStyles={fontStyles}
@@ -43,11 +43,11 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
                         alert("로그인이 필요한 기능입니다.");
                     } else {
                         if (majorList.length >= 2) {
-                            const majorId = majorList[1];
-                            if (!majorId) {
+                            const major = majorList[1];
+                            if (!major) {
                                 alert("학과인증이 필요한 기능입니다.");
                             } else {
-                                window.location.href = `/board/${majorId}`;
+                                window.location.href = `/board/${major.major_id}/${major.free_board_id}`;
                             }
                         } else {
                             alert("학과게시판이 없습니다.");
