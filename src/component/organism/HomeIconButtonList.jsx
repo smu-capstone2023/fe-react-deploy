@@ -15,7 +15,7 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
         fontFamily: "nexon-regular",
         fontSize: fontSize,
     };
-    const majorList = localStorage.getItem("majorList");
+    const majorList = JSON.parse(localStorage.getItem("majorList"));
     return (
         <div style={{ display: "flex", justifyContent: "space-between", width: width }}>
             <IconButton
