@@ -6,9 +6,8 @@ const Signup = () => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [rePassword, setRePassword] = useState("");
-
+    const [nickname, setNickname] = useState("");
     //임시 값 부여
-    const nickname = "z";
 
     const checkIdRegExp = () => {
         //Ex) 123456789(9자리 숫자)
@@ -31,6 +30,8 @@ const Signup = () => {
     const onClickSignupButton = () => {
         if (checkIdRegExp() === false) {
             alert("ID 형식을 확인해주세요.");
+        } else if (nickname === "") {
+            alert("닉네임을 입력해주세요.");
         } else if (checkPasswordExp() === false) {
             alert("비밀번호 형식을 확인해주세요.");
         } else if (checkRePasswordExp() === false) {
@@ -48,6 +49,7 @@ const Signup = () => {
 
     return (
         <SignUpView
+            onChangeNickname={setNickname}
             onChangeId={setId}
             onChangePassword={setPassword}
             onChangeRePassword={setRePassword}
