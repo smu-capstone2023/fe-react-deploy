@@ -8,7 +8,7 @@ import Button from "../molecule/Button";
  * @param onChangeNickname: (value: string) => {}
  * @param onChangePassword: (value: string) => {}
  * @param onChangeRePassword: (value: string) => {}
- * @param onClickSignupButton: () => {}
+ * @param onClickSignupButton: () => {} 
  * @returns
  */
 
@@ -28,6 +28,12 @@ const SignUpView = ({ onChangeId, onChangePassword, onChangeRePassword, onClickS
                     <Title2> 학번을 입력해주세요!</Title2>
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column" }}>
                         <InputBox placeholder="@sangmyung.kr" onChange={onChangeId} />
+                    </InputBoxContainer>
+
+                    {/* 닉넴입력 */}
+                    <Title2 style={{ marginTop: "5px"}}>닉네임을 입력해주세요!</Title2>
+                    <InputBoxContainer style={{ display: "flex", flexDirection: "column" }}>
+                        <InputBox placeholder="nickname" onChange={onChangeNickname} />
                     </InputBoxContainer>
 
                     {/* 비번 입력 */}
