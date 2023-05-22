@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CommentList from "../organism/CommentList";
 import PostContent from "../organism/PostContent";
 import Footer from "../organism/Footer";
+import AddComment from "../organism/AddComment";
 
 /**
  * @param post: {post_id, comments, likes, title, content, created_time}
@@ -22,6 +23,7 @@ const ViewPostView = ({ post, author, isAuthor, commentList }) => {
             <PostMarginView>
                 <CommentList commentList={commentList} />
             </PostMarginView>
+            <AddComment />
             <Footer />
         </ViewPostLayout>
     );
