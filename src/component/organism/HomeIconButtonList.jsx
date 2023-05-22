@@ -29,10 +29,9 @@ export const HomeIconButtonList = ({width, fontSize, iconSize}) => {
                      * 2. 만약 user_id값이 있으면, majorList[0]을 이용해서, 상명대학교 자유게시판으로 이동할 수 있도록 구현해주세요.
                      */
                     const user_id = localStorage.getItem("user_id");
-                    if (!user_id) {             // userid 없음
+                    if (!user_id) {
                         alert("로그인이 필요한 기능입니다.");
-                    } 
-                    else {                      // userid 존재
+                    } else if (majorList.length >= 1) {
                         const majorId = majorList[0];
                         window.location.href = `/board/${majorId}`;
                     }
@@ -53,14 +52,16 @@ export const HomeIconButtonList = ({width, fontSize, iconSize}) => {
                     const user_id = localStorage.getItem("user_id");
                     if (!user_id) {
                         alert("로그인이 필요한 기능입니다.");
-                    } 
-                    else {
-                        const majorId = majorList[1];
-                        if (!majorId) {
-                            alert("학과인증이 필요한 기능입니다.");
-                        } 
-                        else {
-                            window.location.href = `/board/${majorId}`;
+                    } else {
+                        if (majorList.length >= 2) {
+                            const majorId = majorList[1];
+                            if (!majorId) {
+                                alert("학과인증이 필요한 기능입니다.");
+                            } else {
+                                window.location.href = `/board/${majorId}`;
+                            }
+                        } else {
+                            alert("학과게시판이 없습니다.");
                         }
                     }
                 }}
