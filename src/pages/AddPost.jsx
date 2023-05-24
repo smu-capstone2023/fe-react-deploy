@@ -27,7 +27,7 @@ const AddPost = () => {
     const onClickSavePost = () => {
         if (post_id === "null") {
             createPost(title, content, board_id, is_anonymous, image_url_list).then((response) => {
-                if (response == false) {
+                if (response === false) {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
                 } else {
                     window.location.href = `/viewpost/${response}`;
@@ -36,7 +36,7 @@ const AddPost = () => {
         }
         else {
             updatePost(title, content, post_id, is_anonymous, image_url_list).then((response) => {
-                if (response == false) {
+                if (response === false) {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.")
                 } else {
                     window.location.href = `/viewpost/${post_id}`;
@@ -56,7 +56,7 @@ const AddPost = () => {
                 alert("네트워크 문제! 잠시 후에 다시 시도해주세요.")
             }
         })
-        if (post_id != "null") {
+        if (post_id !== "null") {
             getDetailPost(post_id).then((response) => {
                 if (response) {
                     setTitle(response.title);
