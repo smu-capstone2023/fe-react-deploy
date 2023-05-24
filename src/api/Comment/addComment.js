@@ -11,13 +11,14 @@ import axios from "axios";
      * 만약, 댓글 작성이 실패하면, false를, 성공하면 true를 반환해주세요.
      */
     export const addComment = ({ post_id, content }) => {
-      return axios.post(`${process.env.REACT_APP_SERVER_URL}/comment/create/${post_id}`, {
-          post_id: post_id,
-          content: content,
+      return axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/comment/create/`, {
+            post_id: post_id,
+            content: content,
       }, {
-          headers: {
-              Authorization: localStorage.getItem('access_token'),
-          },
+            headers: {
+                Authorization: localStorage.getItem('access_token'),
+            },
       })
       .then((response) => {
           if (response.data.status_code === 201){
