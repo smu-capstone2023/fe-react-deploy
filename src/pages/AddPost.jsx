@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import AddPostView from "../component/template/AddPostView";
 import { createPost } from "../api/Post/createPost";
 import { updatePost } from "../api/Post/updatePost";
 import { getBoardDetailInfo } from "../api/board/getBoardDetailInfo";
 import { getDetailPost } from "../api/Post/getDetailPost";
-import { getBoardDetailInfoByPostId } from "../api/BoardApi/getBoardDetailInfoByPostId";
 
 const AddPost = () => {
     const [boardInfo, setBoardInfo] = useState({ majorName: "", boardName: "" });
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [imageList, setImageList] = useState([]);
-    const [boardId, setBoardId] = useState("");
-    const url = window.location.href;
-    const postId = url.split("/")[4];
+    const image_url_list = "";
+    const is_anonymous = true;
+    let { board_id, post_id } = useParams();
 
     const onAddImageList = (imageUrl) => {
         setImageList([...imageList].push(imageUrl));
@@ -25,37 +25,28 @@ const AddPost = () => {
     };
 
     const onClickSavePost = () => {
-        if (postId === "null") {
-            createPost(title, content, boardId, true, "").then((response) => {
-                console.log(response);
-                if (response) {
-                    window.location.href = `${process.env.REACT_APP_SERVER_URL}/viewPost/${response}`;
-                } else {
+        if (post_id === "null") {
+            createPost(title, content, board_id, is_anonymous, image_url_list).then((response) => {
+                if (response == false) {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
+                } else {
+                    window.location.href = `/viewpost/${response}`;
                 }
             })
         }
         else {
-            updatePost(title, content, postId, true, "").then((response) => {
-                if (response) {
-                    window.location.href = `${process.env.REACT_APP_SERVER_URL}/viewPost/${postId}`;
-                } else (
+            updatePost(title, content, post_id, is_anonymous, image_url_list).then((response) => {
+                if (response == false) {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.")
-                )
+                } else {
+                    window.location.href = `/viewpost/${post_id}`;
+                }
             })
         }
     };
 
     useEffect(() => {
-        getBoardDetailInfoByPostId(postId).then((response) => {
-            if(response) {
-                setBoardId(response.board_id);
-                console.log(response.board_id);
-            } else {
-                console.log(response);
-            }
-        })
-        getBoardDetailInfo(boardId).then((response) => {
+        getBoardDetailInfo(board_id).then((response) => {
             if (response) {
                 setBoardInfo({
                     majorName: response.major_name,
@@ -65,8 +56,8 @@ const AddPost = () => {
                 alert("네트워크 문제! 잠시 후에 다시 시도해주세요.")
             }
         })
-        if (postId != "null") {
-            getDetailPost(postId).then((response) => {
+        if (post_id != "null") {
+            getDetailPost(post_id).then((response) => {
                 if (response) {
                     setTitle(response.title);
                     setContent(response.content);
