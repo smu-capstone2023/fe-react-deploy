@@ -37,7 +37,7 @@ const Signup = () => {
         } else if (checkRePasswordExp() === false) {
             alert("비밀번호가 일치하지 않습니다.");
         } else {
-            signUpSite(id, password, nickname).then((response) => {
+            signUpSite(id, nickname, password).then((response) => {
                 if (response) {
                     window.location.href = "/user-certification";
                 } else {
