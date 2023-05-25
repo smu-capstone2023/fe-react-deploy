@@ -1,19 +1,41 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import ViewPostView from "../component/template/ViewPostView";
+import { getDetailPost } from "../api/Post/getDetailPost";
 
 const ViewPost = () => {
     const [post, setPost] = useState({});
     const [author, setAuthor] = useState({});
     const [commentList, setCommentList] = useState([]);
     const [isAuthor, setIsAuthor] = useState(false);
+    let { post_id } = useParams();
+
     useEffect(() => {
-        /**
-         * 1. api/Post/getPostDetail 를 사용해서 setPost, setAuthor, setCommnetList, setIsAuthor을 해주세요.
-         * post의 값 형식은 {post_id, comments, likes, title, content, created_time} 입니다.
-         * post의 comments값은 백엔드의 comments.length로 set해주셔야 합니다.
-         * setCommnetList는 백엔드의 comments를 받으면 됩니다.
-         * 이때, author의 형식은 {id, userName}입니다. 백엔드에서 오는 요청형식이 다르니 확인해보시고 해당형식으로 set해주세요.
-         */
+        getDetailPost(post_id)
+        .then((response) => {
+            if(response) {
+                let commentsLength = 0;
+                if (response.comments) {
+                    commentsLength = response.comments.length;
+                }
+                setPost({
+                    post_id: response.post_id,
+                    comments: commentsLength,
+                    likes: response.likes,
+                    title: response.title,
+                    content: response.content,
+                    created_time: response.created_time,
+                });
+                setAuthor({
+                    id: response.user_id,
+                    userName: response.username,
+                });
+                setCommentList(response.comments);
+                setIsAuthor(response.is_author);
+            } else {
+                alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
+            }
+        })
     }, []);
 
     return <ViewPostView post={post} author={author} isAuthor={isAuthor} commentList={commentList} />;
