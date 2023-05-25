@@ -32,6 +32,7 @@ const ViewPostView = ({ post, author, isAuthor, commentList, setInputComment, on
 };
 
 const ViewPostLayout = styled.div`
+    flex: 1;
     display: flex;
     flex-direction: column;
     width: 100%;

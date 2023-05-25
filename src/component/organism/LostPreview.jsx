@@ -19,9 +19,9 @@ export const LostPreview = ({ previewList }) => {
                 >
                     <SectionListHeader
                         onClick={() => {
-                            // 만약 localStorage에 school_id값이 없다면 로그인이 필요한 기능이라고 aler를 띄워주세요.
-                            // 만약 있다면,
-                            // .env값 중에 lost board id, lost major id값을 이용해서 board게시판으로 이동할 수 있도록 로직 작성해주세요.
+                            localStorage.getItem("school_id")
+                                ? (window.location.href = `/board/${process.env.REACT_APP_LOST_BOARD_ID}/${process.env.REACT_APP_LOST_MAJOR_ID}`)
+                                : alert("로그인이 필요한 기능입니다.");
                         }}
                         title={"분실물 게시판"}
                     ></SectionListHeader>
@@ -41,9 +41,9 @@ export const LostPreview = ({ previewList }) => {
                                     <div style={{ padding: "0.2rem" }}></div>
                                     <LostPreviewElement
                                         onClick={() => {
-                                            // 만약 localStorage에 school_id값이 없다면 로그인이 필요한 기능이라고 aler를 띄워주세요.
-                                            // 만약 있다면,
-                                            //item.post_id값을 이용해서 viewpost페이지로 이동할 수 있도록 작성해주세요.
+                                            localStorage.getItem("school_id")
+                                                ? (window.location.href = `/viewpost/${data.post_id}`)
+                                                : alert("로그인이 필요한 기능입니다.");
                                         }}
                                         content={data.title}
                                     ></LostPreviewElement>

@@ -18,7 +18,7 @@ const Login = () => {
 
     const setUserInfoInLocalStorage = (userName, schoolId, profileImageUrl, majorList) => {
         localStorage.setItem("user_name", userName);
-        localStorage.setItem("shcool_id", schoolId);
+        localStorage.setItem("school_id", schoolId);
         localStorage.setItem("profile_img_url", profileImageUrl);
         localStorage.setItem("majorList", JSON.stringify(majorList));
     };
