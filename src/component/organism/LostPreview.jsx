@@ -17,7 +17,14 @@ export const LostPreview = ({ previewList }) => {
                         padding: "0.1rem",
                     }}
                 >
-                    <SectionListHeader onClick={() => {}} title={"분실물 게시판"}></SectionListHeader>
+                    <SectionListHeader
+                        onClick={() => {
+                            // 만약 localStorage에 school_id값이 없다면 로그인이 필요한 기능이라고 aler를 띄워주세요.
+                            // 만약 있다면,
+                            // .env값 중에 lost board id, lost major id값을 이용해서 board게시판으로 이동할 수 있도록 로직 작성해주세요.
+                        }}
+                        title={"분실물 게시판"}
+                    ></SectionListHeader>
                 </div>
 
                 <div
@@ -32,7 +39,14 @@ export const LostPreview = ({ previewList }) => {
                             return (
                                 <>
                                     <div style={{ padding: "0.2rem" }}></div>
-                                    <LostPreviewElement onClick={() => alert(data.post_id)} content={data.title}></LostPreviewElement>
+                                    <LostPreviewElement
+                                        onClick={() => {
+                                            // 만약 localStorage에 school_id값이 없다면 로그인이 필요한 기능이라고 aler를 띄워주세요.
+                                            // 만약 있다면,
+                                            //item.post_id값을 이용해서 viewpost페이지로 이동할 수 있도록 작성해주세요.
+                                        }}
+                                        content={data.title}
+                                    ></LostPreviewElement>
                                 </>
                             );
                         })}
