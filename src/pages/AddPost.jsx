@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import AddPostView from "../component/template/AddPostView";
 import { createPost } from "../api/Post/createPost";
 import { updatePost } from "../api/Post/updatePost";
@@ -11,7 +11,6 @@ const AddPost = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [imageList, setImageList] = useState([]);
-    const image_url_list = "";
     const is_anonymous = true;
     let { board_id, post_id } = useParams();
 
@@ -26,22 +25,21 @@ const AddPost = () => {
 
     const onClickSavePost = () => {
         if (post_id === "null") {
-            createPost(title, content, board_id, is_anonymous, image_url_list).then((response) => {
+            createPost(title, content, board_id, is_anonymous, imageList).then((response) => {
                 if (response === false) {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
                 } else {
                     window.location.href = `/viewpost/${response}`;
                 }
-            })
-        }
-        else {
-            updatePost(title, content, post_id, is_anonymous, image_url_list).then((response) => {
+            });
+        } else {
+            updatePost(title, content, post_id, is_anonymous, imageList).then((response) => {
                 if (response === false) {
-                    alert("네트워크 문제! 잠시 후에 다시 시도해주세요.")
+                    alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
                 } else {
                     window.location.href = `/viewpost/${post_id}`;
                 }
-            })
+            });
         }
     };
 
@@ -51,20 +49,20 @@ const AddPost = () => {
                 setBoardInfo({
                     majorName: response.major_name,
                     boardName: response.board_name,
-                })
+                });
             } else {
-                alert("네트워크 문제! 잠시 후에 다시 시도해주세요.")
+                alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
             }
-        })
+        });
         if (post_id !== "null") {
             getDetailPost(post_id).then((response) => {
                 if (response) {
                     setTitle(response.title);
                     setContent(response.content);
                 } else {
-                    alert("네트워크 문제! 잠시 후에 다시 시도해주세요.")
+                    alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
                 }
-            })
+            });
         }
     }, []);
 
