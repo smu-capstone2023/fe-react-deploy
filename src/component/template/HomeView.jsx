@@ -15,7 +15,7 @@ import styled from "styled-components";
  */
 
 export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList, lostPreviewList }) => {
-    const { majorName, majorId } = majorInfo;
+    const { majorName, majorId, freeBoardId } = majorInfo;
 
     return (
         <>
@@ -38,7 +38,13 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                     <HideResponsableView style={{ flex: 1, background: "gray", minWidth: "20em" }} />
                     <RowToColumnResponsableView style={{ flex: 3, gap: 10 }}>
                         <BoardSectionList title="HOT 게시판" previewList={hotPreviewList} />
-                        {majorName && <BoardSectionList title={majorName} previewList={majorPreviewList} />}
+                        {majorName && (
+                            <BoardSectionList
+                                title={majorName}
+                                previewList={majorPreviewList}
+                                headerOnClick={() => (window.location.href = `/board/${majorId}/${freeBoardId}`)}
+                            />
+                        )}
                     </RowToColumnResponsableView>
                 </div>
             </div>

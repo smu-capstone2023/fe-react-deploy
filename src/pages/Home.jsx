@@ -4,7 +4,7 @@ import { getHotBoardPreviewList } from "../api/board/getHotBoardPreviewList";
 import { getLostBoardPreviewList } from "../api/board/getLostBoardPreviewList";
 const Home = () => {
     const [userInfo, setUserInfo] = useState({ nickname: "", schoolId: "", major: "", mbti: "" });
-    const [majorInfo, setMajorInfo] = useState({ majorName: "", majorId: -1 });
+    const [majorInfo, setMajorInfo] = useState({ majorName: "", majorId: -1, freeBoardId: -1 });
     const [hotPreviewList, setHotPreviewList] = useState([]);
     const [lostPreviewList, setLostPreviewList] = useState([]);
 
@@ -14,8 +14,8 @@ const Home = () => {
             const user_id = localStorage.getItem("user_id");
             const majorList = localStorage.getItem("majorList");
             if (majorList && JSON.parse(majorList)[1]) {
-                const major_name = JSON.parse(majorList)[1].major_name;
-                const major_id = JSON.parse(majorList)[1].major_id;
+                const { major_name, major_id, free_board_id } = JSON.parse(majorList)[1];
+
                 setUserInfo({
                     nickname: user_name,
                     schoolId: user_id,
@@ -25,6 +25,7 @@ const Home = () => {
                 setMajorInfo({
                     majorName: major_name,
                     majorId: major_id,
+                    freeBoardId: free_board_id,
                 });
             } else {
                 setUserInfo({

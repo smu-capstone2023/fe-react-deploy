@@ -6,7 +6,7 @@ import PreviewListItem from "../molecule/PreviewListItem";
 /**
  * @param title : 헤더의 제목
  * @param headerOnClick : 헤더를 클릭했을 때 실행되는 함수
- * @param previewList : { title, onClick, comments, likeCount}[]  뿌려줄 데이터 리스트
+ * @param previewList : { title, comments, likeCount, post_id}[]  뿌려줄 데이터 리스트
  * @returns
  */
 
@@ -21,9 +21,10 @@ export const BoardSectionList = ({ title, headerOnClick, previewList }) => {
                         index //이부분 입니다.
                     ) => (
                         <PreviewListItem
+                            postId={previewItem.post_id}
                             key={index}
                             title={previewItem.title}
-                            onClick={previewItem.onClick}
+                            onClick={() => (window.location.href = `/viewpost/${previewItem.post_id}`)}
                             commentCount={previewItem.comments}
                             likeCount={previewItem.likes}
                         />
