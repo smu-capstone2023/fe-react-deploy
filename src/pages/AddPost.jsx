@@ -20,8 +20,8 @@ const AddPost = () => {
     };
 
     const onDeleteImage = (index) => {
-        //imageList의 해당 index에 있는 요소를 삭제한 것을 setImageList를 해주세요.
-        //useState를 사용할 때 주의할 점은 imageList를 직접 수정하면 안됩니다. imageList 복사본을 만들어서 그 복사본의 값을 변경해주시고, 그 복사본을 setImageList해주셔야 합니다.
+        const newImageList = imageList.filter((image, idx) => idx !== index);
+        setImageList(newImageList);
     };
 
     const onClickSavePost = () => {
