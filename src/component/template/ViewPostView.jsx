@@ -10,10 +10,12 @@ import AddComment from "../organism/AddComment";
  * @param author: {id, userName}
  * @param isAuthor: boolean
  * @param commentList: {comment_id, username, user_id, content, likes, created_time, isLiked, children: ReactElement}[]
+ * @param setInputComment: (value: string) => void
+ * @param onClickAddComment: () => void
  * @returns
  */
 
-const ViewPostView = ({ post, author, isAuthor, commentList }) => {
+const ViewPostView = ({ post, author, isAuthor, commentList, setInputComment, onClickAddComment }) => {
     return (
         <ViewPostLayout>
             <PostMarginView>
@@ -23,7 +25,7 @@ const ViewPostView = ({ post, author, isAuthor, commentList }) => {
             <PostMarginView>
                 <CommentList commentList={commentList} />
             </PostMarginView>
-            <AddComment />
+            <AddComment onChangeComment={setInputComment} onClickAddComment={onClickAddComment} />
             <Footer />
         </ViewPostLayout>
     );

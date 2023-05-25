@@ -2,13 +2,24 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ViewPostView from "../component/template/ViewPostView";
 import { getDetailPost } from "../api/Post/getDetailPost";
+import { addComment } from "../api/Comment/addComment";
 
 const ViewPost = () => {
     const [post, setPost] = useState({});
     const [author, setAuthor] = useState({});
     const [commentList, setCommentList] = useState([]);
     const [isAuthor, setIsAuthor] = useState(false);
-    let { post_id } = useParams();
+    const { post_id } = useParams();
+    const [inputComment, setInputComment] = useState("");
+    const onClickAddComment = () => {
+        addComment(post_id, inputComment).then((response) => {
+            if (response) {
+                window.location.reload();
+            } else {
+                alert("네트워크 문제!", "잠시후 시도해주세요");
+            }
+        });
+    };
 
     useEffect(() => {
         getDetailPost(post_id).then((response) => {
@@ -37,7 +48,16 @@ const ViewPost = () => {
         });
     }, [post_id]);
 
-    return <ViewPostView post={post} author={author} isAuthor={isAuthor} commentList={commentList} />;
+    return (
+        <ViewPostView
+            post={post}
+            author={author}
+            isAuthor={isAuthor}
+            commentList={commentList}
+            setInputComment={setInputComment}
+            onClickAddComment={onClickAddComment}
+        />
+    );
 };
 
 export default ViewPost;
