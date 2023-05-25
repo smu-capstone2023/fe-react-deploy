@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 
 /**
@@ -19,7 +19,9 @@ export const InputTextAreaBox = ({ placeholder, onChange, background, width, hei
             height={height}
             background={background}
             placeholder={placeholder}
-            onChange={onChange}
+            onChange={(e) => {
+                onChange(e.target.value);
+            }}
         />
     );
 };

@@ -14,9 +14,11 @@ export const ImageUploadButton = ({ iconSize, size, onClickImageButton }) => {
 
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
-        uploadImageToServer(file).then((response) => {
+        const formData = new FormData();
+        formData.append("image", file);
+        uploadImageToServer(formData).then((response) => {
             if (response !== "") {
-                onClickImageButton(response);
+                onClickImageButton(response.imageUrls);
             } else {
                 alert("네트워크 오류! 잠시 후에 시도해주세요");
             }

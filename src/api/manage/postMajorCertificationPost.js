@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const postMajorCertificationPost = (imageUrl, content) => {
+    console.log(imageUrl, content);
     return axios
         .post(
             `${process.env.REACT_APP_SERVER_URL}/manage/certificate/create`,
@@ -16,7 +17,7 @@ export const postMajorCertificationPost = (imageUrl, content) => {
             return response.data.isSuccess;
         })
         .catch((response) => {
-            console.log(response);
+            console.error("postMajorCertificationPost", response);
             return false;
         });
 };

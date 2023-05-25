@@ -24,8 +24,8 @@ const ImageViewLayout = styled.div`
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     background-image: url(${(props) => props.imageUrl});
-    background-size: cover;
-    object-fit: cover;
+    background-repeat: no-repeat;
+    background-size: contain;
     justify-content: end;
     align-items: flex-end;
 `;

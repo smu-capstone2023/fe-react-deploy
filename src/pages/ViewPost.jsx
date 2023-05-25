@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import ViewPostView from "../component/template/ViewPostView";
 import { getDetailPost } from "../api/Post/getDetailPost";
 
@@ -11,9 +11,8 @@ const ViewPost = () => {
     let { post_id } = useParams();
 
     useEffect(() => {
-        getDetailPost(post_id)
-        .then((response) => {
-            if(response) {
+        getDetailPost(post_id).then((response) => {
+            if (response) {
                 let commentsLength = 0;
                 if (response.comments) {
                     commentsLength = response.comments.length;
@@ -35,8 +34,8 @@ const ViewPost = () => {
             } else {
                 alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
             }
-        })
-    }, []);
+        });
+    }, [post_id]);
 
     return <ViewPostView post={post} author={author} isAuthor={isAuthor} commentList={commentList} />;
 };
