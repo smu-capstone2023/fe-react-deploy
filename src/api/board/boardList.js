@@ -5,7 +5,7 @@ export const getBoardListFromMajorId = (majorId) => {
         .then((response) => {
             return response.data;
         })
-        .catch((resposne) => {
+        .catch((response) => {
             alert('네트워크 오류!', '잠시후 다시 시도해주세요');
             return [];
         });
