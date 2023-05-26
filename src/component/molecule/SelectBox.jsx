@@ -34,10 +34,11 @@ const Select = ({ options, onChange, init }) => {
         >
             {options &&
                 options.map((option) => {
-                    console.log(option.id);
                     return (
-                        <option value={option.id} style={{ fontFamily: "nexon-regular" }} key={option.id}>
-                            {option.name}
+                        <option value={option.major_id
+                        } style={{ fontFamily: "nexon-regular" }} key={option.major_id}
+                        >
+                            {option.major_name}
                         </option>
                     );
                 })}
