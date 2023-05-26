@@ -26,7 +26,7 @@ export const BoardSectionList = ({ title, headerOnClick, previewList }) => {
                             title={previewItem.title}
                             onClick={() => {
                                 localStorage.getItem("school_id")
-                                    ? (window.location.href = `/viewpost/${previewItem.post_id}`)
+                                    ? (window.location.href = `/viewpost/1/${previewItem.post_id}`)
                                     : alert("로그인이 필요한 기능입니다.");
                             }}
                             commentCount={previewItem.comments}

@@ -37,7 +37,11 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                 <div style={{ flex: 1, display: "flex", gap: 10 }}>
                     <HideResponsableView style={{ flex: 1, background: "gray", minWidth: "20em" }} />
                     <RowToColumnResponsableView style={{ flex: 3, gap: 10 }}>
-                        <BoardSectionList title="HOT 게시판" previewList={hotPreviewList} />
+                        <BoardSectionList
+                            title="HOT 게시판"
+                            previewList={hotPreviewList}
+                            headerOnClick={() => (window.location.href = `/board/1/3`)}
+                        />
                         {majorName && (
                             <BoardSectionList
                                 title={majorName}
