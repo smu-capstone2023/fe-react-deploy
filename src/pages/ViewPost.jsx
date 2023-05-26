@@ -5,11 +5,11 @@ import { getDetailPost } from "../api/Post/getDetailPost";
 import { addComment } from "../api/Comment/addComment";
 
 const ViewPost = () => {
+    const { post_id, board_id } = useParams();
     const [post, setPost] = useState({});
     const [author, setAuthor] = useState({});
     const [commentList, setCommentList] = useState([]);
     const [isAuthor, setIsAuthor] = useState(false);
-    const { post_id } = useParams();
     const [inputComment, setInputComment] = useState("");
     const onClickAddComment = () => {
         addComment(post_id, inputComment).then((response) => {
@@ -50,6 +50,7 @@ const ViewPost = () => {
 
     return (
         <ViewPostView
+            boardId={board_id}
             post={post}
             author={author}
             isAuthor={isAuthor}

@@ -5,20 +5,25 @@ import UserInfoPostWriter from "../molecule/UserInfoPostWriter";
 import CommentView from "../molecule/CommentView";
 import LikeView from "../molecule/LikeView";
 /**
+ * @param boardId: number
  * @param post: {post_id, comments, likes, title, content, created_time}
  * @param author : {id, userName}
  * @param isAuthor : boolean
  * @returns
  */
 
-const PostContent = ({ post, author, isAuthor }) => {
+const PostContent = ({ boardId, post, author, isAuthor }) => {
     //구조 분해 할당 역영입니다.
     const { post_id, comments, likes, title, content, created_time } = post;
+
+    const onClickEdit = () => {
+        window.location.href = `/addpost/${boardId}/${post_id}`;
+    };
     return (
         <PostContentLayout>
             {isAuthor ? (
                 //글쓴이
-                <UserInfoPostWriter iconSize="1.3em" fontSize="1.3em" userName={author.userName} postId={post_id} />
+                <UserInfoPostWriter iconSize="1.3em" fontSize="1.3em" userName={author.userName} onClickEdit={onClickEdit} />
             ) : (
                 //글쓴이 아닌 사람
                 <UserInfoPostReader iconSize="1.3em" fontSize="1.3em" userName={author.userName} postId={post_id} />

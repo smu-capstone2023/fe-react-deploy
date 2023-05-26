@@ -14,7 +14,7 @@ export const changeNickname = (nickname) => {
             }
         )
         .then((response) => {
-            if (response.data.statue_code === 201) {
+            if (response.data.status_code === 201) {
                 return true;
             } else return false;
         })
