@@ -2,7 +2,7 @@ import MypageView from "../component/template/MypageView ";
 import { revoke } from "../api/User/revoke";
 import { changeNickname } from "../api/User/changeNickname";
 import Swal from "sweetalert2";
-import { changePassword } from "../api/User/ChangePassword";
+import { changePassword } from "../api/User/changePassword";
 
 const Mypage = () => {
     const onChangeNickname = (newNickname) => {
