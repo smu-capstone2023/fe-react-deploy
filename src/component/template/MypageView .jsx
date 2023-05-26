@@ -2,18 +2,20 @@ import React from "react";
 import Footer from "../organism/Footer";
 import SectionListHeader from "../molecule/SectionListHeader";
 import styled from "styled-components";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import { useState } from "react";
 
 /**
  * @param onClickRevoke: () => {}
  * @param onClickLogout: () => {}
+ * @param changeNickname: (value: string) => void;
+ * @param changePassword: (value: string) => void;
  * @returns
  */
 
-const MypageView = ({ onClickRevoke, onClickLogout }) => {
-    const [inputValue, setInputValue] = useState('');
-    const [password, setPassword] = useState('');
+const MypageView = ({ onClickRevoke, onClickLogout, changeNickname, changePassword }) => {
+    const [inputValue, setInputValue] = useState("");
+    const [password, setPassword] = useState("");
 
     return (
         <>
@@ -26,60 +28,52 @@ const MypageView = ({ onClickRevoke, onClickLogout }) => {
                     <SectionListHeader
                         title={"닉네임 설정"}
                         onClick={() => {
-
                             Swal.fire({
-                            title: '닉네임 변경',
-                            input: 'text',
-                            inputLabel: '변경할 닉네임을 써주세요!',
-                            inputValue: inputValue,
-                            showCancelButton: true,
-                            inputValidator: (value) => {
-                                if (!value) {
-                                return '변경할 닉네임을 입력해주세요!';
+                                title: "닉네임 변경",
+                                input: "text",
+                                inputLabel: "변경할 닉네임을 써주세요!",
+                                inputValue: inputValue,
+                                showCancelButton: true,
+                                inputValidator: (value) => {
+                                    if (!value) {
+                                        return "변경할 닉네임을 입력해주세요!";
+                                    }
+                                },
+                            }).then((result) => {
+                                if (result.value) {
+                                    changeNickname(result.value);
                                 }
-                            }
-                            }).then((result) => { 
-                            if (result.value) {
-                                const newNickname = result.value;
-                                setInputValue(newNickname);
-                                Swal.fire(`닉네임이 ${newNickname}로 바뀌었습니다!!`);
-                            }
                             });
-                        
-                        
                         }}
                     ></SectionListHeader>
                     <SectionListHeader
                         title={"프로필 이미지 변경"}
                         onClick={() => {
                             Swal.fire({
-                                title: '준비중입니다.'
-                              })
+                                title: "준비중입니다.",
+                            });
                         }}
                     ></SectionListHeader>
                     <SectionListHeader
                         title={"비밀번호 변경"}
                         onClick={() => {
-
-                            Swal.fire({
-                            title: '비밀번호 변경',
-                            input: 'password',
-                            inputLabel: '새로 변경할 비밀번호를 써주세요!',
-                            showCancelButton: true,
-                            inputValidator: (value) => {
-                                if (!value) {
-                                return '변경할 비밀번호를 입력해주세요!';
-                                }
-                            }
-                            }).then((result) => { 
-                            if (result.value) {
-                                const newPassword = result.value;
-                                setPassword(newPassword);
-                                Swal.fire(`비빌번호가 ${newPassword[0]+ '*'.repeat(newPassword.length-1)}로 바뀌었습니다!!`);
-                            }
-                            });
-                        
-                        
+                            Swal.fire("준비중인 기능입니다.");
+                            // Swal.fire({
+                            //     title: "비밀번호 변경",
+                            //     input: "password",
+                            //     inputLabel: "새로 변경할 비밀번호를 써주세요!",
+                            //     showCancelButton: true,
+                            //     inputValidator: (value) => {
+                            //         if (!value) {
+                            //             return "변경할 비밀번호를 입력해주세요!";
+                            //         }
+                            //     },
+                            // }).then((result) => {
+                            //     if (result.value) {
+                            //         const newPassword = result.value;
+                            //         changePassword(newPassword);
+                            //     }
+                            // });
                         }}
                     ></SectionListHeader>
                     <SectionListHeader title={"로그아웃"} onClick={onClickLogout}></SectionListHeader>

@@ -14,12 +14,12 @@ export const changeNickname = (nickname) => {
             }
         )
         .then((response) => {
-            if (response.data.statue_code) {
+            if (response.data.statue_code === 201) {
                 return true;
             } else return false;
         })
         .catch((response) => {
-            console.log(response);
+            console.error("changeNickname", response);
             return false;
         });
 };
