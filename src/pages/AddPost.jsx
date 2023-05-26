@@ -15,7 +15,7 @@ const AddPost = () => {
     let { board_id, post_id } = useParams();
 
     const onAddImageList = (imageUrl) => {
-        setImageList([...imageList].push(imageUrl));
+        setImageList([...imageList, imageUrl]);
     };
 
     const onDeleteImage = (index) => {
@@ -70,7 +70,7 @@ const AddPost = () => {
         <AddPostView
             title={title}
             content={content}
-            onAddImageList={onAddImageList}
+            onAddImage={onAddImageList}
             onClickSavePost={onClickSavePost}
             boardInfo={boardInfo}
             onChangeTitle={setTitle}

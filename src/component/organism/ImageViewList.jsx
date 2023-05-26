@@ -15,7 +15,7 @@ export const ImageViewList = ({ onDeleteImageList, imageList, iconSize, size }) 
         <>
             <ImageViewListLayout>
                 {imageList &&
-                    imageList.map((image, i) => {
+                    imageList.map(({ image, i }) => {
                         return (
                             <ImageView
                                 key={i}
