@@ -8,7 +8,11 @@ export const loginSite = (school_id, password) => {
         })
         .then((response) => {
             if (response.data.status_code === 200) {
-                return { access_token: response.data.access_token, refresh_token: response.data.refresh_token };
+                return {
+                    access_token: response.data.access_token,
+                    refresh_token: response.data.refresh_token,
+                    user_id: response.data.user_id,
+                };
             }
         })
         .catch((response) => {

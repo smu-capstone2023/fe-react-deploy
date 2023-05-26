@@ -11,14 +11,14 @@ const Home = () => {
     useEffect(() => {
         if (localStorage) {
             const user_name = localStorage.getItem("user_name");
-            const user_id = localStorage.getItem("user_id");
+            const school_id = localStorage.getItem("school_id");
             const majorList = localStorage.getItem("majorList");
             if (majorList && JSON.parse(majorList)[1]) {
                 const { major_name, major_id, free_board_id } = JSON.parse(majorList)[1];
 
                 setUserInfo({
                     nickname: user_name,
-                    schoolId: user_id,
+                    schoolId: school_id,
                     major: major_name,
                     mbti: "",
                 });
@@ -30,7 +30,7 @@ const Home = () => {
             } else {
                 setUserInfo({
                     nickname: user_name,
-                    schoolId: user_id,
+                    schoolId: school_id,
                     major: "",
                     mbti: "",
                 });
@@ -39,16 +39,12 @@ const Home = () => {
         getHotBoardPreviewList().then((response) => {
             if (response) {
                 setHotPreviewList(response);
-            } else {
-                console.log(response);
             }
         });
         getLostBoardPreviewList().then((response) => {
             if (response) {
                 const sliceResponse = response.slice(0, 2);
                 setLostPreviewList(sliceResponse);
-            } else {
-                console.log(response);
             }
         });
     }, []);

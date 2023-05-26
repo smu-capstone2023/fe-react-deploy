@@ -4,26 +4,20 @@ import styled from "styled-components";
 import { BsPencilFill } from "react-icons/bs";
 import { BiTrash } from "react-icons/bi";
 import { BiUserCircle } from "react-icons/bi";
-
+import Swal from "sweetalert2";
+import { deleteComment } from "../../api/Comment/deleteComment";
 /**
  * @param userName: string
  * @param postId: number
  * @param commentId: number
  * @param fontSize: string
  * @param iconSize: string
+ * @param onClickDelete: () => void;
+ * @param onClickEdit: () => void;
  * @returns
  */
 
-const UserInfoPostWriter = ({ userName, iconSize = 17, fontSize = "1em", postId, commentId }) => {
-    const handleEditClick = () => {
-        //alert 띄우기
-        alert(`게시글 수정 ${postId}`);
-    };
-
-    const handleDeleteClick = () => {
-        alert(`게시글 삭제 ${postId}`);
-    };
-
+const UserInfoPostWriter = ({ userName, iconSize = 17, fontSize = "1em", onClickEdit, onClickDelete }) => {
     return (
         <UserInfoPostWriterLayout style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -31,8 +25,8 @@ const UserInfoPostWriter = ({ userName, iconSize = 17, fontSize = "1em", postId,
                 <p style={{ fontSize: fontSize, fontFamily: "nexon-regular" }}>{userName}</p>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
-                <BsPencilFill size={iconSize} style={{ marginRight: "8px", color: "#4169E1" }} onClick={handleEditClick} />
-                <BiTrash size={iconSize} style={{ color: "#FF5A5A" }} onClick={handleDeleteClick} />
+                <BsPencilFill size={iconSize} style={{ marginRight: "8px", color: "#4169E1" }} onClick={onClickEdit} />
+                <BiTrash size={iconSize} style={{ color: "#FF5A5A" }} onClick={onClickDelete} />
             </div>
         </UserInfoPostWriterLayout>
     );

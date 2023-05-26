@@ -32,11 +32,10 @@ const Login = () => {
         loginSite(id, password).then((response) => {
             if (response.access_token) {
                 console.log(response);
-                const { access_token, refresh_token } = response;
-                setUserTokenInLocalStorage(id, access_token, refresh_token);
+                const { access_token, refresh_token, user_id } = response;
+                setUserTokenInLocalStorage(user_id, access_token, refresh_token);
 
                 getUserInfo().then((userInfoResponse) => {
-                    console.log(userInfoResponse);
                     if (userInfoResponse === {}) {
                         alert("네트워크 문제! 잠시 다시 시도해주세요");
                     } else {

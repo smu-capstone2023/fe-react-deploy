@@ -13,13 +13,14 @@ const CommentList = ({ commentList }) => {
             {commentList &&
                 commentList.map((comment, index) => {
                     const { comment_id, likes, comments, content, create_time, user_id, username } = comment;
+                    console.log(user_id);
                     return (
                         <CommentWrapper key={index}>
                             <CommentContentView
                                 key={index}
                                 comment={{ comment_id, likes, comments, content, create_time }}
                                 author={{ user_id, username }}
-                                isAuthor={localStorage.getItem("user_id") === user_id}
+                                isAuthor={localStorage.getItem("user_id") === `${user_id}`}
                             />
                         </CommentWrapper>
                     );
