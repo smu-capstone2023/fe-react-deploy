@@ -15,6 +15,7 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
         fontFamily: "nexon-regular",
         fontSize: fontSize,
     };
+
     const majorList = localStorage.getItem("majorList") ? JSON.parse(localStorage.getItem("majorList")) : null;
 
     return (

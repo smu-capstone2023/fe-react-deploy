@@ -22,14 +22,16 @@ function App() {
     };
     useEffect(() => {
         console.log("render");
-        getUserInfo().then((response) => {
-            if (response === {}) {
-                alert("네트워크 문제! 잠시 다시 시도해주세요");
-            } else {
-                const { username, school_id, profile_img_url, majors } = response;
-                setUserInfoInLocalStorage(username, school_id, profile_img_url, majors);
-            }
-        });
+        if (localStorage.getItem("access_token")) {
+            getUserInfo().then((response) => {
+                if (response === {}) {
+                    alert("네트워크 문제! 잠시 다시 시도해주세요");
+                } else {
+                    const { username, school_id, profile_img_url, majors } = response;
+                    setUserInfoInLocalStorage(username, school_id, profile_img_url, majors);
+                }
+            });
+        }
     }, []);
 
     return (
