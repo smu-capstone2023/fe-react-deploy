@@ -15,7 +15,8 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
         fontFamily: "nexon-regular",
         fontSize: fontSize,
     };
-    const majorList = localStorage.getItem("majorList") ? null : JSON.parse(localStorage.getItem("majorList"));
+    const majorList = localStorage.getItem("majorList") ? JSON.parse(localStorage.getItem("majorList")) : null;
+
     return (
         <div style={{ display: "flex", justifyContent: "space-between", width: width }}>
             <IconButton
@@ -44,13 +45,9 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
                     } else {
                         if (majorList && majorList.length >= 2) {
                             const major = majorList[1];
-                            if (!major) {
-                                alert("학과인증이 필요한 기능입니다.");
-                            } else {
-                                window.location.href = `/board/${major.major_id}/${major.free_board_id}`;
-                            }
+                            window.location.href = `/board/${major.major_id}/${major.free_board_id}`;
                         } else {
-                            alert("학과게시판이 없습니다.");
+                            alert("학과 인증이 필요한 기능입니다.");
                         }
                     }
                 }}
