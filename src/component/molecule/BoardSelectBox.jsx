@@ -14,14 +14,14 @@ const BoardSelectBox = ({ boardList, onClick, currentBoardId }) => {
         <BoardSelectBoxLayout>
             {boardList &&
                 boardList.map((item) => {
-                    if (item.id === currentBoardId) {
+                    if (item.board_id === currentBoardId) {
                         color = COLORS.logo;
                     } else {
                         color = "black";
                     }
                     return (
-                        <BoardSelectdiv color={color} key={item.id} onClick={() => onClick(item.id)}>
-                            {item.name}
+                        <BoardSelectdiv color={color} key={item.board_id} onClick={() => onClick(item.board_id)}>
+                            {item.board_name}
                         </BoardSelectdiv>
                     );
                 })}
