@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import ViewPostView from "../component/template/ViewPostView";
 import { getDetailPost } from "../api/Post/getDetailPost";
 import { addComment } from "../api/Comment/addComment";
-
+import { deletePost } from "../api/Post/deletePost";
+import Swal from "sweetalert2";
 const ViewPost = () => {
     const { post_id, board_id } = useParams();
     const [post, setPost] = useState({});
@@ -17,6 +18,25 @@ const ViewPost = () => {
                 window.location.reload();
             } else {
                 alert("네트워크 문제!", "잠시후 시도해주세요");
+            }
+        });
+    };
+
+    const onDeletePost = () => {
+        Swal.fire({
+            title: "해당 글을 삭제하시겠습니까?",
+            showCancelButton: true,
+            confirmButtonText: "예",
+            cancelButtonText: "아니오",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deletePost(post_id).then((response) => {
+                    if (response) {
+                        window.history.back();
+                    } else {
+                        alert("네트워크 오류!", "잠시 후에 다시 시도해주세요!");
+                    }
+                });
             }
         });
     };
@@ -57,6 +77,7 @@ const ViewPost = () => {
             commentList={commentList}
             setInputComment={setInputComment}
             onClickAddComment={onClickAddComment}
+            onDeletePost={onDeletePost}
         />
     );
 };

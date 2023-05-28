@@ -14,10 +14,11 @@ import { deleteComment } from "../../api/Comment/deleteComment";
  * @param iconSize: string
  * @param onClickDelete: () => void;
  * @param onClickEdit: () => void;
+ * @param isShowEdit: boolean
  * @returns
  */
 
-const UserInfoPostWriter = ({ userName, iconSize = 17, fontSize = "1em", onClickEdit, onClickDelete }) => {
+const UserInfoPostWriter = ({ userName, iconSize = 17, fontSize = "1em", onClickEdit, onClickDelete, isShowEdit }) => {
     return (
         <UserInfoPostWriterLayout style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -25,7 +26,7 @@ const UserInfoPostWriter = ({ userName, iconSize = 17, fontSize = "1em", onClick
                 <p style={{ fontSize: fontSize, fontFamily: "nexon-regular" }}>{userName}</p>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
-                <BsPencilFill size={iconSize} style={{ marginRight: "8px", color: "#4169E1" }} onClick={onClickEdit} />
+                {isShowEdit && <BsPencilFill size={iconSize} style={{ marginRight: "8px", color: "#4169E1" }} onClick={onClickEdit} />}
                 <BiTrash size={iconSize} style={{ color: "#FF5A5A" }} onClick={onClickDelete} />
             </div>
         </UserInfoPostWriterLayout>

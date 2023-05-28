@@ -9,23 +9,29 @@ import LikeView from "../molecule/LikeView";
  * @param post: {post_id, comments, likes, title, content, created_time}
  * @param author : {id, userName}
  * @param isAuthor : boolean
+ * @param onDeletePost: () => void
  * @returns
  */
 
-const PostContent = ({ boardId, post, author, isAuthor }) => {
-    //구조 분해 할당 역영입니다.
+const PostContent = ({ boardId, post, author, isAuthor, onDeletePost }) => {
     const { post_id, comments, likes, title, content, created_time } = post;
 
     const onClickEdit = () => {
         window.location.href = `/addpost/${boardId}/${post_id}`;
     };
 
-    
     return (
         <PostContentLayout>
             {isAuthor ? (
                 //글쓴이
-                <UserInfoPostWriter iconSize="1.3em" fontSize="1.3em" userName={author.userName} onClickEdit={onClickEdit} />
+                <UserInfoPostWriter
+                    iconSize="1.3em"
+                    fontSize="1.3em"
+                    userName={author.userName}
+                    onClickEdit={onClickEdit}
+                    onClickDelete={onDeletePost}
+                    isShowEdit={true}
+                />
             ) : (
                 //글쓴이 아닌 사람
                 <UserInfoPostReader iconSize="1.3em" fontSize="1.3em" userName={author.userName} postId={post_id} />

@@ -6,6 +6,8 @@ import LikeView from "../molecule/LikeView";
 import CommentView from "../molecule/CommentView";
 import Swal from "sweetalert2";
 import { deleteComment } from "../../api/Comment/deleteComment";
+import { likeComment } from "../../api/Comment/likeComment";
+import { useToast } from "@chakra-ui/react";
 /**
  * @param comment: { comment_id, likes, comments, content, create_time }
  * @param author : {user_id, username}
@@ -16,6 +18,17 @@ import { deleteComment } from "../../api/Comment/deleteComment";
 
 const CommentContentView = ({ comment, author, isAuthor, children }) => {
     const { comment_id, comments, likes, content, create_time } = comment;
+    const toast = useToast();
+
+    const onClickCommentLike = () => {
+        likeComment(comment_id).then((response) => {
+            if (response) {
+                toast({ title: "이 글을 공감하였습니다.", position: "top", isClosable: true });
+            } else {
+                toast({ title: "이미 글을 공감하였습니다.", position: "top", isClosable: true });
+            }
+        });
+    };
 
     const onClickDelete = () => {
         Swal.fire({
@@ -45,10 +58,11 @@ const CommentContentView = ({ comment, author, isAuthor, children }) => {
                     userName={author.username}
                     postId={comment_id}
                     onClickDelete={onClickDelete}
+                    isShowEdit={false}
                 />
             ) : (
                 //댓글 작성자 외
-                <UserInfoPostReader iconSize="1.1em" fontSize="1.1em" userName={author.username} postId={comment_id} />
+                <UserInfoPostReader iconSize="1.1em" fontSize="1.1em" userName={author.username} onClickLike={onClickCommentLike} />
             )}
             <TextContentText>{content}</TextContentText>
             {/* 대댓글수, 좋아요수, 작성일 */}
