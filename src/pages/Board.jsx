@@ -37,7 +37,7 @@ const Board = () => {
     };
 
     const onClickPost = (postId) => {
-        window.location.href = `/viewpost/${postId}`;
+        window.location.href = `/viewpost/${board_id}/${postId}`;
     };
 
     const onClickAddPost = () => {

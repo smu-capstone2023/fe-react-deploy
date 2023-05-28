@@ -22,7 +22,7 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
             <div style={{ flex: 1, padding: "1em", gap: 20, display: "flex", flexDirection: "column" }}>
                 <div style={{ flex: 1, gap: 10, display: "flex" }}>
                     <HideResponsableView style={{ flex: 1 }}>
-                        <MyInfo userInfo={userInfo} />
+                        <MyInfo userInfo={{ ...userInfo, majorId: majorId, freeBoardId: freeBoardId }} />
                     </HideResponsableView>
                     <div style={{ background: "gray", flex: 3, minHeight: "10em" }} />
                 </div>
