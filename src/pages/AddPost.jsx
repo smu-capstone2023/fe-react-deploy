@@ -30,7 +30,7 @@ const AddPost = () => {
                 if (response === false) {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
                 } else {
-                    window.location.href = `/viewpost/${response}`;
+                    window.location.href = `/viewpost/${board_id}/${response}`;
                 }
             });
         } else {
@@ -38,7 +38,7 @@ const AddPost = () => {
                 if (response === false) {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
                 } else {
-                    window.location.href = `/viewpost/${post_id}`;
+                    window.location.href = `/viewpost/${board_id}/${post_id}`;
                 }
             });
         }

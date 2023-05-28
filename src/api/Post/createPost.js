@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const createPost = ({ title, content, board_id, is_anonymous, image_url_list }) => {
+export const createPost = (title, content, board_id, is_anonymous, image_url_list) => {
     return axios
         .post(
             `${process.env.REACT_APP_SERVER_URL}/board/create`,
@@ -19,7 +19,8 @@ export const createPost = ({ title, content, board_id, is_anonymous, image_url_l
         )
         .then((response) => {
             if (response.data.status_code === 201) {
-                return true;
+                console.log(response.data);
+                return response.data.post_id;
             }
             return false;
         })
