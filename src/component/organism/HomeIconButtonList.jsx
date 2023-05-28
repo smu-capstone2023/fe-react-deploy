@@ -15,7 +15,7 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
         fontFamily: "nexon-regular",
         fontSize: fontSize,
     };
-    const majorList = JSON.parse(localStorage.getItem("majorList"));
+    const majorList = localStorage.getItem("majorList") ? null : JSON.parse(localStorage.getItem("majorList"));
     return (
         <div style={{ display: "flex", justifyContent: "space-between", width: width }}>
             <IconButton
@@ -25,7 +25,7 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
                     const user_id = localStorage.getItem("user_id");
                     if (!user_id) {
                         alert("로그인이 필요한 기능입니다.");
-                    } else if (majorList.length >= 1) {
+                    } else if (majorList && majorList.length >= 1) {
                         const major = majorList[0];
                         window.location.href = `/board/${major.major_id}/${major.free_board_id}`;
                     }
@@ -42,7 +42,7 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
                     if (!user_id) {
                         alert("로그인이 필요한 기능입니다.");
                     } else {
-                        if (majorList.length >= 2) {
+                        if (majorList && majorList.length >= 2) {
                             const major = majorList[1];
                             if (!major) {
                                 alert("학과인증이 필요한 기능입니다.");
@@ -62,9 +62,6 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
                 icon={<IoCalendarOutline />}
                 title={"학사일정"}
                 onClick={() => {
-                    /**
-                     * 상명대학교 공식 홈페이지의 학사일정으로 이동할 수 있게 구현해주세요.
-                     */
                     window.location.href = "https://www.smu.ac.kr/ko/life/academicCalendar.do";
                 }}
                 fontStyles={fontStyles}
@@ -75,9 +72,6 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
                 icon={<IoCallOutline />}
                 title={"문의하기"}
                 onClick={() => {
-                    /**
-                     * 준비중이라고 alert를 띄워주세요.
-                     */
                     alert("준비중입니다.");
                 }}
                 fontStyles={fontStyles}
