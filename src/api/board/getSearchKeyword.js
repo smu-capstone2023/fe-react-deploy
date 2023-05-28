@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const getSearchKeyword = (boardId, keyword, lastId, perPage) => {
     return axios
@@ -6,7 +6,7 @@ export const getSearchKeyword = (boardId, keyword, lastId, perPage) => {
             `${process.env.REACT_APP_SERVER_URL}/board/cursor?board_id=${boardId}&last_id=${lastId}&per_page=${perPage}&keyword=${keyword}`,
             {
                 headers: {
-                    Authorization: localStorage.getItem('access_token'),
+                    Authorization: localStorage.getItem("access_token"),
                 },
             }
         )
@@ -14,6 +14,7 @@ export const getSearchKeyword = (boardId, keyword, lastId, perPage) => {
             return response.data.posts;
         })
         .catch((response) => {
+            console.error("getSearchKeyworkd", response);
             return [];
         });
 };

@@ -40,7 +40,7 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                         <BoardSectionList
                             title="HOT 게시판"
                             previewList={hotPreviewList}
-                            headerOnClick={() => (window.location.href = `/board/1/3`)}
+                            headerOnClick={() => (window.location.href = `/board/1/1`)}
                         />
                         {majorName && (
                             <BoardSectionList

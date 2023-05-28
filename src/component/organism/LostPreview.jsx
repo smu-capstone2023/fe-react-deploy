@@ -32,22 +32,21 @@ export const LostPreview = ({ previewList }) => {
                         display: "flex",
                         padding: "0.7rem",
                         overflow: "auto",
+                        gap: 10,
                     }}
                 >
                     {previewList &&
                         previewList.map((data, i) => {
                             return (
-                                <>
-                                    <div style={{ padding: "0.2rem" }}></div>
-                                    <LostPreviewElement
-                                        onClick={() => {
-                                            localStorage.getItem("school_id")
-                                                ? (window.location.href = `/viewpost/${process.env.REACT_APP_LOST_BOARD_ID}/${data.post_id}`)
-                                                : alert("로그인이 필요한 기능입니다.");
-                                        }}
-                                        content={data.title}
-                                    ></LostPreviewElement>
-                                </>
+                                <LostPreviewElement
+                                    key={i}
+                                    onClick={() => {
+                                        localStorage.getItem("school_id")
+                                            ? (window.location.href = `/viewpost/${process.env.REACT_APP_LOST_BOARD_ID}/${data.post_id}`)
+                                            : alert("로그인이 필요한 기능입니다.");
+                                    }}
+                                    content={data.title}
+                                ></LostPreviewElement>
                             );
                         })}
                 </div>

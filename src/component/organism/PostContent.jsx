@@ -19,6 +19,8 @@ const PostContent = ({ boardId, post, author, isAuthor }) => {
     const onClickEdit = () => {
         window.location.href = `/addpost/${boardId}/${post_id}`;
     };
+
+    
     return (
         <PostContentLayout>
             {isAuthor ? (
