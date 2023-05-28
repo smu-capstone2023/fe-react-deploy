@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { COLORS } from "../../color";
 /**
- * @param boardList : {id: number, name: string}[]
+ * @param boardList : {board_id: number, board_name: string}[]
  * @param onClick: () => {}
  * @param currentBoardId: number
  * @returns
@@ -10,11 +10,12 @@ import { COLORS } from "../../color";
 
 const BoardSelectBox = ({ boardList, onClick, currentBoardId }) => {
     let color = "black";
+
     return (
         <BoardSelectBoxLayout>
             {boardList &&
                 boardList.map((item) => {
-                    if (item.board_id === currentBoardId) {
+                    if (item.board_id === parseInt(currentBoardId)) {
                         color = COLORS.logo;
                     } else {
                         color = "black";
