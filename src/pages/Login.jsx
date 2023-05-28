@@ -27,6 +27,7 @@ const Login = () => {
             if (response.access_token) {
                 const { access_token, refresh_token, user_id } = response;
                 setUserTokenInLocalStorage(user_id, access_token, refresh_token);
+                window.location.href = "/";
             } else {
                 alert("로그인 정보가 없습니다. 다시 시도해주세요! ");
             }
