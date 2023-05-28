@@ -4,7 +4,6 @@
     padding: 0;
 }
 
-
 @font-face {
     font-family: "nexon-regular";
     src: url("./font/NEXON Lv1 Gothic Low OTF.woff") format("woff");
@@ -24,20 +23,20 @@
     font-family: "nexon-light";
 }
 
-.Start{
+.Start {
     opacity: 0;
 }
 
-.End{
+.End {
     opacity: 1;
     transition: opacity 1s;
 }
 
-.HomeStart{
+.HomeStart {
     opacity: 0;
 }
 
-.HomeEnd{
+.HomeEnd {
     opacity: 1;
     transition: opacity 1.5s;
 }

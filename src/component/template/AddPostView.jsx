@@ -57,7 +57,7 @@ const AddPostView = ({
 
                 <ImageLayout>
                     <ImageUploadButton iconSize={"2rem"} size={"4rem"} onClickImageButton={onAddImage} />
-                    <ImageViewList onDeleteImageList={onDeleteImage} imageList={imageList} iconSize={"1.5rem"} size={"4rem"} />
+                    <ImageViewList onDeleteImage={onDeleteImage} imageList={imageList} iconSize={"1.5rem"} size={"4rem"} />
                 </ImageLayout>
 
                 <AddPostViewLine />

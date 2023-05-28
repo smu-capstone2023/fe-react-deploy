@@ -4,18 +4,19 @@ import UserInfoPostReader from "../molecule/UserInfoPostReader";
 import UserInfoPostWriter from "../molecule/UserInfoPostWriter";
 import CommentView from "../molecule/CommentView";
 import LikeView from "../molecule/LikeView";
+import ViewImageList from "./ViewImageList";
 /**
  * @param boardId: number
  * @param post: {post_id, comments, likes, title, content, created_time}
  * @param author : {id, userName}
  * @param isAuthor : boolean
  * @param onDeletePost: () => void
+ * @param imageUrlList: string[]
  * @returns
  */
 
-const PostContent = ({ boardId, post, author, isAuthor, onDeletePost }) => {
+const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlList }) => {
     const { post_id, comments, likes, title, content, created_time } = post;
-
     const onClickEdit = () => {
         window.location.href = `/addpost/${boardId}/${post_id}`;
     };
@@ -40,6 +41,7 @@ const PostContent = ({ boardId, post, author, isAuthor, onDeletePost }) => {
                 <PostContentTitle>{title}</PostContentTitle>
                 <PostContentText>{content}</PostContentText>
             </div>
+            <ViewImageList imageUrlList={imageUrlList} size={80} />
             <PostContentInfoLayout>
                 {/* 댓글수,좋아요수,작성일 */}
                 <CommentView commentCount={comments} fontSize={15} iconSize={15} />

@@ -12,6 +12,7 @@ const ViewPost = () => {
     const [commentList, setCommentList] = useState([]);
     const [isAuthor, setIsAuthor] = useState(false);
     const [inputComment, setInputComment] = useState("");
+    const [imageUrlList, setImageUrlList] = useState([]);
     const onClickAddComment = () => {
         addComment(post_id, inputComment).then((response) => {
             if (response) {
@@ -48,6 +49,7 @@ const ViewPost = () => {
                 if (response.comments) {
                     commentsLength = response.comments.length;
                 }
+                setImageUrlList(response.image_urls.split(","));
                 setPost({
                     post_id: response.post_id,
                     comments: commentsLength,
@@ -78,6 +80,7 @@ const ViewPost = () => {
             setInputComment={setInputComment}
             onClickAddComment={onClickAddComment}
             onDeletePost={onDeletePost}
+            imageUrlList={imageUrlList}
         />
     );
 };

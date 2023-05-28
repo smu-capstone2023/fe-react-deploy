@@ -3,26 +3,26 @@ import styled from "styled-components";
 import ImageView from "../molecule/ImageView";
 
 /**
- * @param onDeleteImageList : (value: number) => void;
+ * @param onDeleteImage : (value: number) => void;
  * @param imageList: string[]
  * @param iconSize: string;
  * @param size: string;
  * @returns
  */
 
-export const ImageViewList = ({ onDeleteImageList, imageList, iconSize, size }) => {
+export const ImageViewList = ({ onDeleteImage, imageList, iconSize, size }) => {
     return (
         <>
             <ImageViewListLayout>
                 {imageList &&
-                    imageList.map(({ image, i }) => {
+                    imageList.map((image, i) => {
                         return (
                             <ImageView
                                 key={i}
                                 iconSize={iconSize}
                                 width={size}
                                 height={size}
-                                onClickDelete={(i) => onDeleteImageList(i)}
+                                onClickDelete={() => onDeleteImage(i)}
                                 imageUrl={image}
                             />
                         );

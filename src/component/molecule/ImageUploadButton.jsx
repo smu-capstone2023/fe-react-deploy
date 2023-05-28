@@ -19,8 +19,6 @@ export const ImageUploadButton = ({ iconSize, size, onClickImageButton }) => {
         uploadImageToServer(formData).then((response) => {
             if (response !== "") {
                 onClickImageButton(response.imageUrls);
-            } else {
-                alert("네트워크 오류! 잠시 후에 시도해주세요");
             }
         });
     };

@@ -19,8 +19,7 @@ const AddPost = () => {
     };
 
     const onDeleteImage = (index) => {
-        alert(index);
-        const newImageList = imageList.filter((image, idx) => idx !== index);
+        const newImageList = imageList.filter((_, idx) => idx !== index);
         setImageList(newImageList);
     };
 
