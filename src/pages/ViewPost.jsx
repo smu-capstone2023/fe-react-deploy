@@ -49,7 +49,10 @@ const ViewPost = () => {
                 if (response.comments) {
                     commentsLength = response.comments.length;
                 }
-                setImageUrlList(response.image_urls.split(","));
+                if (response.image_urls) {
+                    setImageUrlList(response.image_urls.split(","));
+                }
+
                 setPost({
                     post_id: response.post_id,
                     comments: commentsLength,
