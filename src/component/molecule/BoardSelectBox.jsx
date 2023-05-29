@@ -52,6 +52,7 @@ const BoardSelectdiv = styled.div`
     display: flex;
     font-family: nexon-regular;
     padding: 0.8em 0em 1em 0em;
+    cursor: pointer;
 
     @media screen and (max-width: 500px) {
         margin-left: 0.3em;

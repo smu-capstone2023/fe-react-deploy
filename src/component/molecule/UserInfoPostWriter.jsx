@@ -22,12 +22,12 @@ const UserInfoPostWriter = ({ userName, iconSize = 17, fontSize = "1em", onClick
     return (
         <UserInfoPostWriterLayout style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center" }}>
-                <BiUserCircle size={iconSize} style={{ marginRight: "8px", color: "#747474" }} />
+                <BiUserCircle size={iconSize} style={{ marginRight: "8px", color: "#747474", }} />
                 <p style={{ fontSize: fontSize, fontFamily: "nexon-regular" }}>{userName}</p>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
-                {isShowEdit && <BsPencilFill size={iconSize} style={{ marginRight: "8px", color: "#4169E1" }} onClick={onClickEdit} />}
-                <BiTrash size={iconSize} style={{ color: "#FF5A5A" }} onClick={onClickDelete} />
+                {isShowEdit && <BsPencilFill size={iconSize} style={{ marginRight: "8px", color: "#4169E1", cursor: "pointer" }} onClick={onClickEdit} />}
+                <BiTrash size={iconSize} style={{ color: "#FF5A5A", cursor: "pointer" }} onClick={onClickDelete} />
             </div>
         </UserInfoPostWriterLayout>
     );

@@ -35,6 +35,7 @@ const DeleteImageButton = styled(AiFillMinusCircle)`
     width: ${(props) => props.iconSize};
     height: ${(props) => props.iconSize};
     color: #ff5a5a;
+    cursor: pointer;
 `;
 
 export default ImageView;
