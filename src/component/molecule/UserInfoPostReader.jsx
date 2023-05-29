@@ -21,7 +21,7 @@ const UserInfoPostReader = ({ userName, iconSize = 17, fontSize = "1rem", onClic
                 <p style={{ fontSize, fontFamily: "nexon-regular" }}>{userName}</p>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
-                <AiOutlineLike size={iconSize} style={{ color: "#4169E1" }} onClick={onClickLike} />
+                <AiOutlineLike size={iconSize} style={{ color: "#4169E1", cursor: "pointer" }} onClick={onClickLike} />
                 {/* <IoChatboxOutline size={iconSize} style={{ color: "#4169E1" }} onClick={handleCommentClick} /> */}
             </div>
         </UserInfoPostReaderLayout>
