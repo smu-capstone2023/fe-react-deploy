@@ -7,10 +7,10 @@ import React, { useState } from "react";
  * @returns
  */
 
-const InputBox = ({ placeholder, onChange, background = "#FAFAFA" }) => {
+const InputBox = ({ placeholder, onChange, background = "#FAFAFA", type="text"}) => {
     return (
         <input
-            type="text"
+            type={type}
             placeholder={placeholder}
             onChange={(e) => onChange(e.target.value)}
             style={{

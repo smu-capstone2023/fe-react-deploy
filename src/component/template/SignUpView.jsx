@@ -18,20 +18,20 @@ const SignUpView = ({ onChangeId, onChangePassword, onChangeRePassword, onClickS
             <SignupViewLayout>
                 <SignUpContainer style={{ flex: 1 }}>
                     <SignUpImage src={"../img/signimg2.png"} alt="signup" />
-                    <Title>회원 가입 절차</Title>
+                    <Title>회원가입 절차</Title>
 
                     {/* 학번입력 */}
                     <Title1>
                         {" "}
                         <BoldText>SMUS</BoldText>인증을 위한
                     </Title1>
-                    <Title2> 학번을 입력해주세요!</Title2>
+                    <Title2> 학번을 입력해 주세요!</Title2>
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column" }}>
-                        <InputBox placeholder="@sangmyung.kr" onChange={onChangeId} />
+                        <InputBox placeholder="ex) 202312345 (9자리)" onChange={onChangeId} />
                     </InputBoxContainer>
 
                     {/* 닉넴입력 */}
-                    <Title2 style={{ marginTop: "5px"}}>닉네임을 입력해주세요!</Title2>
+                    <Title2 style={{ marginTop: "5px"}}>닉네임을 입력해 주세요!</Title2>
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column" }}>
                         <InputBox placeholder="nickname" onChange={onChangeNickname} />
                     </InputBoxContainer>
@@ -41,10 +41,11 @@ const SignUpView = ({ onChangeId, onChangePassword, onChangeRePassword, onClickS
                         {" "}
                         <BoldText>SMUS</BoldText> 에서 사용할{" "}
                     </Title1>
-                    <Title2> 비밀번호를 입력해주세요!</Title2>
+                    <Title2> 비밀번호를 입력해 주세요!</Title2>
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                        <InputBox placeholder="password" onChange={onChangePassword} />
-                        <InputBox placeholder="re-password" onChange={onChangeRePassword} />
+                        <InputBox placeholder="password" onChange={onChangePassword} type="password"/>
+                        <Title2 style={{color:'red'}}> * 비밀번호: 8~16자리 영문, 숫자를 조합해 주세요. (특수문자 허용) </Title2>
+                        <InputBox placeholder="re-password" onChange={onChangeRePassword}type="password"/>
                     </InputBoxContainer>
                     <div style={{ width: "inherit", margin: "50px 0 100px" }}>
                         <Button title="다음" onClick={onClickSignupButton} style={{ marginTop: "50px", width: "inherit" }} />
