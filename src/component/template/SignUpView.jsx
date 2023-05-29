@@ -27,7 +27,7 @@ const SignUpView = ({ onChangeId, onChangePassword, onChangeRePassword, onClickS
                     </Title1>
                     <Title2> 학번을 입력해주세요!</Title2>
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column" }}>
-                        <InputBox placeholder="@sangmyung.kr" onChange={onChangeId} />
+                        <InputBox placeholder="ex) 202312345 (9자리)" onChange={onChangeId} />
                     </InputBoxContainer>
 
                     {/* 닉넴입력 */}
@@ -44,6 +44,8 @@ const SignUpView = ({ onChangeId, onChangePassword, onChangeRePassword, onClickS
                     <Title2> 비밀번호를 입력해주세요!</Title2>
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                         <InputBox placeholder="password" onChange={onChangePassword} />
+                        <Title2 style={{color:'red'}}> * 비밀번호: 8~16자리 영문 대 소문자, 숫자를 사용해주세요. (특수문자 허용) </Title2>
+
                         <InputBox placeholder="re-password" onChange={onChangeRePassword} />
                     </InputBoxContainer>
                     <div style={{ width: "inherit", margin: "50px 0 100px" }}>
