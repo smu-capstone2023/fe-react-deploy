@@ -14,6 +14,7 @@ export const PreviewListItem = ({ title, onClick, commentCount, likeCount }) => 
         padding: '0 16px',
         backgroundColor: 'white',
         fontSize: '12px', 
+        cursor: 'pointer',
       }}
       onClick={onClick}
     >

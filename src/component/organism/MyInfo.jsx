@@ -74,7 +74,7 @@ export const MyInfo = ({ userInfo }) => {
                     {schoolId ? (
                         <>
                             <p
-                                style={ContentFontStyles}
+                                style={{...ContentFontStyles, cursor: 'pointer'}}
                                 onClick={() => {
                                     window.location.href = `/board/${majorId}/${freeBoardId}`;
                                 }}
@@ -82,7 +82,7 @@ export const MyInfo = ({ userInfo }) => {
                                 내 학과
                             </p>
                             <p
-                                style={ContentFontStyles}
+                                style={{...ContentFontStyles, cursor: 'pointer'}}
                                 onClick={() => {
                                     alert("준비중입니다!");
                                 }}
@@ -90,7 +90,7 @@ export const MyInfo = ({ userInfo }) => {
                                 내가 쓴 글
                             </p>
                             <p
-                                style={ContentFontStyles}
+                                style={{...ContentFontStyles, cursor: 'pointer'}}
                                 onClick={() => {
                                     window.location.href = "/mypage";
                                 }}

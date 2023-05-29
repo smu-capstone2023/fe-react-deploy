@@ -29,6 +29,7 @@ const LPELayout = styled.div`
     border-width: 1px;
     border-radius: 0.8rem;
     color: #3E3E3E;
+    cursor: pointer;
 
     @media screen and (max-width: 380px) {
         padding: .6rem;

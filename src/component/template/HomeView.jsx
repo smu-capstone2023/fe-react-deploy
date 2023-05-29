@@ -24,7 +24,7 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                     <HideResponsableView style={{ flex: 1 }}>
                         <MyInfo userInfo={{ ...userInfo, majorId: majorId, freeBoardId: freeBoardId }} />
                     </HideResponsableView>
-                    <div style={{ background: "gray", flex: 3, minHeight: "10em" }} />
+                    <div style={{ background: "gray", flex: 3, minHeight: "10em", cursor: "pointer" }} />
                 </div>
                 <RowToColumnResponsableView style={{ flex: 1, gap: 10 }}>
                     <HomeIconButtonListLayout>
@@ -35,7 +35,7 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                     </div>
                 </RowToColumnResponsableView>
                 <div style={{ flex: 1, display: "flex", gap: 10 }}>
-                    <HideResponsableView style={{ flex: 1, background: "gray", minWidth: "20em" }} />
+                    <HideResponsableView style={{ flex: 1, background: "gray", minWidth: "20em", cursor: "pointer" }} />
                     <RowToColumnResponsableView style={{ flex: 3, gap: 10 }}>
                         <BoardSectionList
                             title="HOT 게시판"
