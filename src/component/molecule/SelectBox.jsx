@@ -30,7 +30,7 @@ const Select = ({ options, onChange, init }) => {
             key={uuid()}
             defaultValue={init}
             onChange={() => onChange(selectRef.current.value)}
-            style={{ fontFamily: "nexon-regular" }}
+            style={{ fontFamily: "nexon-regular", cursor: "pointer" }}
         >
             {options &&
                 options.map((option) => {
