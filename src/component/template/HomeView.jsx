@@ -24,7 +24,7 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                     <HideResponsableView style={{ flex: 1 }}>
                         <MyInfo userInfo={{ ...userInfo, majorId: majorId, freeBoardId: freeBoardId }} />
                     </HideResponsableView>
-                    <div style={{ background: "gray", flex: 3, minHeight: "10em", cursor: "pointer" }} />
+                    <HomeBanner />
                 </div>
                 <RowToColumnResponsableView style={{ flex: 1, gap: 10 }}>
                     <HomeIconButtonListLayout>
@@ -79,5 +79,20 @@ const HomeIconButtonListLayout = styled.div`
     @media (max-width: 780px) {
         font-size: 13px;
         min-width: 10em;
+    }
+`;
+
+const HomeBanner = styled.div`
+    background: no-repeat center/80% url("./img/BannerWeb.png") #ebf0ff;
+    background-position: bottom;
+    background-size: contain;
+    flex: 3;
+    min-height: 10em;
+    cursor: pointer;
+
+    @media (max-width: 780px) {
+        background: no-repeat center/80% url("./img/BannerMobile.png") #ebf0ff;
+        background-position: bottom;
+        background-size: contain;
     }
 `;
