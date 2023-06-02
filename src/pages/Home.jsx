@@ -11,7 +11,7 @@ const Home = () => {
     const [majorPreviewList, setMajorPreviewList] = useState([]);
     //TODO: localStorage에서는 로그인 유무만 판단하고, 자세한 정보를 가져오는 로직은 다시 작성해야 함
     useEffect(() => {
-        if (localStorage) {
+        if (localStorage.getItem("access_token")) {
             const user_name = localStorage.getItem("user_name");
             const school_id = localStorage.getItem("school_id");
             const majorList = JSON.parse(localStorage.getItem("majorList"));

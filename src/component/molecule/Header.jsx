@@ -9,7 +9,7 @@ export const Header = () => {
     useEffect(() => {
         if (localStorage.getItem("access_token")) {
             const majorList = JSON.parse(localStorage.getItem("majorList"));
-            if (majorList.length >= 2) {
+            if (majorList && majorList.length >= 2) {
                 setMenu([
                     {
                         name: "학교게시판",
