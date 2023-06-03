@@ -18,6 +18,7 @@ import Footer from "../organism/Footer";
  * @param currentMajorId: number
  * @param onClickPost: (value: number) => void
  * @param onClickAddPost: () => void
+ * @param onChangeSearch: (value: string) => void
  * @returns
  */
 
@@ -31,6 +32,7 @@ const BoardView = ({
     currentMajorId,
     onClickPost,
     onClickAddPost,
+    onChangeSearch,
 }) => {
     return (
         <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
@@ -40,7 +42,7 @@ const BoardView = ({
                 <BoardLayout>
                     <SearchAndWriteLayout>
                         <InputBoxContainer style={{ flex: "1" }}>
-                            <InputBox placeholder="검색어를 입력해주세요." />
+                            <InputBox placeholder="검색어를 입력해주세요." onChange={onChangeSearch} />
                         </InputBoxContainer>
                         <ButtonLayout>
                             <Button title={"글쓰기"} onClick={onClickAddPost} width={"130px"} fontSize={"20px"} height={"50px"}></Button>

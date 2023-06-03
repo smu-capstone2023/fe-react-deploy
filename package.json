@@ -27,6 +27,7 @@
     "react-uuid": "^2.0.0",
     "styled-components": "^5.3.6",
     "sweetalert2": "^11.7.5",
+    "use-debounce": "^9.0.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -8,6 +8,8 @@ const Board = () => {
     const [majorOptions, setMajorOptions] = useState([]);
     const [postListData, setPostListData] = useState([]);
     const [boardList, setBoardList] = useState([]);
+    const [allOfPostListData, setAllOfPostListData] = useState([]);
+
     let { board_id, major_id } = useParams();
 
     useEffect(() => {
@@ -15,6 +17,7 @@ const Board = () => {
 
         getBoardPostList(board_id).then((response) => {
             const filtered_PostListData = response.map(({ username, views, updated_time, ...filtered }) => filtered);
+            setAllOfPostListData(filtered_PostListData);
             setPostListData(filtered_PostListData);
         });
 
@@ -30,6 +33,13 @@ const Board = () => {
                 window.location.href = `/board/${value}/${item.free_board_id}`;
             }
         });
+    };
+
+    const onChangeSearch = (search) => {
+        console.log(search);
+        if (search === "") {
+            setPostListData([...allOfPostListData]);
+        } else setPostListData([...allOfPostListData].filter((value) => value.title.includes(search)));
     };
 
     const onChangeBoard = (board_id) => {
@@ -56,6 +66,7 @@ const Board = () => {
                 onClickPost={onClickPost}
                 currentMajorId={major_id}
                 currentBoardId={board_id}
+                onChangeSearch={onChangeSearch}
             />
         </>
     );
