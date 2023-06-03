@@ -41,6 +41,7 @@ const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlLi
                 <PostContentTitle>{title}</PostContentTitle>
                 <PostContentText>{content}</PostContentText>
             </div>
+
             <ViewImageList imageUrlList={imageUrlList} size={80} />
             <PostContentInfoLayout>
                 {/* 댓글수,좋아요수,작성일 */}
