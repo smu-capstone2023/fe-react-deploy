@@ -36,7 +36,6 @@ const Board = () => {
     };
 
     const onChangeSearch = (search) => {
-        console.log(search);
         if (search === "") {
             setPostListData([...allOfPostListData]);
         } else setPostListData([...allOfPostListData].filter((value) => value.title.includes(search)));
