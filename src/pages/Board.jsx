@@ -9,11 +9,12 @@ const Board = () => {
     const [postListData, setPostListData] = useState([]);
     const [boardList, setBoardList] = useState([]);
     const [allOfPostListData, setAllOfPostListData] = useState([]);
+    const majorList = localStorage.getItem("majorList");
 
     let { board_id, major_id } = useParams();
 
     useEffect(() => {
-        setMajorOptions(JSON.parse(localStorage.majorList));
+        if (majorList) setMajorOptions(JSON.parse(localStorage.majorList));
 
         getBoardPostList(board_id).then((response) => {
             const filtered_PostListData = response.map(({ username, views, updated_time, ...filtered }) => filtered);
