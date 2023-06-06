@@ -42,7 +42,7 @@ export const LostPreview = ({ previewList }) => {
                                     key={i}
                                     onClick={() => {
                                         localStorage.getItem("school_id")
-                                            ? (window.location.href = `/viewpost/${process.env.REACT_APP_LOST_BOARD_ID}/${data.post_id}`)
+                                            ? (window.location.href = `/viewpost/18/${data.post_id}`)
                                             : alert("로그인이 필요한 기능입니다.");
                                     }}
                                     content={data.title}
