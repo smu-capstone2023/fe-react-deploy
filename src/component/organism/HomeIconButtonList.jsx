@@ -60,7 +60,7 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
                 icon={<IoCalendarOutline />}
                 title={"학사일정"}
                 onClick={() => {
-                    window.location.href = "https://www.smu.ac.kr/ko/life/academicCalendar.do";
+                    window.open("https://www.smu.ac.kr/ko/life/academicCalendar.do");
                 }}
                 fontStyles={fontStyles}
                 iconSize={iconSize}

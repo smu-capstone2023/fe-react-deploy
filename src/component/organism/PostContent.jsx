@@ -5,6 +5,8 @@ import UserInfoPostWriter from "../molecule/UserInfoPostWriter";
 import CommentView from "../molecule/CommentView";
 import LikeView from "../molecule/LikeView";
 import ViewImageList from "./ViewImageList";
+import { likePost } from "../../api/Post/likePost";
+import { useToast } from "@chakra-ui/react";
 /**
  * @param boardId: number
  * @param post: {post_id, comments, likes, title, content, created_time}
@@ -17,8 +19,18 @@ import ViewImageList from "./ViewImageList";
 
 const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlList }) => {
     const { post_id, comments, likes, title, content, created_time } = post;
+    const toast = useToast();
     const onClickEdit = () => {
         window.location.href = `/addpost/${boardId}/${post_id}`;
+    };
+    const onClickLike = () => {
+        likePost(post_id).then((response) => {
+            if (response) {
+                toast({ title: "이 글을 공감하였습니다.", position: "top", isClosable: true });
+            } else {
+                toast({ title: "이미 글을 공감하였습니다.", position: "top", isClosable: true });
+            }
+        });
     };
 
     return (
@@ -35,7 +47,13 @@ const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlLi
                 />
             ) : (
                 //글쓴이 아닌 사람
-                <UserInfoPostReader iconSize="1.3em" fontSize="1.3em" userName={author.userName} postId={post_id} />
+                <UserInfoPostReader
+                    iconSize="1.3em"
+                    fontSize="1.3em"
+                    userName={author.userName}
+                    postId={post_id}
+                    onClickLike={onClickLike}
+                />
             )}
             <div>
                 <PostContentTitle>{title}</PostContentTitle>

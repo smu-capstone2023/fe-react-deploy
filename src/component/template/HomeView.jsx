@@ -35,7 +35,7 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                     </div>
                 </RowToColumnResponsableView>
                 <div style={{ flex: 1, display: "flex", gap: 10 }}>
-                    <HideResponsableView style={{ flex: 1, background: "gray", minWidth: "20em", cursor: "pointer" }} />
+                    <HideResponsableView style={{ flex: 1, minWidth: "20em", cursor: "pointer" }} />
                     <RowToColumnResponsableView style={{ flex: 3, gap: 10 }}>
                         <BoardSectionList
                             title="HOT 게시판"

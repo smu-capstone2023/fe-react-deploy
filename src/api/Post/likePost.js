@@ -19,7 +19,7 @@ export const likePost = (postId) => {
             } else return false;
         })
         .catch((response) => {
-            console.error("addLike", response);
+            console.error("likePost", response);
             return false;
         });
 };
