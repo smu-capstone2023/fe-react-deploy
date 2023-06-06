@@ -5,7 +5,7 @@ export const likePost = (postId) => {
         .post(
             `${process.env.REACT_APP_SERVER_URL}/board/like/`,
             {
-                pose_id: postId,
+                post_id: postId,
             },
             {
                 headers: {
