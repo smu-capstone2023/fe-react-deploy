@@ -20,7 +20,7 @@ export const LostPreview = ({ previewList }) => {
                     <SectionListHeader
                         onClick={() => {
                             localStorage.getItem("school_id")
-                                ? (window.location.href = `/board/${process.env.REACT_APP_LOST_MAJOR_ID}/${process.env.REACT_APP_LOST_BOARD_ID}`)
+                                ? (window.location.href = `/board/1/18`)
                                 : alert("로그인이 필요한 기능입니다.");
                         }}
                         title={"분실물 게시판"}
