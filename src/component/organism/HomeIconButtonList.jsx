@@ -2,7 +2,7 @@ import React from "react";
 import IconButton from "../molecule/IconButton";
 import { IoSchoolOutline, IoChatbubbleEllipsesOutline, IoCalendarOutline, IoCallOutline } from "react-icons/io5";
 import styled from "styled-components";
-
+import { useToast } from "@chakra-ui/react";
 /**
  * @param width : string
  * @param fontSize: string
@@ -11,6 +11,7 @@ import styled from "styled-components";
  */
 
 export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
+    const toast = useToast();
     const fontStyles = {
         fontFamily: "nexon-regular",
         fontSize: fontSize,
@@ -70,7 +71,7 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
                 icon={<IoCallOutline />}
                 title={"문의하기"}
                 onClick={() => {
-                    alert("준비중입니다.");
+                    toast({ title: "준비중입니다.", position: "top", isClosable: true, variant: "subtle" });
                 }}
                 fontStyles={fontStyles}
                 iconSize={iconSize}

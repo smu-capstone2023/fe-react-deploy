@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import LoginView from "../component/template/LoginView";
 import { loginSite } from "../api/User/LoginSite";
-import { getUserInfo } from "../api/User/getUserInfo";
+import { useToast } from "@chakra-ui/react";
 
 const Login = () => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
-
+    const toast = useToast();
     //아이디/비밀번호 찾기
     const onClickFindAccount = () => {
-        alert("준비중입니다");
+        toast({ title: "준비중입니다.", position: "top", isClosable: true, variant: "subtle" });
     };
     //회원가입
     const onClickSignUp = () => {

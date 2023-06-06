@@ -4,7 +4,7 @@ import SectionListHeader from "../molecule/SectionListHeader";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { useState } from "react";
-
+import { useToast } from "@chakra-ui/react";
 /**
  * @param onClickRevoke: () => {}
  * @param onClickLogout: () => {}
@@ -16,7 +16,7 @@ import { useState } from "react";
 const MypageView = ({ onClickRevoke, onClickLogout, changeNickname, changePassword }) => {
     const [inputValue, setInputValue] = useState("");
     const [password, setPassword] = useState("");
-
+    const toast = useToast();
     return (
         <>
             <SectionListLayout>
@@ -49,9 +49,7 @@ const MypageView = ({ onClickRevoke, onClickLogout, changeNickname, changePasswo
                     <SectionListHeader
                         title={"프로필 이미지 변경"}
                         onClick={() => {
-                            Swal.fire({
-                                title: "준비중입니다.",
-                            });
+                            toast({ title: "준비중입니다.", position: "top", isClosable: true, variant: "subtle" });
                         }}
                     ></SectionListHeader>
                     <SectionListHeader

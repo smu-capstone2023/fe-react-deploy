@@ -1,9 +1,11 @@
+import { useToast } from "@chakra-ui/react";
 /**
  * @param userInfo : { nickname: string, major: string, schoolId: string, mbti:string, majorId, freeBoardId}
  * @returns
  */
 
 export const MyInfo = ({ userInfo }) => {
+    const toast = useToast();
     const { nickname, major, mbti, majorId, freeBoardId } = userInfo;
     let schoolId = "";
     if (userInfo.schoolId) {
@@ -83,7 +85,7 @@ export const MyInfo = ({ userInfo }) => {
                             <p
                                 style={{ ...ContentFontStyles, cursor: "pointer" }}
                                 onClick={() => {
-                                    alert("준비중입니다!");
+                                    toast({ title: "준비중입니다.", position: "top", isClosable: true, variant: "subtle" });
                                 }}
                             >
                                 내가 쓴 글
