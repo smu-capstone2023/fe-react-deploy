@@ -28,8 +28,9 @@ const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlLi
             if (response) {
                 toast({ title: "이 글을 공감하였습니다.", position: "top", isClosable: true });
             } else {
-                toast({ title: "이미 글을 공감하였습니다.", position: "top", isClosable: true });
+                toast({ title: "공감을 취소하였습니다.", position: "top", isClosable: true });
             }
+            window.location.reload();
         });
     };
 
