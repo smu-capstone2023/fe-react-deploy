@@ -23,6 +23,7 @@ const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlLi
     const onClickEdit = () => {
         window.location.href = `/addpost/${boardId}/${post_id}`;
     };
+
     const onClickLike = () => {
         likePost(post_id).then((response) => {
             if (response) {
@@ -30,7 +31,6 @@ const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlLi
             } else {
                 toast({ title: "공감을 취소하였습니다.", position: "top", isClosable: true });
             }
-            window.location.reload();
         });
     };
 
