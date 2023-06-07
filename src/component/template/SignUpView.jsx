@@ -8,7 +8,7 @@ import Button from "../molecule/Button";
  * @param onChangeNickname: (value: string) => {}
  * @param onChangePassword: (value: string) => {}
  * @param onChangeRePassword: (value: string) => {}
- * @param onClickSignupButton: () => {} 
+ * @param onClickSignupButton: () => {}
  * @returns
  */
 
@@ -31,7 +31,7 @@ const SignUpView = ({ onChangeId, onChangePassword, onChangeRePassword, onClickS
                     </InputBoxContainer>
 
                     {/* 닉넴입력 */}
-                    <Title2 style={{ marginTop: "5px"}}>닉네임을 입력해 주세요!</Title2>
+                    <Title2 style={{ marginTop: "5px" }}>닉네임을 입력해 주세요!</Title2>
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column" }}>
                         <InputBox placeholder="nickname" onChange={onChangeNickname} />
                     </InputBoxContainer>
@@ -43,9 +43,9 @@ const SignUpView = ({ onChangeId, onChangePassword, onChangeRePassword, onClickS
                     </Title1>
                     <Title2> 비밀번호를 입력해 주세요!</Title2>
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                        <InputBox placeholder="password" onChange={onChangePassword} type="password"/>
-                        <Title2 style={{color:'red'}}> * 비밀번호: 8~16자리 영문, 숫자를 조합해 주세요. (특수문자 허용) </Title2>
-                        <InputBox placeholder="re-password" onChange={onChangeRePassword}type="password"/>
+                        <InputBox placeholder="password" onChange={onChangePassword} type="password" />
+                        <Title2 style={{ color: "red" }}> * 비밀번호: 8~16자리 영문, 숫자를 조합해 주세요. (특수문자 허용) </Title2>
+                        <InputBox placeholder="re-password" onChange={onChangeRePassword} type="password" />
                     </InputBoxContainer>
                     <div style={{ width: "inherit", margin: "50px 0 100px" }}>
                         <Button title="다음" onClick={onClickSignupButton} style={{ marginTop: "50px", width: "inherit" }} />
@@ -96,7 +96,6 @@ const Title2 = styled.p`
 `;
 
 const SignUpImage = styled.img`
-    margin-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -106,13 +105,12 @@ const SignUpImage = styled.img`
     @media (max-width: 760px) {
         width: 100px;
         height: 144.21px;
-        margin-top: 0px;
     }
 `;
 const SignupViewLayout = styled.div`
     display: flex;
     width: 100%;
-    height: 90vh;
+    min-height: 90vh;
     flex-direction: row;
 
     @media (max-width: 760px) {
