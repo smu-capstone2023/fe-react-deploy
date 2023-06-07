@@ -52,7 +52,7 @@ export const MyInfo = ({ userInfo }) => {
                             <h5 style={NameFontStyles}>{nickname}</h5>
                             <div style={{ display: "flex", flexDirection: "row" }}>
                                 <p style={ContentFontStyles}>{major}</p>
-                                <p style={ContentFontStyles}>{schoolId}</p>
+                                <p style={ContentFontStyles}>{schoolId} 학번</p>
                                 <p style={ContentFontStyles}>{mbti}</p>
                             </div>
                         </>
