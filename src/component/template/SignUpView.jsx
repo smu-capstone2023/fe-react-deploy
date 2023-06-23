@@ -23,7 +23,7 @@ const SignUpView = ({ onChangeId, onChangePassword, onChangeRePassword, onClickS
                     {/* 학번입력 */}
                     <Title1>
                         {" "}
-                        <BoldText>SMUS</BoldText>인증을 위한
+                        <BoldText>SMUS</BoldText>&nbsp;인증을 위한
                     </Title1>
                     <Title2> 학번을 입력해 주세요!</Title2>
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column" }}>
@@ -39,12 +39,15 @@ const SignUpView = ({ onChangeId, onChangePassword, onChangeRePassword, onClickS
                     {/* 비번 입력 */}
                     <Title1>
                         {" "}
-                        <BoldText>SMUS</BoldText> 에서 사용할{" "}
+                        <BoldText>SMUS</BoldText>에서 사용할{" "}
                     </Title1>
                     <Title2> 비밀번호를 입력해 주세요!</Title2>
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                         <InputBox placeholder="password" onChange={onChangePassword} type="password" />
-                        <Title2 style={{ color: "red" }}> * 비밀번호: 8~16자리 영문, 숫자를 조합해 주세요. (특수문자 허용) </Title2>
+                        <Title2 style={{ color: "red", fontSize: "0.8rem" }}>
+                            {" "}
+                            * 비밀번호: 8~16자리 영문, 숫자를 조합해 주세요. (특수문자 허용){" "}
+                        </Title2>
                         <InputBox placeholder="re-password" onChange={onChangeRePassword} type="password" />
                     </InputBoxContainer>
                     <div style={{ width: "inherit", margin: "50px 0 100px" }}>
