@@ -73,7 +73,10 @@ export const Header = () => {
                 ]);
             }
         } else {
-            setMenu([{ name: "로그인", onClick: () => (window.location.href = "/login") }]);
+            setMenu([
+                { name: "로그인", onClick: () => (window.location.href = "/login") },
+                { name: "회원가입", onClick: () => (window.location.href = "/signup") },
+            ]);
         }
     }, []);
 
