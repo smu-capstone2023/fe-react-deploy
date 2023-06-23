@@ -13,7 +13,7 @@ export const Footer = () => {
                     }}
                     style={{ fontFamily: "nexon-regular", cursor: "pointer" }}
                 >
-                    개인정보처리방침 &gt;
+                    개인정보처리 방침 &gt;
                 </p>
                 <p
                     onClick={() => {

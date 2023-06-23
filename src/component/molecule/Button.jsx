@@ -20,7 +20,7 @@ export const Button = ({ title, onClick, width = "100%", height = "3rem", fontSi
                         height: height,
                         width: "100%",
                         borderRadius: "6px",
-                        fontSize: fontSize
+                        fontSize: fontSize,
                     }}
                 >
                     {title}
