@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import UserInfoPostReader from "../molecule/UserInfoPostReader";
 import UserInfoPostWriter from "../molecule/UserInfoPostWriter";
@@ -18,7 +18,7 @@ import { useToast } from "@chakra-ui/react";
  */
 
 const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlList }) => {
-    const { post_id, comments, likes, title, content, created_time } = post;
+    const { post_id, comments, title, content, created_time, likes } = post;
     const toast = useToast();
     const onClickEdit = () => {
         window.location.href = `/addpost/${boardId}/${post_id}`;
@@ -26,11 +26,7 @@ const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlLi
 
     const onClickLike = () => {
         likePost(post_id).then((response) => {
-            if (response) {
-                toast({ title: "이 글을 공감하였습니다.", position: "top", isClosable: true });
-            } else {
-                toast({ title: "공감을 취소하였습니다.", position: "top", isClosable: true });
-            }
+            window.location.reload();
         });
     };
 

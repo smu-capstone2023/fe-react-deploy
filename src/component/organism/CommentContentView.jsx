@@ -22,11 +22,7 @@ const CommentContentView = ({ comment, author, isAuthor, children }) => {
 
     const onClickCommentLike = () => {
         likeComment(comment_id).then((response) => {
-            if (response) {
-                toast({ title: "이 글을 공감하였습니다.", position: "top", isClosable: true });
-            } else {
-                toast({ title: "공감을 취소하였습니다.", position: "top", isClosable: true });
-            }
+            window.location.reload();
         });
     };
 
