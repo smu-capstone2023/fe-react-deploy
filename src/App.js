@@ -20,6 +20,7 @@ function App() {
         localStorage.setItem("profile_img_url", profileImageUrl);
         localStorage.setItem("majorList", JSON.stringify(majorList));
     };
+
     useEffect(() => {
         console.log("render");
         if (localStorage.getItem("access_token")) {

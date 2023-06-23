@@ -9,6 +9,7 @@ const Mypage = () => {
         changeNickname(newNickname).then((response) => {
             if (response) {
                 Swal.fire(`닉네임이 ${newNickname}로 바뀌었습니다!!`);
+                localStorage.setItem("user_name", newNickname);
             } else {
                 Swal.fire("네트워크 오류!", "잠시후 다시 시도해주세요!", "error");
             }

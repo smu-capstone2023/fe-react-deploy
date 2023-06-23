@@ -22,7 +22,6 @@ const LoginView = ({ onChangeId, onChangePassword, onClickLoginButton, onClickFi
             <LoginVeiwLayout style={{ display: "flex" }}>
                 <LoginContainer style={{ flex: 1 }}>
                     <Logo width="7" />
-
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "10px" }}>
                         <InputBox placeholder="학번" onChange={onChangeId} />
                         <InputBox type="password" placeholder="비밀번호" onChange={onChangePassword} />
