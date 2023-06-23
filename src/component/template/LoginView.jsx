@@ -5,6 +5,7 @@ import InputBox from "../molecule/InputBox";
 import Logo from "../atom/Logo";
 import Footer from "../organism/Footer";
 import LoginImage from "../atom/LoginImage";
+import Button from "../molecule/Button";
 
 /**
  * @param onChangeId: () => {}
@@ -26,11 +27,12 @@ const LoginView = ({ onChangeId, onChangePassword, onClickLoginButton, onClickFi
                         <InputBox placeholder="학번" onChange={onChangeId} />
                         <InputBox type="password" placeholder="비밀번호" onChange={onChangePassword} />
                     </InputBoxContainer>
-
-                    <LoginButton onClick={onClickLoginButton}>로그인</LoginButton>
+                    <Button onClick={onClickLoginButton} style={{ color: "white" }}>
+                        로그인
+                    </Button>
                     <FindAccountButton onClick={onClickFindAccount}>아이디/비밀번호 찾기</FindAccountButton>
                     <SignUpButton onClick={onClickSignUp}>
-                        아직 <span style={{ color: "#4169E1" }}>SMUS 회원</span>이 아니신가요?
+                        아직&nbsp;<span style={{ color: "#4169E1" }}> SMUS 회원</span>이 아니신가요?
                     </SignUpButton>
                 </LoginContainer>
                 <ImageContainer style={{ flex: 2 }} />
