@@ -4,10 +4,11 @@ import { debounce } from "lodash";
  * @param placeholder : string
  * @param onChange: () => {}
  * @param background: string;
+ * @param debounce: boolean
  * @returns
  */
 
-const InputBox = ({ placeholder, onChange, background = "#FAFAFA", type = "text" }) => {
+const InputBox = ({ placeholder, onChange, background = "#FAFAFA", type = "text", debounce = false }) => {
     const [inputValue, setInputValue] = useState("");
 
     const handleInput = ({ target }) => {
@@ -19,7 +20,7 @@ const InputBox = ({ placeholder, onChange, background = "#FAFAFA", type = "text"
         <input
             type={type}
             placeholder={placeholder}
-            onChange={debounce(handleInput, 550)}
+            onChange={debounce ? debounce(handleInput, 550) : handleInput}
             style={{
                 padding: "10px",
                 height: "50px",

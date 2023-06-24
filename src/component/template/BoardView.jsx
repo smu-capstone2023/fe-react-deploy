@@ -42,7 +42,7 @@ const BoardView = ({
                 <BoardLayout>
                     <SearchAndWriteLayout>
                         <InputBoxContainer style={{ flex: "1" }}>
-                            <InputBox placeholder="검색어를 입력해주세요." onChange={onChangeSearch} />
+                            <InputBox placeholder="검색어를 입력해주세요." onChange={onChangeSearch} debounce={true} />
                         </InputBoxContainer>
                         <ButtonLayout>
                             <Button title={"글쓰기"} onClick={onClickAddPost} width={"130px"} fontSize={"20px"} height={"50px"}></Button>
