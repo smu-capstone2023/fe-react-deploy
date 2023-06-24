@@ -16,7 +16,6 @@ export const loginSite = (school_id, password) => {
             }
         })
         .catch((response) => {
-            alert("loginStie", response);
             console.error("loginSite", response);
             return {};
         });
