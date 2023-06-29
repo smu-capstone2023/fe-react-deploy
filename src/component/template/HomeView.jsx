@@ -28,7 +28,7 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                 </div>
                 <RowToColumnResponsableView style={{ flex: 1, gap: 10 }}>
                     <HomeIconButtonListLayout>
-                        <HomeIconButtonList fontSize={"1em"} />
+                        <HomeIconButtonList fontSize="0.8rem" />
                     </HomeIconButtonListLayout>
                     <div style={{ flex: 3 }}>
                         <LostPreview previewList={lostPreviewList} />
@@ -75,10 +75,10 @@ const HideResponsableView = styled.div`
 const HomeIconButtonListLayout = styled.div`
     flex: 1;
     margin: auto 0;
-    min-width: 20em;
+    min-width: 300px;
+
     @media (max-width: 780px) {
-        font-size: 13px;
-        min-width: 10em;
+        margin: 0 auto;
     }
 `;
 

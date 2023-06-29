@@ -31,20 +31,18 @@ const BoardSelectBox = ({ boardList, onClick, currentBoardId }) => {
 };
 
 const BoardSelectBoxLayout = styled.div`
+    overflow: scroll;
+    white-space: nowrap;
     display: flex;
-    width: 100%;
     border-bottom: 0.3px solid #b6b6b6;
-    gap: 1rem;
-    font-size: 22px;
+    gap: 0.5rem;
+    font-size: 1rem;
 
-    @media screen and (max-width: 768px) {
-        font-size: 20px;
+    ::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
     }
-
-    @media screen and (max-width: 500px) {
-        gap: 0.5rem;
-        font-size: 15px;
-    }
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 `;
 
 const BoardSelectdiv = styled.div`
