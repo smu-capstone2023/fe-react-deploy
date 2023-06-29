@@ -1,34 +1,24 @@
 import React, { useRef } from "react";
 import uuid from "react-uuid";
 import styled from "styled-components";
-
+import { Select } from '@chakra-ui/react'
 /**
  * @param options: {id, name}[]
  * @param onChange: () => {}
- * @param fontSize: string
  * @param initValue: number
  * @returns
  */
 
 const SelectBox = ({ options, onChange, initValue }) => {
-    return (
-        <>
-            <form>
-                <SelectLayout>
-                    <Select options={options} initValue={options[0]} onChange={onChange} init={initValue} />
-                </SelectLayout>
-            </form>
-        </>
-    );
-};
-
-const Select = ({ options, onChange, init }) => {
     const selectRef = useRef(null);
     return (
-        <select
+        
+        <Select
+            variant='unstyled' 
+            size='md'
             ref={selectRef}
             key={uuid()}
-            defaultValue={init}
+            defaultValue={initValue}
             onChange={() => onChange(selectRef.current.value)}
             style={{ fontFamily: "nexon-regular", cursor: "pointer" }}
         >
@@ -42,8 +32,8 @@ const Select = ({ options, onChange, init }) => {
                         </option>
                     );
                 })}
-        </select>
-    );
+    </Select>
+ );
 };
 
 const SelectLayout = styled.div`
