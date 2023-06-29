@@ -10,7 +10,7 @@ import { useToast } from "@chakra-ui/react";
  * @returns
  */
 
-export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
+export const HomeIconButtonList = ({ fontSize, iconSize }) => {
     const toast = useToast();
     const fontStyles = {
         fontFamily: "nexon-regular",
@@ -20,7 +20,7 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
     const majorList = localStorage.getItem("majorList") ? JSON.parse(localStorage.getItem("majorList")) : null;
 
     return (
-        <div style={{ display: "flex", justifyContent: "space-between", width: width }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
             <IconButton
                 icon={<IoSchoolOutline />}
                 title={"학교게시판"}
@@ -79,9 +79,5 @@ export const HomeIconButtonList = ({ width, fontSize, iconSize }) => {
         </div>
     );
 };
-export const IconsButtonLayout = styled.div`
-    display: flex;
-    justify-content: space-between;
-`;
 
 export default HomeIconButtonList;

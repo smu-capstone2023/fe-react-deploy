@@ -13,15 +13,15 @@ import styled from "styled-components";
  * @returns
  */
 
-const PostListElement = ({onClick, commentCount, likeCount, title, content, createdDate}) => {
-    return(
+const PostListElement = ({ onClick, commentCount, likeCount, title, content, createdDate }) => {
+    return (
         <PostListElementLayout onClick={onClick}>
-            <div style={{flex: 1, fontFamily:'nexon-regular', fontSize:'1.1em'}}>{title}</div>
-            <div style={{flex: 1, fontSize:'1em'}}>{content}</div>
-            <CommentViewAndLikeView >
-                <CommentView commentCount={commentCount} iconSize={13} fontSize={13}/>
-                <LikeView likeCount={likeCount} iconSize={13} fontSize={13}/>
-                <div style={{fontSize: 13}}>{createdDate}</div>
+            <div style={{ flex: 1, fontFamily: "nexon-regular", fontSize: "1rem" }}>{title}</div>
+            <div style={{ flex: 1, fontSize: "0.8rem" }}>{content}</div>
+            <CommentViewAndLikeView>
+                <CommentView commentCount={commentCount} fontSize={"0.8rem"} iconSize={"0.8rem"} />
+                <LikeView likeCount={likeCount} fontSize={"0.8rem"} iconSize={"0.8rem"} />
+                <div style={{ fontSize: "0.8rem" }}>{createdDate.split("_")[0]}</div>
             </CommentViewAndLikeView>
         </PostListElementLayout>
     );
@@ -33,26 +33,23 @@ const PostListElementLayout = styled.div`
     width: 100%;
     padding: 1.2rem;
     cursor: pointer;
-    border-bottom: .5px solid #B8B8B8;
-    font-size: .7em;
-    
+    border-bottom: 0.5px solid #b8b8b8;
+    font-size: 0.7em;
+
     @media screen and (max-width: 780px) {
-        gap: .2em;
+        gap: 0.2em;
     }
-`
+`;
 const CommentViewAndLikeView = styled.div`
     flex: 1;
     display: flex;
     flex-direction: row;
-    gap: .5rem;
-    padding: 0rem .3rem 0rem .2rem;
+    gap: 0.5rem;
+    padding: 0rem 0.3rem 0rem 0.2rem;
 
     @media screen and (max-width: 780px) {
-        padding: .3rem .3rem 0rem .2rem;
+        padding: 0.3rem 0.3rem 0rem 0.2rem;
     }
-`
+`;
 
 export default PostListElement;
-
-
-
