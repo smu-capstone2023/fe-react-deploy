@@ -14,9 +14,7 @@ const SelectBox = ({ options, onChange, initValue }) => {
     return (
         <>
             <form>
-                <SelectLayout>
-                    <Select options={options} initValue={options[0]} onChange={onChange} init={initValue} />
-                </SelectLayout>
+                <Select options={options} initValue={options[0]} onChange={onChange} init={initValue} />
             </form>
         </>
     );
@@ -30,14 +28,12 @@ const Select = ({ options, onChange, init }) => {
             key={uuid()}
             defaultValue={init}
             onChange={() => onChange(selectRef.current.value)}
-            style={{ fontFamily: "nexon-regular", cursor: "pointer" }}
+            style={{ fontFamily: "nexon-regular", cursor: "pointer", fontSize: "1.2rem" }}
         >
             {options &&
                 options.map((option) => {
                     return (
-                        <option value={option.major_id
-                        } style={{ fontFamily: "nexon-regular" }} key={option.major_id}
-                        >
+                        <option value={option.major_id} style={{ fontFamily: "nexon-regular" }} key={option.major_id}>
                             {option.major_name}
                         </option>
                     );
@@ -45,22 +41,5 @@ const Select = ({ options, onChange, init }) => {
         </select>
     );
 };
-
-const SelectLayout = styled.div`
-    font-size: 28px;
-
-    @media screen and (max-width: 1300px) {
-        font-size: 25px;
-    }
-
-    @media screen and (max-width: 768px) {
-        font-size: 22px;
-    }
-
-    @media screen and (max-width: 500px) {
-        gap: 0.5rem;
-        font-size: 20px;
-    }
-`;
 
 export default SelectBox;
