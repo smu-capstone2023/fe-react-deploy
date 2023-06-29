@@ -117,19 +117,23 @@ const LogoWrapper = styled.div`
     }
 `;
 const HeaderLayout = styled.div`
+    padding: 0 1rem;
+    z-index: 1;
+    align-items: center;
+    position: fixed;
+    background: white;
     display: flex;
-    padding: 1rem;
+    height: 8vh;
     width: 100%;
     flex-direction: row;
-    font-size: 1em;
-    justify-content: flex-end;
+    font-size: 1rem;
 
     @media (max-width: 1300px) {
-        font-size: 0.8em;
+        font-size: 1rem;
     }
     @media (max-width: 1000px) {
         justify-content: center;
-        font-size: 0.7em;
+        font-size: 1rem;
     }
 `;
 const HeaderElement = styled.div`
