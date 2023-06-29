@@ -35,8 +35,8 @@ const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlLi
             {isAuthor ? (
                 //글쓴이
                 <UserInfoPostWriter
-                    iconSize="1.3em"
-                    fontSize="1.3em"
+                    iconSize="1.3rem"
+                    fontSize="1.3rem"
                     userName={author.userName}
                     onClickEdit={onClickEdit}
                     onClickDelete={onDeletePost}
@@ -45,8 +45,8 @@ const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlLi
             ) : (
                 //글쓴이 아닌 사람
                 <UserInfoPostReader
-                    iconSize="1.3em"
-                    fontSize="1.3em"
+                    iconSize="1.3rem"
+                    fontSize="1.3rem"
                     userName={author.userName}
                     postId={post_id}
                     onClickLike={onClickLike}
@@ -69,9 +69,9 @@ const PostContent = ({ boardId, post, author, isAuthor, onDeletePost, imageUrlLi
 };
 
 const PostContentLayout = styled.div`
+    margin: 0 1rem;
     display: flex;
     flex-direction: column;
-    width: 100%;
     gap: 15px;
 `;
 

@@ -53,20 +53,23 @@ function App() {
                 <meta
                 property="og:description"
                 content="상명대학교 자체 커뮤니티는 학생들을 위한 온라인 공간입니다. 학교 생활에 관한 정보와 소식을 공유하며, 학우들 간의 교류와 소통을 도모합니다."/>
-                <meta property="og:image" content="fe-react-deploy/public/img/opengraphimage.png" />
+                <meta property="og:image" content="https://smus.co.kr/static/opengraphimage.png" />
+                
             </Helmet>
             <Header />
-            <Routes>
-                <Route path="/" element={<Home />}></Route>
-                <Route path="/login" element={<Login />}></Route>
-                <Route path="/mypage" element={<Mypage />}></Route>
-                <Route path="/signup" element={<Signup />}></Route>
-                <Route path="/addpost/:board_id/:post_id" element={<AddPost />}></Route>
-                <Route path="/board/:major_id/:board_id" element={<Board />}></Route>
-                <Route path="/viewpost/:board_id/:post_id" element={<ViewPost />}></Route>
-                <Route path="/user-certification" element={<UserCertificate />}></Route>
-                <Route path="/major-certification" element={<MajorCertificate />}></Route>
-            </Routes>
+            <div style={{ paddingTop: "8vh" }}>
+                <Routes>
+                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/login" element={<Login />}></Route>
+                    <Route path="/mypage" element={<Mypage />}></Route>
+                    <Route path="/signup" element={<Signup />}></Route>
+                    <Route path="/addpost/:board_id/:post_id" element={<AddPost />}></Route>
+                    <Route path="/board/:major_id/:board_id" element={<Board />}></Route>
+                    <Route path="/viewpost/:board_id/:post_id" element={<ViewPost />}></Route>
+                    <Route path="/user-certification" element={<UserCertificate />}></Route>
+                    <Route path="/major-certification" element={<MajorCertificate />}></Route>
+                </Routes>
+            </div>
         </div>
     );
 }
