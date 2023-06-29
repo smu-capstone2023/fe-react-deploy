@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import Home from "./pages/Home";
 import Login from "../src/pages/Login";
 import Mypage from "./pages/MyPage";
@@ -37,6 +38,23 @@ function App() {
 
     return (
         <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+            <Helmet>
+                <title>SMUS</title>
+                {/* Primary Meta Tags */}
+                <meta name="title" content="SMUS | 상명대학교 자체 커뮤니티" />
+                <meta
+                name="description"
+                content="상명대학교 자체 커뮤니티는 학생들을 위한 온라인 공간입니다. 학교 생활에 관한 정보와 소식을 공유하며, 학우들 간의 교류와 소통을 도모합니다."
+                />
+
+                {/* Open Graph 메타태그 추가 */}
+                <meta property="og:url" content="https://smus.co.kr/" />
+                <meta property="og:title" content="SMUS | 상명대학교 자체 커뮤니티" />
+                <meta
+                property="og:description"
+                content="상명대학교 자체 커뮤니티는 학생들을 위한 온라인 공간입니다. 학교 생활에 관한 정보와 소식을 공유하며, 학우들 간의 교류와 소통을 도모합니다."/>
+                <meta property="og:image" content="fe-react-deploy/public/img/opengraphimage.png" />
+            </Helmet>
             <Header />
             <Routes>
                 <Route path="/" element={<Home />}></Route>
