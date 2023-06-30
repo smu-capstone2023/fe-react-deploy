@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { Provider } from "react-redux";
+import store from "./redux/store/index";
 
 const colors = {
     button: {
@@ -22,11 +24,13 @@ const theme = extendTheme({ colors });
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     // <React.StrictMode>
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme}>   
         <BrowserRouter>
-            <App />
+            <Provider store={store}>
+                <App />
+            </Provider>  
         </BrowserRouter>
-    </ChakraProvider>
+    </ChakraProvider> 
     // </React.StrictMode>
 );
 
