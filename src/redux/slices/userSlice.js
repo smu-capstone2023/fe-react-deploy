@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import userInfoData from '../actions/userInfoData';
+import getUserInfoData from '../actions/getUserInfoData';
 
 export const initialState = {
 	username: "",
@@ -19,14 +19,14 @@ const userSlice = createSlice({
 	initialState : {initialState},
 	reducers : {},
 	extraReducers : (builder) => {
-		builder.addCase(userInfoData.pending, (state,action)=>{
+		builder.addCase(getUserInfoData.pending, (state,action)=>{
             return state;
 		})
-		builder.addCase(userInfoData.fulfilled, (state,action)=>{
+		builder.addCase(getUserInfoData.fulfilled, (state,action)=>{
 			const response = action.payload;
             return response;
 		})
-		builder.addCase(userInfoData.rejected, (state,action)=>{
+		builder.addCase(getUserInfoData.rejected, (state,action)=>{
 			return state;
 		})
 	},

@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getUserInfo } from '../../api/User/getUserInfo';
 import { initialState } from '../slices/userSlice';
 
-const userInfoData = createAsyncThunk(
-    'userSlice/userInfoData',
+const getUserInfoData = createAsyncThunk(
+    'userSlice/getUserInfoData',
     async() => {
 		try {
 			if (localStorage.getItem("access_token")) {
@@ -18,4 +18,4 @@ const userInfoData = createAsyncThunk(
 	}
 );
 
-export default userInfoData;
+export default getUserInfoData;
