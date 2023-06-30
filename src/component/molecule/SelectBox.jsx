@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import uuid from "react-uuid";
-import styled from "styled-components";
 
 /**
  * @param options: {id, name}[]
