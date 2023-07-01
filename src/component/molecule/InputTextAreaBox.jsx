@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import styled from "styled-components";
 
 /**
@@ -11,12 +11,22 @@ import styled from "styled-components";
  * @returns
  */
 
-export const InputTextAreaBox = ({ placeholder, onChange, background, width, height, value }) => {
+export const InputTextAreaBox = memo(({ placeholder, onChange, background, width = "100%", height, value, autoHeight = false }) => {
+    const autoResizeTextarea = () => {
+        let textarea = document.querySelector(".autoTextarea");
+
+        if (autoHeight) {
+            textarea.style.height = height;
+            let scorllHeight = textarea.scrollHeight; // 높이
+            textarea.style.height = `${scorllHeight}px`;
+        }
+    };
     return (
         <WriteTextArea
+            style={{ height: height, width: width, overflow: autoHeight ? "hidden" : "" }}
+            onInput={autoResizeTextarea}
             defaultValue={value}
-            width={width}
-            height={height}
+            className="autoTextarea"
             background={background}
             placeholder={placeholder}
             onChange={(e) => {
@@ -24,18 +34,15 @@ export const InputTextAreaBox = ({ placeholder, onChange, background, width, hei
             }}
         />
     );
-};
+});
 
 const WriteTextArea = styled.textarea`
     display: flex;
     border: solid 0.5px #e5e5e5;
     border-radius: 5px;
-    width: ${(props) => props.width || "100%"};
-    height: ${(props) => props.height || "10rem"};
     background: ${(props) => props.background || "white"};
     padding: 0.3rem;
-    overflow: auto;
-    resize: none;
+    //resize: none;
     &::-webkit-scrollbar {
         width: 5px;
         height: 8px;
