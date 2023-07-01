@@ -52,7 +52,6 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                     </RowToColumnResponsableView>
                 </div>
             </div>
-            <Footer />
         </>
     );
 };

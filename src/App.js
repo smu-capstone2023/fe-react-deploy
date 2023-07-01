@@ -13,6 +13,7 @@ import UserCertificate from "./pages/UserCertificate";
 import Header from "./component/molecule/Header";
 import MajorCertificate from "./pages/MajorCertificate";
 import { getUserInfo } from "./api/User/getUserInfo";
+import Footer from "./component/organism/Footer";
 
 function App() {
     const setUserInfoInLocalStorage = (userName, schoolId, profileImageUrl, majorList) => {
@@ -43,8 +44,8 @@ function App() {
                 {/* Primary Meta Tags */}
                 <meta name="title" content="SMUS | 상명대학교 자체 커뮤니티" />
                 <meta
-                name="description"
-                content="상명대학교 자체 커뮤니티는 학생들을 위한 온라인 공간입니다. 학교 생활에 관한 정보와 소식을 공유하며, 학우들 간의 교류와 소통을 도모합니다."
+                    name="description"
+                    content="상명대학교 자체 커뮤니티는 학생들을 위한 온라인 공간입니다. 학교 생활에 관한 정보와 소식을 공유하며, 학우들 간의 교류와 소통을 도모합니다."
                 />
 
                 {/* Open Graph 메타태그 추가 */}
@@ -52,11 +53,12 @@ function App() {
                 <meta property="og:image" content="https://smus.co.kr/Opengraphimage.png" />
                 <meta property="og:title" content="SMUS | 상명대학교 자체 커뮤니티" />
                 <meta
-                property="og:description"
-                content="상명대학교 자체 커뮤니티는 학생들을 위한 온라인 공간입니다. 학교 생활에 관한 정보와 소식을 공유하며, 학우들 간의 교류와 소통을 도모합니다."/>
+                    property="og:description"
+                    content="상명대학교 자체 커뮤니티는 학생들을 위한 온라인 공간입니다. 학교 생활에 관한 정보와 소식을 공유하며, 학우들 간의 교류와 소통을 도모합니다."
+                />
             </Helmet>
             <Header />
-            <div style={{ paddingTop: "8vh" }}>
+            <div style={{ paddingTop: "8vh", marginBottom: "30vh" }}>
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
                     <Route path="/login" element={<Login />}></Route>
@@ -69,6 +71,7 @@ function App() {
                     <Route path="/major-certification" element={<MajorCertificate />}></Route>
                 </Routes>
             </div>
+            <Footer />
         </div>
     );
 }

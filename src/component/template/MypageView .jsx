@@ -84,7 +84,6 @@ const MypageView = ({ onClickRevoke, onClickLogout, changeNickname, changePasswo
                     <SectionListHeader title={"앱 버전"} onClick={() => (window.location.href = "/app")}></SectionListHeader>
                 </SectionList2>
             </SectionListLayout>
-            <Footer />
         </>
     );
 };

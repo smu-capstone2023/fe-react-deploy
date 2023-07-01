@@ -60,7 +60,6 @@ const MajorCertificateView = ({ onClickImageUploadButton, onClickDeleteImageButt
                     <Button title={"학과 인증 요청하기"} onClick={onClickCompleteButton} width={"100%"} height={"2rem"} fontSize={"1em"} />
                 </div>
             </MCVLayout>
-            <Footer />
         </>
     );
 };

@@ -36,7 +36,6 @@ const ViewPostView = ({ boardId, post, author, isAuthor, commentList, setInputCo
                 <CommentList commentList={commentList} />
             </PostMarginView>
             <AddComment onChangeComment={setInputComment} onClickAddComment={onClickAddComment} />
-            <Footer />
         </ViewPostLayout>
     );
 };

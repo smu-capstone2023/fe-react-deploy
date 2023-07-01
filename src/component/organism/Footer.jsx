@@ -38,7 +38,8 @@ export const Footer = () => {
 };
 
 const FooterLayout = styled.footer`
-    margin-top: auto;
+    position: absolute;
+    bottom: 0;
     background: #f6f6f6;
     padding: 1rem;
     border-top: 1px solid #898989;

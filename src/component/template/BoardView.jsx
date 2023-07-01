@@ -51,7 +51,6 @@ const BoardView = ({
                     <PostListView postListData={postListData} onClickPost={onClickPost}></PostListView>
                 </BoardLayout>
             </div>
-            <Footer />
         </div>
     );
 };
