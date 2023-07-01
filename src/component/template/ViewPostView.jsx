@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import CommentList from "../organism/CommentList";
 import PostContent from "../organism/PostContent";
-import Footer from "../organism/Footer";
 import AddComment from "../organism/AddComment";
 
 /**

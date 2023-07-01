@@ -84,6 +84,7 @@ const PostContentText = styled.p`
     margin-top: 20px;
     font-size: 1rem;
     font-family: nexon-light;
+    white-space: pre-wrap;
 `;
 
 const PostContentInfoLayout = styled.div`

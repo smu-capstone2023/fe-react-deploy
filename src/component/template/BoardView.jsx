@@ -5,7 +5,6 @@ import InputBox from "../molecule/InputBox";
 import styled from "styled-components";
 import Button from "../molecule/Button";
 import BoardSelectBox from "../molecule/BoardSelectBox";
-import Footer from "../organism/Footer";
 
 /**
  * @param boardList : {id: number, name: string}[]

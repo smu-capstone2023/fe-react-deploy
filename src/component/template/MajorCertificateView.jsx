@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Footer from "../organism/Footer";
 import ImageUploadButton from "../molecule/ImageUploadButton";
 import InputTextAreaInput from "../molecule/InputTextAreaBox";
 import Button from "../molecule/Button";

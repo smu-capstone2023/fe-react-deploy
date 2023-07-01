@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../organism/Footer";
 import SectionListHeader from "../molecule/SectionListHeader";
 import styled from "styled-components";
 import Swal from "sweetalert2";
