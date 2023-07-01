@@ -53,7 +53,7 @@ function App() {
                 <meta
                 property="og:description"
                 content="상명대학교 자체 커뮤니티는 학생들을 위한 온라인 공간입니다. 학교 생활에 관한 정보와 소식을 공유하며, 학우들 간의 교류와 소통을 도모합니다."/>
-                <meta property="og:image" content="https://smus.co.kr/public/img/opengraphimage.png" />
+                <link rel="og:image" href="%PUBLIC_URL%/opengraphimage.png" />
             </Helmet>
             <Header />
             <div style={{ paddingTop: "8vh" }}>
