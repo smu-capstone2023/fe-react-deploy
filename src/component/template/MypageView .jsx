@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../organism/Footer";
 import SectionListHeader from "../molecule/SectionListHeader";
 import styled from "styled-components";
 import Swal from "sweetalert2";
@@ -84,7 +83,6 @@ const MypageView = ({ onClickRevoke, onClickLogout, changeNickname, changePasswo
                     <SectionListHeader title={"앱 버전"} onClick={() => (window.location.href = "/app")}></SectionListHeader>
                 </SectionList2>
             </SectionListLayout>
-            <Footer />
         </>
     );
 };

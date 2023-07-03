@@ -78,6 +78,7 @@ const CommentContentLayout = styled.div`
     flex-direction: column;
     width: 100%;
     gap: 5px;
+    white-space: pre-wrap;
 `;
 
 //댓글내용

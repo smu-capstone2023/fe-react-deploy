@@ -3,7 +3,6 @@ import MyInfo from "../../component/organism/MyInfo";
 import HomeIconButtonList from "../../component/organism/HomeIconButtonList";
 import LostPreview from "../../component/organism/LostPreview";
 import BoardSectionList from "../../component/organism/BoardSectionList";
-import Footer from "../../component/organism/Footer";
 import styled from "styled-components";
 /**
  * @param userInfo: {nickname, major, shoolId, mbti}
@@ -52,7 +51,6 @@ export const HomeView = ({ userInfo, hotPreviewList, majorInfo, majorPreviewList
                     </RowToColumnResponsableView>
                 </div>
             </div>
-            <Footer />
         </>
     );
 };
