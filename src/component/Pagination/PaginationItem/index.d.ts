@@ -6,4 +6,5 @@ export type PaginationItemProps = {
     sx?: object;
     hide?: boolean;
     page?: number;
+    onClick?: function;
 };

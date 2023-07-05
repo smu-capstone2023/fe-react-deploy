@@ -3,7 +3,7 @@ import { PaginationItemProps } from "./index.d";
 import { css } from "@emotion/react";
 
 export default function PaginationItem(props: PaginationItemProps) {
-    const { color = "primary", shape = "circular", size = "medium", selected = false, sx, hide = false, page = "1" } = props;
+    const { color = "primary", shape = "circular", size = "medium", selected = false, sx, hide = false, page = "1", onClick } = props;
     const getColorStyles = () => {
         switch (color) {
             case "gray":
@@ -35,6 +35,7 @@ export default function PaginationItem(props: PaginationItemProps) {
 
     return (
         <button
+            onClick={onClick}
             style={sx}
             css={css`
                 border: none;
@@ -42,6 +43,10 @@ export default function PaginationItem(props: PaginationItemProps) {
                 ${getSizeStyles()}
                 ${getShapeStyles()}
                 ${hide ? "display: none;" : ""}
+                &:hover {
+                    ${getColorStyles()};
+                    opacity: 0.5;
+                }
             `}
         >
             {page}
