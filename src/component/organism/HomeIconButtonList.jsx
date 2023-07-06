@@ -3,6 +3,7 @@ import IconButton from "../molecule/IconButton";
 import { IoSchoolOutline, IoChatbubbleEllipsesOutline, IoCalendarOutline, IoCallOutline } from "react-icons/io5";
 import styled from "styled-components";
 import { useToast } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 /**
  * @param width : string
  * @param fontSize: string
@@ -16,8 +17,7 @@ export const HomeIconButtonList = ({ fontSize, iconSize }) => {
         fontFamily: "nexon-regular",
         fontSize: fontSize,
     };
-
-    const majorList = localStorage.getItem("majorList") ? JSON.parse(localStorage.getItem("majorList")) : null;
+    const majorList = useSelector((state)=>state.user.majors);
 
     return (
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -25,8 +25,7 @@ export const HomeIconButtonList = ({ fontSize, iconSize }) => {
                 icon={<IoSchoolOutline />}
                 title={"학교게시판"}
                 onClick={() => {
-                    const user_id = localStorage.getItem("user_id");
-                    if (!user_id) {
+                    if (!majorList) {
                         alert("로그인이 필요한 기능입니다.");
                     } else if (majorList && majorList.length >= 1) {
                         const major = majorList[0];
@@ -41,8 +40,7 @@ export const HomeIconButtonList = ({ fontSize, iconSize }) => {
                 icon={<IoChatbubbleEllipsesOutline />}
                 title={"학과게시판"}
                 onClick={() => {
-                    const user_id = localStorage.getItem("user_id");
-                    if (!user_id) {
+                    if (!majorList) {
                         alert("로그인이 필요한 기능입니다.");
                     } else {
                         if (majorList && majorList.length >= 2) {
