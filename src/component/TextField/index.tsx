@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { TextFieldProps } from "./index.d";
 import { ReactElement } from "react";
 
-export function TextField(props: TextFieldProps): ReactElement {
+export default function TextField(props: TextFieldProps): ReactElement {
     const {
         value = "",
         defaultValue = "",
@@ -93,4 +93,3 @@ export function TextField(props: TextFieldProps): ReactElement {
         </>
     );
 }
-export default TextField;
