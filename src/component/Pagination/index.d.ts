@@ -1,10 +1,11 @@
 export type PaginationProps = {
-    color?: "primary" | "standard" | "string";
+    color?: "primary" | "gray";
     count?: number;
-    hideNextButton?: boolean;
+    hideArrowButton?: boolean;
     onChange?: function;
-    renderItem?: function;
     shape?: "circular" | "rounded";
     size?: "small" | "medium" | "large";
     sx?: object;
+    page?: number;
+    siblingCount?: number;
 };
