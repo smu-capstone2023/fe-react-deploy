@@ -6,4 +6,10 @@
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://smus.co.kr/login</loc>
+  </url>
+  <url>
+    <loc>https://smus.co.kr/signup</loc>
+  </url>
 </urlset>
