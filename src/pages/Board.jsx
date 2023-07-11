@@ -3,20 +3,19 @@ import BoardView from "../component/template/BoardView";
 import { getBoardPostList } from "../api/board/getBoardPostList";
 import { getMajorsBoardList } from "../api/board/getMajorsBoardList";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const Board = () => {
     const [majorOptions, setMajorOptions] = useState([]);
     const [postListData, setPostListData] = useState([]);
     const [boardList, setBoardList] = useState([]);
     const [allOfPostListData, setAllOfPostListData] = useState([]);
-    const majorList = useSelector((state)=>state.user.majors);
+    const majorList = localStorage.getItem("majorList");
 
     let { board_id, major_id } = useParams();
 
     useEffect(() => {
-        if (majorList) setMajorOptions(majorList);
- 
+        if (majorList) setMajorOptions(JSON.parse(localStorage.majorList));
+
         getBoardPostList(board_id).then((response) => {
             const filtered_PostListData = response.map(({ username, views, updated_time, ...filtered }) => filtered);
             setAllOfPostListData(filtered_PostListData);
@@ -27,7 +26,7 @@ const Board = () => {
             const filtered_BoardList = response.map(({ is_can_anonymous, is_notice, ...filtered }) => filtered);
             setBoardList(filtered_BoardList);
         });
-    }, [majorList]);
+    }, []);
 
     const onChangeMajorSelect = (value) => {
         majorOptions.map((item) => {
@@ -36,7 +35,7 @@ const Board = () => {
             }
         });
     };
-    
+
     const onChangeSearch = (search) => {
         if (search === "") {
             setPostListData([...allOfPostListData]);

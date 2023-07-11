@@ -2,13 +2,13 @@ import styled from "styled-components";
 import Logo from "../atom/Logo";
 import HambergerMenu from "./HambergerMenu";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 export const Header = () => {
     const [menu, setMenu] = useState([]);
-    const majorList = useSelector((state)=>state.user.majors);
+
     useEffect(() => {
         if (localStorage.getItem("access_token")) {
+            const majorList = JSON.parse(localStorage.getItem("majorList"));
             if (majorList && majorList.length >= 2) {
                 setMenu([
                     {
@@ -78,7 +78,7 @@ export const Header = () => {
                 { name: "회원가입", onClick: () => (window.location.href = "/signup") },
             ]);
         }
-    }, [majorList]);
+    }, []);
 
     return (
         <HeaderLayout>
