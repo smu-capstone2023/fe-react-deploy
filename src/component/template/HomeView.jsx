@@ -4,7 +4,6 @@ import HomeIconButtonList from "../../component/organism/HomeIconButtonList";
 import LostPreview from "../../component/organism/LostPreview";
 import BoardSectionList from "../../component/organism/BoardSectionList";
 import styled from "styled-components";
-import TextField from "component/TextField";
 /**
  * @param userInfo: {nickname, major, shoolId, mbti}
  * @param hotPreviewList : {title, post_id, commens, likeCount}[]

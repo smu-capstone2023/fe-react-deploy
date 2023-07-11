@@ -3,21 +3,18 @@ import HomeView from "../component/template/HomeView";
 import { getHotBoardPreviewList } from "../api/board/getHotBoardPreviewList";
 import { getLostBoardPreviewList } from "../api/board/getLostBoardPreviewList";
 import { getBoardPostPreview } from "../api/BoardApi/getBoardPostPreview";
-import { useSelector } from "react-redux";
 const Home = () => {
     const [userInfo, setUserInfo] = useState({ nickname: "", schoolId: "", major: "", mbti: "" });
     const [majorInfo, setMajorInfo] = useState({ majorName: "", majorId: -1, freeBoardId: -1 });
     const [hotPreviewList, setHotPreviewList] = useState([]);
     const [lostPreviewList, setLostPreviewList] = useState([]);
     const [majorPreviewList, setMajorPreviewList] = useState([]);
-    const userInfoData = useSelector((state)=>state.user);
     //TODO: localStorage에서는 로그인 유무만 판단하고, 자세한 정보를 가져오는 로직은 다시 작성해야 함
     useEffect(() => {
         if (localStorage.getItem("access_token")) {
-            const user_name = userInfoData.username;
-            const school_id = userInfoData.school_id;
-            const majorList = userInfoData.majors;
-
+            const user_name = localStorage.getItem("user_name");
+            const school_id = localStorage.getItem("school_id");
+            const majorList = JSON.parse(localStorage.getItem("majorList"));
             if (majorList && majorList.length >= 2) {
                 const { major_name, major_id, free_board_id } = majorList[1];
                 setUserInfo({
@@ -55,7 +52,7 @@ const Home = () => {
                 setLostPreviewList(sliceResponse);
             }
         });
-    }, [userInfoData]);
+    }, []);
     return (
         <HomeView
             majorPreviewList={majorPreviewList}
