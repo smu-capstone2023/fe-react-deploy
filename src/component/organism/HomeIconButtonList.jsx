@@ -1,6 +1,6 @@
 import React from "react";
 import IconButton from "../molecule/IconButton";
-import { IoSchoolOutline, IoChatbubbleEllipsesOutline, IoCalendarOutline, IoCallOutline } from "react-icons/io5";
+import { IoMailOutline, IoSchoolOutline, IoChatbubbleEllipsesOutline, IoCalendarOutline, IoCallOutline } from "react-icons/io5";
 import styled from "styled-components";
 import { useToast } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
@@ -70,6 +70,16 @@ export const HomeIconButtonList = ({ fontSize, iconSize }) => {
                 title={"문의하기"}
                 onClick={() => {
                     toast({ title: "준비중입니다.", position: "top", isClosable: true, variant: "subtle" });
+                }}
+                fontStyles={fontStyles}
+                iconSize={iconSize}
+            ></IconButton>
+
+            <IconButton
+                icon={<IoMailOutline/>}
+                title={"Office365"}
+                onClick={()=>{
+                    window.open("https://cloud.smu.ac.kr/");
                 }}
                 fontStyles={fontStyles}
                 iconSize={iconSize}
