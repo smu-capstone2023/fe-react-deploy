@@ -3,14 +3,33 @@ import Logo from "../atom/Logo";
 import HambergerMenu from "./HambergerMenu";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Dropdown from "./Dropdown";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md"; 
 
 export const Header = () => {
     const [menu, setMenu] = useState([]);
+    const [selectedView, setSelectedView] = useState(0);
+    const [click, setClick] = useState(false);
+    const content = [
+        {title: '상명대학교', link: 'https://www.smu.ac.kr/ko/index.do'},
+        {title: '샘물', link: 'https://portal.smu.ac.kr/p/S00/'},
+        {title: '학술정보관', link: 'https://lib.smu.ac.kr/'},
+        {title: '스마트출결', link: 'http://att.smu.ac.kr'},
+        {title: 'e-campus', link: 'https://ecampus.smu.ac.kr/'},
+        {title: '피어오름', link: 'https://peerorum.smu.ac.kr'},
+        {title: '일자리플러스', link: 'https://smcareer.smu.ac.kr/'},
+        {title: '통합정보', link: 'https://smul.smu.ac.kr/index.do'},
+        {title: '입학처', link: 'https://admission.smu.ac.kr/iphak_home.html'},
+    ];
     const majorList = useSelector((state)=>state.user.majors);
     useEffect(() => {
         if (localStorage.getItem("access_token")) {
             if (majorList && majorList.length >= 2) {
                 setMenu([
+                    {
+                        name: "바로가기",
+                        onClick: ()=>{},
+                    },
                     {
                         name: "학교게시판",
                         onClick: () => {
@@ -45,6 +64,10 @@ export const Header = () => {
                 ]);
             } else {
                 setMenu([
+                    {
+                        name: "바로가기",
+                        onClick: ()=>{},
+                    },
                     {
                         name: "학교게시판",
                         onClick: () => {
@@ -87,8 +110,15 @@ export const Header = () => {
                 <Logo width={"5"} />
             </LogoWrapper>
             {menu.map((item) => (
-                <HeaderElement key={item.name} onClick={item.onClick}>
-                    {item.name}
+                <HeaderElement key={item.name} onClick={()=>{item.onClick(); setSelectedView(item.name); setClick(!click);}}>
+                {item.name}
+                {item.name === "바로가기" && <MdOutlineKeyboardArrowDown style={{display: "inline", textAlign: "center", verticalAlign: "middle"}}/>}
+                {(selectedView === "바로가기" && item.name === selectedView && click) && (
+                    <Dropdown
+                    width="150px"
+                    content={content}
+                    />
+                )}
                 </HeaderElement>
             ))}
             <HambergerLayout>
@@ -137,6 +167,7 @@ const HeaderLayout = styled.div`
     }
 `;
 const HeaderElement = styled.div`
+    position: relative;
     padding: 0.1rem;
     padding-left: 0.6rem;
     cursor: pointer;
