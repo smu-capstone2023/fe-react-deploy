@@ -1,27 +1,27 @@
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md"; 
 
-export const Dropdown = ({width, content}) => {
-    const [hoveredIndex, setHoveredIndex] = useState(null);
-
+export const Dropdown = ({title, width, content, showDropdown, onClick}) => {
     return (
-        <DropdownLayout style={{width: width}}>
-            {content.map((item, index)=>{
-                const isHovered = index === hoveredIndex;
-                return (
-                    <DropdownMenu 
-                        key={index} 
-                        onClick={() => window.open(item.link, '_blank')}
-                        onMouseOver={() => setHoveredIndex(index)}
-                        onMouseOut={() => setHoveredIndex(null)}
-                        isHovered={isHovered}
-                    >
-                        <button>{item.title}</button>
-                    </DropdownMenu>
-                );
-            })}
-        </DropdownLayout>
+        <DropdownBox onClick={onClick}>
+            {title}
+            <MdOutlineKeyboardArrowDown style={{display: "inline", textAlign: "center", verticalAlign: "middle"}}></MdOutlineKeyboardArrowDown>
+            {showDropdown && (
+                <DropdownLayout style={{width: width}}>
+                    {content.map((item, index)=>{
+                        return (
+                            <DropdownMenu 
+                                key={index} 
+                                onClick={() => window.open(item.link, '_blank')}
+                            >
+                                <button>{item.title}</button>
+                            </DropdownMenu>
+                        );
+                    })}
+                </DropdownLayout>
+            )}
+        </DropdownBox>
     );
 };
 
@@ -42,8 +42,21 @@ const DropdownMenu = styled.div`
     display: flex;
     padding: 0.5em 0.8em;
     width: 100%;
-    color: ${(props) => (props.isHovered ? "#4169E1" : "black")};
-    font-family: ${(props) => (props.isHovered ? "nexon-bold" : "nexon-light")};
+    &:hover{  
+        font-family : nexon-bold;
+        color : #4169E1;
+    }
+`;
+
+const DropdownBox = styled.div`
+    position: relative;
+    padding: 0.1rem;
+    padding-left: 0.6rem;
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 export default Dropdown;

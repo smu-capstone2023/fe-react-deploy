@@ -4,12 +4,11 @@ import HambergerMenu from "./HambergerMenu";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md"; 
 
 export const Header = () => {
     const [menu, setMenu] = useState([]);
-    const [selectedView, setSelectedView] = useState(0);
     const [click, setClick] = useState(false);
+    const dropdownTitle = "바로가기";
     const content = [
         {title: '상명대학교', link: 'https://www.smu.ac.kr/ko/index.do'},
         {title: '샘물', link: 'https://portal.smu.ac.kr/p/S00/'},
@@ -26,10 +25,6 @@ export const Header = () => {
         if (localStorage.getItem("access_token")) {
             if (majorList && majorList.length >= 2) {
                 setMenu([
-                    {
-                        name: "바로가기",
-                        onClick: ()=>{},
-                    },
                     {
                         name: "학교게시판",
                         onClick: () => {
@@ -64,10 +59,6 @@ export const Header = () => {
                 ]);
             } else {
                 setMenu([
-                    {
-                        name: "바로가기",
-                        onClick: ()=>{},
-                    },
                     {
                         name: "학교게시판",
                         onClick: () => {
@@ -109,16 +100,10 @@ export const Header = () => {
             <LogoWrapper onClick={() => (window.location.href = "/")}>
                 <Logo width={"5"} />
             </LogoWrapper>
+            <Dropdown title={dropdownTitle} width={"150px"} content={content} showDropdown={click} onClick={()=>{setClick(!click);}} ></Dropdown>
             {menu.map((item) => (
-                <HeaderElement key={item.name} onClick={()=>{item.onClick(); setSelectedView(item.name); setClick(!click);}}>
+                <HeaderElement key={item.name} onClick={()=>{item.onClick()}}>
                 {item.name}
-                {item.name === "바로가기" && <MdOutlineKeyboardArrowDown style={{display: "inline", textAlign: "center", verticalAlign: "middle"}}/>}
-                {(selectedView === "바로가기" && item.name === selectedView && click) && (
-                    <Dropdown
-                    width="150px"
-                    content={content}
-                    />
-                )}
                 </HeaderElement>
             ))}
             <HambergerLayout>
