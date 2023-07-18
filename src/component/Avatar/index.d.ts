@@ -1,4 +1,5 @@
 export type AvatarProps = {
     src?: string;
-    size?: "small" | "medium";
+    size?: string | number;
+    onClick?: fuction;
 };
