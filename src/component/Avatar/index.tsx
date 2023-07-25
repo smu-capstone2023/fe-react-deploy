@@ -10,7 +10,7 @@ export default function Avatar(props: AvatarProps): ReactElement {
             src={src}
             onClick={onClick}
             style={{
-                width: `${size}px`, //만약 유저가 size = '30px'로 줄경우, '30pxpx'가 됩니다.
+                width: size,
                 background: "#E9E9E9",
                 borderRadius: "50%",
             }}
