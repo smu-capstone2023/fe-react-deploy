@@ -10,7 +10,7 @@ export default function Avatar(props: AvatarProps): ReactElement {
             src={src}
             onClick={onClick}
             style={{
-                width: size,
+                width: `${size}px`,
                 background: "#E9E9E9",
                 borderRadius: "50%",
             }}
