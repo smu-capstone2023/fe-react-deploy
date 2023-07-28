@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const checkPassword = (school_id, password) => {
     return axios
-        .get(
+        .post(
             `${process.env.REACT_APP_SERVER_URL}/auth/check_password`,
             {
                 school_id : school_id,

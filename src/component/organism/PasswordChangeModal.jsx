@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TextField from "../TextField/index";
 import { GrClose } from "react-icons/gr";
 import { useToast } from "@chakra-ui/react";
@@ -12,45 +12,40 @@ export const PasswordChangeModal = ({setModalOpen}) => {
     const [newPassword, setNewPassword] = useState("");
     const [oldPasswordCheck, setOldPasswordCheck] = useState(false);
     const [newPasswordCheck, setnewPasswordCheck] = useState("");
-    const [askChangePassword, setAskChangePassword] = useState(false);
-    const [height, setHeight] = useState("");
+    const [finishChange, setFinishChange] = useState(false);
+    const [incorrectPassword, setIncorrectPassword] = useState(false);
     const toast = useToast();
     const userInfoData = useSelector((state)=>state.user);
 
     const checkOldPassword = () => {
         const schoolId = userInfoData.school_id;
         if (schoolId && oldPassword) {
-            console.log(schoolId);
-            console.log(oldPassword);
             checkPassword(schoolId, oldPassword).then((response)=>{
                 setOldPasswordCheck(response);
+                if (!response) {
+                    setIncorrectPassword(true);
+                }
             })
         };
     };
 
     const closeModal = () => {
-        setModalOpen(false)
-    };
-
-    const handleCheckChange = () => {
-        if (height == "") {
-            // setCheck(!check);
-            setHeight("70%");
-        }
+        setModalOpen(false);
     };
 
     const onClickChangePassword = () => {
         if (oldPassword && newPassword) {
             changePassword(oldPassword, newPassword).then((response)=>{
-                if (response) {
-                    setAskChangePassword(true);
-                    window.location.reload();
+                if (response && (newPassword === newPasswordCheck)) {
+                    setFinishChange(true);
+                    localStorage.clear();
                     toast({ title: "비밀번호가 성공적으로 변경되었습니다.", position: "top", isClosable: true, variant: "subtle" });
-
+                    setTimeout(() => { window.location.href = "/"; }, 1000);
                 } else {
-                    setAskChangePassword(true);
-                    window.location.reload();
+                    setFinishChange(true);
                     toast({ title: "비밀번호 변경에 실패했습니다. 다시 시도해주세요.", position: "top", isClosable: true, variant: "subtle" });
+                    setTimeout(() => { window.location.href = "/"; }, 1000);
+                    window.location.reload();
                 }
             })
         }
@@ -63,8 +58,8 @@ export const PasswordChangeModal = ({setModalOpen}) => {
 
     return (
         <ModalBackground>
-            {askChangePassword === false && 
-                <ModalContainer height={height}>
+            {finishChange === false && 
+                <ModalContainer>
                     <GrClose style={{position: "absolute", left: "20px", top: "20px"}} onClick={()=>{closeModal()}}/>
                     <ModalLayout>
                         <ModalTitle>비밀번호 변경</ModalTitle>
@@ -73,7 +68,7 @@ export const PasswordChangeModal = ({setModalOpen}) => {
                             <>
                                 <ModalText>현재 비밀번호</ModalText>
                                 <TextField type={"password"} size={"small"} color={"gray"} placeholder={"기존 비밀번호"} value={oldPassword} onChange={(e)=>{setOldPassword(e.target.value)}}></TextField>
-                                {!oldPasswordCheck && <ModalWarningText>올바르지 않은 비밀번호입니다.</ModalWarningText>}
+                                {incorrectPassword && <ModalWarningText>올바르지 않은 비밀번호입니다.</ModalWarningText>}
                             </> 
                             : <>
                                 <ModalText>변경 비밀번호</ModalText>
@@ -86,8 +81,8 @@ export const PasswordChangeModal = ({setModalOpen}) => {
                             </>}
                         </ModalInputLayout>
                         <ModalButton onClick={()=>{
-                            if (oldPassword) { checkOldPassword(); }
-                            if (oldPasswordCheck) { handleCheckChange(); onClickChangePassword(); }
+                            if (oldPassword) {checkOldPassword()}
+                            if (oldPasswordCheck && (newPassword === newPasswordCheck)) {onClickChangePassword()}
                         }}>다음</ModalButton>
                     </ModalLayout>
                 </ModalContainer>
@@ -108,7 +103,7 @@ const ModalBackground = styled.div`
 const ModalContainer = styled.div`
     display: flex;
     width: 70%;
-    height: ${(props)=>(props.height) || "50%"};
+    height: auto;
     z-index: 999;
     position: absolute;
     top: 50%;
@@ -117,6 +112,7 @@ const ModalContainer = styled.div`
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 8px;
+    padding: 40px;
 `;
 
 const ModalLayout = styled.div`
