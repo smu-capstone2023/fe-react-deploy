@@ -113,6 +113,10 @@ const ModalContainer = styled.div`
     border: 1px solid lightgray;
     border-radius: 8px;
     padding: 40px;
+
+    @media screen and (max-width: 768px) {
+        padding : 40px 10px;
+    }
 `;
 
 const ModalLayout = styled.div`
@@ -130,6 +134,10 @@ const ModalInputLayout = styled.div`
     gap: 10px;
     flex-direction: column;
     justify-content: center;
+
+    @media screen and (max-width: 768px) {
+        width: 90%;
+    }
 `;
 
 const ModalTitle = styled.p`
@@ -156,6 +164,10 @@ const ModalButton = styled.button`
     border-radius: 5px;
     padding: 10px;
     color: white;
+
+    @media screen and (max-width: 768px) {
+        max-width: 90%;
+    }
 `;
 
 const ModalWarningText = styled.p`
