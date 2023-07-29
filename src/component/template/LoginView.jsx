@@ -19,7 +19,7 @@ import Button from "../molecule/Button";
 const LoginView = ({ onChangeId, onChangePassword, onClickLoginButton, onClickFindAccount, onClickSignUp }) => {
     return (
         <>
-            <LoginVeiwLayout style={{ display: "flex" }}>
+            <LoginVeiwLayout style={{ display: "flex", backgroundColor: "white" }}>
                 <LoginContainer style={{ flex: 1 }}>
                     <Logo width="7" />
                     <InputBoxContainer style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "10px" }}>

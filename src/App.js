@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import React, { useEffect } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
@@ -64,21 +62,7 @@ function App() {
                 <meta property="og:image" content="https://smus.co.kr/img/opengraphimage.png" />
             </Helmet>
             <Header />
-            <div
-                css={css`
-                    padding-top: 8vh;
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-
-                    background: white;
-
-                    @media (min-width: 500px) {
-                        max-width: 500px;
-                        margin: 0 auto;
-                    }
-                `}
-            >
+            <div style={{ paddingTop: "8vh", flex: 1, display: "flex" }}>
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
                     <Route path="/login" element={<Login />}></Route>

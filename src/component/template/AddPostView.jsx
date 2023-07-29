@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import React from "react";
 import styled from "styled-components";
 import InputTextAreaBox from "../molecule/InputTextAreaBox";
@@ -73,10 +75,15 @@ const AddPostView = ({
 };
 
 const AddPostViewContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    flex: 1;
+    background: white;
+    padding: 10px;
     width: 100%;
+    @media (min-width: 500px) {
+        max-width: 500px;
+        margin: 0 auto;
+    }
 `;
 
 const AddPostViewLayout = styled.div`
@@ -86,11 +93,7 @@ const AddPostViewLayout = styled.div`
     gap: 12px;
     width: 100%;
     max-width: 50rem;
-    padding: 3rem;
-
-    @media screen and (max-width: 768px) {
-        padding: 1rem;
-    }
+    padding: 1rem;
 `;
 
 const ImageLayout = styled.div`
@@ -108,13 +111,7 @@ const AddPostViewLine = styled.div`
 
 const PostUploadButtonLayout = styled.div`
     display: flex;
-    width: 20%;
-    margin-left: auto;
-
-    @media screen and (max-width: 768px) {
-        width: 100%;
-        margin-left: 0;
-    }
+    width: 100%;
 `;
 
 export default AddPostView;
