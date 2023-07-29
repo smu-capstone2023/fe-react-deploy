@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import React, { useEffect } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
@@ -43,7 +45,7 @@ function App() {
     }, []);
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+        <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", flex: 1, background: "#F3F3F3" }}>
             <Helmet>
                 <title>SMUS</title>
                 {/* Primary Meta Tags */}
@@ -62,7 +64,21 @@ function App() {
                 <meta property="og:image" content="https://smus.co.kr/img/opengraphimage.png" />
             </Helmet>
             <Header />
-            <div style={{ paddingTop: "8vh", marginBottom: "30vh" }}>
+            <div
+                css={css`
+                    padding-top: 8vh;
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+
+                    background: white;
+
+                    @media (min-width: 500px) {
+                        max-width: 500px;
+                        margin: 0 auto;
+                    }
+                `}
+            >
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
                     <Route path="/login" element={<Login />}></Route>
@@ -75,7 +91,7 @@ function App() {
                     <Route path="/major-certification" element={<MajorCertificate />}></Route>
                 </Routes>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

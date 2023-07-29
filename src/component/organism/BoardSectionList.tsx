@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import { css } from "@emotion/react";
 import SectionListHeader from "../molecule/SectionListHeader";
 import PreviewListItem from "../molecule/PreviewListItem";
 
@@ -10,10 +10,20 @@ import PreviewListItem from "../molecule/PreviewListItem";
  * @returns
  */
 
-export const BoardSectionList = ({ title, headerOnClick, previewList }) => {
+interface Prop {
+    title: string;
+    headerOnClick: () => void;
+    previewList: { title: string; comments: number | string; likeCount: number | string; post_id: number | string }[];
+}
+export const BoardSectionList = ({ title, headerOnClick, previewList }: Prop) => {
     return (
-        <BoardSectionListLayout>
-            <SectionListHeader title={title} onClick={headerOnClick} font="nexon-regular" />
+        <div
+            css={css`
+                border-bottom: 1px solid #ddd;
+                width: 100%;
+            `}
+        >
+            <SectionListHeader title={title} onClick={headerOnClick} />
             {previewList &&
                 previewList.map(
                     (
@@ -21,7 +31,6 @@ export const BoardSectionList = ({ title, headerOnClick, previewList }) => {
                         index //이부분 입니다.
                     ) => (
                         <PreviewListItem
-                            postId={previewItem.post_id}
                             key={index}
                             title={previewItem.title}
                             onClick={() => {
@@ -30,17 +39,12 @@ export const BoardSectionList = ({ title, headerOnClick, previewList }) => {
                                     : alert("로그인이 필요한 기능입니다.");
                             }}
                             commentCount={previewItem.comments}
-                            likeCount={previewItem.likes}
+                            likeCount={previewItem.likeCount}
                         />
                     )
                 )}
-        </BoardSectionListLayout>
+        </div>
     );
 };
-
-const BoardSectionListLayout = styled.div`
-    border-bottom: 1px solid #ddd;
-    width: 100%;
-`;
 
 export default BoardSectionList;
