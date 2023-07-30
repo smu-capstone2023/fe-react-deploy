@@ -40,7 +40,7 @@ function App() {
     return (
         <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
             <Helmet>
-                <title>SMUS</title>
+                <title>상명대학교 자체 커뮤니티앱 - 상명대학교 | SMUS</title>
                 {/* Primary Meta Tags */}
                 <meta name="title" content="SMUS | 상명대학교 자체 커뮤니티" />
                 <meta
