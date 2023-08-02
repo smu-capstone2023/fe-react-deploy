@@ -57,7 +57,8 @@ export default function IconList({ majors }: Prop) {
             case "문의하기":
                 toast({ title: "준비중입니다.", position: "top", isClosable: true, variant: "subtle" });
                 break;
-            default:
+            case "Office365":
+                window.open("https://cloud.smu.ac.kr/");
                 break;
         }
     };
