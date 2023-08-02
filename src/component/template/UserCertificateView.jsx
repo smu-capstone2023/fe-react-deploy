@@ -10,7 +10,7 @@ import Button from "../molecule/Button";
 const UserCertificateView = ({ onClickCompleteButton }) => {
     return (
         <>
-            <SignupViewLayout style={{ display: "flex" }}>
+            <SignupViewLayout>
                 <SignUpContainer style={{ flex: 1 }}>
                     <img src={"../img/signimg2.png"} alt="signup" width={"100px"} />
                     <Title>회원 가입 절차</Title>
@@ -101,8 +101,9 @@ const Title2 = styled.p`
 
 const SignupViewLayout = styled.div`
     display: flex;
-    height: 90vh;
+    flex: 1;
     flex-direction: row;
+    background-color: white;
     @media (max-width: 760px) {
         justify-content: center;
         flex-direction: column;
