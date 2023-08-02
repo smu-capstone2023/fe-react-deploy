@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
+import PasswordChangeModal from "../organism/PasswordChangeModal";
 /**
  * @param onClickRevoke: () => {}
  * @param onClickLogout: () => {}
@@ -14,7 +15,11 @@ import { useToast } from "@chakra-ui/react";
 
 const MypageView = ({ onClickRevoke, onClickLogout, changeNickname, changePassword }) => {
     const [inputValue, setInputValue] = useState("");
-    const [password, setPassword] = useState("");
+    const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
+    // 모달창 노출
+    const showChangePasswordModal = () => {
+        setChangePasswordModalOpen(true);
+    };
     const toast = useToast();
     return (
         <>
@@ -54,25 +59,10 @@ const MypageView = ({ onClickRevoke, onClickLogout, changeNickname, changePasswo
                     <SectionListHeader
                         title={"비밀번호 변경"}
                         onClick={() => {
-                            Swal.fire("준비중인 기능입니다.");
-                            // Swal.fire({
-                            //     title: "비밀번호 변경",
-                            //     input: "password",
-                            //     inputLabel: "새로 변경할 비밀번호를 써주세요!",
-                            //     showCancelButton: true,
-                            //     inputValidator: (value) => {
-                            //         if (!value) {
-                            //             return "변경할 비밀번호를 입력해주세요!";
-                            //         }
-                            //     },
-                            // }).then((result) => {
-                            //     if (result.value) {
-                            //         const newPassword = result.value;
-                            //         changePassword(newPassword);
-                            //     }
-                            // });
+                            showChangePasswordModal();
                         }}
                     ></SectionListHeader>
+                    {changePasswordModalOpen && <PasswordChangeModal setChangePasswordModalOpen={setChangePasswordModalOpen}></PasswordChangeModal>}
                     <SectionListHeader title={"로그아웃"} onClick={onClickLogout}></SectionListHeader>
                     <SectionListHeader title={"탈퇴하기"} onClick={onClickRevoke}></SectionListHeader>
                 </SectionList1>
