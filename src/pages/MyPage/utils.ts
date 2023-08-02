@@ -1,0 +1,42 @@
+import { changeNickname } from "api/User/changeNickname";
+import { changePassword } from "api/User/changePassword";
+import { revoke } from "api/User/revoke";
+import Swal from "sweetalert2";
+
+export const onChangeNickname = (newNickname: string) => {
+    changeNickname(newNickname).then((response) => {
+        if (response) {
+            Swal.fire(`닉네임이 ${newNickname}로 바뀌었습니다!!`);
+            localStorage.setItem("user_name", newNickname);
+        } else {
+            Swal.fire("네트워크 오류!", "잠시후 다시 시도해주세요!", "error");
+        }
+    });
+};
+
+export const onChangePassword = (newPassword: string, oldPassword: string) => {
+    changePassword(oldPassword, newPassword).then((response) => {
+        if (response) {
+            Swal.fire(`비밀번호가 변경되었습니다.!!`);
+        } else {
+            Swal.fire("네트워크 오류!", "잠시후 다시 시도해주세요!", "error");
+        }
+    });
+};
+
+export const onClickRevoke = () => {
+    revoke().then((response) => {
+        if (response === true) {
+            alert("성공적으로 탈퇴되었습니다");
+            localStorage.clear();
+            window.location.href = "/";
+        } else {
+            alert("네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+        }
+    });
+};
+
+export const onClickLogout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+};
