@@ -52,7 +52,11 @@ export default function Home() {
                 }
             `}
         >
-            <Profile nickname={userInfo?.username} major={userInfo?.majors[1].major_name} mbti={userInfo?.mbti ? userInfo?.mbti : ""} />
+            <Profile
+                nickname={userInfo?.username}
+                major={userInfo?.majors && userInfo?.majors.length >= 2 ? userInfo?.majors[1].major_name : "학과인증을 해주세요"}
+                mbti={userInfo?.mbti ? userInfo?.mbti : ""}
+            />
             <IconList majors={userInfo?.majors} />
             <LostPreview previewList={lostPreviewList} />
             <div
