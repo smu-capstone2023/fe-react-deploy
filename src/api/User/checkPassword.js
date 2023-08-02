@@ -17,8 +17,8 @@ export const checkPassword = (school_id, password) => {
         .then((response) => {
             return response.data;
         })
-        .catch((response) => {
-            console.log(response);
+        .catch((error) => {
+            console.error("checkPassword", error);
             return false;
         });
 };

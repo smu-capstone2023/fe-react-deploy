@@ -15,11 +15,10 @@ import PasswordChangeModal from "../organism/PasswordChangeModal";
 
 const MypageView = ({ onClickRevoke, onClickLogout, changeNickname, changePassword }) => {
     const [inputValue, setInputValue] = useState("");
-    const [modalOpen, setModalOpen] = useState(false);
-
+    const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
     // 모달창 노출
-    const showModal = () => {
-        setModalOpen(true);
+    const showChangePasswordModal = () => {
+        setChangePasswordModalOpen(true);
     };
     const toast = useToast();
     return (
@@ -60,10 +59,10 @@ const MypageView = ({ onClickRevoke, onClickLogout, changeNickname, changePasswo
                     <SectionListHeader
                         title={"비밀번호 변경"}
                         onClick={() => {
-                            showModal();
+                            showChangePasswordModal();
                         }}
                     ></SectionListHeader>
-                    {modalOpen && <PasswordChangeModal setModalOpen={setModalOpen}></PasswordChangeModal>}
+                    {changePasswordModalOpen && <PasswordChangeModal setChangePasswordModalOpen={setChangePasswordModalOpen}></PasswordChangeModal>}
                     <SectionListHeader title={"로그아웃"} onClick={onClickLogout}></SectionListHeader>
                     <SectionListHeader title={"탈퇴하기"} onClick={onClickRevoke}></SectionListHeader>
                 </SectionList1>
