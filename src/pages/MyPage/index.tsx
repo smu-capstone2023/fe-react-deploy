@@ -53,7 +53,12 @@ export default function MyPage() {
         //TODO: 내 시간표 보기 기능 여기다가.
     };
     return (
-        <>
+        <div
+            css={css`
+                display: flex;
+                flex: 1;
+            `}
+        >
             {changePasswordModalOpen && <PasswordChangeModal setModalOpen={setChangePasswordModalOpen}></PasswordChangeModal>}
             <div
                 css={css`
@@ -61,6 +66,8 @@ export default function MyPage() {
                     flex: 1;
                     flex-direction: column;
                     background: white;
+                    z-index: 0;
+                    position: relative;
 
                     @media (min-width: 500px) {
                         max-width: 500px;
@@ -140,6 +147,6 @@ export default function MyPage() {
                     })}
                 </SectionContainer>
             </div>
-        </>
+        </div>
     );
 }

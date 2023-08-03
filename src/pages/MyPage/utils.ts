@@ -8,13 +8,13 @@ export const foldingCss = css`
     @keyframes fade-in {
         from {
             opacity: 0;
-            transform: translate3d(0, -20px, 0);
+            transform: translateY(-20px);
             height: 0px;
             margin: 0px;
         }
         to {
             opacity: 1;
-            transform: translate3d(0, 0, 0);
+            transform: translateY(0);
             height: 200px;
             margin: 20px;
         }
@@ -22,13 +22,13 @@ export const foldingCss = css`
     @keyframes fade-out {
         from {
             opacity: 1;
-            transform: translate3d(0, 0, 0);
+            transform: translateY(0);
             height: 200px;
             margin: 20px;
         }
         to {
             opacity: 0;
-            transform: translate3d(0, -20px, 0);
+            transform: translateY(-20px);
             height: 0px;
             margin: 0px;
         }
