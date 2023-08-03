@@ -6,6 +6,5 @@ export type PaginationProps = {
     shape?: "circular" | "rounded";
     size?: "small" | "medium" | "large";
     sx?: object;
-    page?: number;
     siblingCount?: number;
 };
