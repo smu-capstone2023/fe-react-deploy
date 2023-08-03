@@ -3,6 +3,7 @@ import { PaginationProps } from "./index.d";
 import { css } from "@emotion/react";
 import PaginationItem from "./PaginationItem";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import { useState } from "react";
 
 export default function Pagination(props: PaginationProps) {
     const {
@@ -13,9 +14,10 @@ export default function Pagination(props: PaginationProps) {
         shape = "circular",
         size = "medium",
         sx,
-        page = 7,
         siblingCount = 5,
     } = props;
+
+    const [page, setPage] = useState<number>(1);
 
     //TODO: 더 이쁘게 짤 수 있을 것 같은데 로직 더 생각해봐야 할 것 같습니다.
     const pageList = [...Array.from({ length: count }, (_, i) => 1 + i)];
@@ -64,7 +66,10 @@ export default function Pagination(props: PaginationProps) {
                         }
                     `}
                     onClick={() => {
-                        if (page !== 1) onChange(page - 1);
+                        if (page !== 1) {
+                            onChange(page - 1);
+                            setPage(page - 1);
+                        }
                     }}
                 />
 
@@ -77,7 +82,10 @@ export default function Pagination(props: PaginationProps) {
                             key={`item_${i}`}
                             selected={page === key}
                             page={key}
-                            onClick={() => onChange(key)}
+                            onClick={() => {
+                                onChange(key);
+                                setPage(key);
+                            }}
                         />
                     );
                 })}
@@ -91,7 +99,10 @@ export default function Pagination(props: PaginationProps) {
                         }
                     `}
                     onClick={() => {
-                        if (page !== count) onChange(page + 1);
+                        if (page !== count) {
+                            onChange(page + 1);
+                            setPage(page + 1);
+                        }
                     }}
                 />
             </ul>
