@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import React from "react";
 import styled from "styled-components";
 import CommentList from "../organism/CommentList";
@@ -40,16 +42,17 @@ const ViewPostView = ({ boardId, post, author, isAuthor, commentList, setInputCo
 };
 
 const ViewPostLayout = styled.div`
-    flex: 1;
-    display: flex;
     flex-direction: column;
-    width: 100%;
+    flex: 1;
+    background: white;
+    max-width: 500px;
+    margin: 0 auto;
 `;
 
 const PostCommentGap = styled.div`
     height: 8px;
     width: 100%;
-    background-color: #e5e5e5;
+    background-color: #f3f3f3;
 `;
 
 const PostMarginView = styled.div`

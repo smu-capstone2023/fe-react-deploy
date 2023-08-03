@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import React from "react";
 import styled from "styled-components";
 import ImageUploadButton from "../molecule/ImageUploadButton";
@@ -45,7 +47,7 @@ const MajorCertificateView = ({ onClickImageUploadButton, onClickDeleteImageButt
                     <p style={{ fontFamily: "nexon-regular", color: "#747474", fontSize: ".7em" }}>(선택)</p>
                 </div>
 
-                <InputTextAreaInput placeholder={"내용을 입력해주세요."} onChange={(e) => onChangeContent(e)} height={"100%"} />
+                <InputTextAreaInput placeholder={"내용을 입력해주세요."} onChange={(e) => onChangeContent(e)} height={"5rem"} />
 
                 <div
                     style={{
@@ -64,17 +66,14 @@ const MajorCertificateView = ({ onClickImageUploadButton, onClickDeleteImageButt
 };
 
 const MCVLayout = styled.div`
-    display: flex;
-    flex: 1;
     flex-direction: column;
-    width: 40%;
-    margin: 0 auto;
-    padding-bottom: 1rem;
-    height: 30rem;
-
-    @media (max-width: 768px) {
-        width: 95%;
-        font-size: 0.7em;
+    flex: 1;
+    background: white;
+    padding: 10px;
+    width: 100%;
+    @media (min-width: 500px) {
+        max-width: 500px;
+        margin: 0 auto;
     }
 `;
 

@@ -38,7 +38,7 @@ function App() {
     }, []);
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+        <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", flex: 1, background: "#F3F3F3" }}>
             <Helmet>
                 <title>SMUS | 상명대 커뮤니티</title>
                 {/* Primary Meta Tags */}
@@ -58,7 +58,7 @@ function App() {
                 />
             </Helmet>
             <Header />
-            <div style={{ paddingTop: "8vh", marginBottom: "30vh" }}>
+            <div style={{ paddingTop: "8vh", flex: 1, display: "flex" }}>
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
                     <Route path="/login" element={<Login />}></Route>
@@ -71,9 +71,10 @@ function App() {
                     <Route path="/major-certification" element={<MajorCertificate />}></Route>
                 </Routes>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }
 
 export default App;
+//1

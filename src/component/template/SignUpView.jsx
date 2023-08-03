@@ -115,6 +115,7 @@ const SignupViewLayout = styled.div`
     width: 100%;
     min-height: 90vh;
     flex-direction: row;
+    background-color: white;
 
     @media (max-width: 760px) {
         flex-direction: column;
