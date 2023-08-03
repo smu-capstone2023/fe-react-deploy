@@ -1,17 +1,57 @@
 /** @jsxImportSource @emotion/react */
-import styled, { css } from "@emotion/react";
+import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import Profile from "pages/Home/Profile";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { AiOutlineRight } from "react-icons/ai";
 import Separator from "./Separator";
 import { app_info_list, my_util_list, setting_list } from "./data";
 import ListItem from "./ListItem";
 import PasswordChangeModal from "./PasswordChangeModal";
+import { foldingCss, onClickLogout, onClickRevoke } from "./utils";
+
+const SectionContainer = styled.div`
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+`;
 export default function MyPage() {
     const userInfoData = useSelector((state: any) => state.user);
-    const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(true);
+    const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
+    const [isOpenSchedule, setIsOpenSchedule] = useState<boolean | null>(null);
 
+    const handleOnClickModifyProfile = () => {
+        //TODO: 프로필 수정하기 기능 여기다가
+    };
+
+    const handleOnClickSettingItem = (item: string) => {
+        switch (item) {
+            case "학과인증":
+                window.location.href = "/major-certification";
+                break;
+            case "비밀번호 변경":
+                setChangePasswordModalOpen(true);
+                break;
+            case "로그아웃":
+                onClickLogout();
+                break;
+            case "탈퇴하기":
+                onClickRevoke();
+        }
+    };
+
+    const handleOnClickAppInfoItem = (item: string) => {
+        //TODO: 앱 정보 기능 추가되면 여기다가.
+    };
+
+    const handleOnClickMyUtilItem = (item: string) => {
+        //TODO: 내 유틸 기능 추가되면 여기다가.
+    };
+
+    const handleOnClickScheduleItem = () => {
+        //TODO: 내 시간표 보기 기능 여기다가.
+    };
     return (
         <>
             {changePasswordModalOpen && <PasswordChangeModal setModalOpen={setChangePasswordModalOpen}></PasswordChangeModal>}
@@ -35,10 +75,9 @@ export default function MyPage() {
                     }
                     mbti={userInfoData.mbti}
                 />
-                <div
+                <SectionContainer
                     css={css`
-                        padding: 20px;
-                        display: flex;
+                        flex-direction: row;
                         justify-content: space-between;
                     `}
                 >
@@ -50,41 +89,43 @@ export default function MyPage() {
                     >
                         내 시간표
                     </p>
-                    <AiOutlineRight size={24} color="#C0C0C0" />
-                </div>
-                <Separator />
+                    <div
+                        css={css`
+                            transition: transform 1s;
+                            ${isOpenSchedule && "transform: rotate(90deg)"}
+                            ${!isOpenSchedule && "transform: rotate(-90deg)"}
+                        `}
+                        onClick={() => {
+                            if (!isOpenSchedule) setIsOpenSchedule(true);
+                            else setIsOpenSchedule(false);
+                        }}
+                    >
+                        <AiOutlineRight size={24} color="#C0C0C0" />
+                    </div>
+                </SectionContainer>
                 <div
                     css={css`
-                        padding: 20px;
-                        display: flex;
-                        flex-direction: column;
+                        background-color: #f3f3f3;
+                        border-radius: 8px;
+                        animation: ${isOpenSchedule !== null ? (isOpenSchedule ? "fade-in 1s" : "fade-out 1s") : ""};
+                        animation-fill-mode: forwards;
+                        ${foldingCss};
                     `}
-                >
+                ></div>
+                <Separator />
+                <SectionContainer>
                     {my_util_list.map((item) => {
                         return <ListItem title={item} key={item} />;
                     })}
-                </div>
+                </SectionContainer>
                 <Separator />
-                <div
-                    css={css`
-                        padding: 20px;
-                        display: flex;
-                        flex-direction: column;
-                    `}
-                >
+                <SectionContainer>
                     {setting_list.map((item) => {
-                        return <ListItem title={item} key={item} />;
+                        return <ListItem title={item} key={item} onClick={() => handleOnClickSettingItem(item)} />;
                     })}
-                </div>
+                </SectionContainer>
                 <Separator />
-                <div
-                    css={css`
-                        padding: 20px;
-                        display: flex;
-                        flex-direction: column;
-                    `}
-                >
-                    {" "}
+                <SectionContainer>
                     <p
                         css={css`
                             color: #747474;
@@ -97,7 +138,7 @@ export default function MyPage() {
                     {app_info_list.map((item) => {
                         return <ListItem title={item} key={item} />;
                     })}
-                </div>
+                </SectionContainer>
             </div>
         </>
     );

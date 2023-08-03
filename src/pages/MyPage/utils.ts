@@ -2,7 +2,38 @@ import { changeNickname } from "api/User/changeNickname";
 import { changePassword } from "api/User/changePassword";
 import { revoke } from "api/User/revoke";
 import Swal from "sweetalert2";
+import { css } from "@emotion/react";
 
+export const foldingCss = css`
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translate3d(0, -20px, 0);
+            height: 0px;
+            margin: 0px;
+        }
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+            height: 200px;
+            margin: 20px;
+        }
+    }
+    @keyframes fade-out {
+        from {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+            height: 200px;
+            margin: 20px;
+        }
+        to {
+            opacity: 0;
+            transform: translate3d(0, -20px, 0);
+            height: 0px;
+            margin: 0px;
+        }
+    }
+`;
 export const onChangeNickname = (newNickname: string) => {
     changeNickname(newNickname).then((response) => {
         if (response) {
