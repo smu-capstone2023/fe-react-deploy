@@ -16,7 +16,6 @@ import { getUserInfo } from "./api/User/getUserInfo";
 import Footer from "./component/organism/Footer";
 import { useDispatch } from "react-redux";
 import getUserInfoData from "redux/actions/getUserInfoData";
-import NewViewPost from "./pages/NewViewPost";
 
 function App() {
     const setUserInfoInLocalStorage = (userName, schoolId, profileImageUrl, majorList) => {
@@ -72,7 +71,7 @@ function App() {
                     <Route path="/signup" element={<Signup />}></Route>
                     <Route path="/addpost/:board_id/:post_id" element={<AddPost />}></Route>
                     <Route path="/board/:major_id/:board_id" element={<Board />}></Route>
-                    <Route path="/viewpost/:board_id/:post_id" element={<NewViewPost />}></Route>
+                    <Route path="/viewpost/:board_id/:post_id" element={<ViewPost />}></Route>
                     <Route path="/user-certification" element={<UserCertificate />}></Route>
                     <Route path="/major-certification" element={<MajorCertificate />}></Route>
                 </Routes>
