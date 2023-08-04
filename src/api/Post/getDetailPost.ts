@@ -1,6 +1,7 @@
 import axios from "axios";
+import { IPost } from "pages/ViewPost/types";
 
-export const getDetailPost = (post_id) => {
+export const getDetailPost = (post_id: number | string): Promise<IPost | null> => {
     return axios
         .get(`${process.env.REACT_APP_SERVER_URL}/board/detail/${post_id}`, {
             headers: {
@@ -12,6 +13,6 @@ export const getDetailPost = (post_id) => {
         })
         .catch((response) => {
             console.error("getDetailPost", response);
-            return {};
+            return null;
         });
 };
