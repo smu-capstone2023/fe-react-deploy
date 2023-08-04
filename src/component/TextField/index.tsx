@@ -5,7 +5,6 @@ import { ReactElement } from "react";
 
 export default function TextField(props: TextFieldProps): ReactElement {
     const {
-        value = "",
         defaultValue = "",
         variant = "outlined",
         size = "small",
@@ -76,7 +75,7 @@ export default function TextField(props: TextFieldProps): ReactElement {
                     ${getVariantStyles()}
                     ${getColorStyles()}
                     ${getSizeStyles()}
-                    ${fullWidth ? `width: 100%` : ""}
+                    ${fullWidth && `width: 100%;`}
                     &:focus-within {
                         outline: none;
                         border-width: 1.8px;
@@ -84,11 +83,9 @@ export default function TextField(props: TextFieldProps): ReactElement {
                 `}
                 placeholder={placeholder}
                 defaultValue={defaultValue}
-                value={value}
                 type={type}
                 disabled={disabled}
                 onChange={onChange}
-                style={sx}
             />
         </>
     );
