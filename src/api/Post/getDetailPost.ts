@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IPost } from "pages/ViewPost/types";
+import { IPost } from "pages/NewViewPost/types";
 
 export const getDetailPost = (post_id: number | string): Promise<IPost | null> => {
     return axios
