@@ -7,7 +7,7 @@ export type TextFieldProps = {
     size?: "small" | "medium";
     fullWidth?: boolean;
     disabled?: boolean;
-    sx?: Object;
+    sx?: any;
     type?: string;
     color?: "primary" | "gray";
 };

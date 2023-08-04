@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const likeComment = (commentId) => {
+export const likePost = (postId: number | string): Promise<boolean | null> => {
     return axios
-        .put(
-            `${process.env.REACT_APP_SERVER_URL}/comment/like`,
+        .post(
+            `${process.env.REACT_APP_SERVER_URL}/board/like/`,
             {
-                comment_id: commentId,
+                post_id: postId,
             },
             {
                 headers: {
@@ -16,12 +16,10 @@ export const likeComment = (commentId) => {
         .then((response) => {
             if (response.data.status_code === 201) {
                 return true;
-            } else {
-                return false;
-            }
+            } else return false;
         })
         .catch((response) => {
-            console.error("likeComment", response);
-            return false;
+            console.error("likePost", response);
+            return null;
         });
 };
