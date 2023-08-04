@@ -13,6 +13,10 @@ const ViewPost = () => {
     const [isAuthor, setIsAuthor] = useState(false);
     const [inputComment, setInputComment] = useState("");
     const [imageUrlList, setImageUrlList] = useState([]);
+    const [emoticonOpen, setEmoticonButton] = useState(false);
+    const onClickOpenEmoticonView =() => {
+        setEmoticonButton(!emoticonOpen);
+    }
     const onClickAddComment = () => {
         addComment(post_id, inputComment).then((response) => {
             if (response) {
@@ -84,6 +88,9 @@ const ViewPost = () => {
             onClickAddComment={onClickAddComment}
             onDeletePost={onDeletePost}
             imageUrlList={imageUrlList}
+            onClickOpenEmoticonView={onClickOpenEmoticonView}
+            emoticonOpen={emoticonOpen}
+            inputComment={inputComment}
         />
     );
 };
