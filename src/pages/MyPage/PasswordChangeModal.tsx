@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import TextField from "component/TextField";
 import { GrClose } from "react-icons/gr";
 import { useToast } from "@chakra-ui/react";
@@ -8,7 +8,7 @@ import { checkPassword } from "api/User/checkPassword";
 import { useSelector } from "react-redux";
 
 export const PasswordChangeModal = ({ setModalOpen }: any) => {
-    const [oldPassword, setOldPassword] = useState("");
+    const oldPassword = useRef("");
     const [newPassword, setNewPassword] = useState("");
     const [oldPasswordCheck, setOldPasswordCheck] = useState(false);
     const [newPasswordCheck, setnewPasswordCheck] = useState("");
@@ -19,12 +19,11 @@ export const PasswordChangeModal = ({ setModalOpen }: any) => {
 
     const checkOldPassword = () => {
         const schoolId = userInfoData.school_id;
-        if (schoolId && oldPassword) {
-            checkPassword(schoolId, oldPassword).then((response) => {
-                setOldPasswordCheck(response);
+        if (schoolId && oldPassword.current) {
+            checkPassword(schoolId, oldPassword.current).then((response) => {
                 if (!response) {
                     setIncorrectPassword(true);
-                }
+                } else setOldPasswordCheck(true);
             });
         }
     };
@@ -34,8 +33,8 @@ export const PasswordChangeModal = ({ setModalOpen }: any) => {
     };
 
     const onClickChangePassword = () => {
-        if (oldPassword && newPassword) {
-            changePassword(oldPassword, newPassword).then((response) => {
+        if (oldPassword.current && newPassword) {
+            changePassword(oldPassword.current, newPassword).then((response) => {
                 if (response && newPassword === newPasswordCheck) {
                     setFinishChange(true);
                     localStorage.clear();
@@ -86,26 +85,25 @@ export const PasswordChangeModal = ({ setModalOpen }: any) => {
                                         size={"small"}
                                         color={"gray"}
                                         placeholder={"기존 비밀번호"}
-                                        value={oldPassword}
                                         onChange={(e: any) => {
-                                            setOldPassword(e.target.value);
+                                            oldPassword.current = e.target.value;
                                         }}
-                                    ></TextField>
+                                    />
                                     {incorrectPassword && <ModalWarningText>올바르지 않은 비밀번호입니다.</ModalWarningText>}
                                 </>
                             ) : (
                                 <>
                                     <ModalText>변경 비밀번호</ModalText>
                                     <TextField
+                                        value={newPassword}
                                         type={"password"}
                                         size={"small"}
                                         color={"gray"}
                                         placeholder={"신규 비밀번호"}
-                                        value={newPassword}
                                         onChange={(e: any) => {
                                             setNewPassword(e.target.value);
                                         }}
-                                    ></TextField>
+                                    />
                                     {checkPasswordExp(newPassword) ? (
                                         <></>
                                     ) : (
@@ -118,7 +116,6 @@ export const PasswordChangeModal = ({ setModalOpen }: any) => {
                                         size={"small"}
                                         color={"gray"}
                                         placeholder={"신규 비밀번호"}
-                                        value={newPasswordCheck}
                                         onChange={(e: any) => {
                                             setnewPasswordCheck(e.target.value);
                                         }}
@@ -129,7 +126,7 @@ export const PasswordChangeModal = ({ setModalOpen }: any) => {
                         </ModalInputLayout>
                         <ModalButton
                             onClick={() => {
-                                if (oldPassword) {
+                                if (oldPassword.current) {
                                     checkOldPassword();
                                 }
                                 if (oldPasswordCheck && newPassword === newPasswordCheck) {

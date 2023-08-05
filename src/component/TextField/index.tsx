@@ -15,6 +15,7 @@ export default function TextField(props: TextFieldProps): ReactElement {
         onChange,
         sx,
         type,
+        value,
     } = props;
 
     const getSizeStyles = () => {
@@ -81,6 +82,7 @@ export default function TextField(props: TextFieldProps): ReactElement {
                         border-width: 1.8px;
                     }
                 `}
+                value={value}
                 placeholder={placeholder}
                 defaultValue={defaultValue}
                 type={type}

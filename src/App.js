@@ -14,6 +14,8 @@ import Header from "./component/molecule/Header";
 import MajorCertificate from "./pages/MajorCertificate";
 import { getUserInfo } from "./api/User/getUserInfo";
 import Footer from "./component/organism/Footer";
+import { useDispatch } from "react-redux";
+import getUserInfoData from "redux/actions/getUserInfoData";
 
 function App() {
     const setUserInfoInLocalStorage = (userName, schoolId, profileImageUrl, majorList) => {
@@ -23,9 +25,12 @@ function App() {
         localStorage.setItem("majorList", JSON.stringify(majorList));
     };
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         console.log("render");
         if (localStorage.getItem("access_token")) {
+            dispatch(getUserInfoData());
             getUserInfo().then((response) => {
                 if (response === {}) {
                     alert("네트워크 문제! 잠시 다시 시도해주세요");
