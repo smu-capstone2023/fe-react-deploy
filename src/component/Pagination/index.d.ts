@@ -7,4 +7,5 @@ export type PaginationProps = {
     size?: "small" | "medium" | "large";
     sx?: object;
     siblingCount?: number;
+    setPassPage?: (page: number) => void;
 };

@@ -12,9 +12,10 @@ export default function Pagination(props: PaginationProps) {
         hideArrowButton = false,
         onChange =() =>{},
         shape = "circular",
-        size = "medium",
+        size = "small",
         sx,
-        siblingCount = 5,
+        siblingCount = 3,
+        setPassPage,
     } = props;
 
     const [page, setPage] = useState<number>(1);
@@ -40,9 +41,16 @@ export default function Pagination(props: PaginationProps) {
 
         if (answer.length < siblingCount * 2 - 1) {
             let addLeftLength = siblingCount * 2 - 1 - answer.length;
+            
             addLeftArray = [...pageList].slice(page - siblingCount - addLeftLength, page - siblingCount);
-            answer = [...addLeftArray, ...answer];
+
+            if (answer[0] === 1) {
+                addLeftArray = [];
+            }
+
+            answer = [...addLeftArray, ...answer];    
         }
+        console.log(answer)// TODO-Question: 이부분 왜 4번 렌더링 되는지 이해 안됨.(장현)
         return answer;
     };
 
@@ -52,6 +60,8 @@ export default function Pagination(props: PaginationProps) {
                 css={css`
                     gap: 5px;
                     display: flex;
+                    justify-content: center;
+                    margin: 30px 0px;
                     flex-wrap: wrap;
                     list-style: none;
                 `}
@@ -85,6 +95,9 @@ export default function Pagination(props: PaginationProps) {
                             onClick={() => {
                                 onChange(key);
                                 setPage(key);
+                                if (setPassPage) {
+                                    setPassPage(key);
+                                }      
                             }}
                         />
                     );
