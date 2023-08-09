@@ -12,6 +12,7 @@ interface Prop {
     isLiked?: boolean;
 }
 export default function CommentItem({ username, likes, date, content, onClickLike, isLiked }: Prop) {
+    const isImage = content?.includes("https://smus.s3");
     return (
         <div
             css={css`
@@ -60,15 +61,26 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                     )}
                 </div>
             </div>
-            <p
-                css={css`
-                    padding: 0 1rem;
-                    font-size: 0.9rem;
-                    font-family: nexon-regular;
-                `}
-            >
-                {content}
-            </p>
+            {isImage ? (
+                <img
+                    src={content}
+                    css={css`
+                        padding: 0 1rem;
+                        width: 80px;
+                    `}
+                />
+            ) : (
+                <p
+                    css={css`
+                        padding: 0 1rem;
+                        font-size: 0.9rem;
+                        font-family: nexon-regular;
+                    `}
+                >
+                    {content}
+                </p>
+            )}
+
             <div
                 css={css`
                     display: flex;

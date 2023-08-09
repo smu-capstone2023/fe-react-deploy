@@ -15,13 +15,16 @@ import TextField from "component/TextField";
 import { IoPaperPlane } from "react-icons/io5";
 import { addComment } from "api/Comment/addComment";
 import { position, useToast } from "@chakra-ui/react";
+import { AiOutlineSmile } from "react-icons/ai";
+import EmoticonView from "./EmotionView";
 
 export default function ViewPost() {
     const { post_id, board_id } = useParams();
-    const [type, setType] = useState<IPost>();
     const [post, setPost] = useState<IPost>();
+    const selectedEmotion = useRef<string | null>(null);
     const comment = useRef<string>();
     const toast = useToast();
+    const [isOpenEmotion, setIsOpenEmotion] = useState<boolean>(false);
     const onHandlePostLike = () => {
         if (post_id)
             likePost(post_id).then((res) => {
@@ -35,9 +38,9 @@ export default function ViewPost() {
         });
     };
 
-    const onHandleAddComment = () => {
+    const onSaveComment = () => {
         if (comment.current) {
-            addComment(type, post_id, comment.current).then((res) => {
+            addComment("글", post_id, comment.current).then((res) => {
                 if (res) window.location.reload();
             });
         } else {
@@ -45,7 +48,20 @@ export default function ViewPost() {
         }
     };
 
+    const onHandleEmotion = (url: string | null) => {
+        selectedEmotion.current = url;
+    };
+
+    const onSaveEmotion = () => {
+        if (selectedEmotion.current) {
+            addComment("사진", post_id, selectedEmotion.current).then((res) => {
+                if (res) window.location.reload();
+            });
+        } else toast({ title: "이모티콘을 선택해주세요", position: "top" });
+    };
+
     useEffect(() => {
+        selectedEmotion.current = null;
         if (post_id) {
             getDetailPost(post_id).then((res) => {
                 if (res) {
@@ -101,7 +117,7 @@ export default function ViewPost() {
                 <div
                     css={css`
                         width: 100%;
-                        height: 3rem;
+                        min-height: 3rem;
                         position: fixed;
                         bottom: 1rem;
                         z-index: 1;
@@ -124,18 +140,31 @@ export default function ViewPost() {
                             variant="filled"
                             fullWidth={true}
                             placeholder="댓글을 입력해주세요"
+                            disabled={isOpenEmotion}
                             onChange={(e: { target: { value: string } }) => (comment.current = e.target.value)}
                         />
                         <div
-                            onClick={onHandleAddComment}
                             css={css`
+                                display: flex;
+                                gap: 5px;
                                 position: absolute;
                                 right: 0.5rem;
                             `}
                         >
-                            <IoPaperPlane size={20} />
+                            <AiOutlineSmile size={20} onClick={() => setIsOpenEmotion(!isOpenEmotion)} />
+                            <IoPaperPlane
+                                size={20}
+                                onClick={() => {
+                                    if (isOpenEmotion) {
+                                        onSaveEmotion();
+                                    } else {
+                                        onSaveComment();
+                                    }
+                                }}
+                            />
                         </div>
                     </div>
+                    {isOpenEmotion && <EmoticonView onChange={onHandleEmotion} />}
                 </div>
             </div>
         </>
