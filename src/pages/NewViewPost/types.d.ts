@@ -23,6 +23,7 @@ export interface IPost {
     isScrap: boolean;
     is_author: boolean;
     comments?: IComment[];
+    type: string;
     created_time: string;
     updated_time?: string;
 }

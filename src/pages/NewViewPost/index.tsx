@@ -18,6 +18,7 @@ import { position, useToast } from "@chakra-ui/react";
 
 export default function ViewPost() {
     const { post_id, board_id } = useParams();
+    const [type, setType] = useState<IPost>();
     const [post, setPost] = useState<IPost>();
     const comment = useRef<string>();
     const toast = useToast();
@@ -36,7 +37,7 @@ export default function ViewPost() {
 
     const onHandleAddComment = () => {
         if (comment.current) {
-            addComment(post_id, comment.current).then((res) => {
+            addComment(type, post_id, comment.current).then((res) => {
                 if (res) window.location.reload();
             });
         } else {
