@@ -11,15 +11,10 @@ const ViewPost = () => {
     const [author, setAuthor] = useState({});
     const [commentList, setCommentList] = useState([]);
     const [isAuthor, setIsAuthor] = useState(false);
-    const [commentType, setCommentType] = useState('');
     const [inputComment, setInputComment] = useState("");
     const [imageUrlList, setImageUrlList] = useState([]);
-    const [emoticonOpen, setEmoticonButton] = useState(false);
-    const onClickOpenEmoticonView =() => {
-        setEmoticonButton(!emoticonOpen);
-    }
     const onClickAddComment = () => {
-        addComment(commentType, post_id, inputComment).then((response) => {
+        addComment(post_id, inputComment).then((response) => {
             if (response) {
                 window.location.reload();
             } else {
@@ -89,10 +84,6 @@ const ViewPost = () => {
             onClickAddComment={onClickAddComment}
             onDeletePost={onDeletePost}
             imageUrlList={imageUrlList}
-            onClickOpenEmoticonView={onClickOpenEmoticonView}
-            emoticonOpen={emoticonOpen}
-            inputComment={inputComment}
-            setCommentType={setCommentType}
         />
     );
 };

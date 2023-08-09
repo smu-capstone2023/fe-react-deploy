@@ -5,7 +5,6 @@ import styled from "styled-components";
 import CommentList from "../organism/CommentList";
 import PostContent from "../organism/PostContent";
 import AddComment from "../organism/AddComment";
-import EmoticonView from "../organism/EmoticonView"
 
 /**
  * @param post: {post_id, comments, likes, title, content, created_time}
@@ -20,7 +19,7 @@ import EmoticonView from "../organism/EmoticonView"
  * @returns
  */
 
-const ViewPostView = ({ boardId, post, author, isAuthor, commentList, setInputComment, onClickAddComment, onDeletePost, imageUrlList, onClickOpenEmoticonView, emoticonOpen, inputComment, setCommentType}) => {
+const ViewPostView = ({ boardId, post, author, isAuthor, commentList, setInputComment, onClickAddComment, onDeletePost, imageUrlList }) => {
     return (
         <ViewPostLayout>
             <PostMarginView>
@@ -37,8 +36,7 @@ const ViewPostView = ({ boardId, post, author, isAuthor, commentList, setInputCo
             <PostMarginView>
                 <CommentList commentList={commentList} />
             </PostMarginView>
-            <AddComment onChangeComment={setInputComment} onClickAddComment={onClickAddComment} onClickOpenEmoticonView={onClickOpenEmoticonView} inputComment={inputComment} setCommentType={setCommentType}/>
-            {emoticonOpen && <EmoticonView/>}
+            <AddComment onChangeComment={setInputComment} onClickAddComment={onClickAddComment} />
         </ViewPostLayout>
     );
 };
