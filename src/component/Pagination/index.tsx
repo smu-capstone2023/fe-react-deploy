@@ -12,10 +12,9 @@ export default function Pagination(props: PaginationProps) {
         hideArrowButton = false,
         onChange =() =>{},
         shape = "circular",
-        size = "small",
+        size = "medium",
         sx,
-        siblingCount = 3,
-        setPassPage,
+        siblingCount = 5,
     } = props;
 
     const [page, setPage] = useState<number>(1);
@@ -94,10 +93,7 @@ export default function Pagination(props: PaginationProps) {
                             page={key}
                             onClick={() => {
                                 onChange(key);
-                                setPage(key);
-                                if (setPassPage) {
-                                    setPassPage(key);
-                                }      
+                                setPage(key);    
                             }}
                         />
                     );

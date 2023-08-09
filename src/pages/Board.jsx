@@ -12,13 +12,13 @@ const Board = () => {
     const majorList = localStorage.getItem("majorList");
     let { board_id, major_id } = useParams();
     const [postListLength, setPostListLength] = useState();
-    const [PassPage, setPassPage] = useState(1);
+    const [ChangePage, setChangePage] = useState(1);
     const per_page = 20;
     
     useEffect(() => {
         if (majorList) setMajorOptions(JSON.parse(localStorage.majorList));
 
-        getBoardPagingByPage(board_id,PassPage,per_page,'').then((response) => {
+        getBoardPagingByPage(board_id,ChangePage,per_page,'').then((response) => {
             const filtered_PostListData = response.posts.map(({ username, views, updated_time, ...filtered }) => filtered);
             setAllOfPostListData(filtered_PostListData);
             setPostListData(filtered_PostListData);
@@ -29,7 +29,7 @@ const Board = () => {
             const filtered_BoardList = response.map(({ is_can_anonymous, is_notice, ...filtered }) => filtered);
             setBoardList(filtered_BoardList);
         });
-    }, [PassPage]);
+    }, [ChangePage]);
 
     const onChangeMajorSelect = (value) => {
         majorOptions.map((item) => {
@@ -71,7 +71,7 @@ const Board = () => {
                 currentBoardId={board_id}
                 onChangeSearch={onChangeSearch}
                 postListLength={postListLength}
-                setPassPage={setPassPage}
+                setChangePage={setChangePage}
             />
         </>
     );
