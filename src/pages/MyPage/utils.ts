@@ -1,5 +1,6 @@
 import { changeNickname } from "api/User/changeNickname";
 import { changePassword } from "api/User/changePassword";
+import { changeMbti } from "api/User/changeMbti";
 import { revoke } from "api/User/revoke";
 import Swal from "sweetalert2";
 import { css } from "@emotion/react";
@@ -34,6 +35,18 @@ export const foldingCss = css`
         }
     }
 `;
+
+export const onChangeMbti = (newMbti: string) => {
+    changeMbti(newMbti).then((response)=>{
+        if (response) {
+            Swal.fire(`MBTI가 ${newMbti}로 바뀌었습니다!!`);
+            localStorage.setItem("mbti", newMbti);
+        } else {
+            Swal.fire("네트워크 오류!", "잠시후 다시 시도해주세요!", "error");
+        }
+    })
+};
+
 export const onChangeNickname = (newNickname: string) => {
     changeNickname(newNickname).then((response) => {
         if (response) {
