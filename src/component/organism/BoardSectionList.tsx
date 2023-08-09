@@ -13,7 +13,7 @@ import PreviewListItem from "../molecule/PreviewListItem";
 interface Prop {
     title: string;
     headerOnClick: () => void;
-    previewList: { title: string; comments: number | string; likeCount: number | string; post_id: number | string }[];
+    previewList: { title: string; comments: number | string; likes: number | string; post_id: number | string }[];
 }
 export const BoardSectionList = ({ title, headerOnClick, previewList }: Prop) => {
     return (
@@ -29,19 +29,21 @@ export const BoardSectionList = ({ title, headerOnClick, previewList }: Prop) =>
                     (
                         previewItem,
                         index //이부분 입니다.
-                    ) => (
-                        <PreviewListItem
-                            key={index}
-                            title={previewItem.title}
-                            onClick={() => {
-                                localStorage.getItem("school_id")
-                                    ? (window.location.href = `/viewpost/1/${previewItem.post_id}`)
-                                    : alert("로그인이 필요한 기능입니다.");
-                            }}
-                            commentCount={previewItem.comments}
-                            likeCount={previewItem.likeCount}
-                        />
-                    )
+                    ) => {
+                        return (
+                            <PreviewListItem
+                                key={index}
+                                title={previewItem.title}
+                                onClick={() => {
+                                    localStorage.getItem("school_id")
+                                        ? (window.location.href = `/viewpost/1/${previewItem.post_id}`)
+                                        : alert("로그인이 필요한 기능입니다.");
+                                }}
+                                commentCount={previewItem.comments}
+                                likeCount={previewItem.likes}
+                            />
+                        );
+                    }
                 )}
         </div>
     );
