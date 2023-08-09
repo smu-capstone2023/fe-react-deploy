@@ -3,7 +3,17 @@ import { PaginationItemProps } from "./index.d";
 import { css } from "@emotion/react";
 
 export default function PaginationItem(props: PaginationItemProps) {
-    const { color = "primary", shape = "circular", size = "medium", selected = false, sx, hide = false, page = "1", onClick } = props;
+    const { 
+        color = "primary", 
+        shape = "circular", 
+        size = "medium", 
+        selected = false, 
+        sx, 
+        hide = false, 
+        page = "1", 
+        onClick,
+    } = props;
+
     const getColorStyles = () => {
         switch (color) {
             case "gray":

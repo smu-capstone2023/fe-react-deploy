@@ -7,6 +7,7 @@ import InputBox from "../molecule/InputBox";
 import styled from "styled-components";
 import Button from "../molecule/Button";
 import BoardSelectBox from "../molecule/BoardSelectBox";
+import Pagination from "component/Pagination";
 
 /**
  * @param boardList : {id: number, name: string}[]
@@ -20,6 +21,8 @@ import BoardSelectBox from "../molecule/BoardSelectBox";
  * @param onClickPost: (value: number) => void
  * @param onClickAddPost: () => void
  * @param onChangeSearch: (value: string) => void
+ * @param postListLength: number
+ * @param setChangePage: number
  * @returns
  */
 
@@ -34,6 +37,8 @@ const BoardView = ({
     onClickPost,
     onClickAddPost,
     onChangeSearch,
+    postListLength,
+    setChangePage,
 }) => {
     return (
         <div
@@ -60,6 +65,7 @@ const BoardView = ({
                     </ButtonLayout>
                 </SearchAndWriteLayout>
                 <PostListView postListData={postListData} onClickPost={onClickPost}></PostListView>
+                <Pagination count={postListLength} onChange={setChangePage} size="small" siblingCount="3"></Pagination>
             </BoardLayout>
         </div>
     );

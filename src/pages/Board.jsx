@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import BoardView from "../component/template/BoardView";
-import { getBoardPostList } from "../api/board/getBoardPostList";
 import { getMajorsBoardList } from "../api/board/getMajorsBoardList";
 import { useParams } from "react-router-dom";
+import { getBoardPagingByPage } from "api/BoardApi/getBoardPagingByPage";
 
 const Board = () => {
     const [majorOptions, setMajorOptions] = useState([]);
@@ -10,23 +10,26 @@ const Board = () => {
     const [boardList, setBoardList] = useState([]);
     const [allOfPostListData, setAllOfPostListData] = useState([]);
     const majorList = localStorage.getItem("majorList");
-
     let { board_id, major_id } = useParams();
-
+    const [postListLength, setPostListLength] = useState();
+    const [ChangePage, setChangePage] = useState(1);
+    const per_page = 20;
+    
     useEffect(() => {
         if (majorList) setMajorOptions(JSON.parse(localStorage.majorList));
 
-        getBoardPostList(board_id).then((response) => {
-            const filtered_PostListData = response.map(({ username, views, updated_time, ...filtered }) => filtered);
+        getBoardPagingByPage(board_id,ChangePage,per_page,'').then((response) => {
+            const filtered_PostListData = response.posts.map(({ username, views, updated_time, ...filtered }) => filtered);
             setAllOfPostListData(filtered_PostListData);
             setPostListData(filtered_PostListData);
+            setPostListLength(response.total_page);
         });
 
         getMajorsBoardList(major_id).then((response) => {
             const filtered_BoardList = response.map(({ is_can_anonymous, is_notice, ...filtered }) => filtered);
             setBoardList(filtered_BoardList);
         });
-    }, []);
+    }, [ChangePage]);
 
     const onChangeMajorSelect = (value) => {
         majorOptions.map((item) => {
@@ -67,6 +70,8 @@ const Board = () => {
                 currentMajorId={major_id}
                 currentBoardId={board_id}
                 onChangeSearch={onChangeSearch}
+                postListLength={postListLength}
+                setChangePage={setChangePage}
             />
         </>
     );
