@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const updatePost = ({ title, content, post_id, is_anonymous, image_url_list }) => {
     return axios
@@ -12,7 +12,7 @@ export const updatePost = ({ title, content, post_id, is_anonymous, image_url_li
             },
             {
                 headers: {
-                    Authorization: localStorage.getItem('access_token'),
+                    Authorization: localStorage.getItem("access_token"),
                 },
             }
         )
