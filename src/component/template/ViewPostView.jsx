@@ -20,7 +20,7 @@ import EmoticonView from "../organism/EmoticonView"
  * @returns
  */
 
-const ViewPostView = ({ boardId, post, author, isAuthor, commentList, setInputComment, onClickAddComment, onDeletePost, imageUrlList, onClickOpenEmoticonView, emoticonOpen, inputComment}) => {
+const ViewPostView = ({ boardId, post, author, isAuthor, commentList, setInputComment, onClickAddComment, onDeletePost, imageUrlList, onClickOpenEmoticonView, emoticonOpen, inputComment, setCommentType}) => {
     return (
         <ViewPostLayout>
             <PostMarginView>
@@ -37,7 +37,7 @@ const ViewPostView = ({ boardId, post, author, isAuthor, commentList, setInputCo
             <PostMarginView>
                 <CommentList commentList={commentList} />
             </PostMarginView>
-            <AddComment onChangeComment={setInputComment} onClickAddComment={onClickAddComment} onClickOpenEmoticonView={onClickOpenEmoticonView} inputComment={inputComment}/>
+            <AddComment onChangeComment={setInputComment} onClickAddComment={onClickAddComment} onClickOpenEmoticonView={onClickOpenEmoticonView} inputComment={inputComment} setCommentType={setCommentType}/>
             {emoticonOpen && <EmoticonView/>}
         </ViewPostLayout>
     );

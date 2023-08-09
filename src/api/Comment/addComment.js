@@ -6,11 +6,12 @@ import axios from "axios";
  * @return boolean
  */
 
-export const addComment = (post_id, content) => {
+export const addComment = (type, post_id, content) => {
     return axios
         .post(
             `${process.env.REACT_APP_SERVER_URL}/comment/create/`,
             {
+                type: type,
                 post_id: post_id,
                 content: content,
             },

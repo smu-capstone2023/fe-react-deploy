@@ -11,6 +11,7 @@ const ViewPost = () => {
     const [author, setAuthor] = useState({});
     const [commentList, setCommentList] = useState([]);
     const [isAuthor, setIsAuthor] = useState(false);
+    const [commentType, setCommentType] = useState('');
     const [inputComment, setInputComment] = useState("");
     const [imageUrlList, setImageUrlList] = useState([]);
     const [emoticonOpen, setEmoticonButton] = useState(false);
@@ -18,7 +19,7 @@ const ViewPost = () => {
         setEmoticonButton(!emoticonOpen);
     }
     const onClickAddComment = () => {
-        addComment(post_id, inputComment).then((response) => {
+        addComment(commentType, post_id, inputComment).then((response) => {
             if (response) {
                 window.location.reload();
             } else {
@@ -91,6 +92,7 @@ const ViewPost = () => {
             onClickOpenEmoticonView={onClickOpenEmoticonView}
             emoticonOpen={emoticonOpen}
             inputComment={inputComment}
+            setCommentType={setCommentType}
         />
     );
 };

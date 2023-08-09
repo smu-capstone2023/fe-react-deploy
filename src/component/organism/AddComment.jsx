@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TextField from "component/TextField";
 import { AiOutlineSmile } from "react-icons/ai";
 import { IoSend } from "react-icons/io5";
+
 /**
  *
  * @param onChangeComment {(value: string) => void}
@@ -10,12 +11,16 @@ import { IoSend } from "react-icons/io5";
  * @returns
  */
 
-const AddComment = ({ onChangeComment, onClickAddComment, onClickOpenEmoticonView, inputComment}) => {
+const AddComment = ({ onChangeComment, onClickAddComment, onClickOpenEmoticonView, inputComment, setCommentType}) => {
     return (
         <>
             <AddCommentLayout>
                 <TextFieldWrapper>
-                    <TextField color={"gray"} placeholder={"댓글 입력"} onChange={(e)=>{onChangeComment(e.target.value)}} value={inputComment}></TextField>
+                    <TextField color={"gray"} placeholder={"댓글 입력"} onChange={(e)=>{
+                        const textComment = e.target.value;
+                        onChangeComment(textComment);
+                        setCommentType("글");
+                        }} value={inputComment}></TextField>
                 </TextFieldWrapper>
                 <ButtonWrapper>
                     <EmoticonViewButton onClick={onClickOpenEmoticonView}/>
