@@ -13,7 +13,7 @@ const CommentList = ({ commentList }) => {
             {commentList &&
                 commentList.map((comment, index) => {
                     const { comment_id, likes, comments, content, create_time, user_id, username } = comment;
-                    console.log(user_id);
+                    // console.log(user_id);
                     return (
                         <CommentWrapper key={index}>
                             <CommentContentView
