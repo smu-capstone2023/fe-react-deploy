@@ -17,9 +17,11 @@ import { addComment } from "api/Comment/addComment";
 import { position, useToast } from "@chakra-ui/react";
 import { AiOutlineSmile } from "react-icons/ai";
 import EmoticonView from "./EmotionView";
+import { getBoardDetailInfoByPostId } from "api/BoardApi/getBoardDetailInfoByPostId";
 
 export default function ViewPost() {
     const { post_id, board_id } = useParams();
+    const [boardInfo, setBoardInfo] = useState<string>();
     const [post, setPost] = useState<IPost>();
     const selectedEmotion = useRef<string | null>(null);
     const comment = useRef<string>();
@@ -63,6 +65,9 @@ export default function ViewPost() {
     useEffect(() => {
         selectedEmotion.current = null;
         if (post_id) {
+            getBoardDetailInfoByPostId(post_id).then((res) => {
+                setBoardInfo(`${res.major_name} ${res.board_name}`);
+            });
             getDetailPost(post_id).then((res) => {
                 if (res) {
                     setPost(res);
@@ -86,6 +91,15 @@ export default function ViewPost() {
                     }
                 `}
             >
+                <p
+                    css={css`
+                        padding: 1rem;
+                        font-family: nexon-regular;
+                        color: #888;
+                    `}
+                >
+                    {boardInfo}
+                </p>
                 <PostHeader username={post?.username} onClick={onHandlePostLike} isLiked={post?.isLiked} />
                 <PostContainer>
                     <PostTitle>{post?.title}</PostTitle>
