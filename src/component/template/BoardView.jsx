@@ -21,7 +21,6 @@ import Pagination from "component/Pagination";
  * @param onClickPost: (value: number) => void
  * @param onClickAddPost: () => void
  * @param onChangeSearch: (value: string) => void
- * @param postListLength: number
  * @param setChangePage: number
  * @returns
  */
@@ -37,7 +36,6 @@ const BoardView = ({
     onClickPost,
     onClickAddPost,
     onChangeSearch,
-    postListLength,
     setChangePage,
 }) => {
     return (
@@ -65,7 +63,7 @@ const BoardView = ({
                     </ButtonLayout>
                 </SearchAndWriteLayout>
                 <PostListView postListData={postListData} onClickPost={onClickPost}></PostListView>
-                <Pagination count={postListLength} onChange={setChangePage} size="small" siblingCount="3"></Pagination>
+                <Pagination count={postListData.length} onChange={setChangePage} size="small" siblingCount="3"></Pagination>
             </BoardLayout>
         </div>
     );

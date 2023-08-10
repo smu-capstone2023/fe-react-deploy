@@ -34,9 +34,8 @@ const BoardSelectBoxLayout = styled.div`
     overflow: scroll;
     white-space: nowrap;
     display: flex;
-    border-bottom: 0.3px solid #b6b6b6;
     gap: 0.5rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
 
     ::-webkit-scrollbar {
         display: none; /* Chrome, Safari, Opera*/
@@ -49,7 +48,6 @@ const BoardSelectdiv = styled.div`
     color: ${(props) => props.color};
     display: flex;
     font-family: nexon-regular;
-    padding: 0.8em 0em 1em 0em;
     cursor: pointer;
 
     @media screen and (max-width: 500px) {
