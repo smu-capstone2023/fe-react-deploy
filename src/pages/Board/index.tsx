@@ -21,6 +21,7 @@ export default function Board() {
     let { board_id, major_id } = useParams();
     const [changePage, setChangePage] = useState(1);
     const searchKeyword = useRef<string>();
+    const [paginationCount, setPaginationCount] = useState<number>(1);
     const per_page = 20;
 
     useEffect(() => {
@@ -33,6 +34,7 @@ export default function Board() {
         if (board_id)
             getBoardPagingByPage(board_id, changePage, per_page, "", "").then((response) => {
                 setPostListData(response.posts);
+                setPaginationCount(response.total_page);
             });
     }, [board_id, changePage]);
 
@@ -143,7 +145,7 @@ export default function Board() {
                         />
                     ))}
 
-                <Pagination count={postListData.length} onChange={setChangePage} size="small" siblingCount={3}></Pagination>
+                <Pagination count={paginationCount} onChange={setChangePage} size="small" siblingCount={3}></Pagination>
             </BoardLayout>
             <div
                 css={css`
