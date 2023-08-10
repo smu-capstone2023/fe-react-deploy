@@ -9,6 +9,7 @@ import Separator from "./Separator";
 import { app_info_list, my_util_list, setting_list } from "./data";
 import ListItem from "./ListItem";
 import PasswordChangeModal from "./PasswordChangeModal";
+import MbtiChangeModal from "./MbtiChangeModal";
 import { foldingCss, onClickLogout, onClickRevoke } from "./utils";
 
 const SectionContainer = styled.div`
@@ -18,6 +19,7 @@ const SectionContainer = styled.div`
 `;
 export default function MyPage() {
     const userInfoData = useSelector((state: any) => state.user);
+    const [changeMbtiModalOpen, setChangeMbtiModalOpen] = useState(false);
     const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
     const [isOpenSchedule, setIsOpenSchedule] = useState<boolean | null>(null);
 
@@ -29,6 +31,9 @@ export default function MyPage() {
         switch (item) {
             case "학과인증":
                 window.location.href = "/major-certification";
+                break;
+            case "MBTI 변경":
+                setChangeMbtiModalOpen(true);
                 break;
             case "비밀번호 변경":
                 setChangePasswordModalOpen(true);
@@ -59,6 +64,7 @@ export default function MyPage() {
                 flex: 1;
             `}
         >
+            {changeMbtiModalOpen && <MbtiChangeModal setModalOpen={setChangeMbtiModalOpen}/>}
             {changePasswordModalOpen && <PasswordChangeModal setModalOpen={setChangePasswordModalOpen}></PasswordChangeModal>}
             <div
                 css={css`
