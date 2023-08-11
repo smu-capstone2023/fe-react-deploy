@@ -17,8 +17,6 @@ export const MbtiChangeModal = ({ setModalOpen }: any) => {
     const onclickChangeMbti = (mbti: string) => {
         if (mbti) {
             changeMbti(mbti).then((response)=>{
-                console.log(mbti);
-                console.log(typeof mbti)
                 if (response) {
                     toast({ 
                         title: "MBTI가 성공적으로 변경되었습니다.", 
