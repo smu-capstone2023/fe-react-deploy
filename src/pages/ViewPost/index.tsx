@@ -19,7 +19,11 @@ import { AiOutlineSmile } from "react-icons/ai";
 import EmoticonView from "./EmotionView";
 import { getBoardDetailInfoByPostId } from "api/BoardApi/getBoardDetailInfoByPostId";
 
+import axios, { AxiosResponse } from 'axios';
+import { requestReportPost } from "api/Post/requestReportPost";
+
 export default function ViewPost() {
+    
     const { post_id, board_id } = useParams();
     const [boardInfo, setBoardInfo] = useState<string>();
     const [post, setPost] = useState<IPost>();
@@ -27,6 +31,23 @@ export default function ViewPost() {
     const comment = useRef<string>();
     const toast = useToast();
     const [isOpenEmotion, setIsOpenEmotion] = useState<boolean>(false);
+    
+
+
+    const ReportPost = () => {
+        requestReportPost(post_id).then((response) => { 
+            // console.log(response)
+            if (response === 400) {
+                alert('이미 신고하신 게시물입니다.');
+            }//catch 로그 보면 400과 201이 동시에 뜸.
+
+            else {
+                alert('성공적으로 신고되었습니다.')
+            }
+        });
+    }
+    
+
     const onHandlePostLike = () => {
         if (post_id)
             likePost(post_id).then((res) => {
@@ -39,7 +60,7 @@ export default function ViewPost() {
             if (res !== null) window.location.reload();
         });
     };
-
+    
     const onSaveComment = () => {
         if (comment.current) {
             addComment("글", post_id, comment.current).then((res) => {
@@ -100,6 +121,14 @@ export default function ViewPost() {
                 >
                     {boardInfo}
                 </p>
+                <button 
+                    onClick={ReportPost}
+                    css={css`
+                    width: 100%;
+                    background:red;
+                    
+                `}
+                >🔔</button>
                 <PostHeader username={post?.username} onClick={onHandlePostLike} isLiked={post?.isLiked} />
                 <PostContainer>
                     <PostTitle>{post?.title}</PostTitle>

@@ -12,11 +12,9 @@ export const requestReportPost = (post_id) => {
             }
         )
         .then((response) => {
-            console.log(response);
-            return true;
+            return response.response.data.status_code;
         })
         .catch((response) => {
-            console.log(response);
-            return false;
+            return response.response.data.status_code;
         });
 };
