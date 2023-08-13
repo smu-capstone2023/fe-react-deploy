@@ -1,5 +1,4 @@
 import { instance } from "api/interceptor";
-import axios from "axios";
 
 export const getSmungEmoticonUrl = (): Promise<string[]> => {
     return instance

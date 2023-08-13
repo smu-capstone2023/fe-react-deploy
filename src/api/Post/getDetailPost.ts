@@ -1,5 +1,4 @@
 import { instance } from "api/interceptor";
-import axios from "axios";
 import { IPost } from "pages/ViewPost/types";
 
 export const getDetailPost = (post_id: number | string): Promise<IPost | null> => {

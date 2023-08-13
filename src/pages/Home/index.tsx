@@ -9,7 +9,7 @@ import { UserDto } from "dto/user";
 import { getUserInfo } from "api/User/getUserInfo";
 import LostPreview from "component/organism/LostPreview";
 import { getLostBoardPreviewList } from "api/board/getLostBoardPreviewList";
-import { getBoardPostPreview } from "api/BoardApi/getBoardPostPreview";
+import { getBoardPostPreview } from "api/board/getBoardPostPreview";
 
 export interface IPreview {
     post_id: number;
@@ -19,9 +19,9 @@ export interface IPreview {
     likes: number;
 }
 export default function Home() {
-    const [hotPreviewList, setHotPreviewList] = useState([]);
+    const [hotPreviewList, setHotPreviewList] = useState<IPreview[]>([]);
     const [userInfo, setUserInfo] = useState<UserDto>();
-    const [lostPreviewList, setLostPreviewList] = useState([]);
+    const [lostPreviewList, setLostPreviewList] = useState<IPreview[]>([]);
     const [majorPreviewList, setMajorPreviewList] = useState<IPreview[]>([]);
     useEffect(() => {
         getHotBoardPreviewList().then((response) => {

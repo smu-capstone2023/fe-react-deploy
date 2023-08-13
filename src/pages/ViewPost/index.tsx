@@ -17,7 +17,7 @@ import { addComment } from "api/Comment/addComment";
 import { position, useToast } from "@chakra-ui/react";
 import { AiOutlineSmile } from "react-icons/ai";
 import EmoticonView from "./EmotionView";
-import { getBoardDetailInfoByPostId } from "api/BoardApi/getBoardDetailInfoByPostId";
+import { getBoardDetailInfoByPostId } from "api/board/getBoardDetailInfoByPostId";
 
 export default function ViewPost() {
     const { post_id, board_id } = useParams();

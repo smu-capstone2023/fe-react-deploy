@@ -1,5 +1,5 @@
 import { instance } from "api/interceptor";
-import axios from "axios";
+
 
 export const likePost = (postId: number | string): Promise<boolean | null> => {
     return instance

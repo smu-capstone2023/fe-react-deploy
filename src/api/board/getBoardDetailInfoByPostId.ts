@@ -1,5 +1,4 @@
 import { instance } from "api/interceptor";
-import axios from "axios";
 
 interface IResponse {
     major_id: number;

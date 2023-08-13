@@ -1,5 +1,4 @@
 import { instance } from "api/interceptor";
-import axios from "axios";
 
 export const getBoardPostSearchCursor = (keyword: string, last_id: string | number, per_page: string | number) => {
     return instance
