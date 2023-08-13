@@ -64,7 +64,7 @@ export default function MyPage() {
                 flex: 1;
             `}
         >
-            {changeMbtiModalOpen && <MbtiChangeModal setModalOpen={setChangeMbtiModalOpen}/>}
+            {changeMbtiModalOpen && <MbtiChangeModal setModalOpen={setChangeMbtiModalOpen} />}
             {changePasswordModalOpen && <PasswordChangeModal setModalOpen={setChangePasswordModalOpen}></PasswordChangeModal>}
             <div
                 css={css`

@@ -1,5 +1,4 @@
 import { instance } from "api/interceptor";
-import axios from "axios";
 import { IPreview } from "pages/Home";
 
 export const getHotBoardPreviewList = (): Promise<IPreview[]> => {
