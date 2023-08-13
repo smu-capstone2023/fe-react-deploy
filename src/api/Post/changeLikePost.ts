@@ -1,12 +1,11 @@
 import { instance } from "api/interceptor";
+import axios from "axios";
 
-export const revoke = () => {
+export const changeLikePost = (post_id: string | number) => {
     return instance
-        .delete(`/auth/revoke`, {})
+        .put(`/board/like/${post_id}`)
         .then((response: any) => {
-            if (response.status === 201) {
-                return true;
-            }
+            return true;
         })
         .catch((response: any) => {
             console.log(response);
