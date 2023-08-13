@@ -1,17 +1,13 @@
-import axios from "axios";
+import { instance } from "api/interceptor";
 import { UserDto } from "dto/user";
 
 export const getUserInfo = (): Promise<UserDto> => {
-    return axios
-        .get(`${process.env.REACT_APP_SERVER_URL}/auth/user_info`, {
-            headers: {
-                Authorization: localStorage.getItem("access_token"),
-            },
-        })
-        .then((response) => {
+    return instance
+        .get(`/auth/user_info`, {})
+        .then((response: any) => {
             return response.data;
         })
-        .catch((response) => {
+        .catch((response: any) => {
             console.error("getUserInfo", response);
             return null;
         });

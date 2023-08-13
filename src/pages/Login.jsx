@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LoginView from "../component/template/LoginView";
-import { loginSite } from "../api/User/LoginSite";
+import { loginSite } from "api/User/loginSite";
 import { useToast } from "@chakra-ui/react";
 import { getUserInfo } from "../api/User/getUserInfo";
 const Login = () => {

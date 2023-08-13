@@ -1,14 +1,14 @@
 import axios from "axios";
 
-export const revoke = () => {
+export const checkDuplicationSchoolId = (school_id: number | string) => {
     return axios
-        .delete(`${process.env.REACT_APP_SERVER_URL}/auth/revoke`, {
+        .get(`${process.env.REACT_APP_SERVER_URL}/auth/check_school_id`, {
             headers: {
-                Authorization: localStorage.getItem("access_token"),
+                school_id: school_id,
             },
         })
         .then((response) => {
-            if (response.status === 201) {
+            if (response.data.status_code === 200) {
                 return true;
             }
         })

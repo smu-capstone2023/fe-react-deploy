@@ -1,5 +1,4 @@
 import { instance } from "api/interceptor";
-import axios from "axios";
 
 export const changeMbti = (mbti: string) => {
     return instance
