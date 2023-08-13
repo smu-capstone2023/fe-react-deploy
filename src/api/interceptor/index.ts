@@ -1,7 +1,6 @@
 import axios from "axios";
 
 function setInterceptor(instance: any) {
-    instance.default.baseURL = `${process.env.REACT_APP_SERVER_URL}`;
     instance.interceptors.request.use(function (config: any) {
         config.headers.Authorization = localStorage.getItem("access_token");
         return config;
