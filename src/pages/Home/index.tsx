@@ -11,11 +11,18 @@ import LostPreview from "component/organism/LostPreview";
 import { getLostBoardPreviewList } from "api/board/getLostBoardPreviewList";
 import { getBoardPostPreview } from "api/BoardApi/getBoardPostPreview";
 
+export interface IPreview {
+    post_id: number;
+    title: string;
+    comments: number;
+    created_time: string;
+    likes: number;
+}
 export default function Home() {
     const [hotPreviewList, setHotPreviewList] = useState([]);
     const [userInfo, setUserInfo] = useState<UserDto>();
     const [lostPreviewList, setLostPreviewList] = useState([]);
-    const [majorPreviewList, setMajorPreviewList] = useState([]);
+    const [majorPreviewList, setMajorPreviewList] = useState<IPreview[]>([]);
     useEffect(() => {
         getHotBoardPreviewList().then((response) => {
             if (response) {

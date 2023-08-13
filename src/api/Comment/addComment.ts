@@ -6,7 +6,7 @@ import { instance } from "api/interceptor";
  * @return boolean
  */
 
-export const addComment = (type: "사진" | "글", post_id: number, content: string): Promise<boolean> => {
+export const addComment = (type: "사진" | "글", post_id: number | string, content: string): Promise<boolean> => {
     return instance
         .post(`/comment/create/`, {
             type: type,

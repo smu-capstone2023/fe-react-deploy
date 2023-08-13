@@ -1,3 +1,4 @@
+import { instance } from "api/interceptor";
 import axios from "axios";
 
 interface IResponse {
@@ -9,17 +10,13 @@ interface IResponse {
     is_notice: boolean;
 }
 export const getBoardDetailInfoByPostId = (post_id: string | number): Promise<IResponse> => {
-    return axios
-        .get(`${process.env.REACT_APP_SERVER_URL}/board/info_by_postid/${post_id}`, {
-            headers: {
-                Authorization: localStorage.getItem("access_token"),
-            },
-        })
-        .then((response) => {
+    return instance
+        .get(`/board/info_by_postid/${post_id}`)
+        .then((response: any) => {
             return response.data;
         })
-        .catch((response) => {
-            console.log(response);
+        .catch((error: any) => {
+            console.error("getBoardDetailInfoByPostId", error);
             return {};
         });
 };
