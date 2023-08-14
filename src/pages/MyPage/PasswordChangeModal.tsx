@@ -171,8 +171,8 @@ const ModalContainer = styled.div`
     padding: 40px;
 
     @media screen and (max-width: 768px) {
-        padding: 40px 10px;
-    }
+        width: 90%;
+        padding: 20px;
 `;
 
 const ModalLayout = styled.div`
