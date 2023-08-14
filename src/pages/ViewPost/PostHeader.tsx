@@ -2,14 +2,12 @@
 import { css } from "@emotion/react";
 import Avatar from "component/Avatar";
 import { AiOutlineHeart, AiTwotoneHeart } from "react-icons/ai";
-import { IoEllipsisVertical } from "react-icons/io5";
 import DetailFunction from "./DetailFunction";
 
 interface Prop {
     username?: string;
     onClickHeart?: () => void;
     isLiked?: boolean;
-    onClickEllipsis?: () => void;
     postId?: string;
     userId?: string;
     isAuthor?: boolean;
@@ -18,11 +16,10 @@ interface Prop {
 export default function PostHeader({ 
     username = "알 수 없음", 
     onClickHeart = () => {}, 
-    onClickEllipsis = () => {}, 
     isLiked = false,
-    postId ='',
-    userId ='',
-    isAuthor =true,
+    postId,
+    userId,
+    isAuthor,
     
     
     }: Prop) {
@@ -58,7 +55,7 @@ export default function PostHeader({
             ) : (
                 <AiOutlineHeart style={{flex: 1}} size={25} color="#fa9090" onClick={onClickHeart} />
             )}
-            <DetailFunction size={25} color="#888888" postId={postId} userId={userId} isAuthor={isAuthor} onClick={onClickEllipsis} />
+            <DetailFunction size={25} color="#888888" postId={postId} userId={userId} isAuthor={isAuthor} />
         </div>
     );
 }

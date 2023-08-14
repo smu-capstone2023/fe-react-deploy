@@ -15,10 +15,9 @@ import TextField from "component/TextField";
 import { IoPaperPlane } from "react-icons/io5";
 import { addComment } from "api/Comment/addComment";
 import { position, useToast } from "@chakra-ui/react";
-import { AiOutlineSmile, AiTwotoneAlert } from "react-icons/ai";
+import { AiOutlineSmile,  } from "react-icons/ai";
 import EmoticonView from "./EmotionView";
 import { getBoardDetailInfoByPostId } from "api/BoardApi/getBoardDetailInfoByPostId";
-import { requestReportPost } from "api/Post/requestReportPost";
 
 export default function ViewPost() {
     
@@ -30,35 +29,12 @@ export default function ViewPost() {
     const toast = useToast();
     const [isOpenEmotion, setIsOpenEmotion] = useState<boolean>(false);
     
-
-
-    const ReportPost = () => {
-        requestReportPost(post_id).then((response) => { 
-            if (response === 400) {
-                alert('이미 신고하신 게시물입니다.');
-            }
-            else if (response === 201) {
-                alert('성공적으로 신고되었습니다.')
-            }
-            else {
-                alert('네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.')
-            }
-        });
-    }
-    
-
     const onHandlePostLike = () => {
         if (post_id)
             likePost(post_id).then((res) => {
                 if (res !== null) window.location.reload();
             });
     };
-
-    const [isDivVisible, setIsDivVisible] = useState(false);
-
-    const onHandleELLipsis = () => {
-        setIsDivVisible(!isDivVisible);
-    }
 
     const onHandleCommentLike = (commentId: number) => {
         likeComment(commentId).then((res) => {
@@ -127,11 +103,7 @@ export default function ViewPost() {
                     {boardInfo}
                 </p>
 
-                <PostHeader username={post?.username} onClickHeart={onHandlePostLike} onClickEllipsis={onHandleELLipsis} isLiked={post?.isLiked} />
-                {isDivVisible && (
-                    <Ellipsis_items onClick={ReportPost}> 신고하기 <AiTwotoneAlert color="#888888" />
-                    </Ellipsis_items>
-                )}
+                <PostHeader username={post?.username} onClickHeart={onHandlePostLike} isLiked={post?.isLiked} postId={post_id} />
                 <PostContainer>
                     <PostTitle>{post?.title}</PostTitle>
                     <PostContent>{post?.content}</PostContent>
@@ -233,25 +205,4 @@ const PostContent = styled.p`
     white-space: pre-wrap;
     font-family: nexon-regular;
     font-size: 0.9rem;
-`;
-
-const Ellipsis_items = styled.div`
-    display: flex;
-    font-size: .8rem;
-    border-radius: 8px;
-    background: #FFF;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    position: absolute; 
-    right: 50px; 
-    width: 35%;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    gap: 20%;
-    top: 150px;
-
-    @media (max-width: 450px) {
-        width: 40%;
-        font-size: .7rem;
-    }
 `;
