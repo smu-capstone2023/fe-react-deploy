@@ -3,15 +3,31 @@ import { css } from "@emotion/react";
 import Avatar from "component/Avatar";
 import { AiOutlineHeart, AiTwotoneHeart } from "react-icons/ai";
 import { IoEllipsisVertical } from "react-icons/io5";
+import DetailFunction from "./DetailFunction";
+
 interface Prop {
     username?: string;
-    onClick_Heart?: () => void;
+    onClickHeart?: () => void;
     isLiked?: boolean;
-    onClick_Ellipsis?: () => void;
+    onClickEllipsis?: () => void;
+    postId?: string;
+    userId?: string;
+    isAuthor?: boolean;
 }
 
-export default function PostHeader({ username = "알 수 없음", onClick_Heart = () => {}, onClick_Ellipsis = () => {}, isLiked = false }: Prop) {
-    return (
+export default function PostHeader({ 
+    username = "알 수 없음", 
+    onClickHeart = () => {}, 
+    onClickEllipsis = () => {}, 
+    isLiked = false,
+    postId ='',
+    userId ='',
+    isAuthor =true,
+    
+    
+    }: Prop) {
+    
+        return (
         <div
             css={css`
                 display: flex;
@@ -38,11 +54,11 @@ export default function PostHeader({ username = "알 수 없음", onClick_Heart 
                 </p>
             </div>
             {isLiked ? (
-                <AiTwotoneHeart style={{flex: 1}} size={25} color="#fa9090" onClick={onClick_Heart} />
+                <AiTwotoneHeart style={{flex: 1}} size={25} color="#fa9090" onClick={onClickHeart} />
             ) : (
-                <AiOutlineHeart style={{flex: 1}} size={25} color="#fa9090" onClick={onClick_Heart} />
+                <AiOutlineHeart style={{flex: 1}} size={25} color="#fa9090" onClick={onClickHeart} />
             )}
-            <IoEllipsisVertical style={{flex: 1}} size={25} color="#888888" onClick={onClick_Ellipsis}/>
+            <DetailFunction size={25} color="#888888" postId={postId} userId={userId} isAuthor={isAuthor} onClick={onClickEllipsis} />
         </div>
     );
 }

@@ -127,7 +127,7 @@ export default function ViewPost() {
                     {boardInfo}
                 </p>
 
-                <PostHeader username={post?.username} onClick_Heart={onHandlePostLike} onClick_Ellipsis={onHandleELLipsis} isLiked={post?.isLiked} />
+                <PostHeader username={post?.username} onClickHeart={onHandlePostLike} onClickEllipsis={onHandleELLipsis} isLiked={post?.isLiked} />
                 {isDivVisible && (
                     <Ellipsis_items onClick={ReportPost}> 신고하기 <AiTwotoneAlert color="#888888" />
                     </Ellipsis_items>
