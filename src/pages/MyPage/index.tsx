@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Profile from "pages/Home/Profile";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AiOutlineRight } from "react-icons/ai";
 import Separator from "./Separator";
@@ -10,6 +10,7 @@ import { app_info_list, my_util_list, setting_list } from "./data";
 import ListItem from "./ListItem";
 import PasswordChangeModal from "./PasswordChangeModal";
 import MbtiChangeModal from "./MbtiChangeModal";
+import ScheduleImgUpload from "./ScheduleImgUpload";
 import { foldingCss, onClickLogout, onClickRevoke } from "./utils";
 
 const SectionContainer = styled.div`
@@ -22,6 +23,18 @@ export default function MyPage() {
     const [changeMbtiModalOpen, setChangeMbtiModalOpen] = useState(false);
     const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
     const [isOpenSchedule, setIsOpenSchedule] = useState<boolean | null>(null);
+    const [scheduleImage, setSchduleImage] = useState<string>('');
+
+    useEffect(()=>{
+        if (userInfoData.time_table) {
+            console.log(userInfoData.time_table);
+            setSchduleImage(userInfoData.time_table + 'jpg');
+        } 
+    }, [userInfoData]);
+
+    const img: HTMLImageElement = new Image();
+    img.src = scheduleImage;
+    const scheduleImageHeight: number = img.height/2;
 
     const handleOnClickModifyProfile = () => {
         //TODO: 프로필 수정하기 기능 여기다가
@@ -102,6 +115,7 @@ export default function MyPage() {
                     >
                         내 시간표
                     </p>
+                    <ScheduleImgUpload title={"수정하기"}/>
                     <div
                         css={css`
                             transition: transform 1s;
@@ -113,16 +127,25 @@ export default function MyPage() {
                             else setIsOpenSchedule(false);
                         }}
                     >
-                        <AiOutlineRight size={24} color="#C0C0C0" />
+                        <AiOutlineRight size={24} color="#C0C0C0"/>
                     </div>
                 </SectionContainer>
                 <div
                     css={css`
-                        background-color: #f3f3f3;
+                        background-color: ${scheduleImage ? '#ffffff' : '#f3f3f3'};
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        background-image: url(${scheduleImage});
                         border-radius: 8px;
-                        animation: ${isOpenSchedule !== null ? (isOpenSchedule ? "fade-in 1s" : "fade-out 1s") : ""};
-                        animation-fill-mode: forwards;
+                        height: ${isOpenSchedule ? `${scheduleImageHeight}px` : '0'};
+                        max-height: ${isOpenSchedule ? 'none' : '0'};
+                        overflow: hidden;
+                        transition: height 0.4s ease-out, max-height 0.3s ease-out;
                         ${foldingCss};
+                        // animation: ${isOpenSchedule !== null ? (isOpenSchedule ? "fade-in 1s" : "fade-out 1s") : ""};
+                        // animation-fill-mode: forwards;
+                        // ${foldingCss};
                     `}
                 ></div>
                 <Separator />
