@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { getBoardPagingByPage } from "api/BoardApi/getBoardPagingByPage";
+import { getBoardPagingByPage } from "api/board/getBoardPagingByPage";
 import { getMajorsBoardList } from "api/board/getMajorsBoardList";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";

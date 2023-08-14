@@ -1,17 +1,13 @@
-import axios from "axios";
+import { instance } from "api/interceptor";
 import { IPost } from "pages/ViewPost/types";
 
 export const getDetailPost = (post_id: number | string): Promise<IPost | null> => {
-    return axios
-        .get(`${process.env.REACT_APP_SERVER_URL}/board/detail/${post_id}`, {
-            headers: {
-                Authorization: localStorage.getItem("access_token"),
-            },
-        })
-        .then((response) => {
+    return instance
+        .get(`/board/detail/${post_id}`, {})
+        .then((response: any) => {
             return response.data;
         })
-        .catch((response) => {
+        .catch((response: any) => {
             console.error("getDetailPost", response);
             return null;
         });

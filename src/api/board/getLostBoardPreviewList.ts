@@ -1,14 +1,14 @@
 import { instance } from "api/interceptor";
-import { IBoard } from "pages/Board/type";
+import { IPreview } from "pages/Home";
 
-export const getMajorsBoardList = (major_id: string | number): Promise<IBoard[]> => {
+export const getLostBoardPreviewList = (): Promise<IPreview[]> => {
     return instance
-        .get(`/board/board_list/${major_id}`)
+        .get(`/board/lost`)
         .then((response: any) => {
             return response.data;
         })
         .catch((response: any) => {
-            console.log(response);
+            console.error("getLostBoardPreviewList", response);
             return [];
         });
 };

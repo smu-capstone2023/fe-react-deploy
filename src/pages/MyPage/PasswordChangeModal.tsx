@@ -20,7 +20,7 @@ export const PasswordChangeModal = ({ setModalOpen }: any) => {
     const checkOldPassword = () => {
         const schoolId = userInfoData.school_id;
         if (schoolId && oldPassword.current) {
-            checkPassword(schoolId, oldPassword.current).then((response) => {
+            checkPassword(schoolId, oldPassword.current).then((response: any) => {
                 if (!response) {
                     setIncorrectPassword(true);
                 } else setOldPasswordCheck(true);
@@ -34,7 +34,7 @@ export const PasswordChangeModal = ({ setModalOpen }: any) => {
 
     const onClickChangePassword = () => {
         if (oldPassword.current && newPassword) {
-            changePassword(oldPassword.current, newPassword).then((response) => {
+            changePassword(oldPassword.current, newPassword).then((response: any) => {
                 if (response && newPassword === newPasswordCheck) {
                     setFinishChange(true);
                     localStorage.clear();

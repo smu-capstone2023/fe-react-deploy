@@ -17,7 +17,7 @@ import { addComment } from "api/Comment/addComment";
 import { position, useToast } from "@chakra-ui/react";
 import { AiOutlineSmile } from "react-icons/ai";
 import EmoticonView from "./EmotionView";
-import { getBoardDetailInfoByPostId } from "api/BoardApi/getBoardDetailInfoByPostId";
+import { getBoardDetailInfoByPostId } from "api/board/getBoardDetailInfoByPostId";
 
 export default function ViewPost() {
     const { post_id, board_id } = useParams();
@@ -41,7 +41,7 @@ export default function ViewPost() {
     };
 
     const onSaveComment = () => {
-        if (comment.current) {
+        if (comment.current && post_id) {
             addComment("글", post_id, comment.current).then((res) => {
                 if (res) window.location.reload();
             });
@@ -55,7 +55,7 @@ export default function ViewPost() {
     };
 
     const onSaveEmotion = () => {
-        if (selectedEmotion.current) {
+        if (selectedEmotion.current && post_id) {
             addComment("사진", post_id, selectedEmotion.current).then((res) => {
                 if (res) window.location.reload();
             });
