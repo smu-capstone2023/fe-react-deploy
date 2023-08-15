@@ -4,7 +4,6 @@ import { changeTimeTable } from "../../api/User/ChangeTimeTable";
 
 /**
  * @param title : string
- * @param onClickImageButton : () => {}
  * @returns
  */
 

@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Profile from "pages/Home/Profile";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AiOutlineRight } from "react-icons/ai";
 import Separator from "./Separator";
@@ -27,8 +27,7 @@ export default function MyPage() {
 
     useEffect(()=>{
         if (userInfoData.time_table) {
-            console.log(userInfoData.time_table);
-            setSchduleImage(userInfoData.time_table + 'jpg');
+            setSchduleImage(userInfoData.time_table);
         } 
     }, [userInfoData]);
 
@@ -141,11 +140,8 @@ export default function MyPage() {
                         height: ${isOpenSchedule ? `${scheduleImageHeight}px` : '0'};
                         max-height: ${isOpenSchedule ? 'none' : '0'};
                         overflow: hidden;
-                        transition: height 0.4s ease-out, max-height 0.3s ease-out;
+                        transition: height 0.5s ease-out, max-height 0.5s ease-out;
                         ${foldingCss};
-                        // animation: ${isOpenSchedule !== null ? (isOpenSchedule ? "fade-in 1s" : "fade-out 1s") : ""};
-                        // animation-fill-mode: forwards;
-                        // ${foldingCss};
                     `}
                 ></div>
                 <Separator />
