@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const changeTimeTable = (image) => {
+export const changeTimeTable = (imageUrl) => {
     return axios
         .put(
             `${process.env.REACT_APP_SERVER_URL}/auth/edit/timetable`,
             {
-                time_table: image,
+                time_table: imageUrl,
             },
             {
                 headers: {
