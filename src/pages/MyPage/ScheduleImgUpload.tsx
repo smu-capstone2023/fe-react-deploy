@@ -41,25 +41,35 @@ export const ScheduleImgUpload = ({title} :any) => {
     };
 
     return (
-        <p style={{
-            fontFamily: "nexon-regular",
-            fontSize: "13px",
-            color: "#4169E1",
-            margin: "3px 0 5px 15px",
-            verticalAlign: "middle",
-            flex: "1",
+        <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "20px",
         }}
-            onClick={handleClick}
         >
-            <input
-                type="file"
-                accept="image/jpg, image/jpeg, image/png"
-                style={{ display: "none" }}
-                ref={fileInput}
-                onChange={handleGetImageUrl}
-            />
-        {title}
-        </p>
+            <button style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                border: "solid 1px #4169E1",
+                borderRadius: "5px",
+                background: "#ffffff",
+                padding: "10px 30px",
+                color: "#4169E1",
+            }} 
+                onClick={handleClick}
+            >
+                <input
+                    type="file"
+                    accept="image/jpg, image/jpeg, image/png"
+                    style={{ display: "none" }}
+                    ref={fileInput}
+                    onChange={handleGetImageUrl}
+                />
+            {title}
+            </button>
+        </div>
     );
 }
 
