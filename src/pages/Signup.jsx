@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SignUpView from "../component/template/SignUpView";
-import { signUpSite } from "../api/User/SignUpSite";
+import { signUpSite } from "../api/User/signUpSite";
 
 const Signup = () => {
     const [id, setId] = useState("");

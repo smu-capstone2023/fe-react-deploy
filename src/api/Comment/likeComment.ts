@@ -1,27 +1,18 @@
-import axios from "axios";
+import { instance } from "api/interceptor";
 
 export const likeComment = (commentId: number): Promise<boolean | null> => {
-    console.log(commentId);
-    return axios
-        .put(
-            `${process.env.REACT_APP_SERVER_URL}/comment/like`,
-            {
-                comment_id: `${commentId}`,
-            },
-            {
-                headers: {
-                    Authorization: localStorage.getItem("access_token"),
-                },
-            }
-        )
-        .then((response) => {
+    return instance
+        .put(`/comment/like`, {
+            comment_id: `${commentId}`,
+        })
+        .then((response: any) => {
             if (response.data.status_code === 201) {
                 return true;
             } else {
                 return false;
             }
         })
-        .catch((response) => {
+        .catch((response: any) => {
             console.error("likeComment", response);
             return null;
         });

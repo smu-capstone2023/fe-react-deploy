@@ -20,7 +20,7 @@ export const PasswordChangeModal = ({ setModalOpen }: any) => {
     const checkOldPassword = () => {
         const schoolId = userInfoData.school_id;
         if (schoolId && oldPassword.current) {
-            checkPassword(schoolId, oldPassword.current).then((response) => {
+            checkPassword(schoolId, oldPassword.current).then((response: any) => {
                 if (!response) {
                     setIncorrectPassword(true);
                 } else setOldPasswordCheck(true);
@@ -34,7 +34,7 @@ export const PasswordChangeModal = ({ setModalOpen }: any) => {
 
     const onClickChangePassword = () => {
         if (oldPassword.current && newPassword) {
-            changePassword(oldPassword.current, newPassword).then((response) => {
+            changePassword(oldPassword.current, newPassword).then((response: any) => {
                 if (response && newPassword === newPasswordCheck) {
                     setFinishChange(true);
                     localStorage.clear();
@@ -168,8 +168,8 @@ const ModalContainer = styled.div`
     padding: 40px;
 
     @media screen and (max-width: 768px) {
-        padding: 40px 10px;
-    }
+        width: 90%;
+        padding: 20px;
 `;
 
 const ModalLayout = styled.div`

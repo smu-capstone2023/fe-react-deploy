@@ -8,7 +8,7 @@ interface Prop {
     onChange: (url: string | null) => void;
 }
 const EmoticonView = ({ onChange }: Prop) => {
-    const [smungImgUrl, setSmungImgUrl] = useState([]);
+    const [smungImgUrl, setSmungImgUrl] = useState<string[]>([]);
     const [selectedId, setSelectedId] = useState<number | null>(null);
 
     useEffect(() => {

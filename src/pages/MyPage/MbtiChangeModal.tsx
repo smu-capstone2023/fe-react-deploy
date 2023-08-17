@@ -8,7 +8,7 @@ import MbtiButton from "./MbtiButton";
 
 export const MbtiChangeModal = ({ setModalOpen }: any) => {
     const toast = useToast();
-    const [mbti, setMbti] = useState<string | null>('');
+    const [mbti, setMbti] = useState<string | null>("");
 
     const closeModal = () => {
         setModalOpen(false);
@@ -16,30 +16,30 @@ export const MbtiChangeModal = ({ setModalOpen }: any) => {
 
     const onclickChangeMbti = (mbti: string) => {
         if (mbti) {
-            changeMbti(mbti).then((response)=>{
+            changeMbti(mbti).then((response: any) => {
                 if (response) {
-                    toast({ 
-                        title: "MBTI가 성공적으로 변경되었습니다.", 
-                        position: "top", 
-                        isClosable: true, 
-                        variant: "subtle" 
+                    toast({
+                        title: "MBTI가 성공적으로 변경되었습니다.",
+                        position: "top",
+                        isClosable: true,
+                        variant: "subtle",
                     });
                     setTimeout(() => {
                         window.location.href = "/";
                     }, 1000);
                 } else {
-                    toast({ 
-                        title: "MBTI 변경에 실패했습니다. 다시 시도해주세요.", 
-                        position: "top", 
-                        isClosable: true, 
-                        variant: "subtle" 
+                    toast({
+                        title: "MBTI 변경에 실패했습니다. 다시 시도해주세요.",
+                        position: "top",
+                        isClosable: true,
+                        variant: "subtle",
                     });
                     setTimeout(() => {
                         window.location.href = "/";
                     }, 1000);
                     window.location.reload();
                 }
-            })
+            });
         }
     };
 
@@ -55,8 +55,17 @@ export const MbtiChangeModal = ({ setModalOpen }: any) => {
                 <ModalLayout>
                     <ModalTitle>MBTI를 선택해주세요</ModalTitle>
                     <ListButtonContainer>
-                        {mbti_list.map((item :string)=> {
-                            return <MbtiButton title={item} key={item} onClick={()=>{setMbti(item)}} background={mbti === item ? "#4169e1" : ''}></MbtiButton>;
+                        {mbti_list.map((item: string) => {
+                            return (
+                                <MbtiButton
+                                    title={item}
+                                    key={item}
+                                    onClick={() => {
+                                        setMbti(item);
+                                    }}
+                                    background={mbti === item ? "#4169e1" : ""}
+                                ></MbtiButton>
+                            );
                         })}
                     </ListButtonContainer>
                     <ModalButton
@@ -67,7 +76,9 @@ export const MbtiChangeModal = ({ setModalOpen }: any) => {
                                 alert("변경할 MBTI를 선택해주세요");
                             }
                         }}
-                    >저장하기</ModalButton>
+                    >
+                        저장하기
+                    </ModalButton>
                 </ModalLayout>
             </ModalContainer>
         </ModalBackground>
@@ -133,10 +144,10 @@ const ListButtonContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex: 1;
-    width: 20rem; 
-    flex-wrap: wrap; 
-    gap: 10px; 
-    justify-content: center; 
+    width: 20rem;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
     align-items: center;
 
     @media screen and (max-width: 768px) {
@@ -151,10 +162,10 @@ const ListButtonContainer = styled.div`
 const ModalButton = styled.button`
     display: flex;
     heigth: 40px;
-    border: solid 1px #4169E1;
+    border: solid 1px #4169e1;
     border-radius: 5px;
     padding: 10px 30px;
-    background: #FFFFFF;
+    background: #ffffff;
     margin-left: auto;
 
     @media screen and (max-width: 768px) {

@@ -37,7 +37,7 @@ export const foldingCss = css`
 `;
 
 export const onChangeMbti = (newMbti: string) => {
-    changeMbti(newMbti).then((response) => {
+    changeMbti(newMbti).then((response: any) => {
         if (response) {
             Swal.fire(`MBTI가 ${newMbti}로 바뀌었습니다!!`);
             localStorage.setItem("mbti", newMbti);
@@ -48,7 +48,7 @@ export const onChangeMbti = (newMbti: string) => {
 };
 
 export const onChangeNickname = (newNickname: string) => {
-    changeNickname(newNickname).then((response) => {
+    changeNickname(newNickname).then((response: any) => {
         if (response) {
             Swal.fire(`닉네임이 ${newNickname}로 바뀌었습니다!!`);
             localStorage.setItem("user_name", newNickname);
@@ -59,7 +59,7 @@ export const onChangeNickname = (newNickname: string) => {
 };
 
 export const onChangePassword = (newPassword: string, oldPassword: string) => {
-    changePassword(oldPassword, newPassword).then((response) => {
+    changePassword(oldPassword, newPassword).then((response: any) => {
         if (response) {
             Swal.fire(`비밀번호가 변경되었습니다.!!`);
         } else {
@@ -76,7 +76,7 @@ export const onClickRevoke = () => {
         cancelButtonText: "아니오",
     }).then((result) => {
         if (result.isConfirmed) {
-            revoke().then((response) => {
+            revoke().then((response: any) => {
                 if (response === true) {
                     alert("성공적으로 탈퇴되었습니다");
                     localStorage.clear();

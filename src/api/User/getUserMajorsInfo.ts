@@ -1,11 +1,12 @@
 import { instance } from "api/interceptor";
-import { IBoard } from "pages/Board/type";
 
-export const getMajorsBoardList = (major_id: string | number): Promise<IBoard[]> => {
+export const getUserMajorsInfo = () => {
     return instance
-        .get(`/board/board_list/${major_id}`)
+        .get(`/auth/usermajors`, {})
         .then((response: any) => {
-            return response.data;
+            if (response.data.status_code === 200) {
+                return response.data;
+            }
         })
         .catch((response: any) => {
             console.log(response);
