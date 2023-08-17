@@ -16,7 +16,7 @@ export const foldingCss = css`
         to {
             opacity: 1;
             transform: translateY(0);
-            height: 400px;
+            height: 100%;
             margin: 10px 20px 0 20px;
         }
     }
@@ -24,7 +24,7 @@ export const foldingCss = css`
         from {
             opacity: 1;
             transform: translateY(0);
-            height: 400px;
+            height: 100%;
             margin: 10px 20px 0 20px;
         }
         to {
@@ -37,14 +37,14 @@ export const foldingCss = css`
 `;
 
 export const onChangeMbti = (newMbti: string) => {
-    changeMbti(newMbti).then((response)=>{
+    changeMbti(newMbti).then((response) => {
         if (response) {
             Swal.fire(`MBTI가 ${newMbti}로 바뀌었습니다!!`);
             localStorage.setItem("mbti", newMbti);
         } else {
             Swal.fire("네트워크 오류!", "잠시후 다시 시도해주세요!", "error");
         }
-    })
+    });
 };
 
 export const onChangeNickname = (newNickname: string) => {
@@ -77,14 +77,14 @@ export const onClickRevoke = () => {
     }).then((result) => {
         if (result.isConfirmed) {
             revoke().then((response) => {
-            if (response === true) {
-                alert("성공적으로 탈퇴되었습니다");
-                localStorage.clear();
-                window.location.href = "/";
-            } else {
-                alert("네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
-            }
-        });
+                if (response === true) {
+                    alert("성공적으로 탈퇴되었습니다");
+                    localStorage.clear();
+                    window.location.href = "/";
+                } else {
+                    alert("네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+                }
+            });
         }
     });
 };
