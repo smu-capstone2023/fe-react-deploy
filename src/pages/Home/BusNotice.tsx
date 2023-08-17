@@ -1,18 +1,31 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { useState } from "react";
-import { AiOutlineRight } from "react-icons/ai";
-import { foldingCss } from "../../pages/MyPage/utils";
-
+import { useState, useEffect } from "react";
+import { BusNoticeType } from "../../pages/Home/index";
+ 
 const SectionContainer = styled.div`
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     display: flex;
     flex-direction: column;
 `;
 
-export default function BusNotice() {
-    const [isOpenSchedule, setIsOpenSchedule] = useState<boolean | null>(null);
+interface BusNoticeProps {
+    BusNoticeLists: BusNoticeType[];
+}
+
+export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
+    const [toDayBusContent, setTodayBusContent] = useState<string | null>(null);
+
+    const findTodayBusList = () => {
+        if (BusNoticeLists) {
+            setTodayBusContent(BusNoticeLists[0].title);
+        }
+    }
+
+    useEffect(()=>{
+        findTodayBusList();
+    }, []);
 
     return (
         <>
@@ -26,50 +39,59 @@ export default function BusNotice() {
                     css={css`
                         font-family: nexon-regular;
                         font-size: 16px;
+                        font-weight: 700;
                     `}
                 >
-                    오늘의 버스 우회 정보
+                    ⚠️ 오늘의 우회정보
                 </p>
+            </SectionContainer>
+            {toDayBusContent === null &&
                 <div
                     css={css`
-                        transition: transform 1s;
-                        ${isOpenSchedule && "transform: rotate(90deg)"}
-                        ${!isOpenSchedule && "transform: rotate(-90deg)"}
+                        dislpay: flex;
+                        padding: 10px 20px 20px 20px;
                     `}
-                    onClick={() => {
-                        if (!isOpenSchedule) setIsOpenSchedule(true);
-                        else setIsOpenSchedule(false);
-                    }}
                 >
-                    <AiOutlineRight size={24} color="#C0C0C0" />
-                </div>
-            </SectionContainer>
-            <div
-                css={css`
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: #f3f3f3;
-                    border-radius: 8px;
-                    animation: ${isOpenSchedule !== null ? (isOpenSchedule ? "fade-in 1s" : "fade-out 1s") : ""};
-                    animation-fill-mode: forwards;
-                    ${foldingCss};
-                `}
-            >
-                {isOpenSchedule && 
                     <p
                         css={css`
-                            font-family: nexon-light;
+                            font-family: nexon-regular;
                             font-size: 16px;
-                            text-align: center;
-                            color: #7A7A7A;
+                            color: #000000;
                         `}
                     >
-                        오늘의 버스 우회 정보가
-                        <br/>업로드 되지 않았습니다 :)
+                        오늘 예정된 우회 정보가 없습니다! 🥳
                     </p>
-                }
-            </div>
+                </div>
+            }
+            {toDayBusContent !== null &&
+                <div
+                    css={css`
+                        display: flex;
+                        padding: 0 20px 20px 20px;
+                        flex-direction: column;
+                    `}
+                >
+                    <p
+                        css={css`
+                            display: flex;
+                            padding : 10px 0;
+                            font-family: nexon-light;
+                            font-size: 16px;
+                        `}
+                    >{toDayBusContent}</p>
+                    <button
+                        css={css`
+                            display: flex;
+                            padding: 0 10px;
+                            height: 20px;
+                            border-radius: 5px;
+                            color: #4169E1;
+                            margin-left: auto;
+                        `}
+                        onClick={() => window.open('https://topis.seoul.go.kr/notice/openNoticeList.do', '_blank')}
+                    >더 자세히 보러가기 &gt;&gt;</button>
+                </div>
+            }
         </>
     );
 }

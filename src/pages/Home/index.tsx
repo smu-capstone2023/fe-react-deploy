@@ -20,11 +20,20 @@ export interface IPreview {
     created_time: string;
     likes: number;
 }
+export interface BusNoticeType {
+    post_id: string;
+    created_time: string;
+    updated_time: string;
+    title: string;
+    imageUrls: string[];
+    content: string;
+}
 export default function Home() {
     const [hotPreviewList, setHotPreviewList] = useState<IPreview[]>([]);
     const [userInfo, setUserInfo] = useState<UserDto>();
     const [lostPreviewList, setLostPreviewList] = useState<IPreview[]>([]);
     const [majorPreviewList, setMajorPreviewList] = useState<IPreview[]>([]);
+    const [BusNoticeList, setBusNoticeList] = useState<BusNoticeType[]>([]);
     useEffect(() => {
         getHotBoardPreviewList().then((response) => {
             if (response) {
@@ -46,7 +55,7 @@ export default function Home() {
         }
         getBusNotice().then((res :any)=>{
             if (res) {
-                console.log(res);
+                setBusNoticeList(res);
             }
         });
     }, []);
@@ -72,7 +81,7 @@ export default function Home() {
                 mbti={userInfo?.mbti ? userInfo?.mbti : ""}
             />
             <IconList majors={userInfo?.majors} />
-            <BusNotice />
+            <BusNotice BusNoticeLists={BusNoticeList}/>
             <div
                 css={css`
                     border-bottom-width: 10px;
