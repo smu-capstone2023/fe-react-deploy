@@ -26,7 +26,7 @@ export default function MyPage() {
     const [isOpenSchedule, setIsOpenSchedule] = useState<boolean | null>(null);
     const [scheduleImage, setSchduleImage] = useState<string | null>(null);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (userInfoData.time_table) {
             setSchduleImage(userInfoData.time_table);
         }
@@ -36,7 +36,7 @@ export default function MyPage() {
     if (scheduleImage !== null) {
         img.src = scheduleImage;
     }
-    const scheduleImageHeight: number = img.height/2;
+    const scheduleImageHeight: number = img.height / 2;
 
     const handleOnClickModifyProfile = () => {
         //TODO: 프로필 수정하기 기능 여기다가
@@ -79,7 +79,7 @@ export default function MyPage() {
                 flex: 1;
             `}
         >
-            {changeMbtiModalOpen && <MbtiChangeModal setModalOpen={setChangeMbtiModalOpen}/>}
+            {changeMbtiModalOpen && <MbtiChangeModal setModalOpen={setChangeMbtiModalOpen} />}
             {changePasswordModalOpen && <PasswordChangeModal setModalOpen={setChangePasswordModalOpen}></PasswordChangeModal>}
             <div
                 css={css`
@@ -128,54 +128,57 @@ export default function MyPage() {
                             else setIsOpenSchedule(false);
                         }}
                     >
-                        <AiOutlineRight size={24} color="#C0C0C0"/>
+                        <AiOutlineRight size={24} color="#C0C0C0" />
                     </div>
                 </SectionContainer>
-                {scheduleImage ? 
-                    <div
-                        css={css`
-                            background-color: ${scheduleImage ? '#ffffff' : '#f3f3f3'};
-                            background-size: contain;
-                            background-repeat: no-repeat;
-                            background-position: center center;
-                            background-image: url(${scheduleImage});
-                            border-radius: 8px;
-                            height: ${isOpenSchedule ? `${scheduleImageHeight}px` : '0'};
-                            max-height: ${isOpenSchedule ? 'none' : '0'};
-                            overflow: hidden;
-                            transition: height 0.5s ease-out, max-height 0.5s ease-out;
-                            ${foldingCss};
-                        `}
-                    ></div> 
-                    : 
-                    <div
-                        css={css`
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            flex-direction: column;
-                            gap: 10px;
-                            background-color: #f3f3f3;
-                            border-radius: 8px;
-                            animation: ${isOpenSchedule !== null ? (isOpenSchedule ? "fade-in 1s" : "fade-out 1s") : ""};
-                            animation-fill-mode: forwards;
-                            ${foldingCss};
-                        `}
-                    >
-                        <AiOutlineClockCircle
+
+                <div
+                    css={css`
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        gap: 10px;
+                        border-radius: 8px;
+                        animation: ${isOpenSchedule !== null ? (isOpenSchedule ? "fade-in 1s" : "fade-out 1s") : ""};
+                        animation-fill-mode: forwards;
+                        ${foldingCss};
+                    `}
+                >
+                    {isOpenSchedule !== null && scheduleImage && (
+                        // eslint-disable-next-line jsx-a11y/alt-text
+                        <img
+                            src={scheduleImage}
                             css={css`
-                            color: #8B8B8B;
-                            font-size: 30px;
-                        `}/>
-                        <p
-                            css={css`
-                            color: #8B8B8B;
-                            text-align: center;
-                        `}
-                        >아직 시간표를 업로드<br/>하지 않았습니다 ㅠㅠ</p>
-                    </div>
-                }
-                {isOpenSchedule && <ScheduleImgUpload title={"시간표 수정하기"}/>}
+                                object-fit: cover;
+                                animation: ${isOpenSchedule ? "fade-in 1s" : "fade-out 1s"};
+                                animation-fill-mode: forwards;
+                            `}
+                        />
+                    )}
+                    {isOpenSchedule !== null && !scheduleImage && (
+                        <>
+                            <AiOutlineClockCircle
+                                css={css`
+                                    color: #8b8b8b;
+                                    font-size: 30px;
+                                `}
+                            />
+                            <p
+                                css={css`
+                                    color: #8b8b8b;
+                                    text-align: center;
+                                `}
+                            >
+                                아직 시간표를 업로드
+                                <br />
+                                하지 않았습니다 ㅠㅠ
+                            </p>
+                        </>
+                    )}
+                </div>
+
+                {isOpenSchedule && <ScheduleImgUpload title={"시간표 수정하기"} />}
                 <Separator />
                 <SectionContainer>
                     {my_util_list.map((item) => {
