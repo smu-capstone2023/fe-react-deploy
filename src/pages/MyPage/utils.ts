@@ -16,16 +16,16 @@ export const foldingCss = css`
         to {
             opacity: 1;
             transform: translateY(0);
-            height: 200px;
-            margin: 20px;
+            height: 100%;
+            margin: 10px 20px 0 20px;
         }
     }
     @keyframes fade-out {
         from {
             opacity: 1;
             transform: translateY(0);
-            height: 200px;
-            margin: 20px;
+            height: 100%;
+            margin: 10px 20px 0 20px;
         }
         to {
             opacity: 0;

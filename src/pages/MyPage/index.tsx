@@ -2,14 +2,16 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Profile from "pages/Home/Profile";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AiOutlineRight } from "react-icons/ai";
+import { AiOutlineClockCircle } from "react-icons/ai";
 import Separator from "./Separator";
 import { app_info_list, my_util_list, setting_list } from "./data";
 import ListItem from "./ListItem";
 import PasswordChangeModal from "./PasswordChangeModal";
 import MbtiChangeModal from "./MbtiChangeModal";
+import ScheduleImgUpload from "./ScheduleImgUpload";
 import { foldingCss, onClickLogout, onClickRevoke } from "./utils";
 
 const SectionContainer = styled.div`
@@ -22,6 +24,19 @@ export default function MyPage() {
     const [changeMbtiModalOpen, setChangeMbtiModalOpen] = useState(false);
     const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
     const [isOpenSchedule, setIsOpenSchedule] = useState<boolean | null>(null);
+    const [scheduleImage, setSchduleImage] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (userInfoData.time_table) {
+            setSchduleImage(userInfoData.time_table);
+        }
+    }, [userInfoData]);
+
+    const img: HTMLImageElement = new Image();
+    if (scheduleImage !== null) {
+        img.src = scheduleImage;
+    }
+    const scheduleImageHeight: number = img.height / 2;
 
     const handleOnClickModifyProfile = () => {
         //TODO: 프로필 수정하기 기능 여기다가
@@ -116,15 +131,54 @@ export default function MyPage() {
                         <AiOutlineRight size={24} color="#C0C0C0" />
                     </div>
                 </SectionContainer>
+
                 <div
                     css={css`
-                        background-color: #f3f3f3;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        gap: 10px;
                         border-radius: 8px;
                         animation: ${isOpenSchedule !== null ? (isOpenSchedule ? "fade-in 1s" : "fade-out 1s") : ""};
                         animation-fill-mode: forwards;
                         ${foldingCss};
                     `}
-                ></div>
+                >
+                    {isOpenSchedule !== null && scheduleImage && (
+                        // eslint-disable-next-line jsx-a11y/alt-text
+                        <img
+                            src={scheduleImage}
+                            css={css`
+                                object-fit: cover;
+                                animation: ${isOpenSchedule ? "fade-in 1s" : "fade-out 1s"};
+                                animation-fill-mode: forwards;
+                            `}
+                        />
+                    )}
+                    {isOpenSchedule !== null && !scheduleImage && (
+                        <>
+                            <AiOutlineClockCircle
+                                css={css`
+                                    color: #8b8b8b;
+                                    font-size: 30px;
+                                `}
+                            />
+                            <p
+                                css={css`
+                                    color: #8b8b8b;
+                                    text-align: center;
+                                `}
+                            >
+                                아직 시간표를 업로드
+                                <br />
+                                하지 않았습니다 ㅠㅠ
+                            </p>
+                        </>
+                    )}
+                </div>
+
+                {isOpenSchedule && <ScheduleImgUpload title={"시간표 수정하기"} />}
                 <Separator />
                 <SectionContainer>
                     {my_util_list.map((item) => {
