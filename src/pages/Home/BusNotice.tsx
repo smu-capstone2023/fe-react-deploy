@@ -18,14 +18,16 @@ export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
     const [toDayBusContent, setTodayBusContent] = useState<string | null>(null);
 
     const findTodayBusList = () => {
-        if (BusNoticeLists) {
+        if (BusNoticeLists && BusNoticeLists.length > 0) {
             setTodayBusContent(BusNoticeLists[0].title);
+        } else {
+            setTodayBusContent(null);
         }
     }
 
     useEffect(()=>{
         findTodayBusList();
-    }, []);
+    }, [BusNoticeLists]);
 
     return (
         <>
