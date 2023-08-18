@@ -2,7 +2,14 @@
 import { useToast } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { MajorDto } from "dto/user";
-import { IoSchoolOutline, IoChatbubbleEllipsesOutline, IoCalendarOutline, IoCallOutline } from "react-icons/io5";
+import {
+    IoSchoolOutline,
+    IoChatbubbleEllipsesOutline,
+    IoCalendarOutline,
+    IoCallOutline,
+    IoLogoMicrosoft,
+    IoMailUnreadOutline,
+} from "react-icons/io5";
 
 type IconType = "학교게시판" | "학과게시판" | "학사일정" | "문의하기" | "Office365";
 
@@ -15,9 +22,9 @@ const IconButton = ({ iconName }: { iconName: IconType }): JSX.Element => {
         case "학사일정":
             return <IoCalendarOutline size={25} color="#999" />;
         case "문의하기":
-            return <IoCallOutline size={25} color="#999" />;
+            return <IoMailUnreadOutline size={25} color="#999" />;
         case "Office365":
-            return <IoChatbubbleEllipsesOutline size={25} color="#999" />;
+            return <IoLogoMicrosoft size={25} color="#999" />;
         default:
             return <></>;
     }
