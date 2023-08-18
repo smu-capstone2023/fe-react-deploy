@@ -43,7 +43,7 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
 
     return (
         <>
-            <IoEllipsisVertical style={{ flex: 1 }} size={size} color={color} onClick={onHandleELLipsis} />
+            <IoEllipsisVertical size={size} color={color} onClick={onHandleELLipsis} />
             {isDivVisible && (
                 <EllipsisItem onClick={isAuthor ? () => alert("수정하기(준비중)") : ReportPost}>
                     {" "}
