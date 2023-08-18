@@ -37,7 +37,7 @@ export const foldingCss = css`
 `;
 
 export const onChangeMbti = (newMbti: string) => {
-    changeMbti(newMbti).then((response) => {
+    changeMbti(newMbti).then((response: any) => {
         if (response) {
             Swal.fire(`MBTI가 ${newMbti}로 바뀌었습니다!!`);
             localStorage.setItem("mbti", newMbti);
