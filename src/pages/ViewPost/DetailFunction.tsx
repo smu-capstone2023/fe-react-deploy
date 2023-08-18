@@ -13,13 +13,12 @@ interface DetailFunctionProps {
     isAuthor?: boolean;
 }
 
-export default function DetailFunction({ size = 25, color = "#888888", postId, userId, isAuthor, }: DetailFunctionProps) {
-    
+export default function DetailFunction({ size = 25, color = "#888888", postId, userId, isAuthor }: DetailFunctionProps) {
     const [isDivVisible, setIsDivVisible] = useState<Boolean>(false);
-    
+
     const onHandleELLipsis = () => {
         setIsDivVisible(!isDivVisible);
-    }
+    };
 
     const ReportPost = () => {
         Swal.fire({
@@ -28,17 +27,14 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
             confirmButtonText: "예",
             cancelButtonText: "아니오",
         }).then((result) => {
-            if (result.isConfirmed) {
-                requestReportPost(postId).then((response) => { 
-                    console.log(response)
+            if (result.isConfirmed && postId) {
+                requestReportPost(postId).then((response: number) => {
                     if (response === 201) {
-                        alert('성공적으로 신고되었습니다.')
-                    }
-                    else if (response === 400) {
-                        alert('이미 신고하신 게시물입니다.');
-                    }
-                    else {
-                        alert('네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.')
+                        alert("성공적으로 신고되었습니다.");
+                    } else if (response === 400) {
+                        alert("이미 신고하신 게시물입니다.");
+                    } else {
+                        alert("네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.");
                     }
                 });
             }
@@ -47,33 +43,38 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
 
     return (
         <>
-        <IoEllipsisVertical style={{flex: 1}} size={size} color={color} onClick={onHandleELLipsis} />
-        {isDivVisible && (
-            <Ellipsis_items 
-                onClick={ isAuthor ?()=> alert('수정하기(준비중)') :ReportPost}
-                > { isAuthor ? <>수정하기 <AiFillEdit color="#888888"/> </> : <>신고하기 <AiTwotoneAlert color="#888888" /></> }  
-            </Ellipsis_items>
-        )}
- </>   );
+            <IoEllipsisVertical size={size} color={color} onClick={onHandleELLipsis} />
+            {isDivVisible && (
+                <EllipsisItem onClick={isAuthor ? () => alert("수정하기(준비중)") : ReportPost}>
+                    {" "}
+                    {isAuthor ? (
+                        <>
+                            수정하기 <AiFillEdit color="#888888" />{" "}
+                        </>
+                    ) : (
+                        <>
+                            신고하기 <AiTwotoneAlert color="#888888" />
+                        </>
+                    )}
+                </EllipsisItem>
+            )}
+        </>
+    );
 }
 
-const Ellipsis_items = styled.div`
+const EllipsisItem = styled.div`
+    font-family: nexon-regular;
     display: flex;
-    font-size: .8rem;
+    font-size: 0.8rem;
     border-radius: 8px;
-    background: #FFF;
+    background: #fff;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    position: absolute; 
-    right: 50px; 
-    width: 35%;
+    position: absolute;
+    top: 4rem;
+    right: 1rem;
+    width: 150px;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 1rem;
     gap: 20%;
-    top: 150px;
-
-    @media (max-width: 450px) {
-        width: 40%;
-        font-size: .7rem;
-    }
 `;

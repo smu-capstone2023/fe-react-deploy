@@ -13,23 +13,14 @@ interface Prop {
     isAuthor?: boolean;
 }
 
-export default function PostHeader({ 
-    username = "알 수 없음", 
-    onClickHeart = () => {}, 
-    isLiked = false,
-    postId,
-    userId,
-    isAuthor,
-    
-    
-    }: Prop) {
-    
-        return (
+export default function PostHeader({ username = "알 수 없음", onClickHeart = () => {}, isLiked = false, postId, userId, isAuthor }: Prop) {
+    return (
         <div
             css={css`
                 display: flex;
                 align-items: center;
                 padding: 1rem;
+                position: relative;
             `}
         >
             <div
@@ -51,9 +42,9 @@ export default function PostHeader({
                 </p>
             </div>
             {isLiked ? (
-                <AiTwotoneHeart style={{flex: 1}} size={25} color="#fa9090" onClick={onClickHeart} />
+                <AiTwotoneHeart style={{ flex: 1 }} size={25} color="#fa9090" onClick={onClickHeart} />
             ) : (
-                <AiOutlineHeart style={{flex: 1}} size={25} color="#fa9090" onClick={onClickHeart} />
+                <AiOutlineHeart style={{ flex: 1 }} size={25} color="#fa9090" onClick={onClickHeart} />
             )}
             <DetailFunction size={25} color="#888888" postId={postId} userId={userId} isAuthor={isAuthor} />
         </div>
