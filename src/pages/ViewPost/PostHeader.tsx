@@ -2,19 +2,33 @@
 import { css } from "@emotion/react";
 import Avatar from "component/Avatar";
 import { AiOutlineHeart, AiTwotoneHeart } from "react-icons/ai";
+import DetailFunction from "./DetailFunction";
+
 interface Prop {
     username?: string;
-    onClick?: () => void;
+    onClickHeart?: () => void;
     isLiked?: boolean;
+    postId?: string;
+    userId?: string;
+    isAuthor?: boolean;
 }
 
-export default function PostHeader({ username = "알 수 없음", onClick = () => {}, isLiked = false }: Prop) {
-    return (
+export default function PostHeader({ 
+    username = "알 수 없음", 
+    onClickHeart = () => {}, 
+    isLiked = false,
+    postId,
+    userId,
+    isAuthor,
+    
+    
+    }: Prop) {
+    
+        return (
         <div
             css={css`
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
                 padding: 1rem;
             `}
         >
@@ -23,6 +37,7 @@ export default function PostHeader({ username = "알 수 없음", onClick = () =
                     display: flex;
                     gap: 0.5rem;
                     align-items: center;
+                    flex: 8;
                 `}
             >
                 <Avatar size={45} />
@@ -36,10 +51,11 @@ export default function PostHeader({ username = "알 수 없음", onClick = () =
                 </p>
             </div>
             {isLiked ? (
-                <AiTwotoneHeart size={25} color="#fa9090" onClick={onClick} />
+                <AiTwotoneHeart style={{flex: 1}} size={25} color="#fa9090" onClick={onClickHeart} />
             ) : (
-                <AiOutlineHeart size={25} color="#fa9090" onClick={onClick} />
+                <AiOutlineHeart style={{flex: 1}} size={25} color="#fa9090" onClick={onClickHeart} />
             )}
+            <DetailFunction size={25} color="#888888" postId={postId} userId={userId} isAuthor={isAuthor} />
         </div>
     );
 }
