@@ -45,7 +45,7 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
         <>
             <IoEllipsisVertical style={{ flex: 1 }} size={size} color={color} onClick={onHandleELLipsis} />
             {isDivVisible && (
-                <Ellipsis_items onClick={isAuthor ? () => alert("수정하기(준비중)") : ReportPost}>
+                <EllipsisItem onClick={isAuthor ? () => alert("수정하기(준비중)") : ReportPost}>
                     {" "}
                     {isAuthor ? (
                         <>
@@ -56,13 +56,13 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
                             신고하기 <AiTwotoneAlert color="#888888" />
                         </>
                     )}
-                </Ellipsis_items>
+                </EllipsisItem>
             )}
         </>
     );
 }
 
-const Ellipsis_items = styled.div`
+const EllipsisItem = styled.div`
     font-family: nexon-regular;
     display: flex;
     font-size: 0.8rem;
