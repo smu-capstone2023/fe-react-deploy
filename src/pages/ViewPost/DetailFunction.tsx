@@ -9,12 +9,13 @@ import Swal from "sweetalert2";
 interface DetailFunctionProps {
     size?: number;
     color?: string;
+    boardId?: string;
     postId?: string;
     userId?: string;
     isAuthor?: boolean;
 }
 
-export default function DetailFunction({ size = 25, color = "#888888", postId, userId, isAuthor }: DetailFunctionProps) {
+export default function DetailFunction({ size = 25, color = "#888888", boardId, postId, userId, isAuthor }: DetailFunctionProps) {
     const [isDivVisible, setIsDivVisible] = useState<Boolean>(false);
 
     const onHandleELLipsis = () => {
@@ -30,10 +31,10 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
         }).then((result) => {
             if (result.isConfirmed && postId) {
                 requestReportPost(postId).then((response: number) => {
-                    if (response) {
+                    if (response === 201) {
                         alert("성공적으로 신고되었습니다.");
-                    // } else if (response === 400) {
-                    //     alert("이미 신고하신 게시물입니다.");
+                    } else if (response === 400) {
+                        alert("이미 신고하신 게시물입니다.");
                     } else {
                         alert("네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.");
                     }
@@ -54,8 +55,6 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
                 if (response) {
                     alert("성공적으로 삭제되었습니다.");
                     window.history.back();
-                // } else if (response === 400) {
-                //     alert("이미 삭제된 게시물입니다.");
                 } else {
                     alert("네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.");
                 }
@@ -64,7 +63,7 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
     });
     }
 
-
+    const UpdatePost = () => window.location.href = `/addpost/${boardId}/${postId}`
 
     return (
         <>
@@ -74,7 +73,7 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
                     {" "}
                     {isAuthor ? (
                         <>
-                          <Items onClick={() => alert("수정하기(준비중)")}>
+                          <Items onClick={UpdatePost}>
                               수정하기 <AiFillEdit color="#888888" />{" "}
                           </Items>
                           <Items onClick={DeletePost}>

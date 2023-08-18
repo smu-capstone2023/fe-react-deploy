@@ -8,6 +8,6 @@ export const requestReportPost = (post_id: string | number): Promise<number> => 
         })
         .catch((error: any) => {
             console.error("requestReportPost", error);
-            return -1;
+            return error.response.status;
         });
 };

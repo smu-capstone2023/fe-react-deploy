@@ -8,12 +8,13 @@ interface Prop {
     username?: string;
     onClickHeart?: () => void;
     isLiked?: boolean;
+    boardId?: string;
     postId?: string;
     userId?: string;
     isAuthor?: boolean;
 }
 
-export default function PostHeader({ username = "알 수 없음", onClickHeart = () => {}, isLiked = false, postId, userId, isAuthor }: Prop) {
+export default function PostHeader({ username = "알 수 없음", onClickHeart = () => {}, isLiked = false, boardId, postId, userId, isAuthor }: Prop) {
     return (
         <div
             css={css`
@@ -46,7 +47,7 @@ export default function PostHeader({ username = "알 수 없음", onClickHeart =
             ) : (
                 <AiOutlineHeart style={{ flex: 1 }} size={25} color="#fa9090" onClick={onClickHeart} />
             )}
-            <DetailFunction size={25} color="#888888" postId={postId} userId={userId} isAuthor={isAuthor} />
+            <DetailFunction size={25} color="#888888" boardId={boardId} postId={postId} userId={userId} isAuthor={isAuthor} />
         </div>
     );
 }
