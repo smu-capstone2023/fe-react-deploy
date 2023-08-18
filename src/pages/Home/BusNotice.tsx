@@ -8,17 +8,19 @@ const SectionContainer = styled.div`
     padding: 20px 20px 0 20px;
     display: flex;
     flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
 `;
 
 interface BusNoticeProps {
-    BusNoticeLists: BusNoticeType[];
+    BusNoticeLists: BusNoticeType[] | boolean;
 }
 
 export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
     const [toDayBusContent, setTodayBusContent] = useState<string | null>(null);
 
     const findTodayBusList = () => {
-        if (BusNoticeLists && BusNoticeLists.length > 0) {
+        if (Array.isArray(BusNoticeLists) && BusNoticeLists.length > 0) {
             setTodayBusContent(BusNoticeLists[0].title);
         } else {
             setTodayBusContent(null);
@@ -31,12 +33,7 @@ export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
 
     return (
         <>
-            <SectionContainer
-                css={css`
-                    flex-direction: row;
-                    justify-content: space-between;
-                `}
-            >
+            <SectionContainer>
                 <p
                     css={css`
                         font-family: nexon-regular;
@@ -47,7 +44,7 @@ export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
                     ⚠️ 오늘의 우회정보
                 </p>
             </SectionContainer>
-            {toDayBusContent === null &&
+            {!toDayBusContent &&
                 <div
                     css={css`
                         dislpay: flex;
@@ -65,7 +62,7 @@ export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
                     </p>
                 </div>
             }
-            {toDayBusContent !== null &&
+            {toDayBusContent &&
                 <div
                     css={css`
                         display: flex;

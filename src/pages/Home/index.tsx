@@ -33,7 +33,7 @@ export default function Home() {
     const [userInfo, setUserInfo] = useState<UserDto>();
     const [lostPreviewList, setLostPreviewList] = useState<IPreview[]>([]);
     const [majorPreviewList, setMajorPreviewList] = useState<IPreview[]>([]);
-    const [BusNoticeList, setBusNoticeList] = useState<BusNoticeType[]>([]);
+    const [BusNoticeList, setBusNoticeList] = useState<BusNoticeType[] | boolean>([]);
     useEffect(() => {
         getHotBoardPreviewList().then((response) => {
             if (response) {
@@ -53,7 +53,7 @@ export default function Home() {
                 }
             });
         }
-        getBusNotice().then((res :any)=>{
+        getBusNotice().then((res :(BusNoticeType[] | boolean))=>{
             if (res) {
                 setBusNoticeList(res);
             }

@@ -1,8 +1,9 @@
 import { instance } from "api/interceptor";
+import { BusNoticeType } from "pages/Home";
 
-export const getBusNotice = () => {
+export const getBusNotice = () : Promise<boolean | BusNoticeType[]> => {
     return instance
-        .get(`/board/bus_notice`, {})
+        .get(`/board/bus_notice`)
         .then((response: any) => {
             return response.data;
         })
