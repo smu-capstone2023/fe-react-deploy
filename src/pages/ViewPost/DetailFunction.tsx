@@ -63,22 +63,18 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
 }
 
 const Ellipsis_items = styled.div`
+    font-family: nexon-regular;
     display: flex;
     font-size: 0.8rem;
     border-radius: 8px;
     background: #fff;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     position: absolute;
-    right: 50px;
-    width: 35%;
+    top: 4rem;
+    right: 1rem;
+    width: 150px;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 1rem;
     gap: 20%;
-    top: 150px;
-
-    @media (max-width: 450px) {
-        width: 40%;
-        font-size: 0.7rem;
-    }
 `;
