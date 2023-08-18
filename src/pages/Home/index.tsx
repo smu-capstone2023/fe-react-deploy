@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import React, { useEffect, useState } from "react";
 import Profile from "./Profile";
 import IconList from "./IconList";
+import BusNotice from "./BusNotice";
 import { getHotBoardPreviewList } from "api/board/getHotBoardPreviewList";
 import BoardSectionList from "component/organism/BoardSectionList";
 import { UserDto } from "dto/user";
@@ -10,6 +11,7 @@ import { getUserInfo } from "api/User/getUserInfo";
 import LostPreview from "component/organism/LostPreview";
 import { getLostBoardPreviewList } from "api/board/getLostBoardPreviewList";
 import { getBoardPostPreview } from "api/board/getBoardPostPreview";
+import { getBusNotice } from "api/utils/getBusNotice";
 
 export interface IPreview {
     post_id: number;
@@ -18,11 +20,20 @@ export interface IPreview {
     created_time: string;
     likes: number;
 }
+export interface BusNoticeType {
+    post_id: string;
+    created_time: string;
+    updated_time: string;
+    title: string;
+    imageUrls: string[];
+    content: string;
+}
 export default function Home() {
     const [hotPreviewList, setHotPreviewList] = useState<IPreview[]>([]);
     const [userInfo, setUserInfo] = useState<UserDto>();
     const [lostPreviewList, setLostPreviewList] = useState<IPreview[]>([]);
     const [majorPreviewList, setMajorPreviewList] = useState<IPreview[]>([]);
+    const [BusNoticeList, setBusNoticeList] = useState<BusNoticeType[] | boolean>([]);
     useEffect(() => {
         getHotBoardPreviewList().then((response) => {
             if (response) {
@@ -42,6 +53,11 @@ export default function Home() {
                 }
             });
         }
+        getBusNotice().then((res :(BusNoticeType[] | boolean))=>{
+            if (res) {
+                setBusNoticeList(res);
+            }
+        });
     }, []);
 
     return (
@@ -65,6 +81,14 @@ export default function Home() {
                 mbti={userInfo?.mbti ? userInfo?.mbti : ""}
             />
             <IconList majors={userInfo?.majors} />
+            <BusNotice BusNoticeLists={BusNoticeList}/>
+            <div
+                css={css`
+                    border-bottom-width: 10px;
+                    border-bottom-style: solid;
+                    border-bottom-color: #f3f3f3;
+                `}
+            />
             <LostPreview previewList={lostPreviewList} />
             <div
                 css={css`
