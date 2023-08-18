@@ -69,22 +69,13 @@ export const onChangePassword = (newPassword: string, oldPassword: string) => {
 };
 
 export const onClickRevoke = () => {
-    Swal.fire({
-        title: "정말 탈퇴하시겠습니까?",
-        showCancelButton: true,
-        confirmButtonText: "예",
-        cancelButtonText: "아니오",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            revoke().then((response: any) => {
-                if (response === true) {
-                    alert("성공적으로 탈퇴되었습니다");
-                    localStorage.clear();
-                    window.location.href = "/";
-                } else {
-                    alert("네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
-                }
-            });
+    revoke().then((response: any) => {
+        if (response === true) {
+            alert("성공적으로 탈퇴되었습니다");
+            localStorage.clear();
+            window.location.href = "/";
+        } else {
+            alert("네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
         }
     });
 };

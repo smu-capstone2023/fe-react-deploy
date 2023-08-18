@@ -15,11 +15,12 @@ import TextField from "component/TextField";
 import { IoPaperPlane } from "react-icons/io5";
 import { addComment } from "api/Comment/addComment";
 import { position, useToast } from "@chakra-ui/react";
-import { AiOutlineSmile } from "react-icons/ai";
+import { AiOutlineSmile,  } from "react-icons/ai";
 import EmoticonView from "./EmotionView";
 import { getBoardDetailInfoByPostId } from "api/board/getBoardDetailInfoByPostId";
 
 export default function ViewPost() {
+    
     const { post_id, board_id } = useParams();
     const [boardInfo, setBoardInfo] = useState<string>();
     const [post, setPost] = useState<IPost>();
@@ -27,6 +28,7 @@ export default function ViewPost() {
     const comment = useRef<string>();
     const toast = useToast();
     const [isOpenEmotion, setIsOpenEmotion] = useState<boolean>(false);
+    
     const onHandlePostLike = () => {
         if (post_id)
             likePost(post_id).then((res) => {
@@ -39,7 +41,7 @@ export default function ViewPost() {
             if (res !== null) window.location.reload();
         });
     };
-
+    
     const onSaveComment = () => {
         if (comment.current && post_id) {
             addComment("글", post_id, comment.current).then((res) => {
@@ -100,7 +102,8 @@ export default function ViewPost() {
                 >
                     {boardInfo}
                 </p>
-                <PostHeader username={post?.username} onClick={onHandlePostLike} isLiked={post?.isLiked} />
+
+                <PostHeader username={post?.username} onClickHeart={onHandlePostLike} isLiked={post?.isLiked} postId={post_id} />
                 <PostContainer>
                     <PostTitle>{post?.title}</PostTitle>
                     <PostContent>{post?.content}</PostContent>
