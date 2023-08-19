@@ -56,6 +56,9 @@ export default function Profile({ nickname, mbti, major }: ProfileProp) {
                                 font-size: 16px;
                                 font-family: nexon-regular;
                             `}
+                            onClick={()=>{
+                                window.location.href="/major-certification";
+                            }}
                         >
                             {major ? major : "학과인증을 해주세요"}
                         </p>
