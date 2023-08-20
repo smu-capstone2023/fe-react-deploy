@@ -8,11 +8,10 @@ import { useParams } from "react-router-dom";
 import { IBoard, IPostPreview } from "./type";
 import SelectBox from "component/molecule/SelectBox";
 import BoardSelectBox from "component/molecule/BoardSelectBox";
-import TextField from "component/TextField";
-import Button from "component/molecule/Button";
 import Pagination from "component/Pagination";
 import PostListElement from "component/molecule/PostListElement";
 import { AiOutlineSearch } from "react-icons/ai";
+import { IoAddCircleOutline } from "react-icons/io5";
 
 export default function Board() {
     const [postListData, setPostListData] = useState<IPostPreview[]>([]);
@@ -137,8 +136,7 @@ export default function Board() {
                             key={index}
                             onClick={() => onClickPost(postData.post_id)}
                             commentCount={postData.comments}
-                            // likeCount={postData.likes}
-                            likeCount={0}
+                            likeCount={postData.likes}
                             title={postData.title}
                             content={postData.preview}
                             createdDate={postData.created_time}
@@ -151,12 +149,25 @@ export default function Board() {
                 css={css`
                     position: fixed;
                     display: flex;
-                    width: 100%;
+                    align-self: center;
                     bottom: 1rem;
-                    padding: 0 1rem;
                 `}
             >
-                <Button title={"글쓰기"} onClick={onClickAddPost} width={"100px"} fontSize={"16px"} height={"40px"} />
+                <button
+                    onClick={onClickAddPost}
+                    css={css`
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        background-color: #4169e1;
+                        padding: 0.8rem 1.2rem;
+                        border-radius: 2rem;
+                        color: white;
+                        font-family: nexon-bold;
+                    `}
+                >
+                    글쓰기 <IoAddCircleOutline size={"1.5rem"} />
+                </button>
             </div>
         </div>
     );
