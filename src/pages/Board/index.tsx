@@ -98,9 +98,8 @@ export default function Board() {
                         display: flex;
                         align-items: center;
                         gap: 5px;
-                        margin: 0 3rem;
-                        @media screen and (max-width: 350px) {
-                            margin: 0;
+                        @media screen and (min-width: 350px) {
+                            margin: 0 3rem;
                         }
                     `}
                 >
