@@ -98,9 +98,7 @@ export default function Board() {
                         display: flex;
                         align-items: center;
                         gap: 5px;
-                        @media screen and (min-width: 350px) {
-                            margin: 0 3rem;
-                        }
+                        justify-content: center;
                     `}
                 >
                     <input
@@ -115,9 +113,10 @@ export default function Board() {
                             font-size: 13px;
                             padding: 1rem;
                             flex: 1;
+                            max-width: 300px;
                         `}
                     />
-                    {/* <AiOutlineSearch size={25} color="#888" onClick={onHandleSearch} /> */}
+                    <AiOutlineSearch size={25} color="#888" onClick={onHandleSearch} />
                 </div>
             </div>
             <div
