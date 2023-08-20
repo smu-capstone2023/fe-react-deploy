@@ -11,11 +11,10 @@ interface DetailFunctionProps {
     color?: string;
     boardId?: string;
     postId?: string;
-    userId?: string;
     isAuthor?: boolean;
 }
 
-export default function DetailFunction({ size = 25, color = "#888888", boardId, postId, userId, isAuthor }: DetailFunctionProps) {
+export default function DetailFunction({ size = 25, color = "#888888", boardId, postId, isAuthor }: DetailFunctionProps) {
     const [isDivVisible, setIsDivVisible] = useState<Boolean>(false);
 
     const onHandleELLipsis = () => {
@@ -51,7 +50,7 @@ export default function DetailFunction({ size = 25, color = "#888888", boardId, 
         cancelButtonText: "아니오",
     }).then((result) => {
         if (result.isConfirmed && postId) {
-          deletePost(postId).then((response: number) => {
+          deletePost(postId).then((response: boolean) => {
                 if (response) {
                     alert("성공적으로 삭제되었습니다.");
                     window.history.back();
@@ -70,14 +69,13 @@ export default function DetailFunction({ size = 25, color = "#888888", boardId, 
             <IoEllipsisVertical size={size} color={color} onClick={onHandleELLipsis} />
             {isDivVisible && (
                 <EllipsisItem >
-                    {" "}
                     {isAuthor ? (
                         <>
                           <Items onClick={UpdatePost}>
-                              수정하기 <AiFillEdit color="#888888" />{" "}
+                              수정하기 <AiFillEdit color="#888888" />
                           </Items>
                           <Items onClick={DeletePost}>
-                              삭제하기 <IoTrashBin  color="#888888" />{" "}
+                              삭제하기 <IoTrashBin  color="#888888" />
                           </Items>
                         </>
                     ) : (

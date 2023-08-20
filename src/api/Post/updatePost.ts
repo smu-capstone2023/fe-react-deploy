@@ -1,6 +1,6 @@
 import { instance } from "api/interceptor";
 
-export const updatePost = (title: string, content: string, is_anonymous: boolean, image_url_list: string[], post_id: number) => {
+export const updatePost = (title: string, content: string, is_anonymous: boolean, image_url_list: string[], post_id: string | number): Promise<boolean> => {
     return instance
         .patch(`/board/update/${post_id}`, {
             title: title,
