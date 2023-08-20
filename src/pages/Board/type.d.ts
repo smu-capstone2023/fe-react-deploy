@@ -12,6 +12,7 @@ export interface IPostPreview {
     preview: string;
     comments: number;
     views: number;
+    likes: number;
     created_time: string;
     updated_time: string;
 }

@@ -8,8 +8,6 @@ import { useParams } from "react-router-dom";
 import { IBoard, IPostPreview } from "./type";
 import SelectBox from "component/molecule/SelectBox";
 import BoardSelectBox from "component/molecule/BoardSelectBox";
-import TextField from "component/TextField";
-import Button from "component/molecule/Button";
 import Pagination from "component/Pagination";
 import PostListElement from "component/molecule/PostListElement";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -138,8 +136,7 @@ export default function Board() {
                             key={index}
                             onClick={() => onClickPost(postData.post_id)}
                             commentCount={postData.comments}
-                            // likeCount={postData.likes}
-                            likeCount={0}
+                            likeCount={postData.likes}
                             title={postData.title}
                             content={postData.preview}
                             createdDate={postData.created_time}
@@ -157,6 +154,7 @@ export default function Board() {
                 `}
             >
                 <button
+                    onClick={onClickAddPost}
                     css={css`
                         display: flex;
                         align-items: center;
