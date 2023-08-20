@@ -31,7 +31,7 @@ const Select = ({ options, onChange, init }) => {
                 cursor: pointer;
                 font-size: 1.1rem;
                 outline: none;
-                background-color: none;
+                background-color: white;
             `}
         >
             {options &&
