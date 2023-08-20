@@ -1,6 +1,6 @@
 import { instance } from "api/interceptor";
 
-export const changeProfileImage = (image: FormData) => {
+export const changeProfileImage = (image: string) => {
     return instance
         .put(`/auth/user/profile_image`, {
             image: image,
