@@ -118,7 +118,7 @@ export default function Board() {
                             flex: 1;
                         `}
                     />
-                    <AiOutlineSearch size={25} color="#888" onClick={onHandleSearch} />
+                    {/* <AiOutlineSearch size={25} color="#888" onClick={onHandleSearch} /> */}
                 </div>
             </div>
             <div
