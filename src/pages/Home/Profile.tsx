@@ -4,18 +4,21 @@ import { css } from "@emotion/react";
 import Avatar from "component/Avatar";
 import { useSelector } from "react-redux";
 import { changeProfileImage } from "../../api/User/changeProfileImage";
+import { useLocation } from "react-router-dom";
 
 interface ProfileProp {
     nickname?: string;
     mbti?: string;
     major?: string;
 }
+
 export default function Profile({ nickname, mbti, major}: ProfileProp) {
+    const location = useLocation();
     const userInfoData = useSelector((state: any) => state.user);
     const [userProfileSrc, setUserProfileSrc] = useState<string>('');
     const [newUserProfileSrc, setNewProfileSrc] = useState<string>('');
     const [profileEditSelected, setProfileEditSelected] = useState<boolean>(false);
-
+    
     const userProfileImageUpload = (imageUrls :string) => {
         changeProfileImage(imageUrls).then((response :any)=>{
             if (response) {
@@ -103,28 +106,30 @@ export default function Profile({ nickname, mbti, major}: ProfileProp) {
                         >
                             {major ? major : "학과인증을 해주세요"}
                         </p>
-                        <button
-                            css={css`
-                                display: flex;
-                                height: 40px;
-                                padding: 10px 30px;
-                                justify-content: center;
-                                align-items: center;
-                                margin-top: 10px;
-                                border: solid 1px #4169E1;
-                                border-radius: 5px;
-                                color: #4169E1;
-                            `}
-                            onClick={()=>{
-                                setProfileEditSelected(!profileEditSelected);
-                                if (profileEditSelected && newUserProfileSrc) {
-                                    userProfileImageUpload(newUserProfileSrc);
-                                } else if (profileEditSelected && !newUserProfileSrc) {
-                                    userProfileImageUpload(userProfileSrc);
-                                }
-                            }}
-                        >{profileEditSelected ? '프로필 저장하기' : '프로필 수정하기'}
-                        </button>
+                        {(location.pathname === "/mypage") &&
+                            <button
+                                css={css`
+                                    display: flex;
+                                    height: 40px;
+                                    padding: 10px 30px;
+                                    justify-content: center;
+                                    align-items: center;
+                                    margin-top: 10px;
+                                    border: solid 1px #4169E1;
+                                    border-radius: 5px;
+                                    color: #4169E1;
+                                `}
+                                onClick={()=>{
+                                    setProfileEditSelected(!profileEditSelected);
+                                    if (profileEditSelected && newUserProfileSrc) {
+                                        userProfileImageUpload(newUserProfileSrc);
+                                    } else if (profileEditSelected && !newUserProfileSrc) {
+                                        userProfileImageUpload(userProfileSrc);
+                                    }
+                                }}
+                            >{profileEditSelected ? '프로필 저장하기' : '프로필 수정하기'}
+                            </button>
+                        }
                     </div>
                 </>
             ) : (
