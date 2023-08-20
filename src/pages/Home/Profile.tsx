@@ -9,16 +9,6 @@ interface ProfileProp {
     major?: string;
 }
 export default function Profile({ nickname, mbti, major }: ProfileProp) {
-    const [isHovering, setIsHovering] = useState<boolean>(false);
-
-    const handleMouseOver = () => {
-        setIsHovering(true);
-      };
-    
-      const handleMouseOut = () => {
-        setIsHovering(false);
-      };
-
     return (
         <div
             css={css`
@@ -66,13 +56,13 @@ export default function Profile({ nickname, mbti, major }: ProfileProp) {
                             css={css`
                                 font-size: 16px;
                                 font-family: nexon-regular;
-                                text-decoration-line: ${isHovering ? 'underline' : 'none'};
+                                &:hover {
+                                    text-decoration-line : underline;
+                                }
                             `}
                             onClick={()=>{
                                 window.location.href="/major-certification";
                             }}
-                            onMouseOver={handleMouseOver}
-                            onMouseOut={handleMouseOut}
                         >
                             {major ? major : "학과인증을 해주세요"}
                         </p>
