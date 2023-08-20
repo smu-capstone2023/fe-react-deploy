@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+/** @jsxImportSource @emotion/react */
+import { useRef } from "react";
+import { css } from "@emotion/react";
 import uuid from "react-uuid";
-import styled from "styled-components";
-
 /**
  * @param options: {id, name}[]
  * @param onChange: () => {}
@@ -12,11 +12,9 @@ import styled from "styled-components";
 
 const SelectBox = ({ options, onChange, initValue }) => {
     return (
-        <>
-            <form>
-                <Select options={options} initValue={options[0]} onChange={onChange} init={initValue} />
-            </form>
-        </>
+        <form>
+            <Select options={options} initValue={options[0]} onChange={onChange} init={initValue} />
+        </form>
     );
 };
 
@@ -28,7 +26,13 @@ const Select = ({ options, onChange, init }) => {
             key={uuid()}
             defaultValue={init}
             onChange={() => onChange(selectRef.current.value)}
-            style={{ fontFamily: "nexon-regular", cursor: "pointer", fontSize: "1.2rem" }}
+            css={css`
+                font-family: nexon-bold;
+                cursor: pointer;
+                font-size: 1.1rem;
+                outline: none;
+                background-color: none;
+            `}
         >
             {options &&
                 options.map((option) => {
