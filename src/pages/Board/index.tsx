@@ -13,6 +13,7 @@ import Button from "component/molecule/Button";
 import Pagination from "component/Pagination";
 import PostListElement from "component/molecule/PostListElement";
 import { AiOutlineSearch } from "react-icons/ai";
+import { IoAddCircleOutline } from "react-icons/io5";
 
 export default function Board() {
     const [postListData, setPostListData] = useState<IPostPreview[]>([]);
@@ -151,12 +152,24 @@ export default function Board() {
                 css={css`
                     position: fixed;
                     display: flex;
-                    width: 100%;
+                    align-self: center;
                     bottom: 1rem;
-                    padding: 0 1rem;
                 `}
             >
-                <Button title={"글쓰기"} onClick={onClickAddPost} width={"100px"} fontSize={"16px"} height={"40px"} />
+                <button
+                    css={css`
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        background-color: #4169e1;
+                        padding: 0.8rem 1.2rem;
+                        border-radius: 2rem;
+                        color: white;
+                        font-family: nexon-bold;
+                    `}
+                >
+                    글쓰기 <IoAddCircleOutline size={"1.5rem"} />
+                </button>
             </div>
         </div>
     );
