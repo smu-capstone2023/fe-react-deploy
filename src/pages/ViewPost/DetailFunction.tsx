@@ -1,19 +1,20 @@
 import { useState } from "react";
-import { IoEllipsisVertical } from "react-icons/io5";
+import { IoEllipsisVertical, IoTrashBin } from "react-icons/io5";
 import { AiTwotoneAlert, AiFillEdit } from "react-icons/ai";
 import { requestReportPost } from "api/Post/requestReportPost";
+import { deletePost } from "api/Post/deletePost";
 import styled from "@emotion/styled";
 import Swal from "sweetalert2";
 
 interface DetailFunctionProps {
     size?: number;
     color?: string;
+    boardId?: string;
     postId?: string;
-    userId?: string;
     isAuthor?: boolean;
 }
 
-export default function DetailFunction({ size = 25, color = "#888888", postId, userId, isAuthor }: DetailFunctionProps) {
+export default function DetailFunction({ size = 25, color = "#888888", boardId, postId, isAuthor }: DetailFunctionProps) {
     const [isDivVisible, setIsDivVisible] = useState<Boolean>(false);
 
     const onHandleELLipsis = () => {
@@ -41,20 +42,46 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
         });
     };
 
+    const DeletePost = () => {
+      Swal.fire({
+        title: "해당 글을 삭제하시겠습니까?",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+    }).then((result) => {
+        if (result.isConfirmed && postId) {
+          deletePost(postId).then((response: boolean) => {
+                if (response) {
+                    alert("성공적으로 삭제되었습니다.");
+                    window.history.back();
+                } else {
+                    alert("네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.");
+                }
+            });
+        }
+    });
+    }
+
+    const UpdatePost = () => window.location.href = `/addpost/${boardId}/${postId}`
+
     return (
         <>
             <IoEllipsisVertical size={size} color={color} onClick={onHandleELLipsis} />
             {isDivVisible && (
-                <EllipsisItem onClick={isAuthor ? () => alert("수정하기(준비중)") : ReportPost}>
-                    {" "}
+                <EllipsisItem >
                     {isAuthor ? (
                         <>
-                            수정하기 <AiFillEdit color="#888888" />{" "}
+                          <Items onClick={UpdatePost}>
+                              수정하기 <AiFillEdit color="#888888" />
+                          </Items>
+                          <Items onClick={DeletePost}>
+                              삭제하기 <IoTrashBin  color="#888888" />
+                          </Items>
                         </>
                     ) : (
-                        <>
+                        <Items onClick={ReportPost}>
                             신고하기 <AiTwotoneAlert color="#888888" />
-                        </>
+                        </Items>
                     )}
                 </EllipsisItem>
             )}
@@ -63,8 +90,8 @@ export default function DetailFunction({ size = 25, color = "#888888", postId, u
 }
 
 const EllipsisItem = styled.div`
-    font-family: nexon-regular;
-    display: flex;
+    
+    flex-direction: column;
     font-size: 0.8rem;
     border-radius: 8px;
     background: #fff;
@@ -72,9 +99,15 @@ const EllipsisItem = styled.div`
     position: absolute;
     top: 4rem;
     right: 1rem;
-    width: 150px;
+    width: 180px;
+    padding: .7rem;
+`;
+
+const Items = styled.div`
+    font-family: nexon-regular;
+    display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
-    gap: 20%;
+    gap: 30%;
+    margin-bottom: 5px; // 다음 항목과의 간격 조정
 `;

@@ -33,7 +33,7 @@ const AddPost = () => {
                 }
             });
         } else {
-            updatePost(title, content, post_id, is_anonymous, imageList).then((response) => {
+            updatePost( title, content, is_anonymous, imageList, post_id ).then((response) => {
                 if (response === false) {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
                 } else {

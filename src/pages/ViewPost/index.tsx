@@ -106,6 +106,7 @@ export default function ViewPost() {
                     username={post?.username}
                     onClickHeart={onHandlePostLike}
                     isLiked={post?.isLiked}
+                    boardId={board_id}
                     postId={post_id}
                     isAuthor={post?.is_author}
                 />
