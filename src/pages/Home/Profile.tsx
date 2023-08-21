@@ -10,15 +10,16 @@ interface ProfileProp {
     nickname?: string;
     mbti?: string;
     major?: string;
+    newProfileUrl? :string;
+    profileEditSelected?: boolean;
+    setProfileEditSelected?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Profile({ nickname, mbti, major}: ProfileProp) {
+export default function Profile({ nickname, mbti, major, newProfileUrl, profileEditSelected, setProfileEditSelected }: ProfileProp) {
     const location = useLocation();
     const userInfoData = useSelector((state: any) => state.user);
     const [userProfileSrc, setUserProfileSrc] = useState<string>('');
-    const [newUserProfileSrc, setNewProfileSrc] = useState<string>('');
-    const [profileEditSelected, setProfileEditSelected] = useState<boolean>(false);
-    
+
     const userProfileImageUpload = (imageUrls :string) => {
         changeProfileImage(imageUrls).then((response :any)=>{
             if (response) {
@@ -30,6 +31,12 @@ export default function Profile({ nickname, mbti, major}: ProfileProp) {
             }
         })
     }
+
+    useEffect(()=>{
+        if (newProfileUrl) {
+            setUserProfileSrc(newProfileUrl);
+        }
+    }, [newProfileUrl]);
 
     useEffect(() => {
         if (userInfoData.profile_img_url) {
@@ -54,17 +61,14 @@ export default function Profile({ nickname, mbti, major}: ProfileProp) {
         >
             {nickname ? (
                 <>
-                    {!userProfileSrc && <Avatar 
-                        size={100} 
-                        profileEdit={profileEditSelected} 
-                        onNewProfileImageSelected={setNewProfileSrc}/>
-                    }
-                    {userProfileSrc && <Avatar 
+                    {!userProfileSrc && <Avatar
+                        size={100}
+                        profileUrl={userProfileSrc}
+                    />}
+                    {userProfileSrc && <Avatar
                         src={userProfileSrc} 
-                        size={100} 
-                        profileEdit={profileEditSelected} 
-                        onNewProfileImageSelected={setNewProfileSrc}/>
-                    }
+                        size={100}
+                    />}
                     <div
                         css={css`
                             flex: 1;
@@ -120,10 +124,12 @@ export default function Profile({ nickname, mbti, major}: ProfileProp) {
                                     color: #4169E1;
                                 `}
                                 onClick={()=>{
-                                    setProfileEditSelected(!profileEditSelected);
-                                    if (profileEditSelected && newUserProfileSrc) {
-                                        userProfileImageUpload(newUserProfileSrc);
-                                    } else if (profileEditSelected && !newUserProfileSrc) {
+                                    if (setProfileEditSelected) {
+                                        setProfileEditSelected(!profileEditSelected);
+                                    }
+                                    if (profileEditSelected && newProfileUrl) {
+                                        userProfileImageUpload(newProfileUrl);
+                                    } else if (profileEditSelected && !newProfileUrl) {
                                         userProfileImageUpload(userProfileSrc);
                                     }
                                 }}
