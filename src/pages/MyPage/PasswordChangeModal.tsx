@@ -170,6 +170,7 @@ const ModalContainer = styled.div`
     @media screen and (max-width: 768px) {
         width: 90%;
         padding: 20px;
+    }
 `;
 
 const ModalLayout = styled.div`
