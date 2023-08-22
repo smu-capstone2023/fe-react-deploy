@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import Avatar from "component/Avatar";
 import { AiOutlineHeart, AiOutlineMessage, AiTwotoneHeart } from "react-icons/ai";
+import DetailFunction from "./DetailFunction";
 
 interface Prop {
     username?: string;
@@ -10,8 +11,10 @@ interface Prop {
     content?: string;
     onClickLike?: () => void;
     isLiked?: boolean;
+    commentId?: number;
+    isCommentAuthor?: boolean;
 }
-export default function CommentItem({ username, likes, date, content, onClickLike, isLiked }: Prop) {
+export default function CommentItem({ username, likes, date, content, onClickLike, isLiked, commentId, isCommentAuthor }: Prop) {
     const isImage = content?.includes("https://smus.s3");
     return (
         <div
@@ -26,7 +29,6 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                 css={css`
                     padding: 0.8rem 1rem;
                     display: flex;
-                    justify-content: space-between;
                     align-items: center;
                 `}
             >
@@ -35,6 +37,7 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                         display: flex;
                         gap: 0.5rem;
                         align-items: center;
+                        flex: 8;
                     `}
                 >
                     <Avatar size={30} />
@@ -51,6 +54,7 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                     css={css`
                         display: flex;
                         gap: 0.2rem;
+                        flex: 1;
                     `}
                 >
                     <AiOutlineMessage size={20} color="#888" />
@@ -60,6 +64,7 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                         <AiOutlineHeart size={20} color="#fa9090" onClick={onClickLike} />
                     )}
                 </div>
+                <DetailFunction commentId={commentId} isCommentAuthor={isCommentAuthor}></DetailFunction>
             </div>
             {isImage ? (
                 <img
