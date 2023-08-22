@@ -197,7 +197,7 @@ export default function MyPage() {
                         css={css`
                             color: #747474;
                             font-size: 18px;
-                            font-family: nexon;
+                            font-family: nexon-regular;
                         `}
                     >
                         앱 정보
