@@ -10,3 +10,7 @@ export interface UserDto {
     mbti: null | string;
     majors: MajorDto[];
 }
+export interface ActivityDto {
+    user_post: [{post_id: number, board_id: number}];
+    user_liked: [{post_id: number, board_id: number}];
+}
