@@ -11,6 +11,40 @@ export interface UserDto {
     majors: MajorDto[];
 }
 export interface ActivityDto {
-    user_post: [{post_id: number, board_id: number}];
-    user_liked: [{post_id: number, board_id: number}];
+    writed_post: [{
+        id: number,
+        board_id: number,
+        user_id: number,
+        title: string,
+        content: string,
+        img_urls: string,
+        views: number,
+        likes: number,
+        unlikes: number,
+        scraps: number,
+        reports: number,
+        is_anonymous: boolean,
+        createdAt: string,
+        updatedAt: string,
+        deletedAt: string | null,
+        number_of_comments: number,
+    }];
+    liked_post: [{
+        id: number,
+        board_id: number,
+        user_id: number,
+        title: string,
+        content: string,
+        img_urls: string,
+        views: number,
+        likes: number,
+        unlikes: number,
+        scraps: number,
+        reports: number,
+        is_anonymous: boolean,
+        createdAt: string,
+        updatedAt: string,
+        deletedAt: string | null,
+        number_of_comments: number,
+    }];
 }
