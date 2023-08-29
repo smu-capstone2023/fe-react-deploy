@@ -28,7 +28,7 @@ export interface ActivityDto {
         updatedAt: string,
         deletedAt: string | null,
         number_of_comments: number,
-    }[];
+    }[],
     liked_post: {
         id: number,
         board_id: number,
@@ -46,5 +46,5 @@ export interface ActivityDto {
         updatedAt: string,
         deletedAt: string | null,
         number_of_comments: number,
-    }[];
+    }[]
 }
