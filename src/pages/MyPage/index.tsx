@@ -27,9 +27,7 @@ export default function MyPage() {
     const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
     const [isOpenSchedule, setIsOpenSchedule] = useState<boolean | null>(null);
     const [scheduleImage, setSchduleImage] = useState<string | null>(null);
-
     const [profileEditSelected, setProfileEditSelected] = useState(false);
-
     const [newProfileUrl, setNewProfileUrl] = useState<string>('');
     const fileInput = useRef<HTMLInputElement | null>(null);
 
@@ -241,7 +239,14 @@ export default function MyPage() {
                 <Separator />
                 <SectionContainer>
                     {my_util_list.map((item) => {
-                        return <ListItem title={item} key={item} />;
+                        return <ListItem title={item} key={item} onClick={()=>{
+                            if (item === "내가 쓴 글") {
+                                window.location.href="/userpost";
+                            }
+                            if (item === "내가 좋아요 한 글") {
+                                window.location.href="/userliked";
+                            }
+                        }}/>;
                     })}
                 </SectionContainer>
                 <Separator />

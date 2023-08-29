@@ -12,6 +12,8 @@ import ViewPost from "./pages/ViewPost";
 import UserCertificate from "./pages/UserCertificate";
 import Header from "./component/molecule/Header";
 import MajorCertificate from "./pages/MajorCertificate";
+import UserPost from "pages/UserPost";
+import UserLiked from "pages/UserLiked";
 import { getUserInfo } from "./api/User/getUserInfo";
 import Footer from "./component/organism/Footer";
 import { useDispatch } from "react-redux";
@@ -74,6 +76,8 @@ function App() {
                     <Route path="/viewpost/:board_id/:post_id" element={<ViewPost />}></Route>
                     <Route path="/user-certification" element={<UserCertificate />}></Route>
                     <Route path="/major-certification" element={<MajorCertificate />}></Route>
+                    <Route path="/userpost" element={<UserPost/>}></Route>
+                    <Route path="/userliked" element={<UserLiked/>}></Route>
                 </Routes>
             </div>
             {/* <Footer /> */}
