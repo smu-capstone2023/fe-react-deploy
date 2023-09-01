@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 import { AiOutlineCamera } from "react-icons/ai";
 import { uploadImageToServer } from "../../api/utils/imageUploader";

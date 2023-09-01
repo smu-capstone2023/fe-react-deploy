@@ -27,7 +27,6 @@ function setInterceptor(instance: any) {
                     }
                 } catch (error: any) {
                     if (error.response && error.response.status === 444) {
-                        alert("로그인 만료시간이 지났습니다.");
                         localStorage.clear();
                         window.location.href = "/login";
                     }
