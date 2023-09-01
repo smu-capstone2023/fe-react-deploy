@@ -15,10 +15,9 @@ interface DetailFunctionProps {
     postId?: string;
     isAuthor?: boolean;
     commentId?: number;
-    isCommentAuthor?: boolean;
 }
 
-export default function DetailFunction({ size = 25, color = "#888888", boardId, postId, isAuthor, commentId, isCommentAuthor }: DetailFunctionProps) {
+export default function DetailFunction({ size = 25, color = "#888888", boardId, postId, isAuthor, commentId }: DetailFunctionProps) {
     const [isDivVisible, setIsDivVisible] = useState<Boolean>(false);
 
     const onHandleELLipsis = () => {
@@ -142,7 +141,7 @@ export default function DetailFunction({ size = 25, color = "#888888", boardId, 
             <>
             {isDivVisible && (
                 <EllipsisItem  >
-                    {isCommentAuthor ?
+                    {isAuthor ?
                     <>
                         <Items onClick={UpdateComment}>
                               수정하기 <AiFillEdit color="#888888" />
