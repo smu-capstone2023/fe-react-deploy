@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import styled from "styled-components";
 import { AiOutlineCamera } from "react-icons/ai";
-import { uploadImageToServer } from "../../api/utils/imageUploader";
+import { uploadPostImageToServer } from "api/utils/postImageUploader";
 /**
  * @param iconSize: string
  * @param size: string
@@ -16,7 +16,7 @@ export const ImageUploadButton = ({ iconSize, size, onClickImageButton }) => {
         const file = event.target.files[0];
         const formData = new FormData();
         formData.append("image", file);
-        uploadImageToServer(formData).then((response) => {
+        uploadPostImageToServer(formData).then((response) => {
             if (response !== "") {
                 onClickImageButton(response.imageUrls);
             }
