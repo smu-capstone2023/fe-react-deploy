@@ -53,7 +53,8 @@ export default function Home() {
                 }
             });
         }
-        getBusNotice().then((res :(BusNoticeType[] | boolean))=>{
+
+        getBusNotice().then((res: BusNoticeType[] | boolean) => {
             if (res) {
                 setBusNoticeList(res);
             }
@@ -81,7 +82,7 @@ export default function Home() {
                 mbti={userInfo?.mbti ? userInfo?.mbti : ""}
             />
             <IconList majors={userInfo?.majors} />
-            <BusNotice BusNoticeLists={BusNoticeList}/>
+            <BusNotice BusNoticeLists={BusNoticeList} />
             <div
                 css={css`
                     border-bottom-width: 10px;
@@ -97,7 +98,13 @@ export default function Home() {
                     border-bottom-color: #f3f3f3;
                 `}
             />
-            <BoardSectionList title="HOT 게시판" previewList={hotPreviewList} headerOnClick={() => (window.location.href = `/board/1/1`)} />
+            <BoardSectionList
+                title="HOT 게시판"
+                previewList={hotPreviewList}
+                headerOnClick={() => {
+                    localStorage.getItem("access_token") ? (window.location.href = `/board/1/1`) : alert("로그인을 해주세요.");
+                }}
+            />
             <div
                 css={css`
                     border-bottom-width: 10px;

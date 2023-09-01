@@ -30,7 +30,6 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("render");
         if (localStorage.getItem("access_token")) {
             dispatch(getUserInfoData());
             getUserInfo().then((response) => {
@@ -76,8 +75,8 @@ function App() {
                     <Route path="/viewpost/:board_id/:post_id" element={<ViewPost />}></Route>
                     <Route path="/user-certification" element={<UserCertificate />}></Route>
                     <Route path="/major-certification" element={<MajorCertificate />}></Route>
-                    <Route path="/userpost" element={<UserPost/>}></Route>
-                    <Route path="/userliked" element={<UserLiked/>}></Route>
+                    <Route path="/userpost" element={<UserPost />}></Route>
+                    <Route path="/userliked" element={<UserLiked />}></Route>
                 </Routes>
             </div>
             {/* <Footer /> */}
