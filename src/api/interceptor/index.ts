@@ -11,7 +11,7 @@ function setInterceptor(instance: any) {
             return response;
         },
         async function (error: any) {
-            if (error.response && error.response.status === 403) {
+            if (error.response && error.response.status === 444) {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/refresh_access_token`, {
                     headers: {
                         access_token: localStorage.getItem("access_token"),
@@ -25,6 +25,7 @@ function setInterceptor(instance: any) {
                     return instance(error.config);
                 } else {
                     alert("로그인 만료시간이 지났습니다.");
+                    localStorage.clear();
                     window.location.href = "/login";
                 }
             }
