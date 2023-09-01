@@ -22,10 +22,19 @@ const MajorCertificateView = ({ onClickImageUploadButton, onClickDeleteImageButt
             <MCVLayout>
                 <div style={{ display: "flex", justifyContent: "center", fontFamily: "nexon-regular" }}>학과 인증 절차</div>
 
-                <div style={{ margin: "1rem 0" }}>
+                <div style={{ margin: "1rem 0", gap: "0.5rem" }}>
                     <p style={{ fontFamily: "nexon-regular", fontSize: ".9em" }}>학과를 인증할 수 있는 이미지를 첨부해주세요.</p>
-                    <p style={{ fontFamily: "nexon-regular", color: "#747474", fontSize: ".7em" }}>사진을 기준으로 학과가 추가됩니다.</p>
-                    <p style={{ fontFamily: "nexon-regular", color: "#4169E1", fontSize: ".7em" }}>(사진엔 학번도 들어가있어야 합니다!)</p>
+                    <p style={{ fontFamily: "nexon-regular", color: "#5a5a5a", fontSize: ".7em" }}>(사진엔 학번도 들어가있어야 합니다!)</p>
+                    <a
+                        href="https://ddakzip.notion.site/ddakzip/4904bb3508c64a5bb5f2f05180fa9fdc"
+                        style={{
+                            fontFamily: "nexon-regular",
+                            color: "#4169E1",
+                            fontSize: "1rem",
+                        }}
+                    >
+                        학과인증 절차보기! {`>>`}
+                    </a>
                 </div>
 
                 <div style={{ width: "100%", height: "15em" }}>

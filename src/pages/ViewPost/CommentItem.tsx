@@ -41,7 +41,7 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                         flex: 8;
                     `}
                 >
-                    <Avatar size={30} profileUrl={userProfile}/>
+                    <Avatar size={30} profileUrl={userProfile} />
                     <p
                         css={css`
                             font-family: nexon-regular;
