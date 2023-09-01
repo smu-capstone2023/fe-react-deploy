@@ -12,9 +12,9 @@ interface Prop {
     onClickLike?: () => void;
     isLiked?: boolean;
     commentId?: number;
-    isCommentAuthor?: boolean;
+    isAuthor?: boolean;
 }
-export default function CommentItem({ username, likes, date, content, onClickLike, isLiked, commentId, isCommentAuthor }: Prop) {
+export default function CommentItem({ username, likes, date, content, onClickLike, isLiked, commentId, isAuthor }: Prop) {
     const isImage = content?.includes("https://smus.s3");
     return (
         <div
@@ -64,7 +64,7 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                         <AiOutlineHeart size={20} color="#fa9090" onClick={onClickLike} />
                     )}
                 </div>
-                <DetailFunction commentId={commentId} isCommentAuthor={isCommentAuthor}></DetailFunction>
+                <DetailFunction commentId={commentId} isAuthor={isAuthor}></DetailFunction>
             </div>
             {isImage ? (
                 <img

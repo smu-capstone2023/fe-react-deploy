@@ -141,7 +141,7 @@ export default function ViewPost() {
                                 username={item.username}
                                 content={item.content}
                                 isLiked={item.isLiked}
-                                isCommentAuthor={CommentAuthor(item.user_id)}
+                                isAuthor={CommentAuthor(item.user_id)}
                             />
                         );
                     })}
