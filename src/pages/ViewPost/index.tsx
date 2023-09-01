@@ -28,6 +28,13 @@ export default function ViewPost() {
     const toast = useToast();
     const [isOpenEmotion, setIsOpenEmotion] = useState<boolean>(false);
 
+    const CommentAuthor = (userId: string):boolean => {
+        const Id = (localStorage.user_id);
+        if(userId == Id) {
+            return true;
+        } else return false;
+    }
+    
     const onHandlePostLike = () => {
         if (post_id)
             likePost(post_id).then((res) => {
@@ -128,12 +135,14 @@ export default function ViewPost() {
                         return (
                             <CommentItem
                                 onClickLike={() => onHandleCommentLike(item.comment_id)}
+                                commentId={item.comment_id}
                                 date={item.created_time}
                                 key={index}
                                 likes={item.likes}
                                 username={item.username}
                                 content={item.content}
                                 isLiked={item.isLiked}
+                                isAuthor={CommentAuthor(item.user_id)}
                                 userProfile={item.profile_img_url}
                             />
                         );
