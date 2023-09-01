@@ -141,7 +141,7 @@ export default function Profile({ nickname, mbti, major, newProfileUrl, profileE
             ) : (
                 <>
                     <Avatar size={100} />
-                    <p>로그인을 해주세요!</p>
+                    <a style={{cursor:"pointer", borderBottom: "1px solid #E8E8E8" }} href="/login">로그인을 해주세요!</a>
                 </>
             )}
         </div>
