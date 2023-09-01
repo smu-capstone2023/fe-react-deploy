@@ -12,6 +12,6 @@ export const uploadProfileImageToServer = (formData) => {
         })
         .catch((response) => {
             console.error("uploadProfileImageToServer", response);
-            return "";
+            return null;
         });
 };

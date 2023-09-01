@@ -12,6 +12,6 @@ export const uploadPostImageToServer = (formData) => {
         })
         .catch((response) => {
             console.error("uploadPostImageToServer", response);
-            return "";
+            return null;
         });
 };

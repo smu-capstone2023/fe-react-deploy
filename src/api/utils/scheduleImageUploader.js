@@ -12,6 +12,6 @@ export const uploadScheduleImageToServer = (formData) => {
         })
         .catch((response) => {
             console.error("uploadScheduleImageToServer", response);
-            return "";
+            return null;
         });
 };
