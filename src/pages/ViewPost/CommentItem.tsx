@@ -10,8 +10,9 @@ interface Prop {
     content?: string;
     onClickLike?: () => void;
     isLiked?: boolean;
+    userProfile?: string;
 }
-export default function CommentItem({ username, likes, date, content, onClickLike, isLiked }: Prop) {
+export default function CommentItem({ username, likes, date, content, onClickLike, isLiked, userProfile }: Prop) {
     const isImage = content?.includes("https://smus.s3");
     return (
         <div
@@ -37,7 +38,7 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                         align-items: center;
                     `}
                 >
-                    <Avatar size={30} />
+                    <Avatar size={30} profileUrl={userProfile}/>
                     <p
                         css={css`
                             font-family: nexon-regular;

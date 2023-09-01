@@ -109,6 +109,7 @@ export default function ViewPost() {
                     boardId={board_id}
                     postId={post_id}
                     isAuthor={post?.is_author}
+                    userProfile={post?.profile_img_url}
                 />
                 <PostContainer>
                     <PostTitle>{post?.title}</PostTitle>
@@ -133,6 +134,7 @@ export default function ViewPost() {
                                 username={item.username}
                                 content={item.content}
                                 isLiked={item.isLiked}
+                                userProfile={item.profile_img_url}
                             />
                         );
                     })}

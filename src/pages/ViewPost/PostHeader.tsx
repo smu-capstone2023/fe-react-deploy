@@ -11,9 +11,10 @@ interface Prop {
     boardId?: string;
     postId?: string;
     isAuthor?: boolean;
+    userProfile? : string;
 }
 
-export default function PostHeader({ username = "알 수 없음", onClickHeart = () => {}, isLiked = false, boardId, postId, isAuthor }: Prop) {
+export default function PostHeader({ username = "알 수 없음", onClickHeart = () => {}, isLiked = false, boardId, postId, isAuthor, userProfile }: Prop) {
     return (
         <div
             css={css`
@@ -31,7 +32,7 @@ export default function PostHeader({ username = "알 수 없음", onClickHeart =
                     flex: 8;
                 `}
             >
-                <Avatar size={45} />
+                <Avatar size={45} profileUrl={userProfile}/>
                 <p
                     css={css`
                         font-family: nexon-regular;
