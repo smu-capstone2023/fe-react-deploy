@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Profile from "pages/Home/Profile";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { AiOutlineRight } from "react-icons/ai";
 import { AiOutlineClockCircle } from "react-icons/ai";
@@ -13,6 +13,8 @@ import PasswordChangeModal from "./PasswordChangeModal";
 import MbtiChangeModal from "./MbtiChangeModal";
 import ScheduleImgUpload from "./ScheduleImgUpload";
 import { foldingCss, onClickLogout, onClickRevoke } from "./utils";
+import FileUpload from "../../component/Avatar/fileUpload.svg";
+import { uploadImageToServer } from "../../api/utils/imageUploader";
 
 const SectionContainer = styled.div`
     padding: 20px;
@@ -25,6 +27,26 @@ export default function MyPage() {
     const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
     const [isOpenSchedule, setIsOpenSchedule] = useState<boolean | null>(null);
     const [scheduleImage, setSchduleImage] = useState<string | null>(null);
+    const [profileEditSelected, setProfileEditSelected] = useState(false);
+    const [newProfileUrl, setNewProfileUrl] = useState<string>('');
+    const fileInput = useRef<HTMLInputElement | null>(null);
+
+    const handleGetImageUrl = (event :any) => {
+        const file = event.target.files[0]; 
+        const formData = new FormData();
+        formData.append("image", file);
+        uploadImageToServer(formData).then((response) => {
+            if (response !== "") {
+                setNewProfileUrl(response.imageUrls);
+            }
+        });
+    };
+
+    const handleClick = () => {
+        if (fileInput.current !== null) {
+            fileInput.current.click();
+        }
+    };
 
     useEffect(() => {
         if (userInfoData.time_table) {
@@ -96,13 +118,48 @@ export default function MyPage() {
                     }
                 `}
             >
-                <Profile
-                    nickname={userInfoData.username}
-                    major={
-                        userInfoData.majors && userInfoData.majors.length >= 2 ? userInfoData.majors[1].major_name : "학과인증을 해주세요"
+                <div
+                    style={{
+                        position: "relative",
+                    }}
+                >
+                    <Profile
+                        nickname={userInfoData.username}
+                        major={
+                            userInfoData.majors && userInfoData.majors.length >= 2 ? userInfoData.majors[1].major_name : "학과인증을 해주세요"
+                        }
+                        mbti={userInfoData.mbti}
+                        newProfileUrl={newProfileUrl}
+                        profileEditSelected={profileEditSelected}
+                        setProfileEditSelected={setProfileEditSelected}
+                    />
+                    {profileEditSelected &&
+                        <div
+                            style={{
+                                position: "absolute",
+                                width: "30px",
+                                height: "30px",
+                                background: "#4169E1",
+                                borderRadius: `100px`,
+                                backgroundImage: `url(${FileUpload})`,
+                                backgroundSize: "cover",
+                                bottom: "60%",
+                                right: "40%",
+                            }}
+
+                            onClick={handleClick}
+                            >
+                                <input
+                                    type="file"
+                                    accept="image/jpg, image/jpeg, image/png"
+                                    style={{ display: "none" }}
+                                    ref={fileInput}
+                                    onChange={handleGetImageUrl}
+                                />
+                        </div>
                     }
-                    mbti={userInfoData.mbti}
-                />
+                </div>
+
                 <SectionContainer
                     css={css`
                         flex-direction: row;
@@ -182,7 +239,14 @@ export default function MyPage() {
                 <Separator />
                 <SectionContainer>
                     {my_util_list.map((item) => {
-                        return <ListItem title={item} key={item} />;
+                        return <ListItem title={item} key={item} onClick={()=>{
+                            if (item === "내가 쓴 글") {
+                                window.location.href="/userpost";
+                            }
+                            if (item === "내가 좋아요 한 글") {
+                                window.location.href="/userliked";
+                            }
+                        }}/>;
                     })}
                 </SectionContainer>
                 <Separator />
@@ -197,7 +261,7 @@ export default function MyPage() {
                         css={css`
                             color: #747474;
                             font-size: 18px;
-                            font-family: nexon;
+                            font-family: nexon-regular;
                         `}
                     >
                         앱 정보

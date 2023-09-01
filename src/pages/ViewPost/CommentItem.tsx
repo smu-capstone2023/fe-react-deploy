@@ -13,8 +13,9 @@ interface Prop {
     isLiked?: boolean;
     commentId?: number;
     isAuthor?: boolean;
+    userProfile?: string;
 }
-export default function CommentItem({ username, likes, date, content, onClickLike, isLiked, commentId, isAuthor }: Prop) {
+export default function CommentItem({ username, likes, date, content, onClickLike, isLiked, commentId, isAuthor, userProfile }: Prop) {
     const isImage = content?.includes("https://smus.s3");
     return (
         <div
@@ -40,7 +41,7 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                         flex: 8;
                     `}
                 >
-                    <Avatar size={30} />
+                    <Avatar size={30} profileUrl={userProfile}/>
                     <p
                         css={css`
                             font-family: nexon-regular;
