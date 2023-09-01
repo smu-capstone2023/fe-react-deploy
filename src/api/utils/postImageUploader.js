@@ -1,8 +1,9 @@
 import axios from "axios";
-export const uploadImageToServer = (formData) => {
+export const uploadPostImageToServer = (formData) => {
     return axios
-        .post(`${process.env.REACT_APP_SERVER_URL}/upload`, formData, {
+        .post(`${process.env.REACT_APP_SERVER_URL}/upload/post`, formData, {
             headers: {
+                Authorization: localStorage.getItem("access_token"),
                 "Contest-Type": "multipart/form-data",
             },
         })
@@ -10,7 +11,7 @@ export const uploadImageToServer = (formData) => {
             return response.data;
         })
         .catch((response) => {
-            console.error("uploadImageToServer", response);
+            console.error("uploadPostImageToServer", response);
             return "";
         });
 };

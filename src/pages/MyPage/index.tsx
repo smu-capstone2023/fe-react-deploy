@@ -14,7 +14,7 @@ import MbtiChangeModal from "./MbtiChangeModal";
 import ScheduleImgUpload from "./ScheduleImgUpload";
 import { foldingCss, onClickLogout, onClickRevoke } from "./utils";
 import FileUpload from "../../component/Avatar/fileUpload.svg";
-import { uploadImageToServer } from "../../api/utils/imageUploader";
+import { uploadProfileImageToServer } from "../../api/utils/profileImageUploader";
 
 const SectionContainer = styled.div`
     padding: 20px;
@@ -35,7 +35,7 @@ export default function MyPage() {
         const file = event.target.files[0]; 
         const formData = new FormData();
         formData.append("image", file);
-        uploadImageToServer(formData).then((response) => {
+        uploadProfileImageToServer(formData).then((response) => {
             if (response !== "") {
                 setNewProfileUrl(response.imageUrls);
             }
