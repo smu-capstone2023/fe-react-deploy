@@ -1,10 +1,9 @@
 import axios from "axios";
 
-export const findPassword = () => {
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/find_password`, {
-        headers: {
-            access_token: localStorage.getItem("access_token"),
-        },
+export const findPassword = ({school_id}) => {
+    return axios
+    .post(`${process.env.REACT_APP_SERVER_URL}/auth/find_password`, {
+        school_id: school_id,
     })
     .then((response)=>{
         return true;
