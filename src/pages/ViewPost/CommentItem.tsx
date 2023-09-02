@@ -24,6 +24,7 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                 flex-direction: column;
                 border-bottom-width: 2px;
                 border-color: #f3f3f3;
+                position: relative;
             `}
         >
             <div
@@ -55,7 +56,7 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                     css={css`
                         display: flex;
                         gap: 0.2rem;
-                        flex: 1;
+                        position: relative;
                     `}
                 >
                     <AiOutlineMessage size={20} color="#888" />
@@ -64,9 +65,10 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                     ) : (
                         <AiOutlineHeart size={20} color="#fa9090" onClick={onClickLike} />
                     )}
+                    <DetailFunction size={20} commentId={commentId} isAuthor={isAuthor}></DetailFunction>
                 </div>
-                <DetailFunction commentId={commentId} isAuthor={isAuthor}></DetailFunction>
             </div>
+
             {isImage ? (
                 <img
                     src={content}
