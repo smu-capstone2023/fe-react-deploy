@@ -12,7 +12,6 @@ export const changeProfileImage = (image: string): Promise<boolean> => {
             }
         })
         .catch((response: any) => {
-            console.log(response);
             return false;
         });
 };

@@ -7,7 +7,6 @@ export const getBoardPostSearchCursor = (keyword: string, last_id: string | numb
             return response.data;
         })
         .catch((response: any) => {
-            console.log(response);
             return {};
         });
 };

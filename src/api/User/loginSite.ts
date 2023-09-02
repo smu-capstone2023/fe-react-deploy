@@ -15,8 +15,13 @@ export const loginSite = (school_id: string, password: string) => {
                 };
             }
         })
-        .catch((response) => {
-            console.error("loginSite", response);
+        .catch((error) => {
+            if (error.response.status === 405) {
+                alert("메일인증을 완료해주세요!");
+            }
+            if (error.response.status === 403) {
+                alert("로그인 정보가 없습니다!");
+            }
             return {};
         });
 };

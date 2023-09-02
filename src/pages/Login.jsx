@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import LoginView from "../component/template/LoginView";
 import { loginSite } from "api/User/loginSite";
 import { useToast } from "@chakra-ui/react";
@@ -12,8 +12,8 @@ const Login = () => {
 
     //비밀번호 찾기
     const onClickFindAccount = async () => {
-        let school_id = '';
-        let swalResult = '';
+        let school_id = "";
+        let swalResult = "";
         swalResult = await Swal.fire({
             title: "학번을 입력해주세요",
             input: "text",
@@ -26,11 +26,16 @@ const Login = () => {
         if (swalResult.isConfirmed) {
             school_id = swalResult.value;
             if (school_id) {
-                const response = await findPassword({school_id: school_id});
+                const response = await findPassword({ school_id: school_id });
                 if (response) {
                     toast({ title: "임시 비밀번호가 메일로 전송되었습니다.", position: "top", isClosable: true, variant: "subtle" });
                 } else {
-                    toast({ title: "일시적인 오류로 임시 비밀번호 전송에 실패했습니다. 다시 시도해주세요.", position: "top", isClosable: true, variant: "subtle" });
+                    toast({
+                        title: "일시적인 오류로 임시 비밀번호 전송에 실패했습니다. 다시 시도해주세요.",
+                        position: "top",
+                        isClosable: true,
+                        variant: "subtle",
+                    });
                 }
             }
         }
@@ -69,8 +74,6 @@ const Login = () => {
                         window.location.href = "/";
                     }
                 });
-            } else {
-                alert("로그인 정보가 없습니다. 다시 시도해주세요! ");
             }
         });
     };

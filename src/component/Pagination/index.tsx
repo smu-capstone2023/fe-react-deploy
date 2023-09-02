@@ -50,7 +50,7 @@ export default function Pagination(props: PaginationProps) {
 
             answer = [...addLeftArray, ...answer];
         }
-        console.log(answer); // TODO-Question: 이부분 왜 4번 렌더링 되는지 이해 안됨.(장현)
+
         return answer;
     };
 

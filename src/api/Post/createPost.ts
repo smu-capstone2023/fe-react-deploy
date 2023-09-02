@@ -16,7 +16,12 @@ export const createPost = (title: string, content: string, board_id: string | nu
             return false;
         })
         .catch((error: any) => {
-            console.error("createPost", error);
+            if (error.response.status === 402) {
+                alert("해당 게시판의 글쓰기 권한이 없습니다.");
+            }
+            if (error.response.status === 401) {
+                alert("제목과 내용이 작성되지 않았습니다");
+            }
             return false;
         });
 };

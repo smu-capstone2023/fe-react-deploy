@@ -59,7 +59,7 @@ export default function CommentItem({ username, likes, date, content, onClickLik
                         position: relative;
                     `}
                 >
-                    <AiOutlineMessage size={20} color="#888" />
+                    {/* <AiOutlineMessage size={20} color="#888" /> */}
                     {isLiked ? (
                         <AiTwotoneHeart size={20} color="#fa9090" onClick={onClickLike} />
                     ) : (

@@ -8,7 +8,6 @@ export const getMajorsBoardList = (major_id: string | number): Promise<IBoard[]>
             return response.data;
         })
         .catch((response: any) => {
-            console.log(response);
             return [];
         });
 };

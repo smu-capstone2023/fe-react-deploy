@@ -9,7 +9,6 @@ export const getUserMajorsInfo = () => {
             }
         })
         .catch((response: any) => {
-            console.log(response);
             return [];
         });
 };
