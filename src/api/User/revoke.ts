@@ -9,7 +9,6 @@ export const revoke = () => {
             }
         })
         .catch((response: any) => {
-            console.log(response);
             return false;
         });
 };

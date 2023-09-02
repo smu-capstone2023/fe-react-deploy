@@ -12,7 +12,6 @@ export const getBoardPostSearchPaging = (keyword: string, now_page: string | num
             return response.data;
         })
         .catch((response) => {
-            console.log(response);
             return {};
         });
 };

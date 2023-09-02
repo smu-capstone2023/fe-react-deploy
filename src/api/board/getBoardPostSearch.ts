@@ -12,7 +12,6 @@ export const getBoardPostSearch = (keyword: string, sorting: string) => {
             return response.data;
         })
         .catch((response) => {
-            console.log(response);
             return {};
         });
 };
