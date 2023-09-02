@@ -15,6 +15,7 @@ import ScheduleImgUpload from "./ScheduleImgUpload";
 import { foldingCss, onClickLogout, onClickRevoke } from "./utils";
 import FileUpload from "../../component/Avatar/fileUpload.svg";
 import { uploadProfileImageToServer } from "../../api/utils/profileImageUploader";
+import Swal from "sweetalert2";
 
 const SectionContainer = styled.div`
     padding: 20px;
@@ -28,11 +29,11 @@ export default function MyPage() {
     const [isOpenSchedule, setIsOpenSchedule] = useState<boolean | null>(null);
     const [scheduleImage, setSchduleImage] = useState<string | null>(null);
     const [profileEditSelected, setProfileEditSelected] = useState(false);
-    const [newProfileUrl, setNewProfileUrl] = useState<string>('');
+    const [newProfileUrl, setNewProfileUrl] = useState<string>("");
     const fileInput = useRef<HTMLInputElement | null>(null);
 
-    const handleGetImageUrl = (event :any) => {
-        const file = event.target.files[0]; 
+    const handleGetImageUrl = (event: any) => {
+        const file = event.target.files[0];
         const formData = new FormData();
         formData.append("image", file);
         uploadProfileImageToServer(formData).then((response) => {
@@ -64,7 +65,7 @@ export default function MyPage() {
         //TODO: 프로필 수정하기 기능 여기다가
     };
 
-    const handleOnClickSettingItem = (item: string) => {
+    const handleOnClickSettingItem = async (item: string) => {
         switch (item) {
             case "학과인증":
                 window.location.href = "/major-certification";
@@ -79,7 +80,16 @@ export default function MyPage() {
                 onClickLogout();
                 break;
             case "탈퇴하기":
-                onClickRevoke();
+                const result = await Swal.fire({
+                    title: "탈퇴하시겠습니까?",
+                    showCancelButton: true,
+                    confirmButtonText: "예",
+                    cancelButtonText: "아니오",
+                });
+
+                if (result.isConfirmed) {
+                    onClickRevoke();
+                }
         }
     };
 
@@ -126,14 +136,16 @@ export default function MyPage() {
                     <Profile
                         nickname={userInfoData.username}
                         major={
-                            userInfoData.majors && userInfoData.majors.length >= 2 ? userInfoData.majors[1].major_name : "학과인증을 해주세요"
+                            userInfoData.majors && userInfoData.majors.length >= 2
+                                ? userInfoData.majors[1].major_name
+                                : "학과인증을 해주세요"
                         }
                         mbti={userInfoData.mbti}
                         newProfileUrl={newProfileUrl}
                         profileEditSelected={profileEditSelected}
                         setProfileEditSelected={setProfileEditSelected}
                     />
-                    {profileEditSelected &&
+                    {profileEditSelected && (
                         <div
                             style={{
                                 position: "absolute",
@@ -146,18 +158,17 @@ export default function MyPage() {
                                 bottom: "60%",
                                 right: "40%",
                             }}
-
                             onClick={handleClick}
-                            >
-                                <input
-                                    type="file"
-                                    accept="image/jpg, image/jpeg, image/png"
-                                    style={{ display: "none" }}
-                                    ref={fileInput}
-                                    onChange={handleGetImageUrl}
-                                />
+                        >
+                            <input
+                                type="file"
+                                accept="image/jpg, image/jpeg, image/png"
+                                style={{ display: "none" }}
+                                ref={fileInput}
+                                onChange={handleGetImageUrl}
+                            />
                         </div>
-                    }
+                    )}
                 </div>
 
                 <SectionContainer
@@ -239,14 +250,20 @@ export default function MyPage() {
                 <Separator />
                 <SectionContainer>
                     {my_util_list.map((item) => {
-                        return <ListItem title={item} key={item} onClick={()=>{
-                            if (item === "내가 쓴 글") {
-                                window.location.href="/userpost";
-                            }
-                            if (item === "내가 좋아요 한 글") {
-                                window.location.href="/userliked";
-                            }
-                        }}/>;
+                        return (
+                            <ListItem
+                                title={item}
+                                key={item}
+                                onClick={() => {
+                                    if (item === "내가 쓴 글") {
+                                        window.location.href = "/userpost";
+                                    }
+                                    if (item === "내가 좋아요 한 글") {
+                                        window.location.href = "/userliked";
+                                    }
+                                }}
+                            />
+                        );
                     })}
                 </SectionContainer>
                 <Separator />
