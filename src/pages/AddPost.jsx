@@ -26,14 +26,12 @@ const AddPost = () => {
     const onClickSavePost = () => {
         if (post_id === "null") {
             createPost(title, content, board_id, is_anonymous, imageList).then((response) => {
-                if (response === false) {
-                    alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
-                } else {
+                if (typeof response === "number") {
                     window.location.href = `/viewpost/${board_id}/${response}`;
                 }
             });
         } else {
-            updatePost( title, content, is_anonymous, imageList, post_id ).then((response) => {
+            updatePost(title, content, is_anonymous, imageList, post_id).then((response) => {
                 if (response === false) {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
                 } else {
