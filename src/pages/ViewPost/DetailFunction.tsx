@@ -97,9 +97,9 @@ const EllipsisItem = styled.div`
     background: #fff;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     position: absolute;
-    top: 4rem;
-    right: 1rem;
-    width: 180px;
+    right: 0;
+    top: 25px;
+    width: 140px;
     padding: 0.7rem;
 `;
 
