@@ -3,6 +3,7 @@ import LoginView from "../component/template/LoginView";
 import { loginSite } from "api/User/loginSite";
 import { useToast } from "@chakra-ui/react";
 import { getUserInfo } from "../api/User/getUserInfo";
+import { findPassword } from "../api/User/findPassword";
 const Login = () => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
