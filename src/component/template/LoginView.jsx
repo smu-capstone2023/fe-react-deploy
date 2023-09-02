@@ -27,7 +27,7 @@ const LoginView = ({ onChangeId, onChangePassword, onClickLoginButton, onClickFi
                         <InputBox type="password" placeholder="비밀번호" onChange={onChangePassword} />
                     </InputBoxContainer>
                     <Button onClick={onClickLoginButton} title="로그인"></Button>
-                    <FindAccountButton onClick={onClickFindAccount}>아이디/비밀번호 찾기</FindAccountButton>
+                    <FindAccountButton onClick={onClickFindAccount}>비밀번호 찾기</FindAccountButton>
                     <SignUpButton onClick={onClickSignUp}>
                         아직&nbsp;<span style={{ color: "#4169E1" }}> SMUS 회원</span>이 아니신가요?
                     </SignUpButton>
