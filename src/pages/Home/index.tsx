@@ -27,6 +27,7 @@ export interface BusNoticeType {
     title: string;
     imageUrls: string[];
     content: string;
+    bus_list: string[];
 }
 export default function Home() {
     const [hotPreviewList, setHotPreviewList] = useState<IPreview[]>([]);

@@ -18,12 +18,15 @@ interface BusNoticeProps {
 
 export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
     const [toDayBusContent, setTodayBusContent] = useState<string | null>(null);
+    const [toDayBusNumber, setTodayBusNumber] = useState<string[] | null>(null);
 
     const findTodayBusList = () => {
         if (Array.isArray(BusNoticeLists) && BusNoticeLists.length > 0) {
             setTodayBusContent(BusNoticeLists[0].title);
+            setTodayBusNumber(BusNoticeLists[0].bus_list);
         } else {
             setTodayBusContent(null);
+            setTodayBusNumber(null);
         }
     }
 
@@ -69,7 +72,31 @@ export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
                         padding: 0 20px 20px 20px;
                         flex-direction: column;
                     `}
-                >
+                >  
+                {(toDayBusNumber && toDayBusNumber.length > 0) &&
+                    <div
+                        css={css`
+                            display: flex;
+                            flex-direction: row;
+                            padding : 10px 0 0 0;
+                            align-items: center;
+                            font-family: nexon-light;
+                            font-size: 16px;
+                        `}
+                    >오늘&nbsp;
+                    {toDayBusNumber.map((item, index)=>
+                        <p
+                            css={css`
+                                display: flex;
+                                font-family: nexon-bold;
+                                font-size: 16px;
+                            `}
+                        >{item}&nbsp;
+                        </p>
+                    )}
+                버스가 우회할 수도 있어요!
+                </div>   
+                }
                     <p
                         css={css`
                             display: flex;
