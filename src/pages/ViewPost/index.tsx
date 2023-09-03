@@ -18,6 +18,7 @@ import { position, useToast } from "@chakra-ui/react";
 import { AiOutlineSmile } from "react-icons/ai";
 import EmoticonView from "./EmotionView";
 import { getBoardDetailInfoByPostId } from "api/board/getBoardDetailInfoByPostId";
+import ImageViewList from "component/organism/ImageViewList";
 
 export default function ViewPost() {
     const { post_id, board_id } = useParams();
@@ -84,6 +85,11 @@ export default function ViewPost() {
         }
     }, []);
 
+    const postImage = () => {
+        const imageLists: string[] | undefined = post?.image_urls?.split(',') ?? [];
+        return imageLists;
+      };
+      
     return (
         <>
             <div
@@ -121,6 +127,7 @@ export default function ViewPost() {
                 <PostContainer>
                     <PostTitle>{post?.title}</PostTitle>
                     <PostContent>{post?.content}</PostContent>
+                    <ImageViewList size={"4rem"} iconSize={0} onDeleteImage={null} imageList={postImage()}/>
                 </PostContainer>
                 <PostFooter commentCount={post?.comments?.length} likeCount={post?.likes} date={post?.created_time} />
                 <Separator />
