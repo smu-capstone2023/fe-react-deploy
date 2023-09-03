@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AddPostView from "../component/template/AddPostView";
 import { createPost } from "../api/Post/createPost";
@@ -41,6 +41,11 @@ const AddPost = () => {
         }
     };
 
+    const getPostImage = (images) => {
+        const postImages = images?.split(',') ?? [];
+        setImageList(...imageList, postImages);
+      };
+
     useEffect(() => {
         getBoardDetailInfo(board_id).then((response) => {
             if (response) {
@@ -57,6 +62,7 @@ const AddPost = () => {
                 if (response) {
                     setTitle(response.title);
                     setContent(response.content);
+                    getPostImage(response.image_urls);
                 } else {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
                 }

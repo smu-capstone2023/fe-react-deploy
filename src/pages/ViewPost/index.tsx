@@ -86,8 +86,8 @@ export default function ViewPost() {
     }, []);
 
     const postImage = () => {
-        const sentences: string[] | undefined = post?.image_urls?.split(',') ?? [];
-        return sentences;
+        const imageLists: string[] | undefined = post?.image_urls?.split(',') ?? [];
+        return imageLists;
       };
       
     return (
