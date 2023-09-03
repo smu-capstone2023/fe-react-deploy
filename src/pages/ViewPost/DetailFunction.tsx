@@ -46,26 +46,26 @@ export default function DetailFunction({ size = 25, color = "#888888", boardId, 
     };
 
     const DeletePost = () => {
-      Swal.fire({
-        title: "해당 글을 삭제하시겠습니까?",
-        showCancelButton: true,
-        confirmButtonText: "예",
-        cancelButtonText: "아니오",
-    }).then((result) => {
-        if (result.isConfirmed && postId) {
-          deletePost(postId).then((response: boolean) => {
-                if (response) {
-                    alert("성공적으로 삭제되었습니다.");
-                    window.history.back();
-                } else {
-                    alert("네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.");
-                }
-            });
-        }
-    });
-    }
+        Swal.fire({
+            title: "해당 글을 삭제하시겠습니까?",
+            showCancelButton: true,
+            confirmButtonText: "예",
+            cancelButtonText: "아니오",
+        }).then((result) => {
+            if (result.isConfirmed && postId) {
+                deletePost(postId).then((response: boolean) => {
+                    if (response) {
+                        alert("성공적으로 삭제되었습니다.");
+                        window.history.back();
+                    } else {
+                        alert("네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.");
+                    }
+                });
+            }
+        });
+    };
 
-    const UpdatePost = () => window.location.href = `/addpost/${boardId}/${postId}`
+    const UpdatePost = () => (window.location.href = `/addpost/${boardId}/${postId}`);
 
     const ReportComment = () => {
         Swal.fire({
@@ -86,7 +86,7 @@ export default function DetailFunction({ size = 25, color = "#888888", boardId, 
                 });
             }
         });
-    }
+    };
 
     const DeleteComment = () => {
         Swal.fire({
@@ -106,60 +106,60 @@ export default function DetailFunction({ size = 25, color = "#888888", boardId, 
                 });
             }
         });
-    }
+    };
 
     const UpdateComment = () => {
-        alert('준비중')
-    }
+        alert("준비중");
+    };
 
     return (
         <div>
             <IoEllipsisVertical size={size} color={color} onClick={onHandleELLipsis} />
-            {!commentId ? 
+            {!commentId ? (
                 <>
-                {isDivVisible && (
-                    <EllipsisItem>
-                        {isAuthor ? (
-                            <>
-                            <Items onClick={UpdatePost}>
-                                수정하기 <AiFillEdit color="#888888" />
-                            </Items>
-                            <Items onClick={DeletePost}>
-                                삭제하기 <IoTrashBin  color="#888888" />
-                            </Items>
-                            </>
-                        ) : (
-                            <Items onClick={ReportPost}>
-                                신고하기 <AiTwotoneAlert color="#888888" />
-                            </Items>
-                        )}
-                    </EllipsisItem>
-                )}
+                    {isDivVisible && (
+                        <EllipsisItem>
+                            {isAuthor ? (
+                                <>
+                                    <Items onClick={UpdatePost}>
+                                        수정하기 <AiFillEdit color="#888888" />
+                                    </Items>
+                                    <Items onClick={DeletePost}>
+                                        삭제하기 <IoTrashBin color="#888888" />
+                                    </Items>
+                                </>
+                            ) : (
+                                <Items onClick={ReportPost}>
+                                    신고하기 <AiTwotoneAlert color="#888888" />
+                                </Items>
+                            )}
+                        </EllipsisItem>
+                    )}
                 </>
-            :
-            <>
-            {isDivVisible && (
-                <EllipsisItem  >
-                    {isAuthor ?
-                    <>
-                        <Items onClick={UpdateComment}>
+            ) : (
+                <>
+                    {isDivVisible && (
+                        <EllipsisItem>
+                            {isAuthor ? (
+                                <>
+                                    {/* <Items onClick={UpdateComment}>
                               수정하기 <AiFillEdit color="#888888" />
-                          </Items>
-                          <Items onClick={DeleteComment}>
-                          삭제하기 <IoTrashBin  color="#888888" />
-                          </Items>
-                    </>
-                :
-                <>
-                        <Items onClick={ReportComment}>
-                            신고하기 <AiTwotoneAlert color="#888888" />
-                        </Items>
+                          </Items> */}
+                                    <Items onClick={DeleteComment}>
+                                        삭제하기 <IoTrashBin color="#888888" />
+                                    </Items>
+                                </>
+                            ) : (
+                                <>
+                                    <Items onClick={ReportComment}>
+                                        신고하기 <AiTwotoneAlert color="#888888" />
+                                    </Items>
+                                </>
+                            )}
+                        </EllipsisItem>
+                    )}
                 </>
-                }  
-                </EllipsisItem>
             )}
-            </>
-            }
         </div>
     );
 }
