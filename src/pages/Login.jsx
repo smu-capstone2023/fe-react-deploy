@@ -1,16 +1,46 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import LoginView from "../component/template/LoginView";
 import { loginSite } from "api/User/loginSite";
 import { useToast } from "@chakra-ui/react";
 import { getUserInfo } from "../api/User/getUserInfo";
+import { findPassword } from "../api/User/findPassword";
+import Swal from "sweetalert2";
 const Login = () => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const toast = useToast();
-    //아이디/비밀번호 찾기
-    const onClickFindAccount = () => {
-        toast({ title: "준비중입니다.", position: "top", isClosable: true, variant: "subtle" });
+
+    //비밀번호 찾기
+    const onClickFindAccount = async () => {
+        let school_id = "";
+        let swalResult = "";
+        swalResult = await Swal.fire({
+            title: "학번을 입력해주세요",
+            input: "text",
+            inputPlaceholder: "학번 입력",
+            showCancelButton: true,
+            confirmButtonText: "예",
+            cancelButtonText: "아니오",
+        });
+
+        if (swalResult.isConfirmed) {
+            school_id = swalResult.value;
+            if (school_id) {
+                const response = await findPassword({ school_id: school_id });
+                if (response) {
+                    toast({ title: "임시 비밀번호가 메일로 전송되었습니다.", position: "top", isClosable: true, variant: "subtle" });
+                } else {
+                    toast({
+                        title: "일시적인 오류로 임시 비밀번호 전송에 실패했습니다. 다시 시도해주세요.",
+                        position: "top",
+                        isClosable: true,
+                        variant: "subtle",
+                    });
+                }
+            }
+        }
     };
+
     //회원가입
     const onClickSignUp = () => {
         window.location.href = "/signup";
@@ -44,8 +74,6 @@ const Login = () => {
                         window.location.href = "/";
                     }
                 });
-            } else {
-                alert("로그인 정보가 없습니다. 다시 시도해주세요! ");
             }
         });
     };

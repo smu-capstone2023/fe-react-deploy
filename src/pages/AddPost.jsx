@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AddPostView from "../component/template/AddPostView";
 import { createPost } from "../api/Post/createPost";
@@ -26,14 +26,12 @@ const AddPost = () => {
     const onClickSavePost = () => {
         if (post_id === "null") {
             createPost(title, content, board_id, is_anonymous, imageList).then((response) => {
-                if (response === false) {
-                    alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
-                } else {
+                if (typeof response === "number") {
                     window.location.href = `/viewpost/${board_id}/${response}`;
                 }
             });
         } else {
-            updatePost( title, content, is_anonymous, imageList, post_id ).then((response) => {
+            updatePost(title, content, is_anonymous, imageList, post_id).then((response) => {
                 if (response === false) {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
                 } else {
@@ -42,6 +40,11 @@ const AddPost = () => {
             });
         }
     };
+
+    const getPostImage = (images) => {
+        const postImages = images?.split(',') ?? [];
+        setImageList(...imageList, postImages);
+      };
 
     useEffect(() => {
         getBoardDetailInfo(board_id).then((response) => {
@@ -59,6 +62,7 @@ const AddPost = () => {
                 if (response) {
                     setTitle(response.title);
                     setContent(response.content);
+                    getPostImage(response.image_urls);
                 } else {
                     alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
                 }

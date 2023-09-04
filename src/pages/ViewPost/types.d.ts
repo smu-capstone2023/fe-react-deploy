@@ -2,6 +2,7 @@ export interface IComment {
     comment_id: number;
     username: string;
     user_id: string;
+    profile_img_url?: string;
     content?: string;
     likes: number;
     isLiked: boolean;
@@ -13,6 +14,7 @@ export interface IPost {
     post_id: number;
     username: string;
     user_id: number;
+    profile_img_url?: string;
     title: string;
     content: string;
     image_urls?: any;

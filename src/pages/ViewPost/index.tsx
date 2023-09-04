@@ -18,6 +18,7 @@ import { position, useToast } from "@chakra-ui/react";
 import { AiOutlineSmile } from "react-icons/ai";
 import EmoticonView from "./EmotionView";
 import { getBoardDetailInfoByPostId } from "api/board/getBoardDetailInfoByPostId";
+import ImageViewList from "component/organism/ImageViewList";
 
 export default function ViewPost() {
     const { post_id, board_id } = useParams();
@@ -28,6 +29,13 @@ export default function ViewPost() {
     const toast = useToast();
     const [isOpenEmotion, setIsOpenEmotion] = useState<boolean>(false);
 
+    const CommentAuthor = (userId: string):boolean => {
+        const Id = (localStorage.user_id);
+        if(userId == Id) {
+            return true;
+        } else return false;
+    }
+    
     const onHandlePostLike = () => {
         if (post_id)
             likePost(post_id).then((res) => {
@@ -77,6 +85,11 @@ export default function ViewPost() {
         }
     }, []);
 
+    const postImage = () => {
+        const imageLists: string[] | undefined = post?.image_urls?.split(',') ?? [];
+        return imageLists;
+      };
+      
     return (
         <>
             <div
@@ -109,10 +122,12 @@ export default function ViewPost() {
                     boardId={board_id}
                     postId={post_id}
                     isAuthor={post?.is_author}
+                    userProfile={post?.profile_img_url}
                 />
                 <PostContainer>
                     <PostTitle>{post?.title}</PostTitle>
                     <PostContent>{post?.content}</PostContent>
+                    <ImageViewList size={"4rem"} iconSize={0} onDeleteImage={null} imageList={postImage()}/>
                 </PostContainer>
                 <PostFooter commentCount={post?.comments?.length} likeCount={post?.likes} date={post?.created_time} />
                 <Separator />
@@ -127,12 +142,15 @@ export default function ViewPost() {
                         return (
                             <CommentItem
                                 onClickLike={() => onHandleCommentLike(item.comment_id)}
+                                commentId={item.comment_id}
                                 date={item.created_time}
                                 key={index}
                                 likes={item.likes}
                                 username={item.username}
                                 content={item.content}
                                 isLiked={item.isLiked}
+                                isAuthor={CommentAuthor(item.user_id)}
+                                userProfile={item.profile_img_url}
                             />
                         );
                     })}

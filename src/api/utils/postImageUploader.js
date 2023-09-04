@@ -1,17 +1,17 @@
 import axios from "axios";
-
-export const getBoardPostSearch = (keyword: string, sorting: string) => {
+export const uploadPostImageToServer = (formData) => {
     return axios
-        .get(`${process.env.REACT_APP_SERVER_URL}/board/search?keyword=${keyword}`, {
+        .post(`${process.env.REACT_APP_SERVER_URL}/upload/post`, formData, {
             headers: {
                 Authorization: localStorage.getItem("access_token"),
-                sorting: sorting,
+                "Contest-Type": "multipart/form-data",
             },
         })
         .then((response) => {
             return response.data;
         })
         .catch((response) => {
-            return {};
+            console.error("uploadPostImageToServer", response);
+            return null;
         });
 };

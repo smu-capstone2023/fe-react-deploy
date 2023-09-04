@@ -7,7 +7,6 @@ export const changeLikePost = (post_id: string | number) => {
             return true;
         })
         .catch((response: any) => {
-            console.log(response);
             return false;
         });
 };

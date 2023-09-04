@@ -22,7 +22,6 @@ export const getBoardPagingByPage = (
             return response.data;
         })
         .catch((response) => {
-            console.log(response);
             return {};
         });
 };

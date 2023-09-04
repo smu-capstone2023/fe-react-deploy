@@ -13,7 +13,6 @@ export const checkDuplicationSchoolId = (school_id: number | string) => {
             }
         })
         .catch((response) => {
-            console.log(response);
             return false;
         });
 };

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { uploadImageToServer } from "../../api/utils/imageUploader";
 import { changeTimeTable } from "../../api/User/ChangeTimeTable";
+import { uploadScheduleImageToServer } from "../../api/utils/scheduleImageUploader";
 
 /**
  * @param title : string
@@ -14,7 +14,7 @@ export const ScheduleImgUpload = ({title} :any) => {
         const file = event.target.files[0];
         const formData = new FormData();
         formData.append("image", file);
-        uploadImageToServer(formData).then((response) => {
+        uploadScheduleImageToServer(formData).then((response) => {
             if (response !== "") {
                 scheduleImageUpload(response.imageUrls);
             }

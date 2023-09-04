@@ -7,7 +7,6 @@ export const getBoardDetailInfo = (board_id: string | number) => {
             return response.data;
         })
         .catch((response: any) => {
-            console.log(response);
             return {};
         });
 };
