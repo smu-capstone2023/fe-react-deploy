@@ -73,7 +73,7 @@ export const MbtiChangeModal = ({ setModalOpen }: any) => {
                             if (mbti) {
                                 onclickChangeMbti(mbti);
                             } else {
-                                alert("변경할 MBTI를 선택해주세요");
+                                toast({ title: "변경할 MBTI를 선택해주세요", position: "top", isClosable: true, variant: "subtle" });
                             }
                         }}
                     >

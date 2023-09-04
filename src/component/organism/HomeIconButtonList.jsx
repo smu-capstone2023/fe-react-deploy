@@ -27,7 +27,7 @@ export const HomeIconButtonList = ({ fontSize, iconSize }) => {
                 onClick={() => {
                     const user_id = localStorage.getItem("user_id");
                     if (!user_id) {
-                        alert("로그인이 필요한 기능입니다.");
+                        toast({ title: "로그인이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                     } else if (majorList && majorList.length >= 1) {
                         const major = majorList[0];
                         window.location.href = `/board/${major.major_id}/${major.free_board_id}`;
@@ -43,13 +43,13 @@ export const HomeIconButtonList = ({ fontSize, iconSize }) => {
                 onClick={() => {
                     const user_id = localStorage.getItem("user_id");
                     if (!user_id) {
-                        alert("로그인이 필요한 기능입니다.");
+                        toast({ title: "로그인이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                     } else {
                         if (majorList && majorList.length >= 2) {
                             const major = majorList[1];
                             window.location.href = `/board/${major.major_id}/${major.free_board_id}`;
                         } else {
-                            alert("학과 인증이 필요한 기능입니다.");
+                            toast({ title: "학과 인증이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                         }
                     }
                 }}

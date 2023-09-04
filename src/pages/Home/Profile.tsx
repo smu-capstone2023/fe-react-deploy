@@ -5,6 +5,7 @@ import Avatar from "component/Avatar";
 import { useSelector } from "react-redux";
 import { changeProfileImage } from "../../api/User/changeProfileImage";
 import { useLocation } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
 
 interface ProfileProp {
     nickname?: string;
@@ -19,14 +20,15 @@ export default function Profile({ nickname, mbti, major, newProfileUrl, profileE
     const location = useLocation();
     const userInfoData = useSelector((state: any) => state.user);
     const [userProfileSrc, setUserProfileSrc] = useState<string>('');
+    const toast = useToast();
 
     const userProfileImageUpload = (imageUrls :string) => {
         changeProfileImage(imageUrls).then((response :any)=>{
             if (response) {
-                alert("프로필이 변경되었습니다");
+                toast({ title: "프로필이 변경되었습니다", position: "top", isClosable: true, variant: "subtle" });
                 window.location.reload();
             } else {
-                alert("프로필 변경에 실패했습니다. 다시 시도해주세요.");
+                toast({ title: "프로필 변경에 실패했습니다. 다시 시도해주세요.", position: "top", isClosable: true, variant: "subtle" });
                 window.location.reload();
             }
         })

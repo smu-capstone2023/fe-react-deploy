@@ -42,7 +42,7 @@ export default function IconList({ majors }: Prop) {
         switch (name) {
             case "학교게시판":
                 if (!majors || majors.length < 1) {
-                    alert("로그인이 필요한 기능입니다.");
+                    toast({ title: "로그인이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                 } else {
                     const major = majors[0];
                     window.location.href = `/board/${major.major_id}/${major.free_board_id}`;
@@ -50,9 +50,9 @@ export default function IconList({ majors }: Prop) {
                 break;
             case "학과게시판":
                 if (!majors || majors.length < 1) {
-                    alert("로그인이 필요한 기능입니다.");
+                    toast({ title: "로그인이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                 } else if (majors.length < 2) {
-                    alert("학과 인증이 필요한 기능입니다.");
+                    toast({ title: "학과 인증이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                 } else {
                     const major = majors[1];
                     window.location.href = `/board/${major.major_id}/${major.free_board_id}`;

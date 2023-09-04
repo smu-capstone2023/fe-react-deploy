@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Logo from "../atom/Logo";
+import { useToast } from "@chakra-ui/react";
 
 export const Footer = () => {
+    const toast = useToast();
     const Info = () => {
         return (
             <FooterInfo>
@@ -9,7 +11,7 @@ export const Footer = () => {
                 <br />
                 <p
                     onClick={() => {
-                        alert("준비 중입니다.(개인정보처리방침)");
+                        toast({ title: "준비 중입니다.(개인정보처리방침)", position: "top", isClosable: true, variant: "subtle" });
                     }}
                     style={{ fontFamily: "nexon-regular", cursor: "pointer" }}
                 >
@@ -17,7 +19,7 @@ export const Footer = () => {
                 </p>
                 <p
                     onClick={() => {
-                        alert("준비 중입니다.(서비스 이용약관)");
+                        toast({ title: "준비 중입니다.(서비스 이용약관)", position: "top", isClosable: true, variant: "subtle" });
                     }}
                     style={{ fontFamily: "nexon-regular", cursor: "pointer" }}
                 >

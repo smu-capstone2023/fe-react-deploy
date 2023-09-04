@@ -1,12 +1,14 @@
 import React, { useState, useRef } from "react";
 import SignUpView from "../component/template/SignUpView";
 import { signUpSite } from "../api/User/signUpSite";
+import { useToast } from "@chakra-ui/react";
 
 const Signup = () => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [rePassword, setRePassword] = useState("");
     const [nickname, setNickname] = useState("");
+    const toast = useToast();
  
     // cursor 활성화용 ref
     const idInputRef = useRef(null);
@@ -35,23 +37,23 @@ const Signup = () => {
         let invalidField = null;
 
         if (checkIdRegExp() === false) {
-            alert("ID 형식을 확인해주세요.");
+            toast({ title: "ID 형식을 확인해주세요.", position: "top", isClosable: true, variant: "subtle" });
             invalidField = idInputRef;
         } else if (nickname === "") {
-            alert("닉네임을 입력해주세요.");
+            toast({ title: "닉네임을 입력해주세요.", position: "top", isClosable: true, variant: "subtle" });
             invalidField = null;    //닉네임은 상관x
         } else if (checkPasswordExp() === false) {
-            alert("비밀번호 형식을 확인해주세요.");
+            toast({ title: "비밀번호 형식을 확인해주세요.", position: "top", isClosable: true, variant: "subtle" });
             invalidField = passwordInputRef;
         } else if (checkRePasswordExp() === false) {
-            alert("비밀번호가 일치하지 않습니다.");
+            toast({ title: "비밀번호가 일치하지 않습니다.", position: "top", isClosable: true, variant: "subtle" });
             invalidField = rePasswordInputRef;
         } else {
             signUpSite(id, nickname, password).then((response) => {
                 if (response) {
                     window.location.href = "/user-certification";
                 } else {
-                    alert("네트워크 문제! 잠시후에 다시 시도해주세요! ");
+                    toast({ title: "네트워크 문제! 잠시후에 다시 시도해주세요! ", position: "top", isClosable: true, variant: "subtle" });
                 }
             });
         }

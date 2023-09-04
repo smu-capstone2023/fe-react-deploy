@@ -38,7 +38,7 @@ const CommentContentView = ({ comment, author, isAuthor, children }) => {
                     if (response) {
                         window.location.reload();
                     } else {
-                        alert("네트워크 오류!", "잠시 후에 다시 시도해주세요.");
+                        toast({ title: "네트워크 오류! 잠시 후에 다시 시도해주세요.", position: "top", isClosable: true, variant: "subtle" });
                     }
                 });
             }

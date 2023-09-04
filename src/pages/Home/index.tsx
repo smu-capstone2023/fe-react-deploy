@@ -12,6 +12,7 @@ import LostPreview from "component/organism/LostPreview";
 import { getLostBoardPreviewList } from "api/board/getLostBoardPreviewList";
 import { getBoardPostPreview } from "api/board/getBoardPostPreview";
 import { getBusNotice } from "api/utils/getBusNotice";
+import { useToast } from "@chakra-ui/react";
 
 export interface IPreview {
     post_id: number;
@@ -35,6 +36,8 @@ export default function Home() {
     const [lostPreviewList, setLostPreviewList] = useState<IPreview[]>([]);
     const [majorPreviewList, setMajorPreviewList] = useState<IPreview[]>([]);
     const [BusNoticeList, setBusNoticeList] = useState<BusNoticeType[] | boolean>([]);
+    const toast = useToast();
+    
     useEffect(() => {
         getHotBoardPreviewList().then((response) => {
             if (response) {
@@ -103,7 +106,7 @@ export default function Home() {
                 title="HOT 게시판"
                 previewList={hotPreviewList}
                 headerOnClick={() => {
-                    localStorage.getItem("access_token") ? (window.location.href = `/board/1/1`) : alert("로그인을 해주세요.");
+                    localStorage.getItem("access_token") ? (window.location.href = `/board/1/1`) : toast({ title: "로그인이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                 }}
             />
             <div
