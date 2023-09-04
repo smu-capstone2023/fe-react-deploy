@@ -10,8 +10,8 @@ const Signup = () => {
     //임시 값 부여
 
     const checkIdRegExp = () => {
-        //Ex) 123456789(9자리 숫자)
-        return /^\d{9}/.test(id);
+        //Ex) 123456789(9자리 숫자'만')
+        return /^[0-9]{9}$/.test(id);
     };
 
     const checkPasswordExp = () => {
