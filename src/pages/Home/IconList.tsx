@@ -59,7 +59,7 @@ export default function IconList({ majors }: Prop) {
                 }
                 break;
             case "학사일정":
-                window.open("https://www.smu.ac.kr/ko/life/academicCalendar.do");
+                window.open("https://www.smu.ac.kr/kor/life/academicCalendar.do");
                 break;
             case "문의하기":
                 toast({ title: "준비중입니다.", position: "top", isClosable: true, variant: "subtle" });
