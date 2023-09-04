@@ -5,10 +5,18 @@ import { useToast } from "@chakra-ui/react";
 import { getUserInfo } from "../api/User/getUserInfo";
 import { findPassword } from "../api/User/findPassword";
 import Swal from "sweetalert2";
+
 const Login = () => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const toast = useToast();
+
+    // Enter 키가 눌렸을 때 로그인 실행
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            onClickLoginButton();
+        }
+    };
 
     //비밀번호 찾기
     const onClickFindAccount = async () => {
@@ -85,6 +93,7 @@ const Login = () => {
             onClickFindAccount={onClickFindAccount}
             onClickSignUp={onClickSignUp}
             onClickLoginButton={onClickLoginButton}
+            onKeyPress={handleKeyPress}
         />
     );
 };
