@@ -22,7 +22,7 @@ export const LostPreview = ({ previewList }) => {
                     <SectionListHeader
                         onClick={() => {
                             localStorage.getItem("school_id")
-                                ? (window.location.href = `/board/1/137`)
+                                ? (window.location.href = `/board/1/200`)
                                 : toast({ title: "로그인이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                         }}
                         title={"분실물 게시판"}
@@ -44,7 +44,7 @@ export const LostPreview = ({ previewList }) => {
                                     key={i}
                                     onClick={() => {
                                         localStorage.getItem("school_id")
-                                            ? (window.location.href = `/viewpost/137/${data.post_id}`)
+                                            ? (window.location.href = `/viewpost/200/${data.post_id}`)
                                             : toast({ title: "로그인이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                                     }}
                                     content={data.title}
