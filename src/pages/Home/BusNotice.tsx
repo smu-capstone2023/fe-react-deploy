@@ -83,7 +83,7 @@ export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
                             font-family: nexon-light;
                             font-size: 16px;
                         `}
-                    >이번주에&nbsp;
+                    >최신&nbsp;
                     {toDayBusNumber.map((item, index)=>
                         <p
                             css={css`
@@ -94,7 +94,7 @@ export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
                         >{item}&nbsp;
                         </p>
                     )}
-                버스 우회 일정이 있어요!
+                버스 우회 소식이 올라왔어요!
                 </div>   
                 }
                     <p
