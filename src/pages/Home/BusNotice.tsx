@@ -44,7 +44,7 @@ export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
                         font-weight: 700;
                     `}
                 >
-                    ⚠️ 오늘의 우회정보
+                    ⚠️ 버스 우회 정보
                 </p>
             </SectionContainer>
             {!toDayBusContent &&
@@ -61,7 +61,7 @@ export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
                             color: #000000;
                         `}
                     >
-                        오늘 예정된 우회 정보가 없습니다! 🥳
+                        이번주 예정된 우회 정보가 없습니다! 🥳
                     </p>
                 </div>
             }
@@ -83,7 +83,7 @@ export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
                             font-family: nexon-light;
                             font-size: 16px;
                         `}
-                    >오늘&nbsp;
+                    >이번주에&nbsp;
                     {toDayBusNumber.map((item, index)=>
                         <p
                             css={css`
@@ -94,7 +94,7 @@ export default function BusNotice({BusNoticeLists} :BusNoticeProps) {
                         >{item}&nbsp;
                         </p>
                     )}
-                버스가 우회할 수도 있어요!
+                버스 우회 일정이 있어요!
                 </div>   
                 }
                     <p
