@@ -13,7 +13,15 @@ export const signUpSite = (school_id: string, nickname: string, password: string
             }
         })
         .catch((error) => {
-            console.error("signupSite", error);
-            return false;
+            if (error.response.status === 400) {
+                alert("이미 가입된 사용자입니다.");
+            }
+            if (error.response.status === 406) {
+                alert("해당 닉네임은 사용할 수 없습니다. 다른 닉네임을 사용해주세요");
+            }
+            else {
+                console.error("signupSite", error);
+                return false;
+            }
         });
 };

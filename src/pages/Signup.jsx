@@ -52,7 +52,7 @@ const Signup = () => {
             signUpSite(id, nickname, password).then((response) => {
                 if (response) {
                     window.location.href = "/user-certification";
-                } else {
+                } else if (response === false) {
                     toast({ title: "네트워크 문제! 잠시후에 다시 시도해주세요! ", position: "top", isClosable: true, variant: "subtle" });
                 }
             });
