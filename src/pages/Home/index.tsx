@@ -77,6 +77,35 @@ export default function Home() {
                 }
             `}
         >
+            <div
+                css={css`
+                    background-color: white;
+                    padding: 10px;
+                `}
+            >
+                <div
+                    onClick={() => window.open("https://brash-petalite-c03.notion.site/741e1419729149e39b54be26a927aa40?pvs=4")}
+                    css={css`
+                        background: #ebf0ff;
+                        border-radius: 8px;
+                        height: 50px;
+                        display: flex;
+                        align-items: center;
+                        padding: 0 10px;
+                    `}
+                >
+                    <p
+                        css={css`
+                            font-family: nexon-bold;
+                            color: #6779b2;
+                            font-size: 16px;
+                            margin-left: auto;
+                        `}
+                    >
+                        SMUS 사용 설명서 보러가기 {">>"}
+                    </p>
+                </div>
+            </div>
             <Profile
                 nickname={userInfo?.username}
                 major={userInfo?.majors && userInfo?.majors.length >= 2 ? userInfo?.majors[1].major_name : "학과인증을 해주세요"}
