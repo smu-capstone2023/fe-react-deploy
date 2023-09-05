@@ -2,6 +2,8 @@ import React from "react";
 import { css } from "@emotion/react";
 import SectionListHeader from "../molecule/SectionListHeader";
 import PreviewListItem from "../molecule/PreviewListItem";
+import { useToast } from "@chakra-ui/react";
+
 
 /**
  * @param title : 헤더의 제목
@@ -16,6 +18,8 @@ interface Prop {
     previewList: { title: string; comments: number | string; likes: number | string; post_id: number | string }[];
 }
 export const BoardSectionList = ({ title, headerOnClick, previewList }: Prop) => {
+    const toast = useToast();
+    
     return (
         <div
             css={css`
@@ -37,7 +41,7 @@ export const BoardSectionList = ({ title, headerOnClick, previewList }: Prop) =>
                                 onClick={() => {
                                     localStorage.getItem("school_id")
                                         ? (window.location.href = `/viewpost/1/${previewItem.post_id}`)
-                                        : alert("로그인이 필요한 기능입니다.");
+                                        : toast({ title: "로그인이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                                 }}
                                 commentCount={previewItem.comments}
                                 likeCount={previewItem.likes}

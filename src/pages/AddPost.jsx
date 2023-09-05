@@ -5,6 +5,7 @@ import { createPost } from "../api/Post/createPost";
 import { updatePost } from "../api/Post/updatePost";
 import { getBoardDetailInfo } from "../api/board/getBoardDetailInfo";
 import { getDetailPost } from "../api/Post/getDetailPost";
+import { useToast } from "@chakra-ui/react";
 
 const AddPost = () => {
     const [boardInfo, setBoardInfo] = useState({ majorName: "", boardName: "" });
@@ -12,6 +13,7 @@ const AddPost = () => {
     const [content, setContent] = useState("");
     const [imageList, setImageList] = useState([]);
     const is_anonymous = true;
+    const toast = useToast();
     let { board_id, post_id } = useParams();
 
     const onAddImageList = (imageUrl) => {
@@ -33,7 +35,7 @@ const AddPost = () => {
         } else {
             updatePost(title, content, is_anonymous, imageList, post_id).then((response) => {
                 if (response === false) {
-                    alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
+                    toast({ title: "네트워크 문제! 잠시 후에 다시 시도해주세요.", position: "top", isClosable: true, variant: "subtle" });
                 } else {
                     window.location.href = `/viewpost/${board_id}/${post_id}`;
                 }
@@ -54,7 +56,7 @@ const AddPost = () => {
                     boardName: response.board_name,
                 });
             } else {
-                alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
+                toast({ title: "네트워크 문제! 잠시 후에 다시 시도해주세요.", position: "top", isClosable: true, variant: "subtle" });
             }
         });
         if (post_id !== "null") {
@@ -64,7 +66,7 @@ const AddPost = () => {
                     setContent(response.content);
                     getPostImage(response.image_urls);
                 } else {
-                    alert("네트워크 문제! 잠시 후에 다시 시도해주세요.");
+                    toast({ title: "네트워크 문제! 잠시 후에 다시 시도해주세요.", position: "top", isClosable: true, variant: "subtle" });
                 }
             });
         }

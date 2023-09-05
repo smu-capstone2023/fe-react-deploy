@@ -75,7 +75,7 @@ const Login = () => {
 
                 getUserInfo().then((response) => {
                     if (response === {}) {
-                        alert("네트워크 문제! 잠시 다시 시도해주세요");
+                        toast({ title: "네트워크 문제! 잠시 다시 시도해주세요", position: "top", isClosable: true, variant: "subtle" });
                     } else {
                         const { username, school_id, profile_img_url, majors } = response;
                         setUserInfoInLocalStorage(username, school_id, profile_img_url, majors);

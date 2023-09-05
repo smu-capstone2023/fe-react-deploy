@@ -1,6 +1,7 @@
 import React from "react";
 import SectionListHeader from "../../component/molecule/SectionListHeader";
 import LostPreviewElement from "../../component/molecule/LostPreviewElement";
+import { useToast } from "@chakra-ui/react";
 
 /**
  * @param previewList : { title , post_id }[]  뿌려줄 데이터 리스트
@@ -8,6 +9,7 @@ import LostPreviewElement from "../../component/molecule/LostPreviewElement";
  */
 
 export const LostPreview = ({ previewList }) => {
+    const toast = useToast();
     return (
         <>
             <div style={{ width: "100%" }}>
@@ -21,7 +23,7 @@ export const LostPreview = ({ previewList }) => {
                         onClick={() => {
                             localStorage.getItem("school_id")
                                 ? (window.location.href = `/board/1/137`)
-                                : alert("로그인이 필요한 기능입니다.");
+                                : toast({ title: "로그인이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                         }}
                         title={"분실물 게시판"}
                     ></SectionListHeader>
@@ -43,7 +45,7 @@ export const LostPreview = ({ previewList }) => {
                                     onClick={() => {
                                         localStorage.getItem("school_id")
                                             ? (window.location.href = `/viewpost/137/${data.post_id}`)
-                                            : alert("로그인이 필요한 기능입니다.");
+                                            : toast({ title: "로그인이 필요한 기능입니다.", position: "top", isClosable: true, variant: "subtle" });
                                     }}
                                     content={data.title}
                                 ></LostPreviewElement>

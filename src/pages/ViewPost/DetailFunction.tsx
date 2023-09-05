@@ -5,6 +5,7 @@ import { requestReportPost } from "api/Post/requestReportPost";
 import { deletePost } from "api/Post/deletePost";
 import { deleteComment } from "api/Comment/deleteComment";
 import { reportComment } from "api/Comment/reportComment";
+import { useToast } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import Swal from "sweetalert2";
 
@@ -19,6 +20,7 @@ interface DetailFunctionProps {
 
 export default function DetailFunction({ size = 25, color = "#888888", boardId, postId, isAuthor, commentId }: DetailFunctionProps) {
     const [isDivVisible, setIsDivVisible] = useState<Boolean>(false);
+    const toast = useToast();
 
     const onHandleELLipsis = () => {
         setIsDivVisible(!isDivVisible);
@@ -34,11 +36,11 @@ export default function DetailFunction({ size = 25, color = "#888888", boardId, 
             if (result.isConfirmed && postId) {
                 requestReportPost(postId).then((response: number) => {
                     if (response === 201) {
-                        alert("성공적으로 신고되었습니다.");
+                        toast({ title: "성공적으로 신고되었습니다.", position: "top", isClosable: true, variant: "subtle" });
                     } else if (response === 400) {
-                        alert("이미 신고하신 게시물입니다.");
+                        toast({ title: "이미 신고하신 게시물입니다.", position: "top", isClosable: true, variant: "subtle" });
                     } else {
-                        alert("네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.");
+                        toast({ title: "네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.", position: "top", isClosable: true, variant: "subtle" });
                     }
                 });
             }
@@ -55,10 +57,10 @@ export default function DetailFunction({ size = 25, color = "#888888", boardId, 
             if (result.isConfirmed && postId) {
                 deletePost(postId).then((response: boolean) => {
                     if (response) {
-                        alert("성공적으로 삭제되었습니다.");
+                        toast({ title: "성공적으로 삭제되었습니다.", position: "top", isClosable: true, variant: "subtle" });
                         window.history.back();
                     } else {
-                        alert("네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.");
+                        toast({ title: "네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.", position: "top", isClosable: true, variant: "subtle" });
                     }
                 });
             }
@@ -77,11 +79,11 @@ export default function DetailFunction({ size = 25, color = "#888888", boardId, 
             if (result.isConfirmed && commentId) {
                 reportComment(commentId).then((response: number) => {
                     if (response === 201) {
-                        alert("성공적으로 신고되었습니다.");
+                        toast({ title: "성공적으로 신고되었습니다.", position: "top", isClosable: true, variant: "subtle" });
                     } else if (response === 400) {
-                        alert("이미 신고하신 댓글입니다.");
+                        toast({ title: "이미 신고하신 댓글입니다.", position: "top", isClosable: true, variant: "subtle" });
                     } else {
-                        alert("네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.");
+                        toast({ title: "네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.", position: "top", isClosable: true, variant: "subtle" });
                     }
                 });
             }
@@ -98,10 +100,10 @@ export default function DetailFunction({ size = 25, color = "#888888", boardId, 
             if (result.isConfirmed && commentId) {
                 deleteComment(commentId).then((response: boolean) => {
                     if (response) {
-                        alert("성공적으로 삭제되었습니다.");
+                        toast({ title: "성공적으로 삭제되었습니다.", position: "top", isClosable: true, variant: "subtle" });
                         window.location.reload();
                     } else {
-                        alert("네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.");
+                        toast({ title: "네트워크 오류입니다. 잠시 후에 다시 시도해 주세요.", position: "top", isClosable: true, variant: "subtle" });
                     }
                 });
             }
@@ -109,7 +111,7 @@ export default function DetailFunction({ size = 25, color = "#888888", boardId, 
     };
 
     const UpdateComment = () => {
-        alert("준비중");
+        toast({ title: "준비중", position: "top", isClosable: true, variant: "subtle" });
     };
 
     return (
