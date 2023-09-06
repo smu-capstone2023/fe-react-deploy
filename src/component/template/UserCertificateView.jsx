@@ -33,12 +33,26 @@ const UserCertificateView = ({ onClickCompleteButton }) => {
                         <BoxText>
                             3. 메일로 온, <BoldText>링크를 클릭</BoldText>해주시면 인증이 완료됩니다!{" "}
                         </BoxText>
+                        <BoxText>
+                            4. 메일 발송은 약 <BoldText>5~10분</BoldText> 소요될 수 있습니다.{" "}
+                        </BoxText>
                     </Box>
 
                     {/* 스펨메일함 글 */}
                     <Title1> 만약 메일이 오지 않았다면, </Title1>
                     <Title2>
-                        <BoldText>스펨 메일함</BoldText>을 확인해주세요!
+                        <BoldText>스팸 메일함</BoldText>을 확인해주세요!
+                    </Title2>
+
+                    {/*학과인증 메일 보기*/}
+                    <Title1>인증 메일을 확인하려면</Title1>
+                    <Title2>
+                        <BoldText
+                            onClick={()=>{
+                                window.open("https://cloud.smu.ac.kr/");
+                            }}
+                            style={{cursor: "pointer"}}
+                        >여기</BoldText>를 클릭하세요
                     </Title2>
                     <div style={{ marginTop: "15px", width: "100%" }}>
                         <Button title="네! 확인했습니다" onClick={onClickCompleteButton} />
@@ -87,7 +101,7 @@ const Title = styled.p`
 const Title1 = styled.p`
     display: inline-block;
     margin-top: 30px;
-    font-family: nexont-regular;
+    font-family: nexon-regular;
     font-size: 15px;
     text-align: center;
     color: #000000;
