@@ -2,7 +2,7 @@ import { instance } from "api/interceptor";
 
 export const changeProfileImage = (image: string): Promise<boolean> => {
     return instance
-        .put(`/auth/user/profile_image`, {
+        .put(`/api/user/profile_image`, {
             image: image,
         })
         .then((response: any) => {
