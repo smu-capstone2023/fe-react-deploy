@@ -3,7 +3,7 @@ import { UserDto } from "dto/user";
 
 export const getUserInfo = (): Promise<UserDto> => {
     return instance
-        .get(`/auth/user_info`, {})
+        .get(`/api/user`, {})
         .then((response: any) => {
             return response.data;
         })

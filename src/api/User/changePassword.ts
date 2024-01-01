@@ -2,7 +2,7 @@ import { instance } from "api/interceptor";
 
 export const changePassword = (old_password: string, new_password: string) => {
     return instance
-        .put(`/auth/user/password`, {
+        .put(`/api/user/password`, {
             old_password: old_password,
             new_password: new_password,
         })
